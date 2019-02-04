@@ -2,6 +2,7 @@
 CREATE TABLE "person"
 (
     "id" serial NOT NULL,
+    "name" varchar(300) NOT NULL,
     "username" varchar(300) NOT NULL,
     "password" varchar(300) NOT NULL,
     "email" varchar(1000) NOT NULL,
