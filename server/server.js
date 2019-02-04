@@ -1,4 +1,3 @@
-
 const express = require('express');
 require('dotenv').config();
 
@@ -10,6 +9,12 @@ const passport = require('./strategies/user.strategy');
 
 // Route includes
 const userRouter = require('./routes/user.router');
+const onSiteRouter = require('./routes/onsite.router');
+const reportRouter = require('./routes/report.router');
+const locationRouter = require('./routes/location.router');
+const categoryRouter = require('./routes/category.router');
+const subCategoryRouter = require('./routes/subcategory.router');
+const bulkDataRouter = require('./routes/bulkdata.router'); // stretch goal 
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -24,6 +29,12 @@ app.use(passport.session());
 
 /* Routes */
 app.use('/api/user', userRouter);
+app.use('/api/onsite', onSiteRouter);
+app.use('/api/report', reportRouter);
+app.use('/api/category', categoryRouter);
+app.use('/api/location', locationRouter);
+app.use('/api/subcategory', subCategoryRouter);
+app.use('/api/bulkdata', bulkDataRouter); // empty for now stretch goal
 
 // Serve static files
 app.use(express.static('build'));
