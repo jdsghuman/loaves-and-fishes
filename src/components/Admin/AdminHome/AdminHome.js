@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-
-
-class Admin extends Component {
+class AdminHome extends Component {
 
     render() {
-        return(
-            <div >               
+        return (
+            <div>
             </div>
         )
     }
-
 }
+
 const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
-export default connect(mapReduxStateToProps)(Admin);
+
+export default connect(mapReduxStateToProps)(AdminHome);
