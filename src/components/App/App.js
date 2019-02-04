@@ -16,7 +16,7 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import AdminHome from '../Admin/AdminHome';
+import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 
 
