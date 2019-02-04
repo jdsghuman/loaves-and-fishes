@@ -16,8 +16,9 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
-import Admin from '../Admin/Admin';
+import AdminHome from '../Admin/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
+
 
 import './App.css';
 
@@ -60,7 +61,7 @@ class App extends Component {
              <AdminRoute
               exact
               path="/admin"
-              component={Admin}
+              component={AdminHome}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
