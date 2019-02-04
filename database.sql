@@ -26,9 +26,9 @@ CREATE TABLE "location"
     "city" varchar(500) NOT NULL,
     "state" varchar(500) NOT NULL,
     "zip" integer NOT NULL,
-    "county" integer NOT NULL,
+    "county" varchar(500) NOT NULL,
     "active" BOOLEAN NOT NULL DEFAULT 'true',
-    "notes" varchar(1000) NOT NULL,
+    "notes" varchar(1000),
     "updated_by" integer,
     "date_updated" TIMESTAMP,
     CONSTRAINT location_pk PRIMARY KEY ("id")
