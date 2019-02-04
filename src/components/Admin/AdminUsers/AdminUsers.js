@@ -5,8 +5,34 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import { withStyles } from '@material-ui/core/styles';
+import StarIcon from '@material-ui/icons/Star';
 
+const CustomTableCell = withStyles(theme => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
 
+  const styles = theme => ({
+    root: {
+      width: '100%',
+      marginTop: theme.spacing.unit * 3,
+      overflowX: 'auto',
+    },
+    table: {
+      minWidth: 700,
+    },
+    row: {
+      '&:nth-of-type(odd)': {
+        backgroundColor: theme.palette.background.default,
+      },
+    },
+  });
 
 class AdminUsers extends Component {
 
@@ -26,9 +52,11 @@ class AdminUsers extends Component {
             <Table >
             <TableHead>
               <TableRow>
-                <TableCell>New</TableCell>
-                <TableCell>Active</TableCell>
-                <TableCell>Username</TableCell>
+                <CustomTableCell>New</CustomTableCell>
+                <CustomTableCell>Name</CustomTableCell>
+                <CustomTableCell>Email</CustomTableCell>
+                <CustomTableCell>Status</CustomTableCell>
+                <CustomTableCell>Role</CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -36,11 +64,11 @@ class AdminUsers extends Component {
                   console.log('checking ', list);
                 return (
                   <TableRow key={list.id}>
-                    <TableCell >{list.new}</TableCell>
-                    <TableCell >{list.active}</TableCell>
-                    <TableCell >{list.username}</TableCell>
-                    <TableCell >{list.username}</TableCell>
-                    <TableCell >{list.username}</TableCell>
+                    <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
+                    <TableCell >{list.name}</TableCell>
+                    <TableCell >{list.email}</TableCell>
+                    <TableCell >{list.status}</TableCell>
+                    <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
                   </TableRow>
                 );
               })}
@@ -55,4 +83,4 @@ const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default connect(mapReduxStateToProps)(AdminUsers);
+export default withStyles(styles)(connect(mapReduxStateToProps)(AdminUsers));
