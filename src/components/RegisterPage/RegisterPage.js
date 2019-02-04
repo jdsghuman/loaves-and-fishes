@@ -3,6 +3,8 @@ import {connect} from 'react-redux';
 
 class RegisterPage extends Component {
   state = {
+    name: '',
+    email: '',
     username: '',
     password: '',
   };
@@ -10,12 +12,14 @@ class RegisterPage extends Component {
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password) {
+    if (this.state.username && this.state.password && this.state.name && this.state.email) {
       this.props.dispatch({
         type: 'REGISTER',
         payload: {
           username: this.state.username,
           password: this.state.password,
+          name: this.state.name,
+          email: this.state.email
         },
       });
     } else {
@@ -42,6 +46,28 @@ class RegisterPage extends Component {
         )}
         <form onSubmit={this.registerUser}>
           <h1>Register User</h1>
+          <div>
+            <label htmlFor="name">
+              Name:
+              <input
+                type="text"
+                name="name"
+                value={this.state.name}
+                onChange={this.handleInputChangeFor('name')}
+              />
+            </label>
+          </div>
+          <div>
+            <label htmlFor="email">
+              Email:
+              <input
+                type="email"
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor('email')}
+              />
+            </label>
+          </div>
           <div>
             <label htmlFor="username">
               Username:
@@ -82,6 +108,7 @@ class RegisterPage extends Component {
             Login
           </button>
         </center>
+        {JSON.stringify(this.state)}
       </div>
     );
   }
