@@ -22,6 +22,7 @@ import AdminUsers from '../Admin/AdminUsers/AdminUsers';
 import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
 import OnSiteDemo from '../OnSite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
+import NewUserMessage from '../NewUserMessage/NewUserMessage';
 
 
 import './App.css';
@@ -81,6 +82,11 @@ class App extends Component {
               exact
               path="/OnSiteMeal"
               component={OnSiteMeal}
+            />
+            <ProtectedRoute
+              exact
+              path="/NewUser"
+              component={NewUserMessage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
