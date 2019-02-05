@@ -6,8 +6,9 @@ import './Nav.css';
 
 const Nav = (props) => (
   <div className="nav">
+    <div className="nav__primary">
     <Link to="/home">
-      <img src="logo/loavesAndFishesLogo.png" alt="loaves and fishes logo" height="60px"/>
+      <img className="nav-image" src="logo/loavesAndFishesLogo.png" alt="loaves and fishes logo" />
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -32,6 +33,7 @@ const Nav = (props) => (
       <Link className="nav-link" to="/about">
         About
       </Link>
+    </div>
     </div>
   </div>
 );

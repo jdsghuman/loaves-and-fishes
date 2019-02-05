@@ -54,7 +54,7 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
+        <form className="form__display"  onSubmit={this.login}>
           <h1 className="login__title">Login</h1>
           <div>
             <TextField
@@ -79,12 +79,12 @@ class LoginPage extends Component {
             />
           </div>
           <div>
-            <input
+            <button
               className="log-in"
               type="submit"
               name="submit"
               value="Log In"
-            />
+            >Log In</button>
           </div>
         </form>
         <center>
