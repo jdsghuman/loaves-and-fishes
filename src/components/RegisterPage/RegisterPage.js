@@ -103,6 +103,7 @@ class RegisterPage extends Component {
               className={this.props.classes.textField}
               ype="password"
               name="password"
+              type="password"
               value={this.state.password}
               onChange={this.handleInputChangeFor('password')}
               margin="normal"
