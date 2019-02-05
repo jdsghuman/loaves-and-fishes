@@ -54,8 +54,8 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form style={{ textAlign: 'center' }} onSubmit={this.login}>
-          <h1 style={{ fontWeight: '300', textAlign: 'center', marginTop: '0' }}>Login</h1>
+        <form onSubmit={this.login}>
+          <h1 className="login__title">Login</h1>
           <div>
             <TextField
               id="outlined-name"
