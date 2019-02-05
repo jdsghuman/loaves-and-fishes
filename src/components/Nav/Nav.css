@@ -9,13 +9,23 @@
 
 .nav {
   overflow: hidden;
-  background-color: #00acb0;
+  background-color: #d3d3d3;
+}
+
+.nav__primary {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-image {
+  margin: 10px;
+  height: 40px;
 }
 
 .nav-link {
   float: left;
-  color: #f2f2f2;
-  background-color: #00acb0;
+  color: #98223e;
+  background-color: #d3d3d3;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
@@ -28,8 +38,9 @@
   outline:0;
 }
 
-.nav-link:hover {
-  background-color: #008183;
+.nav-link:hover,
+.nav-link:active {
+  color: #b3b428;
 }
 
 .nav-right {

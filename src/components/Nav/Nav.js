@@ -6,8 +6,9 @@ import './Nav.css';
 
 const Nav = (props) => (
   <div className="nav">
+    <div className="nav__primary">
     <Link to="/home">
-      <h2 className="nav-title">Prime Solo Project</h2>
+      <img className="nav-image" src="logo/loavesAndFishesLogo.png" alt="loaves and fishes logo" />
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/home">
@@ -19,9 +20,9 @@ const Nav = (props) => (
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
         <>
-          <Link className="nav-link" to="/info">
+          {/* <Link className="nav-link" to="/info">
             Info Page
-          </Link>
+          </Link> */}
           <Link className="nav-link" to="/admin">
             Admin
           </Link>
@@ -32,6 +33,7 @@ const Nav = (props) => (
       <Link className="nav-link" to="/about">
         About
       </Link>
+    </div>
     </div>
   </div>
 );

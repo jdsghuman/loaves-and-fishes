@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminUsers from '../Admin/AdminUsers/AdminUsers';
+import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
 
 
 import './App.css';
@@ -50,7 +51,7 @@ class App extends Component {
             <ProtectedRoute
               exact
               path="/home"
-              component={UserPage}
+              component={OnSiteHome}
             />
             {/* This works the same as the other protected route, except that if the user is logged in,
             they will see the info page instead. */}
