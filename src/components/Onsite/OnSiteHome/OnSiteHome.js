@@ -74,10 +74,13 @@ class OnSiteHome extends Component {
     }
 
     handleClick = () => {
-        this.props.dispatch({type: "SET_ONSITE", payload: this.state})
-        if(this.state.value === 'yes'){
+        this.props.dispatch({ type: "SET_ONSITE", payload: this.state })
+        if (this.state.selectedLocation === '') {
+            alert('Please select a location')
+        }
+        else if (this.state.value === 'yes') {
             this.props.history.push('/onSiteDemo')
-        }else{
+        } else {
             this.props.history.push('/onSiteMeal')
         }
     }
