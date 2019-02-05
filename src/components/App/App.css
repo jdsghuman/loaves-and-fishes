@@ -1,7 +1,16 @@
+html,
 body {
+    min-height: 100%;
+    position: relative;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0px;
 }
+
+/* body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0px;
+    height: 100%;
+} */
 
 .alert {
     background-color: #ff4545;
@@ -9,15 +18,20 @@ body {
 }
 
 form {
-    background-color: #dbd5d5;
+    background-color: #d3d3d3;
     width: 30%;
     max-width: 350px;
     /* height: 250px; */
+    transform: translateY(10%);
     margin: 20px auto;
-    transform: translateY(20%);
+    margin-bottom: 40px;
     padding: 25px;
     border-radius: 2px;
     text-align: center;
+}
+
+.form__display {
+    transform: translateY(20%);
 }
 
 input {
@@ -27,6 +41,7 @@ input {
 
 .log-in, .log-out, .register {
   background-color: #98223e;
+  border: none;
   border-radius: 4px;
   color: #f8f8f8;
   min-height: 40px;
@@ -51,6 +66,7 @@ input {
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
     margin-top: 80px;
+    margin-bottom: 60px;
     background:none;
     color:inherit;
     border:none;

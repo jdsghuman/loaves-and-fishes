@@ -110,12 +110,12 @@ class RegisterPage extends Component {
             />
           </div>
           <div>
-            <input
+            <button
               className="register"
               type="submit"
               name="submit"
               value="Register"
-            />
+            >Register</button>
           </div>
         </form>
         <center>

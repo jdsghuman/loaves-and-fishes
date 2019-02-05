@@ -9,13 +9,23 @@
 
 .nav {
   overflow: hidden;
-  background-color: lightgray;
+  background-color: #d3d3d3;
+}
+
+.nav__primary {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nav-image {
+  margin: 10px;
+  height: 40px;
 }
 
 .nav-link {
   float: left;
   color: #98223e;
-  background-color: lightgray;
+  background-color: #d3d3d3;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
