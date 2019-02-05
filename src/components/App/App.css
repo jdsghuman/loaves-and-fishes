@@ -43,6 +43,7 @@ input {
 
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
+    margin-top: 60px;
     background:none;
     color:inherit;
     border:none;
