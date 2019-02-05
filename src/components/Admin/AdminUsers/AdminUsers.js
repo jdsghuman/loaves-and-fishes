@@ -8,6 +8,8 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -50,10 +52,14 @@ class AdminUsers extends Component {
         this.props.dispatch({ type: 'DELETE_USERS', payload: id})
     }
 
+    handleChange = () => {
+        
+    }
+
     render() {
         return (
             <div>
-            <p>Admin user view</p>
+            <p className="adminUserHeader">Admin user view</p>
             <Table >
             <TableHead>
               <TableRow>
@@ -62,6 +68,7 @@ class AdminUsers extends Component {
                 <CustomTableCell>Email</CustomTableCell>
                 <CustomTableCell>Status</CustomTableCell>
                 <CustomTableCell>Role</CustomTableCell>
+                <CustomTableCell>Delete</CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -72,14 +79,20 @@ class AdminUsers extends Component {
                     <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                     <TableCell >{list.name}</TableCell>
                     <TableCell >{list.email}</TableCell>
-                    <TableCell >{list.status}</TableCell>
+                    <TableCell >
+                    <Select> 
+                        <MenuItem>{list.status ? 'Active' : 'Inactive'}</MenuItem>
+                        <MenuItem>{list.status ? 'Inactive' : 'Active'}</MenuItem>
+                    </Select>
+                    </TableCell>
                     <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                    <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button>
+                    <TableCell><Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button></TableCell>
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
+          <Button size="Large" variant="contained" color="Secondary" >Update</Button>
             </div>
         )
     }
