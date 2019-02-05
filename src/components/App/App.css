@@ -12,11 +12,12 @@ form {
     background-color: #dbd5d5;
     width: 30%;
     max-width: 350px;
-    height: 250px;
+    /* height: 250px; */
     margin: 20px auto;
     transform: translateY(20%);
     padding: 25px;
     border-radius: 2px;
+    text-align: center;
 }
 
 input {
@@ -41,9 +42,15 @@ input {
   color: #98223e;
 }
 
+.login__title {
+    font-weight: 300; 
+    text-align: center; 
+    margin-top: 0;
+}
+
 /* This line makes the "Register" and "Login" buttons look like links */
 .link-button {
-    margin-top: 60px;
+    margin-top: 80px;
     background:none;
     color:inherit;
     border:none;
