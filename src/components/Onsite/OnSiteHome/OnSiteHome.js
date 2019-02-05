@@ -12,6 +12,8 @@ import FormLabel from '@material-ui/core/FormLabel';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
+import moment from 'moment';
+import Title from '../../Title/Title';
 
 class OnSiteHome extends Component {
 
@@ -20,7 +22,8 @@ class OnSiteHome extends Component {
         selectedLocation: '',
         collectDemographics: 'yes',
         farm: false,
-        summer: false
+        summer: false,
+        time: moment().format()
     };
 
     handleChange = event => {
@@ -71,10 +74,13 @@ class OnSiteHome extends Component {
     }
 
     handleClick = () => {
-        this.props.dispatch({type: "SET_ONSITE", payload: this.state})
-        if(this.state.value === 'yes'){
+        this.props.dispatch({ type: "SET_ONSITE", payload: this.state })
+        if (this.state.selectedLocation === '') {
+            alert('Please select a location')
+        }
+        else if (this.state.value === 'yes') {
             this.props.history.push('/onSiteDemo')
-        }else{
+        } else {
             this.props.history.push('/onSiteMeal')
         }
     }
@@ -93,6 +99,7 @@ class OnSiteHome extends Component {
 
         return (
             <div>
+                <Title>OnSite Home</Title>
                 <FormControl >
                     <InputLabel>Location</InputLabel>
                     <Select
