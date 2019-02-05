@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  textField: {
+    width: '80%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    paddingBottom: 0,
+    marginTop: '10px',
+    height: '50px',
+  }
+});
+
 class LoginPage extends Component {
   state = {
     username: '',
@@ -40,29 +54,29 @@ class LoginPage extends Component {
             {this.props.errors.loginMessage}
           </h2>
         )}
-        <form onSubmit={this.login}>
-          <h1>Login</h1>
+        <form style={{ textAlign: 'center' }} onSubmit={this.login}>
+          <h1 style={{ fontWeight: '300', textAlign: 'center', marginTop: '0' }}>Login</h1>
           <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
-              />
-            </label>
+            <TextField
+              id="outlined-name"
+              label="Username"
+              className={this.props.classes.textField}
+              value={this.state.username}
+              onChange={this.handleInputChangeFor('username')}
+              margin="normal"
+              variant="outlined"
+            />
           </div>
           <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
-              />
-            </label>
+            <TextField
+              id="outlined-name"
+              label="Password"
+              className={this.props.classes.textField}
+              value={this.state.password}
+              onChange={this.handleInputChangeFor('password')}
+              margin="normal"
+              variant="outlined"
+            />
           </div>
           <div>
             <input
@@ -77,7 +91,7 @@ class LoginPage extends Component {
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>
@@ -94,4 +108,4 @@ const mapStateToProps = state => ({
   errors: state.errors,
 });
 
-export default connect(mapStateToProps)(LoginPage);
+export default withStyles(styles)(connect(mapStateToProps)(LoginPage));
