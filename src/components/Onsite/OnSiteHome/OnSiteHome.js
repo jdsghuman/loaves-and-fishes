@@ -9,7 +9,6 @@ import FormControl from '@material-ui/core/FormControl';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { FormControlLabel } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
-import OnSiteDemo from '../OnSiteDemo/OnSiteDemo';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -71,6 +70,15 @@ class OnSiteHome extends Component {
         }
     }
 
+    handleClick = () => {
+        this.props.dispatch({type: "SET_ONSITE", payload: this.state})
+        if(this.state.value === 'yes'){
+            this.props.history.push('/onSiteDemo')
+        }else{
+            this.props.history.push('/onSiteMeal')
+        }
+    }
+
     render() {
 
         let locations =
@@ -99,12 +107,14 @@ class OnSiteHome extends Component {
                 <Checkbox
                     onChange={this.handleFarmChange}
                     value="farm"
+                    color="primary"
                 />
                 <ListItemText style={checkboxStyle} primary="Farm to Table" />
                 <br />
-                <Checkbox 
+                <Checkbox
                     onChange={this.handleSummerChange}
                     value="summer"
+                    color="primary"
                 />
                 <ListItemText style={checkboxStyle} primary="Summer Meal" />
                 <br />
@@ -118,12 +128,12 @@ class OnSiteHome extends Component {
                         style={checkboxStyle}
                     >
                         <FormLabel>Collect Demographics</FormLabel>
-                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                        <FormControlLabel value="yes" control={<Radio color="primary" />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio color="primary" />} label="No" />
                     </RadioGroup>
                 </FormControl>
                 <br />
-                <Button variant="contained">Collect Data</Button>
+                <Button variant="contained" color="primary" onClick={this.handleClick}>Collect Data</Button>
             </div>
         )
     }

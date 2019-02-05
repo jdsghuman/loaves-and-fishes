@@ -20,6 +20,8 @@ import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminUsers from '../Admin/AdminUsers/AdminUsers';
 import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
+import OnSiteDemo from '../OnSite/OnSiteDemo/OnSiteDemo';
+import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
 
 
 import './App.css';
@@ -69,6 +71,16 @@ class App extends Component {
               exact
               path="/adminUser"
               component={AdminUsers}
+            />
+            <ProtectedRoute
+              exact
+              path="/onSiteDemo"
+              component={OnSiteDemo}
+            />
+            <ProtectedRoute
+              exact
+              path="/OnSiteMeal"
+              component={OnSiteMeal}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

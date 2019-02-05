@@ -7,7 +7,7 @@ CREATE TABLE "person"
     "password" varchar(300) NOT NULL,
     "email" varchar(1000) NOT NULL,
     "last_location" integer,
-    "active" BOOLEAN NOT NULL DEFAULT 'false',
+    "status" BOOLEAN NOT NULL DEFAULT 'false',
     "new" BOOLEAN NOT NULL DEFAULT 'true',
     "admin" BOOLEAN NOT NULL DEFAULT 'false',
     CONSTRAINT person_pk PRIMARY KEY ("id")
