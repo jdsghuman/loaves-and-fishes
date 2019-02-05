@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import Title from '../../Title/Title';
 
 class OnSiteMeal extends Component {
     render() {
         return (
             <div>
-                <p>Onsite Meal</p>
+                <Title>OnSite Meal</Title>
             </div>
         )
     }
