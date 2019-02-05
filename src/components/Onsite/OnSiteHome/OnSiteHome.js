@@ -9,11 +9,19 @@ import FormControl from '@material-ui/core/FormControl';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import { FormControlLabel } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
+import OnSiteDemo from '../OnSiteDemo/OnSiteDemo';
+import { withRouter } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import InputLabel from '@material-ui/core/InputLabel';
 
 class OnSiteHome extends Component {
 
     state = {
-        value: 'yes',
+        value: 'no',
+        selectedLocation: '',
+        collectDemographics: 'yes',
+        farm: false,
+        summer: false
     };
 
     handleChange = event => {
@@ -25,41 +33,97 @@ class OnSiteHome extends Component {
         this.props.dispatch({ type: 'FETCH_LOCATIONS' })
     }
 
+    handleLocationChange = (event) => {
+        console.log('in handleLocationChange');
+        this.setState({
+            ...this.state,
+            selectedLocation: event.target.value
+        })
+    }
+
+    handleFarmChange = () => {
+        if (this.state.farm === false) {
+            this.setState({
+                ...this.state,
+                farm: true
+            })
+        }
+        else {
+            this.setState({
+                ...this.state,
+                farm: false
+            })
+        }
+    }
+
+    handleSummerChange = () => {
+        if (this.state.summer === false) {
+            this.setState({
+                ...this.state,
+                summer: true
+            })
+        }
+        else {
+            this.setState({
+                ...this.state,
+                summer: false
+            })
+        }
+    }
+
     render() {
 
         let locations =
             this.props.reduxStore.locationReducer.map(location => {
                 return (
-                    <MenuItem id={location.id}>{location.location_name}</MenuItem>
+                    <MenuItem key={location.id} value={location} id={location.id}>{location.location_name}</MenuItem>
                 );
             })
 
+        console.log(this.state);
+
+
         return (
             <div>
-                <Select>
-                    {locations}
-                </Select>
+                <FormControl >
+                    <InputLabel>Location</InputLabel>
+                    <Select
+                        label="Select Location"
+                        onChange={this.handleLocationChange}
+                        value={this.state.selectedLocation}
+                    >
+                        {locations}
+                    </Select>
+                </FormControl>
                 <br />
-                <Checkbox />
+                <Checkbox
+                    onChange={this.handleFarmChange}
+                    value="farm"
+                />
                 <ListItemText style={checkboxStyle} primary="Farm to Table" />
                 <br />
-                <Checkbox />
+                <Checkbox 
+                    onChange={this.handleSummerChange}
+                    value="summer"
+                />
                 <ListItemText style={checkboxStyle} primary="Summer Meal" />
-                <br/>
+                <br />
                 <FormControl>
-                
-                <RadioGroup
-                    aria-label="Collect Demographics"
-                    name="Collect Demographics"
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                    style={checkboxStyle}
-                >
-                <FormLabel>Collect Demographics</FormLabel>
-                <FormControlLabel value="yes" control={<Radio />} label="Yes" />
-                <FormControlLabel value="no" control={<Radio />} label="No" />
-                </RadioGroup>
+
+                    <RadioGroup
+                        aria-label="Collect Demographics"
+                        name="Collect Demographics"
+                        value={this.state.value}
+                        onChange={this.handleChange}
+                        style={checkboxStyle}
+                    >
+                        <FormLabel>Collect Demographics</FormLabel>
+                        <FormControlLabel value="yes" control={<Radio />} label="Yes" />
+                        <FormControlLabel value="no" control={<Radio />} label="No" />
+                    </RadioGroup>
                 </FormControl>
+                <br />
+                <Button variant="contained">Collect Data</Button>
             </div>
         )
     }
@@ -76,4 +140,4 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default connect(mapStateToProps)(OnSiteHome);
+export default connect(mapStateToProps)(withRouter(OnSiteHome));
