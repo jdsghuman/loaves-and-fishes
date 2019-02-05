@@ -7,6 +7,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
+import Button from '@material-ui/core/Button';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -44,6 +45,10 @@ class AdminUsers extends Component {
         this.getListofUsers();
     }
 
+    removeUsers = (id) => {
+        console.log('in remove users', id)
+        this.props.dispatch({ type: 'DELETE_USERS', payload: id})
+    }
 
     render() {
         return (
@@ -69,6 +74,7 @@ class AdminUsers extends Component {
                     <TableCell >{list.email}</TableCell>
                     <TableCell >{list.status}</TableCell>
                     <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
+                    <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button>
                   </TableRow>
                 );
               })}
