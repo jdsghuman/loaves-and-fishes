@@ -3,7 +3,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// Get all on site demographics for GENDER
+// GET all on site demographics for GENDER
 router.get('/gender', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
@@ -19,7 +19,7 @@ router.get('/gender', rejectUnauthenticated, (req, res) => {
     }
 });
 
-// Get all on site demographics for RACE
+// GET all on site demographics for RACE
 router.get('/race', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
@@ -35,7 +35,7 @@ router.get('/race', rejectUnauthenticated, (req, res) => {
     }
 });
 
-// Get all on site demographics for AGE
+// GET all on site demographics for AGE
 router.get('/age', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
@@ -51,25 +51,27 @@ router.get('/age', rejectUnauthenticated, (req, res) => {
     }
 });
 
-// MAY NEED MORE GET ROUTES 
-
-
-// Add on site count WILL NEED TO BE UPDATED 
+// POST Demographics submitted
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
-        const newCount = req.body;
-        const queryText =
-            `INSERT INTO RYAN MUNDY PLEASE UPDATE;`;
+        const newDemo = req.body;
+        const queryText = `INSERT INTO "count" ("meal_count", "timestamp", "summer", "farm", "location_id", "gender_id", "race_id", "age_id")
+                           VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
         const queryValues = [
-            newCount.// update with database column name 
-            newCount. // update with database column name 
-            req.user.id
+            newDemo.value, 
+            newDemo.time, 
+            newDemo.summer,
+            newDemo.farm, 
+            newDemo.location,
+            newDemo.selectedGender,
+            newDemo.selectedRace,
+            newDemo.selectedAge,
         ];
         pool.query(queryText, queryValues).then(result => {
             res.sendStatus(204);
         }).catch(error => {
-            console.log('in outlet category POST ROUTER error', error);
+            console.log('in demographics POST ROUTER error', error);
             res.sendStatus(500)
         })
     } else {
