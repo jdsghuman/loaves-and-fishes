@@ -20,12 +20,9 @@ import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminUsers from '../Admin/AdminUsers/AdminUsers';
 import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
-<<<<<<< HEAD
-=======
 import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
->>>>>>> master
 
 
 import './App.css';

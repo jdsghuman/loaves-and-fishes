@@ -31,12 +31,7 @@ function* editUsers(action) {
     console.log('editUsers');
     try{
         yield axios.put(`/api/userList/${action.payload.id}`, action.payload );
-<<<<<<< HEAD
-        yield put({ type: 'FETCH_USERS' });
-        yield put({ type: 'FETCH_USER', payload: action.payload.user });
-=======
         yield put({ type: 'FETCH_USER_LIST' });
->>>>>>> master
     }catch (error) {
         console.log('problem with edit saga', error)
     }

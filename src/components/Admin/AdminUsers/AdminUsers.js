@@ -1,8 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import { withStyles } from '@material-ui/core/styles';
+import StarIcon from '@material-ui/icons/Star';
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
+const CustomTableCell = withStyles(theme => ({
+    head: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    body: {
+      fontSize: 14,
+    },
+  }))(TableCell);
 
-<<<<<<< HEAD
   const styles = theme => ({
     root: {
       width: '100%',
@@ -18,47 +37,29 @@ import { connect } from 'react-redux';
       },
     },
   });
-  const inputs = {
-    admin: '',
-    status: ''
-}
 
 class AdminUsers extends Component {
 
-  state = inputs;
 
     getListofUsers = () => {
         this.props.dispatch({ type: 'FETCH_USER_LIST' });
     }
-=======
+
+    componentDidMount () {
+        this.getListofUsers();
+    }
+
+    removeUsers = (id) => {
+        console.log('in remove users', id)
+        this.props.dispatch({ type: 'DELETE_USERS', payload: id})
+    }
 
 
- 
-
-class AdminUsers extends Component {
-
->>>>>>> master
-
-
-     
-
-    editUsers = (personId) => {
-      const data = {
-          ...this.state,
-          id: personId
-      }
-      console.log('in edit users')
-      this.props.dispatch({ type: 'EDIT_USERS', payload: data })
-      this.setState({
-          inputs
-      })   
-  }
 
     render() {
         return (
             <div>
-<<<<<<< HEAD
-            <p className="adminUserHeader">Admin user view</p>
+            <p>Admin user view</p>
             <Table >
             <TableHead>
               <TableRow>
@@ -74,26 +75,19 @@ class AdminUsers extends Component {
               {this.props.reduxStore.userListReducer.map((list) => {
                   console.log('checking ', list);
                 return (
-                  <TableRow key={list.id}>
+                  <TableRow >
                     <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                     <TableCell >{list.name}</TableCell>
                     <TableCell >{list.email}</TableCell>
                     <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                     <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                    <TableCell><Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button></TableCell>
+                    <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}><DeleteIcon/></Button>
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
-          {/* <Button size="small" variant="contained" color="primary" onClick={() => this.editUsers(list.id)}>Update</Button> */}
-=======
-            <p>Admin user view</p>
-           
-         
-              
-        
->>>>>>> master
+          
             </div>
         )
     }
@@ -103,4 +97,4 @@ const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default connect(mapReduxStateToProps)(AdminUsers);
+export default withStyles(styles)(connect(mapReduxStateToProps)(AdminUsers));
