@@ -19,9 +19,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminUsers from '../Admin/AdminUsers/AdminUsers';
-import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
-import OnSiteDemo from '../OnSite/OnSiteDemo/OnSiteDemo';
-import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
+import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
+import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
+import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
 
 
