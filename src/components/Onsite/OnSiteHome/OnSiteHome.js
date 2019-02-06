@@ -98,7 +98,7 @@ class OnSiteHome extends Component {
 
 
         return (
-            <div>
+            <div className="div__container container__background">
                 <Title>OnSite Home</Title>
                 <FormControl >
                     <InputLabel>Location</InputLabel>
@@ -106,6 +106,7 @@ class OnSiteHome extends Component {
                         label="Select Location"
                         onChange={this.handleLocationChange}
                         value={this.state.selectedLocation}
+                        style={{ height: '40px', width: '150px' }}
                     >
                         {locations}
                     </Select>
