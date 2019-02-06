@@ -12,6 +12,20 @@ body {
     height: 100%;
 } */
 
+.div__container {
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+.container__background {
+    background: #EEE;
+    width: 350px;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 5px;
+}
+
 .alert {
     background-color: #ff4545;
     margin: 50px;
@@ -86,5 +100,9 @@ input {
 @media only screen and (max-width: 475px) {
     form {
         width: 70%
+    }
+    .div__container {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }

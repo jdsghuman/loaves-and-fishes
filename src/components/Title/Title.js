@@ -7,13 +7,12 @@ const Title = (props) => {
 }
 
 const title = {
-  display: 'block',
-  margin: '20px auto',
-  // width: '140px',
-  fontSize: '2rem',
-  fontWeight: '300',
+  margin: '25px auto',
+  // width: '240px',
+  fontSize: '2.2rem',
+  fontWeight: '600',
   textAlign: 'center',
-  color: '#333333',
+  color: '#333333'
 }
 
 export default Title;
