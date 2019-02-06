@@ -63,7 +63,7 @@ class OnSiteDemo extends Component {
         this.props.dispatch({ type: "ADD_DEMO", payload: this.state })
         this.setState({
             ...this.state,
-            count: this.state.count +1,
+            count: this.state.count + 1,
             selectedGender: null,
             selectedRace: null,
             selectedAge: null
@@ -74,7 +74,6 @@ class OnSiteDemo extends Component {
         let genderList =
             this.props.demo.map(gender => {
                 return (
-                    // fix value it's working but not correct way of doing it!!
                     <option key={gender.id} value={gender.id}>{gender.gender_name}</option>
                 );
             })
@@ -82,19 +81,16 @@ class OnSiteDemo extends Component {
         let raceList =
             this.props.demo.map(race => {
                 return (
-                    // fix value it's working but not correct way of doing it!!
                     <option key={race.id} value={race.id}>{race.race_name}</option>
                 );
             })
 
         let ageList =
             this.props.demo.map(age => {
-                if( age.age_category !== 'Generic Adult' && age.age_category !== 'Generic Child'){
-                return (
-                    // fix value it's working but not correct way of doing it!!
-                    // also GENERIC CHILD displays
-                    <option key={age.id} value={age.id}>{age.age_category}</option>
-                );
+                if (age.age_category !== 'Generic Adult' && age.age_category !== 'Generic Child') {
+                    return (
+                        <option key={age.id} value={age.id}>{age.age_category}</option>
+                    );
                 }
             })
 
@@ -105,7 +101,7 @@ class OnSiteDemo extends Component {
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
-                {/* <MyLocation location={this.props.onSite.selectedLocation || 'Location unavailable'} /> */}
+                <MyLocation />
                 <br />
                 <FormControl>
                     <InputLabel shrink htmlFor="select-multiple-native">
@@ -120,13 +116,13 @@ class OnSiteDemo extends Component {
                             id: 'select-multiple-native',
                         }}
                     >
-                        {genderList} 
+                        {genderList}
                         ))}
                     </Select>
                 </FormControl>
-                <br/>
-                <br/>
-                <br/>
+                <br />
+                <br />
+                <br />
                 <FormControl>
                     <InputLabel shrink htmlFor="select-multiple-native">
                         Select Race
@@ -145,8 +141,8 @@ class OnSiteDemo extends Component {
                     </Select>
                 </FormControl>
                 <br />
-                <br/>
-                <br/>
+                <br />
+                <br />
                 <FormControl>
                     <InputLabel shrink htmlFor="select-multiple-native">
                         Select Age
@@ -165,7 +161,7 @@ class OnSiteDemo extends Component {
                     </Select>
                 </FormControl>
                 <br />
-                <br/>
+                <br />
                 <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
             </div>
         )
