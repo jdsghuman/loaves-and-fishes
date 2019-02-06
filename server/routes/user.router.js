@@ -42,4 +42,14 @@ router.post('/logout', (req, res) => {
   res.sendStatus(200);
 });
 
+router.put('/location', (req, res) => {
+  const queryText = `UPDATE "person" SET "last_location"=$1 WHERE "person".id = $2;`;
+  pool.query(queryText, [req.body.selectedLocation.id, req.body.userId])
+    .then(() => { res.sendStatus(201); })
+    .catch((error) => {
+      console.log(error);
+      res.sendStatus(500);
+    });
+});//end PUT
+
 module.exports = router;

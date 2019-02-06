@@ -4,17 +4,31 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
+import Title from '../../Title/Title';
+import MyLocation from '../../MyLocation/MyLocation';
+import './OnSiteDemo.css';
 
 class OnSiteDemo extends Component {
 
     state = {
-        selectedGender: '',
-        selectedRace: '',
-        selectedAge: '',
-        value: 1
+        selectedGender: null,
+        selectedRace: null,
+        selectedAge: null,
+        value: 1,
+        location: this.props.onSite.selectedLocation.id,
+        farm: '',
+        summer: '',
+        time: '',
+        count: 0
     }
 
     componentDidMount() {
+        this.setState({
+            ...this.state,
+            farm: this.props.onSite.farm,
+            summer: this.props.onSite.summer,
+            time: this.props.onSite.time
+        })
         this.props.dispatch({ type: 'FETCH_GENDER' })
         this.props.dispatch({ type: 'FETCH_RACE' })
         this.props.dispatch({ type: 'FETCH_AGE' })
@@ -46,53 +60,118 @@ class OnSiteDemo extends Component {
 
     handleSubmit = () => {
         console.log('in handleSubmit');
-        // axios post this.props.dispatch({ type: "SET_AGE", payload: this.state })
+        this.props.dispatch({ type: "ADD_DEMO", payload: this.state })
+        this.setState({
+            ...this.state,
+            count: this.state.count + 1,
+            selectedGender: null,
+            selectedRace: null,
+            selectedAge: null
+        })
     }
 
     render() {
-        let locationName = this.props.reduxStore.onSiteReducer.selectedLocation.location_name
-        return (
-            <div>
-                <p>Onsite Demo</p>
-                <p>{locationName}</p>
-                <FormControl>
-                    <InputLabel shrink htmlFor="select-multiple-native">
-                        Gender
-          </InputLabel>
-                    <Select>
-                        Gender
-                    </Select>
-                </FormControl>
-                <br />
+        let genderList =
+            this.props.demo.map(gender => {
+                return (
+                    <option key={gender.id} value={gender.id}>{gender.gender_name}</option>
+                );
+            })
 
-                <FormControl>
-                    <InputLabel shrink htmlFor="select-multiple-native">
-                        Race
-          </InputLabel>
-                    <Select>
-                        Race
-                    </Select>
-                </FormControl>
+        let raceList =
+            this.props.demo.map(race => {
+                return (
+                    <option key={race.id} value={race.id}>{race.race_name}</option>
+                );
+            })
+
+        let ageList =
+            this.props.demo.map(age => {
+                if (age.age_category !== 'Generic Adult' && age.age_category !== 'Generic Child') {
+                    return (
+                        <option key={age.id} value={age.id}>{age.age_category}</option>
+                    );
+                }
+            })
+
+        console.log('handleAgeChange AFTER click', this.state);
+        return (
+            <div className="div__container container__background">
+                <Title>OnSite Demographics</Title>
+                <div className="count__container">
+                    <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
+                </div>
+                <MyLocation />
                 <br />
                 <FormControl>
                     <InputLabel shrink htmlFor="select-multiple-native">
-                        Age
-          </InputLabel>
-                    <Select>
-                        Age
+                        Select Gender
+                    </InputLabel>
+                    <Select
+                        multiple
+                        native
+                        value={this.state.selectedGender}
+                        onChange={this.handleGenderChange}
+                        inputProps={{
+                            id: 'select-multiple-native',
+                        }}
+                    >
+                        {genderList}
+                        ))}
                     </Select>
                 </FormControl>
                 <br />
-                <Button>Submit</Button>
+                <br />
+                <br />
+                <FormControl>
+                    <InputLabel shrink htmlFor="select-multiple-native">
+                        Select Race
+                    </InputLabel>
+                    <Select
+                        multiple
+                        native
+                        value={this.state.selectedRace}
+                        onChange={this.handleRaceChange}
+                        inputProps={{
+                            id: 'select-multiple-native',
+                        }}
+                    >
+                        {raceList}
+                        ))}
+                    </Select>
+                </FormControl>
+                <br />
+                <br />
+                <br />
+                <FormControl>
+                    <InputLabel shrink htmlFor="select-multiple-native">
+                        Select Age
+                    </InputLabel>
+                    <Select
+                        multiple
+                        native
+                        value={this.state.selectedAge}
+                        onChange={this.handleAgeChange}
+                        inputProps={{
+                            id: 'select-multiple-native',
+                        }}
+                    >
+                        {ageList}
+                        ))}
+                    </Select>
+                </FormControl>
+                <br />
+                <br />
+                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
             </div>
         )
     }
 }
 
-const mapStateToProps = (reduxStore) => {
-    return {
-        reduxStore
-    }
-}
+const mapStateToProps = (reduxStore) => ({
+    onSite: reduxStore.onSiteReducer,
+    demo: reduxStore.demoReducer,
+    // onSiteReducer: reduxStore.onSiteReducer
+});
 
 export default connect(mapStateToProps)(OnSiteDemo);

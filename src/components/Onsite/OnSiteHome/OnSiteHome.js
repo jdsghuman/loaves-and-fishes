@@ -23,7 +23,9 @@ class OnSiteHome extends Component {
         collectDemographics: 'yes',
         farm: false,
         summer: false,
-        time: moment().format()
+        time: moment().format(),
+        userId: this.props.reduxStore.user.id,
+        lastLocationId: this.props.reduxStore.user.last_location
     };
 
     handleChange = event => {
@@ -75,6 +77,7 @@ class OnSiteHome extends Component {
 
     handleClick = () => {
         this.props.dispatch({ type: "SET_ONSITE", payload: this.state })
+        this.props.dispatch({ type: 'SET_LAST_LOCATION', payload: this.state });
         if (this.state.selectedLocation === '') {
             alert('Please select a location')
         }
@@ -91,14 +94,16 @@ class OnSiteHome extends Component {
             this.props.reduxStore.locationReducer.map(location => {
                 return (
                     <MenuItem key={location.id} value={location} id={location.id}>{location.location_name}</MenuItem>
+                    
                 );
             })
 
         console.log(this.state);
-
+        
+    
 
         return (
-            <div>
+            <div className="div__container container__background">
                 <Title>OnSite Home</Title>
                 <FormControl >
                     <InputLabel>Location</InputLabel>
@@ -106,6 +111,7 @@ class OnSiteHome extends Component {
                         label="Select Location"
                         onChange={this.handleLocationChange}
                         value={this.state.selectedLocation}
+                        style={{ height: '40px', width: '150px' }}
                     >
                         {locations}
                     </Select>
