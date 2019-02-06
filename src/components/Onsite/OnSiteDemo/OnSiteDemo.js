@@ -11,9 +11,9 @@ import './OnSiteDemo.css';
 class OnSiteDemo extends Component {
 
     state = {
-        selectedGender: '',
-        selectedRace: '',
-        selectedAge: '',
+        selectedGender: null,
+        selectedRace: null,
+        selectedAge: null,
         value: 1,
         location: this.props.onSite.selectedLocation.id,
         farm: '',
@@ -64,9 +64,9 @@ class OnSiteDemo extends Component {
         this.setState({
             ...this.state,
             count: this.state.count +1,
-            selectedGender: '',
-            selectedRace: '',
-            selectedAge: ''
+            selectedGender: null,
+            selectedRace: null,
+            selectedAge: null
         })
     }
 
