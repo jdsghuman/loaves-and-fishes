@@ -58,7 +58,6 @@ class LoginPage extends Component {
           <h1 className="login__title">Login</h1>
           <div>
             <TextField
-              id="outlined-name"
               label="Username"
               className={this.props.classes.textField}
               value={this.state.username}
@@ -69,7 +68,6 @@ class LoginPage extends Component {
           </div>
           <div>
             <TextField
-              id="outlined-name"
               label="Password"
               className={this.props.classes.textField}
               value={this.state.password}
