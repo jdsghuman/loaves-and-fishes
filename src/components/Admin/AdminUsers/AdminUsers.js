@@ -8,8 +8,6 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -36,8 +34,14 @@ const CustomTableCell = withStyles(theme => ({
       },
     },
   });
+  const inputs = {
+    admin: '',
+    status: ''
+}
 
 class AdminUsers extends Component {
+
+  state = inputs;
 
     getListofUsers = () => {
         this.props.dispatch({ type: 'FETCH_USER_LIST' });
@@ -52,9 +56,17 @@ class AdminUsers extends Component {
         this.props.dispatch({ type: 'DELETE_USERS', payload: id})
     }
 
-    handleChange = () => {
-        
-    }
+    editUsers = (personId) => {
+      const data = {
+          ...this.state,
+          id: personId
+      }
+      console.log('in edit users')
+      this.props.dispatch({ type: 'EDIT_USERS', payload: data })
+      this.setState({
+          inputs
+      })   
+  }
 
     render() {
         return (
@@ -79,12 +91,7 @@ class AdminUsers extends Component {
                     <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                     <TableCell >{list.name}</TableCell>
                     <TableCell >{list.email}</TableCell>
-                    <TableCell >
-                    <Select> 
-                        <MenuItem>{list.status ? 'Active' : 'Inactive'}</MenuItem>
-                        <MenuItem>{list.status ? 'Inactive' : 'Active'}</MenuItem>
-                    </Select>
-                    </TableCell>
+                    <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                     <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
                     <TableCell><Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button></TableCell>
                   </TableRow>
@@ -92,7 +99,7 @@ class AdminUsers extends Component {
               })}
             </TableBody>
           </Table>
-          <Button size="Large" variant="contained" color="Secondary" >Update</Button>
+          {/* <Button size="small" variant="contained" color="primary" onClick={() => this.editUsers(list.id)}>Update</Button> */}
             </div>
         )
     }

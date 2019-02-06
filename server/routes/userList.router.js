@@ -33,7 +33,7 @@ router.delete('/:id', (req, res) => {
 /**
  * PUT route template
  */
-router.put(`/:id`, rejectUnauthenticated, (req, res) => {
+router.put(`/:id`, (req, res) => {
     const personId = req.params.id;
     const {admin, status } = req.body;
     console.log('in put route', req.body);
