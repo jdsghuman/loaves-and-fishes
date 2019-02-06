@@ -14,12 +14,18 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-import UserPage from '../UserPage/UserPage';
+// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminUsers from '../Admin/AdminUsers/AdminUsers';
 import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
+<<<<<<< HEAD
+=======
+import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
+import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
+import NewUserMessage from '../NewUserMessage/NewUserMessage';
+>>>>>>> master
 
 
 import './App.css';
@@ -69,6 +75,21 @@ class App extends Component {
               exact
               path="/adminUser"
               component={AdminUsers}
+            />
+            <ProtectedRoute
+              exact
+              path="/onSiteDemo"
+              component={OnSiteDemo}
+            />
+            <ProtectedRoute
+              exact
+              path="/OnSiteMeal"
+              component={OnSiteMeal}
+            />
+            <ProtectedRoute
+              exact
+              path="/NewUser"
+              component={NewUserMessage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

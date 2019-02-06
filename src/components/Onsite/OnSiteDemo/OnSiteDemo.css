@@ -1,0 +1,19 @@
+.count__container {
+  /* display: flex;  */
+  /* justify-content: center; */
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.count__total-display {
+  /* margin: 50px auto; */
+  display: inline-block;
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 300;
+  margin-top: 0;
+  margin-bottom: 0;
+  border: 2px solid #333;
+  padding: 5px;
+  border-radius: 5px;
+}

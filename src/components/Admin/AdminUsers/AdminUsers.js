@@ -1,24 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import { withStyles } from '@material-ui/core/styles';
-import StarIcon from '@material-ui/icons/Star';
-import Button from '@material-ui/core/Button';
 
-const CustomTableCell = withStyles(theme => ({
-    head: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    body: {
-      fontSize: 14,
-    },
-  }))(TableCell);
 
+<<<<<<< HEAD
   const styles = theme => ({
     root: {
       width: '100%',
@@ -46,15 +30,17 @@ class AdminUsers extends Component {
     getListofUsers = () => {
         this.props.dispatch({ type: 'FETCH_USER_LIST' });
     }
+=======
 
-    componentDidMount () {
-        this.getListofUsers();
-    }
 
-    removeUsers = (id) => {
-        console.log('in remove users', id)
-        this.props.dispatch({ type: 'DELETE_USERS', payload: id})
-    }
+ 
+
+class AdminUsers extends Component {
+
+>>>>>>> master
+
+
+     
 
     editUsers = (personId) => {
       const data = {
@@ -71,6 +57,7 @@ class AdminUsers extends Component {
     render() {
         return (
             <div>
+<<<<<<< HEAD
             <p className="adminUserHeader">Admin user view</p>
             <Table >
             <TableHead>
@@ -100,6 +87,13 @@ class AdminUsers extends Component {
             </TableBody>
           </Table>
           {/* <Button size="small" variant="contained" color="primary" onClick={() => this.editUsers(list.id)}>Update</Button> */}
+=======
+            <p>Admin user view</p>
+           
+         
+              
+        
+>>>>>>> master
             </div>
         )
     }
@@ -109,4 +103,4 @@ const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
 
-export default withStyles(styles)(connect(mapReduxStateToProps)(AdminUsers));
+export default connect(mapReduxStateToProps)(AdminUsers);
