@@ -101,7 +101,7 @@ class OnSiteDemo extends Component {
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
-                {/* <MyLocation location={this.props.onSite.selectedLocation || 'Location unavailable'} /> */}
+                <MyLocation />
                 <br />
                 <FormControl>
                     <InputLabel shrink htmlFor="select-multiple-native">
