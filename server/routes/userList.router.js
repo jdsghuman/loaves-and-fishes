@@ -33,19 +33,19 @@ router.delete('/:id', (req, res) => {
 /**
  * PUT route template
  */
-router.put(`/:id`, (req, res) => {
-    const personId = req.params.id;
-    const {admin, status } = req.body;
-    console.log('in put route', req.body);
-    const queryText = `UPDATE "person" SET "admin"=$1, "status"=$2 WHERE id=$3;`;
-    pool.query(queryText, [admin, status, personId ] )
-    .then(result => {
-        res.sendStatus(204);
-    })
-    .catch( (error) => {
-        console.log('error in PUT', error);
-        res.sendStatus(500);
-    })
-})// end of PUT route
+// router.put(`/:id`, (req, res) => {
+//     const personId = req.params.id;
+//     const {admin, status } = req.body;
+//     console.log('in put route', req.body);
+//     const queryText = `UPDATE "person" SET "admin"=$1, "status"=$2 WHERE id=$3;`;
+//     pool.query(queryText, [admin, status, personId ] )
+//     .then(result => {
+//         res.sendStatus(204);
+//     })
+//     .catch( (error) => {
+//         console.log('error in PUT', error);
+//         res.sendStatus(500);
+//     })
+// })// end of PUT route
 
 module.exports = router;

@@ -14,7 +14,6 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
@@ -23,6 +22,7 @@ import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
 import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
+import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
 
 
 import './App.css';
@@ -72,6 +72,11 @@ class App extends Component {
               exact
               path="/adminUser"
               component={AdminUsers}
+            />
+             <AdminRoute
+              exact
+              path="/adminCategories"
+              component={AdminCategories}
             />
             <ProtectedRoute
               exact

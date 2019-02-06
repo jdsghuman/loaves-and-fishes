@@ -75,7 +75,7 @@ class AdminUsers extends Component {
               {this.props.reduxStore.userListReducer.map((list) => {
                   console.log('checking ', list);
                 return (
-                  <TableRow >
+                  <TableRow key={list.id}>
                     <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                     <TableCell >{list.name}</TableCell>
                     <TableCell >{list.email}</TableCell>
