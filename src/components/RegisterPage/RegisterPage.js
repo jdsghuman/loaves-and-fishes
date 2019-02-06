@@ -62,7 +62,6 @@ class RegisterPage extends Component {
           <h1 className="login__title">Register User</h1>
           <div>
             <TextField
-              id="outlined-name"
               label="Name"
               className={this.props.classes.textField}
               name="name"
@@ -74,7 +73,6 @@ class RegisterPage extends Component {
           </div>
           <div>
             <TextField
-              id="outlined-name"
               label="Email"
               className={this.props.classes.textField}
               name="email"
@@ -86,7 +84,6 @@ class RegisterPage extends Component {
           </div>
           <div>
             <TextField
-              id="outlined-name"
               label="Username"
               className={this.props.classes.textField}
               name="username"
@@ -98,7 +95,6 @@ class RegisterPage extends Component {
           </div>
           <div>
             <TextField
-              id="outlined-name"
               label="Password"
               className={this.props.classes.textField}
               ype="password"
