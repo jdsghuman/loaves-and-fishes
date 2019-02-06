@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery, actionChannel } from 'redux-saga/effects';
 
 
 function* fetchGender() {
@@ -12,7 +12,7 @@ function* fetchGender() {
         const response = yield axios.get('/api/onsite/gender', config);
         yield put({ type: 'SET_GENDER', payload: response.data });
     } catch (error) {
-        console.log('User get request failed', error);
+        console.log('gender GET request failed', error);
     }
 }
 
@@ -26,7 +26,7 @@ function* fetchRace() {
         const response = yield axios.get('/api/onsite/race', config);
         yield put({ type: 'SET_RACE', payload: response.data });
     } catch (error) {
-        console.log('User get request failed', error);
+        console.log('race GET request failed', error);
     }
 }
 
@@ -40,7 +40,23 @@ function* fetchAge() {
         const response = yield axios.get('/api/onsite/age', config);
         yield put({ type: 'SET_AGE', payload: response.data });
     } catch (error) {
-        console.log('User get request failed', error);
+        console.log('age GET request failed', error);
+    }
+}
+
+function* postDemo(action) {
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        };
+
+        yield axios.post('/api/onsite', action.payload);
+        yield put({ type: 'FETCH_GENDER' });
+        yield put({ type: 'FETCH_RACE' });
+        yield put({ type: 'FETCH_AGE' });
+    } catch (error) {
+        console.log('demo POST request failed', error);
     }
 }
 
@@ -48,6 +64,7 @@ function* demoSaga() {
     yield takeEvery('FETCH_GENDER', fetchGender);
     yield takeEvery('FETCH_RACE', fetchRace);
     yield takeEvery('FETCH_AGE', fetchAge);
+    yield takeEvery('ADD_DEMO', postDemo);
 }
 
 export default demoSaga;
