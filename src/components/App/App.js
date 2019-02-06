@@ -23,7 +23,7 @@ import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
 import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
-
+import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 
 import './App.css';
 
@@ -77,6 +77,11 @@ class App extends Component {
               exact
               path="/adminCategories"
               component={AdminCategories}
+            />
+             <AdminRoute
+              exact
+              path="/adminAddCategories"
+              component={AdminAddCategories}
             />
             <ProtectedRoute
               exact

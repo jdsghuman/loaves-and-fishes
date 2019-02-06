@@ -45,6 +45,10 @@ class AdminManageOutletCategories extends Component {
         this.getCategories();
     }
 
+    handleAddCategories = () => {
+        this.props.history.push('/adminAddCategories');
+    }
+
     removeCategories = (id) => {
         console.log('in remove categories', id)
         this.props.dispatch({ type: 'DELETE_CATEGORY_OUTLET', payload: id})
@@ -54,7 +58,7 @@ class AdminManageOutletCategories extends Component {
         return (
             <div>
                 <p>Manage Outlet Categories</p>
-                <Button size="Large" variant="contained" color="secondary">Add Outlet Categories</Button>
+                <Button size="Large" variant="contained" color="secondary" onClick={this.handleAddCategories}>Add New Outlet Categories</Button>
                 <Table >
             <TableHead>
               <TableRow>
