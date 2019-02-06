@@ -14,21 +14,24 @@ import MyLocation from '../../MyLocation/MyLocation';
 class OnSiteMeal extends Component {
     state = {
         count: 0,
-        categorizebyage: false
+        categorizebyage: false,
+        genericAdult: 0,
+        genericChild: 0
     }
 
     changeCount = (change) => {
-        console.log('add')
-        if(change === 'add') {
+        // Add to count
+        if (change === 'add') {
             this.setState(prevState => {
-                return {count: prevState.count + 1}
+                return { count: prevState.count + 1 }
             })
-        } else if(change === 'subtract' && this.state.count > 0) {
+            // Subtract from count
+        } else if (change === 'subtract' && this.state.count > 0) {
             this.setState(prevState => {
-                return {count: prevState.count - 1}
+                return { count: prevState.count - 1 }
             })
         }
-        
+
     }
 
     handleChange = name => event => {
@@ -37,6 +40,7 @@ class OnSiteMeal extends Component {
         });
     };
 
+    // Toggle state if Categorize Age checkbox is checked
     handleGenericAgeChange = () => {
         this.setState(prevState => ({
             categorizebyage: !prevState.categorizebyage
@@ -50,7 +54,7 @@ class OnSiteMeal extends Component {
                 {/* Location display */}
                 <MyLocation location={this.props.onSiteReducer.selectedLocation || 'Location unavailable'} />
                 {/* Categorize by age */}
-                <div style={{textAlign: 'center'}}>
+                <div style={{ textAlign: 'center' }}>
                     <ListItemText style={checkboxStyle} primary="Categorize by age" />
                     <Checkbox
                         onChange={this.handleGenericAgeChange}
@@ -62,24 +66,62 @@ class OnSiteMeal extends Component {
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
-                <div className="count__container">
-                    <RemoveCircle onClick={() => this.changeCount('subtract')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
-                    <TextField
-                        id="outlined-number"
-                        value={this.state.count}
-                        onChange={this.handleChange()}
-                        type="number"
-                        className={this.props.classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                        InputProps={{
-                            classes: {
-                                input: this.props.classes.resize,
-                            }
-                        }}
-                    />
-                    <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
-                </div>
+
+                {this.state.categorizebyage === false &&
+                    <div className="count__container">
+                        <RemoveCircle onClick={() => this.changeCount('subtract')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
+                        <TextField
+                            value={this.state.count}
+                            onChange={this.handleChange()}
+                            type="number"
+                            className={this.props.classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{
+                                classes: {
+                                    input: this.props.classes.resize,
+                                }
+                            }}
+                        />
+                        <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
+                    </div>
+                }
+                {this.state.categorizebyage === true &&
+                    <div className="count__container">
+                        <p style={{marginBottom: '0', fontWeight: '600'}}>Adult</p>
+                        <RemoveCircle onClick={() => this.changeCount('subtract')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
+                        <TextField
+                            value={this.state.count}
+                            onChange={this.handleChange()}
+                            type="number"
+                            className={this.props.classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{
+                                classes: {
+                                    input: this.props.classes.resize,
+                                }
+                            }}
+                        />
+                        <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
+                        <p style={{marginBottom: '0', fontWeight: '600'}}>Child</p>
+                        <RemoveCircle onClick={() => this.changeCount('subtract')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
+                        <TextField
+                            value={this.state.count}
+                            onChange={this.handleChange()}
+                            type="number"
+                            className={this.props.classes.textField}
+                            margin="normal"
+                            variant="outlined"
+                            InputProps={{
+                                classes: {
+                                    input: this.props.classes.resize,
+                                }
+                            }}
+                        />
+                        <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
+                    </div>
+                }
             </div>
         )
     }
