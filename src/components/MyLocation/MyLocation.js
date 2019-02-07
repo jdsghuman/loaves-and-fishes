@@ -5,18 +5,30 @@ import './MyLocation.css';
 class MyLocation extends Component {
 
   render() {
-    let locationName = this.props.onSiteReducer.selectedLocation.location_name || 'Location Unavailable';
+    let selectedLocation
+    let location = this.props.reduxStore.locationReducer.map(location => {
+      if(location.id===this.props.reduxStore.onSiteReducer.selectedLocation){
+        selectedLocation = <h3 className="location__banner">{location.location_name}</h3>
+      }
+      else if (this.props.reduxStore.onSiteReducer.selectedLocation===''){
+        selectedLocation = <h3 className="location__banner">Location Unavailable</h3>
+      }
+      return (
+        selectedLocation
+      );
+      
+    })
 
     return (
       <>
-      <h3 className="location__banner">{locationName}</h3>
+      {location}
       </>
     )
   }
 }
 
-const mapStateToProps = store => ({
-  onSiteReducer: store.onSiteReducer
+const mapStateToProps = reduxStore => ({
+  reduxStore
 })
 
 
