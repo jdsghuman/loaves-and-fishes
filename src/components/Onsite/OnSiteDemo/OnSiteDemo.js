@@ -22,6 +22,12 @@ class OnSiteDemo extends Component {
         count: 0
     }
 
+    componentWillMount() {
+        if(this.props.onSite.selectedLocation.location_name === '') {
+            this.props.history.push('/home');
+        }
+    }
+
     componentDidMount() {
         this.setState({
             ...this.state,
@@ -171,7 +177,6 @@ class OnSiteDemo extends Component {
 const mapStateToProps = (reduxStore) => ({
     onSite: reduxStore.onSiteReducer,
     demo: reduxStore.demoReducer,
-    // onSiteReducer: reduxStore.onSiteReducer
 });
 
 export default connect(mapStateToProps)(OnSiteDemo);

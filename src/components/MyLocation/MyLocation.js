@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import './MyLocation.css';
 
 class MyLocation extends Component {
+
   render() {
+    let locationName = this.props.onSiteReducer.selectedLocation.location_name || 'Location Unavailable';
+
     return (
       <>
-      <h3 className="location__banner">{this.props.onSiteReducer.selectedLocation.location_name || 'Location Unavailable'}</h3>
-      {/* {JSON.stringify(this.props.onSiteReducer)} */}
+      <h3 className="location__banner">{locationName}</h3>
       </>
     )
   }
