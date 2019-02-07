@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import userListSaga from './userListSaga';
 import locationSaga from './locationSaga';
 import demoSaga from './demoSaga';
+import categorySaga from './categorySaga';
 import adminLocationSaga from './adminLocationSaga';
 
 // rootSaga is the primary saga.
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     userListSaga(),
     locationSaga(),
     demoSaga(),
+    categorySaga(),
     adminLocationSaga(),
   ]);
 }

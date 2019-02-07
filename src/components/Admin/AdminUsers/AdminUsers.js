@@ -8,6 +8,9 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -37,6 +40,7 @@ const CustomTableCell = withStyles(theme => ({
 
 class AdminUsers extends Component {
 
+
     getListofUsers = () => {
         this.props.dispatch({ type: 'FETCH_USER_LIST' });
     }
@@ -50,6 +54,8 @@ class AdminUsers extends Component {
         this.props.dispatch({ type: 'DELETE_USERS', payload: id})
     }
 
+
+
     render() {
         return (
             <div>
@@ -62,6 +68,7 @@ class AdminUsers extends Component {
                 <CustomTableCell>Email</CustomTableCell>
                 <CustomTableCell>Status</CustomTableCell>
                 <CustomTableCell>Role</CustomTableCell>
+                <CustomTableCell>Delete</CustomTableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -72,14 +79,15 @@ class AdminUsers extends Component {
                     <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                     <TableCell >{list.name}</TableCell>
                     <TableCell >{list.email}</TableCell>
-                    <TableCell >{list.status}</TableCell>
+                    <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                     <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                    <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}>Delete</Button>
+                    <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}><DeleteIcon/></Button>
                   </TableRow>
                 );
               })}
             </TableBody>
           </Table>
+          
             </div>
         )
     }

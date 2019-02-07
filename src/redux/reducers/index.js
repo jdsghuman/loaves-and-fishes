@@ -6,6 +6,7 @@ import userListReducer from './userListReducer';
 import locationReducer from './locationReducer';
 import onSiteReducer from './onsiteReducer';
 import demoReducer from './demoReducer';
+import categoryReducer from './categoryReducer';
 import adminLocationReducer from './adminLocationReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   userListReducer,
   locationReducer,
   onSiteReducer,
-  demoReducer,
+  demoReducer, 
+  categoryReducer,
   adminLocationReducer,
 });
 
