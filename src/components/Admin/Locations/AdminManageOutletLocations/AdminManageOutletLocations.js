@@ -85,7 +85,7 @@ class AdminManageOutletLocations extends Component {
                     <TableCell >{location.state}</TableCell>
                     <TableCell >{location.zip}</TableCell>
                     <TableCell >{location.county}</TableCell>
-                    <TableCell >{location.active}</TableCell>
+                    <TableCell >{location.active  ? 'Active' : 'Inactive'}</TableCell>
                     <TableCell >{location.notes}</TableCell>
                     <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon/></Button></TableCell>
                   </TableRow>
