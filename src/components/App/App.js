@@ -22,8 +22,11 @@ import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
 import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
-import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
+import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
 import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
+import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+
 
 import './App.css';
 
@@ -97,6 +100,16 @@ class App extends Component {
               exact
               path="/NewUser"
               component={NewUserMessage}
+            />
+            <AdminRoute
+              exact
+              path="/adminAddLocations"
+              component={AdminAddLocations}
+            />
+            <AdminRoute
+              exact
+              path="/adminManageOutletLocations"
+              component={AdminManageOutletLocations}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

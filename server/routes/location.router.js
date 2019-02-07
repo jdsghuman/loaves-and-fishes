@@ -24,16 +24,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         const newOutletLocation = req.body;
-        // const queryText = `INSERT INTO RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `INSERT INTO "location" ("location_name", "street_address", "city", "state", "zip", "county", "notes", "updated_by")
+                           VALUES($1, $2, $3, $4, $5, $6, $7, $8);`;
         const queryValues = [
-            newOutletLocation.location_name, // update with database column name 
-            newOutletLocation.street_address, // update with database column name 
-            newOutletLocation.city, // update with database column name 
-            newOutletLocation.state, // update with database column name 
-            newOutletLocation.zip, // update with database column name 
-            newOutletLocation.county, // update with database column name 
-            newOutletLocation.description, // update with database column name 
-            newOutletLocation.notes, // update with database column name 
+            newOutletLocation.locationName, 
+            newOutletLocation.street, 
+            newOutletLocation.city, 
+            newOutletLocation.state, 
+            newOutletLocation.zip, 
+            newOutletLocation.county,
+            newOutletLocation.notes,
             req.user.id
         ];
         pool.query(queryText, queryValues).then(result => {
