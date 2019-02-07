@@ -4,21 +4,12 @@ import './MyLocation.css';
 
 class MyLocation extends Component {
 
-  componentWillMount() {
-    if(this.props.onSiteReducer == undefined) {
-      console.log('send home')
-        this.props.history.push('/home');
-    } else {
-      console.log('stay here')
-    }
-}
-
   render() {
-    // let locationName = this.props.onSiteReducer.selectedLocation.location_name || 'Location Unavailable';
+    let locationName = this.props.onSiteReducer.selectedLocation.location_name || 'Location Unavailable';
 
     return (
       <>
-      <h3 className="location__banner">{'locationName'}</h3>
+      <h3 className="location__banner">{locationName}</h3>
       </>
     )
   }
