@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './MyLocation.css';
 
-const MyLocation = props => {
-  return (
-    <h3 className="location__banner">{props.location}</h3>
-  )
+class MyLocation extends Component {
+
+  render() {
+    let locationName = this.props.onSiteReducer.selectedLocation.location_name || 'Location Unavailable';
+
+    return (
+      <>
+      <h3 className="location__banner">{locationName}</h3>
+      </>
+    )
+  }
 }
 
-export default MyLocation;
+const mapStateToProps = store => ({
+  onSiteReducer: store.onSiteReducer
+})
+
+
+export default connect(mapStateToProps)(MyLocation);
