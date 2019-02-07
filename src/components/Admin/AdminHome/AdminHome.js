@@ -10,11 +10,16 @@ class AdminHome extends Component {
     handleSubmitCategories = () => {
         this.props.history.push('/adminCategories');
     }
+    handleClickManageOutletLocations = () => {
+        this.props.history.push('/adminManageOutletLocations');
+    }
+    
     render() {
         return (
             <div>
-                <Button variant="contained" color="primary" onClick={this.handleSubmitUsers}>Users </Button>
+                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Users </Button>
                 <Button variant="contained" color="primary" onClick={this.handleSubmitCategories}>Manage Outlet Categories </Button>
+                <Button variant="contained" color="secondary" onClick={this.handleClickManageOutletLocations}>Manage Outlet Locations </Button>
             </div>
         )
     }
