@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './MyLocation.css';
 
 class MyLocation extends Component {
+
   render() {
     let selectedLocation
     let location = this.props.reduxStore.locationReducer.map(location => {

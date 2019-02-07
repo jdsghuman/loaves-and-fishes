@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
-        // const queryText = `SELECT RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `SELECT * FROM "outlet_sub_category;`;
         pool.query(queryText)
             .then(result => {
                 res.send(result.rows);
@@ -24,9 +24,10 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         const newSubCategory = req.body;
-       // const queryText = `INSERT INTO RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `INSERT INTO "outlet_sub_category" ("category_name", "updated_by")
+                           VALUES($1, $2);`;
         const queryValues = [
-            newSubCategory.category_name, // update with database column name 
+            newSubCategory.category_name, // update with state name 
             req.user.id
         ];
         pool.query(queryText, queryValues).then(result => {

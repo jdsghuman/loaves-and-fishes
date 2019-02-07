@@ -11,15 +11,21 @@ import './OnSiteDemo.css';
 class OnSiteDemo extends Component {
 
     state = {
-        selectedGender: null,
-        selectedRace: null,
-        selectedAge: null,
+        selectedGender: [],
+        selectedRace: [],
+        selectedAge: [],
         value: 1,
         location: this.props.onSite.selectedLocation,
         farm: '',
         summer: '',
         time: '',
         count: 0
+    }
+
+    componentWillMount() {
+        if(this.props.onSite.selectedLocation.location_name === '') {
+            this.props.history.push('/home');
+        }
     }
 
     componentDidMount() {
@@ -64,9 +70,9 @@ class OnSiteDemo extends Component {
         this.setState({
             ...this.state,
             count: this.state.count + 1,
-            selectedGender: null,
-            selectedRace: null,
-            selectedAge: null
+            selectedGender: [],
+            selectedRace: [],
+            selectedAge: []
         })
     }
 
@@ -171,7 +177,6 @@ class OnSiteDemo extends Component {
 const mapStateToProps = (reduxStore) => ({
     onSite: reduxStore.onSiteReducer,
     demo: reduxStore.demoReducer,
-    // onSiteReducer: reduxStore.onSiteReducer
 });
 
 export default connect(mapStateToProps)(OnSiteDemo);
