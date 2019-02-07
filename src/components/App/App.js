@@ -26,6 +26,9 @@ import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/Adm
 import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
+import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+
 
 import './App.css';
 
