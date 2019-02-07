@@ -19,7 +19,7 @@ class OnSiteHome extends Component {
 
     state = {
         value: 'no',
-        selectedLocation: '',
+        selectedLocation: this.props.reduxStore.user.last_location || '',
         collectDemographics: 'yes',
         farm: false,
         summer: false,
@@ -38,6 +38,7 @@ class OnSiteHome extends Component {
     }
 
     handleLocationChange = (event) => {
+        console.log(event.target.value)
         console.log('in handleLocationChange');
         this.setState({
             ...this.state,
@@ -88,13 +89,14 @@ class OnSiteHome extends Component {
         }
     }
 
+    
+
     render() {
 
         let locations =
             this.props.reduxStore.locationReducer.map(location => {
                 return (
-                    <MenuItem key={location.id} value={location} id={location.id}>{location.location_name}</MenuItem>
-                    
+                    <MenuItem key={location.id} value={location.id} id={location.id}>{location.location_name}</MenuItem>
                 );
             })
 
@@ -108,7 +110,7 @@ class OnSiteHome extends Component {
                 <FormControl >
                     <InputLabel>Location</InputLabel>
                     <Select
-                        label="Select Location"
+                        // label="Select Location"
                         onChange={this.handleLocationChange}
                         value={this.state.selectedLocation}
                         style={{ height: '40px', width: '150px' }}
@@ -131,8 +133,9 @@ class OnSiteHome extends Component {
                 />
                 <ListItemText style={checkboxStyle} primary="Summer Meal" />
                 <br />
+                <br/>
                 <FormControl>
-
+                    <FormLabel>Collect Demographics</FormLabel>
                     <RadioGroup
                         aria-label="Collect Demographics"
                         name="Collect Demographics"
@@ -140,7 +143,7 @@ class OnSiteHome extends Component {
                         onChange={this.handleChange}
                         style={checkboxStyle}
                     >
-                        <FormLabel>Collect Demographics</FormLabel>
+                        
                         <FormControlLabel value="yes" control={<Radio color="primary" />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio color="primary" />} label="No" />
                     </RadioGroup>

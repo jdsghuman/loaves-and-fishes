@@ -15,7 +15,7 @@ class OnSiteDemo extends Component {
         selectedRace: null,
         selectedAge: null,
         value: 1,
-        location: this.props.onSite.selectedLocation.id,
+        location: this.props.onSite.selectedLocation,
         farm: '',
         summer: '',
         time: '',

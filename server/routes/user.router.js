@@ -44,7 +44,7 @@ router.post('/logout', (req, res) => {
 
 router.put('/location', (req, res) => {
   const queryText = `UPDATE "person" SET "last_location"=$1 WHERE "person".id = $2;`;
-  pool.query(queryText, [req.body.selectedLocation.id, req.body.userId])
+  pool.query(queryText, [req.body.selectedLocation, req.body.userId])
     .then(() => { res.sendStatus(201); })
     .catch((error) => {
       console.log(error);
