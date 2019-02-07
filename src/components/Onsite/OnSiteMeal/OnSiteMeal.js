@@ -12,6 +12,13 @@ import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
 
 class OnSiteMeal extends Component {
+
+    componentWillMount() {
+        if(this.props.onSite.selectedLocation.location_name === '') {
+            this.props.history.push('/home');
+        }
+    }
+
     state = {
         count: 0,
         categorizebyage: false,
@@ -122,7 +129,7 @@ class OnSiteMeal extends Component {
                         <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
                     </div>
                 }
-                {/* {JSON.stringify(this.props.onSiteReducer)} */}
+                {JSON.stringify(this.props.onSiteReducer)}
             </div>
         )
     }
@@ -150,7 +157,7 @@ const checkboxStyle = {
 }
 
 const mapStateToProps = store => ({
-    onSiteReducer: store.onSiteReducer
+    onSite: store.onSiteReducer
   })
 
 export default withStyles(styles)(connect(mapStateToProps)(OnSiteMeal));
