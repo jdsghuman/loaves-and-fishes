@@ -22,6 +22,8 @@ import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
 import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
+import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
 import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
