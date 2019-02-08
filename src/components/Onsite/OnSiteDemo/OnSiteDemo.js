@@ -10,9 +10,9 @@ import './OnSiteDemo.css';
 
 class OnSiteDemo extends Component {
     state = {
-        selectedGender: [],
-        selectedRace: [],
-        selectedAge: [],
+        selectedGender: '',
+        selectedRace: '',
+        selectedAge: '',
         value: 1,
         location: this.props.onSite.selectedLocation,
         farm: '',
@@ -33,9 +33,6 @@ class OnSiteDemo extends Component {
             farm: this.props.onSite.farm,
             summer: this.props.onSite.summer,
             time: this.props.onSite.time,
-            selectedGender: null,
-            selectedRace: null,
-            selectedAge: null
         })
         this.props.dispatch({ type: 'FETCH_GENDER' })
         this.props.dispatch({ type: 'FETCH_RACE' })
@@ -73,9 +70,9 @@ class OnSiteDemo extends Component {
         this.setState({
             ...this.state,
             count: this.state.count + 1,
-            selectedGender: [],
-            selectedRace: [],
-            selectedAge: []
+            selectedGender: '',
+            selectedRace: '',
+            selectedAge: ''
         })
     }
 
@@ -121,6 +118,7 @@ class OnSiteDemo extends Component {
                         native
                         value={this.state.selectedGender}
                         onChange={this.handleGenderChange}
+                        underlineStyle={{ 'border-color': 'red !important' }}
                         inputProps={{
                             id: 'select-multiple-native',
                         }}
@@ -176,6 +174,10 @@ class OnSiteDemo extends Component {
             </div>
         )
     }
+}
+
+const selectStyle = {
+    borderColor: 'red !important'
 }
 
 const mapStateToProps = (reduxStore) => ({

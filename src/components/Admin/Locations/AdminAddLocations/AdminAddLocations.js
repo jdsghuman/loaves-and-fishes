@@ -2,6 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Title from '../../../Title/Title';
+
+const style = {
+    width: '70%',
+    marginTop: '7em'
+}
+
+const spacing = {
+    margin: '0.5em',
+    backgroundColor: '#ffffff',
+    width: '30%'
+}
+
+const btnStyle = {
+    marginTop: '10px'
+}
 
 class AdminAddLocations extends Component {
 
@@ -41,8 +57,8 @@ class AdminAddLocations extends Component {
 
     render() {
         return (
-            <div className="div__container container__background">
-                <p>Add Location</p>
+            <div className="div__container container__background" style={style}>
+                <Title>Add Location</Title>
                 <TextField
                     label="Location Name"
                     name="Location Name"
@@ -51,6 +67,8 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('locationName')}
                     margin="normal"
                     variant="outlined"
+                    color="secondary"
+                    style={spacing}
                 />
                 <TextField
                     label="Street"
@@ -60,6 +78,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('street')}
                     margin="normal"
                     variant="outlined"
+                    style={spacing}
                 />
                 <TextField
                     label="City"
@@ -68,7 +87,9 @@ class AdminAddLocations extends Component {
                     value={this.state.city}
                     onChange={this.handleInputChangeFor('city')}
                     margin="normal"
-                    variant="outlined"
+                    variant="outlined" 
+                    style={spacing}
+
                 />
                 <TextField
                     label="State"
@@ -78,6 +99,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('state')}
                     margin="normal"
                     variant="outlined"
+                    style={spacing}
                 />
                     <TextField
                         label="Zip"
@@ -87,6 +109,7 @@ class AdminAddLocations extends Component {
                         onChange={this.handleInputChangeFor('zip')}
                         margin="normal"
                         variant="outlined"
+                        style={spacing}
                     /> 
                     <TextField
                         label="County"
@@ -96,6 +119,7 @@ class AdminAddLocations extends Component {
                         onChange={this.handleInputChangeFor('county')}
                         margin="normal"
                         variant="outlined"
+                        style={spacing}
                     />
                     <TextField
                         label="Notes"
@@ -105,9 +129,12 @@ class AdminAddLocations extends Component {
                         onChange={this.handleInputChangeFor('notes')}
                         margin="normal"
                         variant="outlined"
+                        style={spacing}
+                        multiline
+                        rows="4"
                     />
                     <br/>
-                    <Button variant="contained" color="primary" onClick={this.handleClick}>Add Location</Button>
+                    <Button style={btnStyle} variant="contained" color="secondary" onClick={this.handleClick}>Add Location</Button>
             </div>
         )
     }

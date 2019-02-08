@@ -28,8 +28,14 @@ body {
 }
 
 .alert {
-    background-color: #ff4545;
-    margin: 50px;
+    margin: 15px;
+    color: red;
+    position: absolute;
+    z-index: 300;
+    left: 50%;
+    transform: translateX(-53%);
+    font-size: 1rem;
+    /* max-width: 70%; */
 }
 
 form {
@@ -96,6 +102,10 @@ input {
     form {
         width: 50%
     }
+    .alert {
+    /* transform: translateX(46%); */
+    font-size: .8rem;
+}
 }
 
 @media only screen and (max-width: 475px) {
