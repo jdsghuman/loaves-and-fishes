@@ -108,7 +108,9 @@ class OnSiteDemo extends Component {
                 <Title>OnSite Demographics</Title>
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
-                    {JSON.stringify(this.state)}
+                    {/* {JSON.stringify(this.state)} */}
+                    {JSON.stringify(this.demo)}
+
                 </div>
                 <MyLocation />
                 <br />

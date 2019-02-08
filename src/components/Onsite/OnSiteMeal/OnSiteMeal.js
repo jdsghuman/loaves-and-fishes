@@ -17,15 +17,15 @@ class OnSiteMeal extends Component {
     state = {
         count: 0,
         categorizebyage: false,
-        genericAdult: 0,
-        genericChild: 0,
         selectedGender: null,
         selectedRace: null,
         selectedAge: null,
-        location: this.props.onSite.selectedLocation.id,
+        location: this.props.onSite.selectedLocation,
         farm: '',
         summer: '',
-        time: ''
+        time: '',
+        genericAdult: 0,
+        genericChild: 0
     }
 
     componentWillMount() {
@@ -41,11 +41,14 @@ class OnSiteMeal extends Component {
             summer: this.props.onSite.summer,
             time: this.props.onSite.time
         })
+
+        // This pull the IDs of generic child/adult 
+        this.setGenericAgeValuesToState();
     }
 
-    // Change Count Logic 
+    // Counter Logic 
     changeCount = (change, genericAge) => {
-        // Add to count
+        // Add to Total count
         if (change === 'add') {
             this.setState(prevState => {
                 return { count: prevState.count + 1 }
@@ -62,7 +65,7 @@ class OnSiteMeal extends Component {
                     return { genericChild: prevState.genericChild + 1 }
                 })
             }
-            // Subtract from count
+            // Subtract from Total count
         } else if (change === 'subtract' && this.state.count > 0) {
             if (change === 'subtract' && this.state.count > 0 && genericAge === undefined) {
                 this.setState(prevState => {
@@ -106,8 +109,6 @@ class OnSiteMeal extends Component {
             this.setState(prevState => ({
                 categorizebyage: !prevState.categorizebyage,
                 count: 0,
-                genericAdult: 0,
-                genericChild: 0,
                 selectedGender: null,
                 selectedRace: null,
                 selectedAge: null,
@@ -119,15 +120,62 @@ class OnSiteMeal extends Component {
         const confirmed = window.confirm('Are you sure you want to submit a meal count?');
 
         if (confirmed) {
-            this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
-            this.setState({
-                ...this.state,
-                count: 0,
-                categorizebyage: false,
-                genericAdult: 0,
-                genericChild: 0,
-            })
+            if (this.state.genericAdult > 0 || this.state.genericChild > 0) {
+                // Check if generic_adult count exists
+                if (this.state.genericAdult > 0) {
+
+                    
+                    this.setState({
+                        ...this.state,
+                        selectedGender: 9
+                    })
+                    // Send adult count and Total count
+                    this.props.dispatch({ type: 'ADD_MEAL_COUNT_ADULT', payload: this.state });
+                }
+                // Check if generic_child count exists
+                if (this.state.genericChild > 0) {
+                    this.setState({
+                        ...this.state,
+                        selectedGender: 8
+                    })
+                    // Send adult count and Total count
+                    this.props.dispatch({ type: 'ADD_MEAL_COUNT_ADULT', payload: this.state });
+                }
+
+                // No generic Adult/Child value
+            } else {
+                // Send Total count
+                this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
+                this.setState({
+                    ...this.state,
+                    count: 0,
+                    categorizebyage: false,
+                    genericAdult: 0,
+                    genericChild: null,
+                })
+            }
         }
+
+    }
+
+    setGenericAgeValuesToState = () => {
+   
+        this.props.demo.forEach(age => {
+            if (age.age_category === 'Generic Child'){ 
+                console.log('child id', age.id) 
+                this.setState({
+                    ...this.state,
+                    genericChild: age.id
+                })
+            } 
+            if(age.age_category === 'Generic Adult') {
+            console.log('adult id', age.id);
+                this.setState({
+                    ...this.state,
+                    genericAdult: age.id
+                })
+            }
+        })
 
     }
 
@@ -135,6 +183,7 @@ class OnSiteMeal extends Component {
         return (
             <div className="div__container container__background">
                 <Title>OnSite Meal</Title>
+                {JSON.stringify(this.state)}
                 {/* Location display */}
                 <MyLocation />
                 {/* Categorize by age */}
@@ -213,6 +262,7 @@ class OnSiteMeal extends Component {
                     </div>
                 }
                 <Button disabled={this.state.count === 0 ? true : false} variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+                {JSON.stringify(this.props.demo)}
             </div>
         )
     }
@@ -240,7 +290,8 @@ const checkboxStyle = {
 }
 
 const mapStateToProps = store => ({
-    onSite: store.onSiteReducer
+    onSite: store.onSiteReducer,
+    demo: store.demoReducer
 })
 
 export default withStyles(styles)(connect(mapStateToProps)(OnSiteMeal));
