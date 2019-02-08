@@ -118,6 +118,7 @@ class OnSiteDemo extends Component {
                         native
                         value={this.state.selectedGender}
                         onChange={this.handleGenderChange}
+                        underlineStyle={{ 'border-color': 'red !important' }}
                         inputProps={{
                             id: 'select-multiple-native',
                         }}
@@ -172,6 +173,10 @@ class OnSiteDemo extends Component {
             </div>
         )
     }
+}
+
+const selectStyle = {
+    borderColor: 'red !important'
 }
 
 const mapStateToProps = (reduxStore) => ({

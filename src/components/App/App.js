@@ -25,8 +25,17 @@ import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 import './App.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: "#000000" },
+    secondary: { main: "#98223e" }
+  },
+});
 
 class App extends Component {
   componentDidMount () {
@@ -35,6 +44,7 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Router>
         <div>
           <Nav />
@@ -105,6 +115,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </MuiThemeProvider>
   )}
 }
 
