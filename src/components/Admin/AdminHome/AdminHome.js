@@ -8,8 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 class AdminHome extends Component {
     
-
-    
     handleSubmitUsers = () => {
         this.props.history.push('/adminUser');
     }
@@ -19,15 +17,18 @@ class AdminHome extends Component {
     handleClickManageOutletLocations = () => {
         this.props.history.push('/adminManageOutletLocations');
     }
+    handleSubmitAdminAddMeals = () => {
+        this.props.history.push('/adminAddMeal');
+    }
     
     render() {
         return (
             <div>
                 
-                 <Button variant="contained" color="primary" onClick={this.handleSubmitUsers}>Users </Button>
+                <Button variant="contained" color="primary" onClick={this.handleSubmitUsers}>Users </Button>
                 <Button variant="contained" color="primary" onClick={this.handleSubmitCategories}>Manage Outlet Categories </Button>
                 <Button variant="contained" color="secondary" onClick={this.handleClickManageOutletLocations}>Manage Outlet Locations </Button>
-
+                <Button variant="contained" color="primary" onClick={this.handleSubmitAdminAddMeals}>Add Meals </Button>
             </div>
         )
     }
