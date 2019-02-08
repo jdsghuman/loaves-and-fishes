@@ -7,30 +7,89 @@ import AddCircle from '@material-ui/icons/AddCircle';
 import RemoveCircle from '@material-ui/icons/RemoveCircleOutline';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
 
 class OnSiteMeal extends Component {
+
     state = {
         count: 0,
         categorizebyage: false,
         genericAdult: 0,
-        genericChild: 0
+        genericChild: 0,
+        selectedGender: null,
+        selectedRace: null,
+        selectedAge: null,
+        location: this.props.onSite.selectedLocation.id,
+        farm: '',
+        summer: '',
+        time: ''
     }
 
-    changeCount = (change) => {
+    componentWillMount() {
+        if (this.props.onSite.selectedLocation.location_name === '') {
+            this.props.history.push('/home');
+        }
+    }
+
+    componentDidMount() {
+        this.setState({
+            ...this.state,
+            farm: this.props.onSite.farm,
+            summer: this.props.onSite.summer,
+            time: this.props.onSite.time
+        })
+    }
+
+    // Change Count Logic 
+    changeCount = (change, genericAge) => {
         // Add to count
         if (change === 'add') {
             this.setState(prevState => {
                 return { count: prevState.count + 1 }
             })
+            // Add to Adult count
+            if (genericAge === 'adult') {
+                this.setState(prevState => {
+                    return { genericAdult: prevState.genericAdult + 1 }
+                })
+            }
+            // Add to Child count
+            if (genericAge === 'child') {
+                this.setState(prevState => {
+                    return { genericChild: prevState.genericChild + 1 }
+                })
+            }
             // Subtract from count
         } else if (change === 'subtract' && this.state.count > 0) {
-            this.setState(prevState => {
-                return { count: prevState.count - 1 }
-            })
+            if (change === 'subtract' && this.state.count > 0 && genericAge === undefined) {
+                this.setState(prevState => {
+                    return { count: prevState.count - 1 }
+                })
+            }
+            // Subtract from Adult count
+            if (genericAge === 'adult' && this.state.genericAdult > 0) {
+                this.setState(prevState => {
+                    return {
+                        count: prevState.count - 1,
+                        genericAdult: prevState.genericAdult - 1
+                    }
+                })
+            }
+            // Subtract from Child count
+            if (genericAge === 'child' && this.state.genericChild > 0) {
+                this.setState(prevState => {
+                    return {
+                        count: prevState.count - 1,
+                        genericChild: prevState.genericChild - 1
+                    }
+                })
+            }
         }
+
+
 
     }
 
@@ -42,9 +101,34 @@ class OnSiteMeal extends Component {
 
     // Toggle state if Categorize Age checkbox is checked
     handleGenericAgeChange = () => {
-        this.setState(prevState => ({
-            categorizebyage: !prevState.categorizebyage
-        }))
+        const confirmed = window.confirm('This will reset the Total Meal Count. Are you sure you want to reset the Total Meal Count?');
+        if (confirmed) {
+            this.setState(prevState => ({
+                categorizebyage: !prevState.categorizebyage,
+                count: 0,
+                genericAdult: 0,
+                genericChild: 0,
+                selectedGender: null,
+                selectedRace: null,
+                selectedAge: null,
+            }))
+        }
+    }
+
+    handleSubmit = () => {
+        const confirmed = window.confirm('Are you sure you want to submit a meal count?');
+
+        if (confirmed) {
+            this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
+            this.setState({
+                ...this.state,
+                count: 0,
+                categorizebyage: false,
+                genericAdult: 0,
+                genericChild: 0,
+            })
+        }
+
     }
 
     render() {
@@ -57,6 +141,7 @@ class OnSiteMeal extends Component {
                 <div style={{ textAlign: 'center' }}>
                     <ListItemText style={checkboxStyle} primary="Categorize by age" />
                     <Checkbox
+                        checked={this.state.categorizebyage}
                         onChange={this.handleGenericAgeChange}
                         value="categorize"
                         color="primary"
@@ -86,12 +171,15 @@ class OnSiteMeal extends Component {
                         <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
                     </div>
                 }
+                {/* Categorize by Age count */}
                 {this.state.categorizebyage === true &&
                     <div className="count__container">
-                        <p style={{marginBottom: '0', fontWeight: '600'}}>Adult</p>
-                        <RemoveCircle onClick={() => this.changeCount('subtract')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
+
+                        {/* Adult count */}
+                        <p style={{ marginBottom: '0', fontWeight: '600' }}>Adult</p>
+                        <RemoveCircle onClick={() => this.changeCount('subtract', 'adult')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
                         <TextField
-                            value={this.state.count}
+                            value={this.state.genericAdult}
                             onChange={this.handleChange()}
                             type="number"
                             className={this.props.classes.textField}
@@ -103,11 +191,13 @@ class OnSiteMeal extends Component {
                                 }
                             }}
                         />
-                        <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
-                        <p style={{marginBottom: '0', fontWeight: '600'}}>Child</p>
-                        <RemoveCircle onClick={() => this.changeCount('subtract')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
+                        <AddCircle onClick={() => this.changeCount('add', 'adult')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
+
+                        {/* Child count */}
+                        <p style={{ marginBottom: '0', fontWeight: '600' }}>Child</p>
+                        <RemoveCircle onClick={() => this.changeCount('subtract', 'child')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
                         <TextField
-                            value={this.state.count}
+                            value={this.state.genericChild}
                             onChange={this.handleChange()}
                             type="number"
                             className={this.props.classes.textField}
@@ -119,10 +209,10 @@ class OnSiteMeal extends Component {
                                 }
                             }}
                         />
-                        <AddCircle onClick={() => this.changeCount('add')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
+                        <AddCircle onClick={() => this.changeCount('add', 'child')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
                     </div>
                 }
-                {/* {JSON.stringify(this.props.onSiteReducer)} */}
+                <Button disabled={this.state.count === 0 ? true : false} variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
             </div>
         )
     }
@@ -150,7 +240,7 @@ const checkboxStyle = {
 }
 
 const mapStateToProps = store => ({
-    onSiteReducer: store.onSiteReducer
-  })
+    onSite: store.onSiteReducer
+})
 
 export default withStyles(styles)(connect(mapStateToProps)(OnSiteMeal));

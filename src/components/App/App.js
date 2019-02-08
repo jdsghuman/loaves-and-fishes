@@ -14,7 +14,6 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
@@ -23,8 +22,11 @@ import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
 import OnSiteDemo from '../OnSite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
+import AdminManageOutletCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+import AdminAddOutletCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+
 
 import './App.css';
 
@@ -73,6 +75,16 @@ class App extends Component {
               exact
               path="/adminUser"
               component={AdminUsers}
+            />
+             <AdminRoute
+              exact
+              path="/adminCategories"
+              component={AdminManageOutletCategories}
+            />
+             <AdminRoute
+              exact
+              path="/adminAddCategories"
+              component={AdminAddOutletCategories}
             />
             <ProtectedRoute
               exact

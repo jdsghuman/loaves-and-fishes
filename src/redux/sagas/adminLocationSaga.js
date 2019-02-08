@@ -30,9 +30,19 @@ function* postAdminLocation(action) {
     }
 }
 
+function* deleteAdminLocation(action) {
+    try{
+        yield axios.delete(`/api/location/${action.payload}`);
+        yield put({ type: 'FETCH_ADMIN_LOCATION' });
+    }catch (error){
+        console.log('delete saga failed for Location', error);
+    }
+}
+
 function* adminLocationSaga() {
     yield takeEvery('FETCH_ADMIN_LOCATION', fetchAdminLocation);
     yield takeEvery('ADD_LOCATION', postAdminLocation);
+    yield takeEvery('DELETE_ADMIN_LOCATION', deleteAdminLocation);
 }
 
 export default adminLocationSaga;
