@@ -9,11 +9,10 @@ import MyLocation from '../../MyLocation/MyLocation';
 import './OnSiteDemo.css';
 
 class OnSiteDemo extends Component {
-
     state = {
-        selectedGender: [],
-        selectedRace: [],
-        selectedAge: [],
+        selectedGender: '',
+        selectedRace: '',
+        selectedAge: '',
         value: 1,
         location: this.props.onSite.selectedLocation,
         farm: '',
@@ -33,12 +32,13 @@ class OnSiteDemo extends Component {
             ...this.state,
             farm: this.props.onSite.farm,
             summer: this.props.onSite.summer,
-            time: this.props.onSite.time
+            time: this.props.onSite.time,
         })
         this.props.dispatch({ type: 'FETCH_GENDER' })
         this.props.dispatch({ type: 'FETCH_RACE' })
         this.props.dispatch({ type: 'FETCH_AGE' })
     }
+
 
     handleGenderChange = (event) => {
         console.log('in handleGenderChange');
@@ -70,9 +70,9 @@ class OnSiteDemo extends Component {
         this.setState({
             ...this.state,
             count: this.state.count + 1,
-            selectedGender: [],
-            selectedRace: [],
-            selectedAge: []
+            selectedGender: '',
+            selectedRace: '',
+            selectedAge: ''
         })
     }
 
@@ -99,13 +99,13 @@ class OnSiteDemo extends Component {
                     );
                 }
             })
-
         console.log('handleAgeChange AFTER click', this.state);
         return (
             <div className="div__container container__background">
                 <Title>OnSite Demographics</Title>
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
+                    {JSON.stringify(this.state)}
                 </div>
                 <MyLocation />
                 <br />
@@ -169,7 +169,8 @@ class OnSiteDemo extends Component {
                 </FormControl>
                 <br />
                 <br />
-                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+                <Button disabled={this.state.selectedAge == '' && this.state.selectedGender == '' && this.state.selectedRace == '' ? true : false} 
+                    variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
             </div>
         )
     }

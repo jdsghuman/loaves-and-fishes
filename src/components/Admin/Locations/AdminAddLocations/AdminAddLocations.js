@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Title from '../../../Title/Title';
 
 const style = {
-    width: '50em',
+    width: '70%',
     marginTop: '7em'
 }
 
 const spacing = {
-    margin: '0.8em',
+    margin: '0.5em',
     backgroundColor: '#ffffff',
-    width: '15em'
+    width: '30%'
+}
+
+const btnStyle = {
+    marginTop: '10px'
 }
 
 class AdminAddLocations extends Component {
@@ -53,7 +58,7 @@ class AdminAddLocations extends Component {
     render() {
         return (
             <div className="div__container container__background" style={style}>
-                <p>Add Location</p>
+                <Title>Add Location</Title>
                 <TextField
                     label="Location Name"
                     name="Location Name"
@@ -129,7 +134,7 @@ class AdminAddLocations extends Component {
                         rows="4"
                     />
                     <br/>
-                    <Button variant="contained" color="secondary" onClick={this.handleClick}>Add Location</Button>
+                    <Button style={btnStyle} variant="contained" color="secondary" onClick={this.handleClick}>Add Location</Button>
             </div>
         )
     }
