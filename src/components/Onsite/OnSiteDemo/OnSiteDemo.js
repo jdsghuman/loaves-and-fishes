@@ -78,34 +78,33 @@ class OnSiteDemo extends Component {
 
     render() {
         let genderList =
-            this.props.demo.map(gender => {
+            this.props.gender.map(gender => {
                 return (
                     <option key={gender.id} value={gender.id}>{gender.gender_name}</option>
                 );
             })
 
         let raceList =
-            this.props.demo.map(race => {
+            this.props.race.map(race => {
                 return (
                     <option key={race.id} value={race.id}>{race.race_name}</option>
                 );
             })
 
         let ageList =
-            this.props.demo.map(age => {
+            this.props.age.map(age => {
                 if (age.age_category !== 'Generic Adult' && age.age_category !== 'Generic Child') {
                     return (
                         <option key={age.id} value={age.id}>{age.age_category}</option>
                     );
                 }
             })
-        console.log('handleAgeChange AFTER click', this.state);
+        console.log('handleChange AFTER click', this.state);
         return (
             <div className="div__container container__background">
                 <Title>OnSite Demographics</Title>
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
-                    {JSON.stringify(this.state)}
                 </div>
                 <MyLocation />
                 <br />
@@ -176,13 +175,11 @@ class OnSiteDemo extends Component {
     }
 }
 
-const selectStyle = {
-    borderColor: 'red !important'
-}
-
 const mapStateToProps = (reduxStore) => ({
     onSite: reduxStore.onSiteReducer,
-    demo: reduxStore.demoReducer,
+    age: reduxStore.ageReducer,
+    gender: reduxStore.genderReducer,
+    race: reduxStore.raceReducer,
 });
 
 export default connect(mapStateToProps)(OnSiteDemo);

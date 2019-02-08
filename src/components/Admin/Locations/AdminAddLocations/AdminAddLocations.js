@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Title from '../../../Title/Title';
+import moment from 'moment';
 
 const style = {
     width: '70%',
@@ -28,7 +29,8 @@ class AdminAddLocations extends Component {
         state: '',
         zip: '',
         county: '',
-        notes: ''
+        notes: '',
+        time: moment().format(),
     }
 
     handleInputChangeFor = propertyName => event => {
@@ -51,7 +53,9 @@ class AdminAddLocations extends Component {
             state: '',
             zip: '',
             county: '',
-            notes: ''
+            notes: '',
+            time: moment().format(),
+
         })
     }
 
