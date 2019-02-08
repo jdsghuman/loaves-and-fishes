@@ -15,6 +15,10 @@ const styles = theme => ({
   }
 });
 
+const btnStyle = {
+  marginTop: '15px'
+}
+
 class LoginPage extends Component {
   state = {
     username: '',
@@ -83,6 +87,7 @@ class LoginPage extends Component {
               type="submit"
               name="submit"
               value="Log In"
+              style={btnStyle}
             >Log In</button>
           </div>
         </form>

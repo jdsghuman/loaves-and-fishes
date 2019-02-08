@@ -25,7 +25,19 @@ class OnSiteMeal extends Component {
         summer: '',
         time: '',
         genericAdult: 0,
-        genericChild: 0
+        genericChild: 0,
+        selectedAgeAdult: '',
+        selectedAgeChild: ''
+    }
+
+    clearState = () => {
+        this.setState({
+            ...this.state,
+            count: 0,
+            categorizebyage: false,
+            genericAdult: 0,
+            genericChild: 0,
+        })
     }
 
     componentWillMount() {
@@ -35,15 +47,8 @@ class OnSiteMeal extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            ...this.state,
-            farm: this.props.onSite.farm,
-            summer: this.props.onSite.summer,
-            time: this.props.onSite.time
-        })
-
-        // This pull the IDs of generic child/adult 
-        this.setGenericAgeValuesToState();
+        // This sets the IDs of generic child/adult 
+        this.setGenericAgeId();
     }
 
     // Counter Logic 
@@ -118,72 +123,57 @@ class OnSiteMeal extends Component {
 
     handleSubmit = () => {
         const confirmed = window.confirm('Are you sure you want to submit a meal count?');
-
         if (confirmed) {
+            // If adults and/or child counts exist
             if (this.state.genericAdult > 0 || this.state.genericChild > 0) {
                 // Check if generic_adult count exists
                 if (this.state.genericAdult > 0) {
-
-                    
-                    this.setState({
-                        ...this.state,
-                        selectedGender: 9
-                    })
                     // Send adult count and Total count
                     this.props.dispatch({ type: 'ADD_MEAL_COUNT_ADULT', payload: this.state });
                 }
                 // Check if generic_child count exists
                 if (this.state.genericChild > 0) {
-                    this.setState({
-                        ...this.state,
-                        selectedGender: 8
-                    })
-                    // Send adult count and Total count
-                    this.props.dispatch({ type: 'ADD_MEAL_COUNT_ADULT', payload: this.state });
+                    // Send child count and Total count
+                    this.props.dispatch({ type: 'ADD_MEAL_COUNT_CHILD', payload: this.state });
                 }
-
                 // No generic Adult/Child value
             } else {
                 // Send Total count
                 this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
-                this.setState({
-                    ...this.state,
-                    count: 0,
-                    categorizebyage: false,
-                    genericAdult: 0,
-                    genericChild: null,
-                })
             }
+
+            this.clearState();
         }
 
     }
 
-    setGenericAgeValuesToState = () => {
-   
-        this.props.demo.forEach(age => {
-            if (age.age_category === 'Generic Child'){ 
-                console.log('child id', age.id) 
-                this.setState({
-                    ...this.state,
-                    genericChild: age.id
-                })
-            } 
-            if(age.age_category === 'Generic Adult') {
-            console.log('adult id', age.id);
-                this.setState({
-                    ...this.state,
-                    genericAdult: age.id
-                })
+    // Set the Generic Age ID for child/adult
+    setGenericAgeId = () => {
+        let ageChild;
+        let ageAdult;
+        this.props.age.map(age => {
+            if (age.age_category === 'Generic Adult') {
+                ageAdult = age.id;
             }
-        })
+            if (age.age_category === 'Generic Child') {
+                ageChild = age.id;
+            }
 
+            this.setState({
+                ...this.state,
+                selectedAgeAdult: ageAdult,
+                selectedAgeChild: ageChild,
+                farm: this.props.onSite.farm,
+                summer: this.props.onSite.summer,
+                time: this.props.onSite.time
+            })
+        })
     }
 
     render() {
         return (
             <div className="div__container container__background">
                 <Title>OnSite Meal</Title>
-                {JSON.stringify(this.state)}
                 {/* Location display */}
                 <MyLocation />
                 {/* Categorize by age */}
@@ -262,7 +252,6 @@ class OnSiteMeal extends Component {
                     </div>
                 }
                 <Button disabled={this.state.count === 0 ? true : false} variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
-                {JSON.stringify(this.props.demo)}
             </div>
         )
     }
@@ -291,7 +280,7 @@ const checkboxStyle = {
 
 const mapStateToProps = store => ({
     onSite: store.onSiteReducer,
-    demo: store.demoReducer
+    age: store.ageReducer
 })
 
 export default withStyles(styles)(connect(mapStateToProps)(OnSiteMeal));
