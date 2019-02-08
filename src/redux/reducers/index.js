@@ -8,6 +8,7 @@ import onSiteReducer from './onsiteReducer';
 import demoReducer from './demoReducer';
 import categoryReducer from './categoryReducer';
 import adminLocationReducer from './adminLocationReducer';
+import allMealReducer from './allMealReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   demoReducer, 
   categoryReducer,
   adminLocationReducer,
+  allMealReducer
 });
 
 export default rootReducer;

@@ -26,6 +26,7 @@ import AdminManageOutletCategories from '../Admin/Categories/AdminManageOutletCa
 import AdminAddOutletCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+import AdminReportGenerations from '../Admin/AdminReports/AdminReportGenerations/AdminReportGenerations';
 
 
 import './App.css';
@@ -110,6 +111,11 @@ class App extends Component {
               exact
               path="/adminManageOutletLocations"
               component={AdminManageOutletLocations}
+            />
+            <AdminRoute
+              exact
+              path="/adminReportGeneration"
+              component={AdminReportGenerations}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
