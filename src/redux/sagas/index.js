@@ -5,6 +5,7 @@ import userSaga from './userSaga';
 import userListSaga from './userListSaga';
 import locationSaga from './locationSaga';
 import demoSaga from './demoSaga';
+import mealCountSaga from './mealCountSaga';
 import categorySaga from './categorySaga';
 import adminLocationSaga from './adminLocationSaga';
 
@@ -23,6 +24,7 @@ export default function* rootSaga() {
     userListSaga(),
     locationSaga(),
     demoSaga(),
+    mealCountSaga(),
     categorySaga(),
     adminLocationSaga(),
   ]);

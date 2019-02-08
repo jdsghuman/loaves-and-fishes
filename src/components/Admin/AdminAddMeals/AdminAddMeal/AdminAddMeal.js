@@ -7,6 +7,8 @@ import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 class AdminAddMeal extends Component {
 
@@ -71,9 +73,15 @@ class AdminAddMeal extends Component {
         });
     };
 
-
-    
-
+    handleSubmit = () => {
+            this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
+            this.setState({
+                ...this.state,
+                count: 0,
+                farm: false,
+                summer: false,
+            })
+    }
 
     render() {
         let locations =
@@ -82,16 +90,16 @@ class AdminAddMeal extends Component {
                 <MenuItem key={location.id} value={location.id} id={location.id}>{location.location_name}</MenuItem>
             );
         })
+      
 
     console.log(this.state);
 
         return (
-            <div>
+            <div className="div__container container__background">
             <h1>Add Meal </h1> 
             <FormControl >
                     <InputLabel>Location</InputLabel>
                     <Select
-                        // label="Select Location"
                         onChange={this.handleLocationChange}
                         value={this.state.selectedLocation}
                         style={{ height: '40px', width: '150px' }}
@@ -100,6 +108,16 @@ class AdminAddMeal extends Component {
                     </Select>
                 </FormControl> 
                 <br />
+                <TextField
+                            value={this.state.count}
+                            type="number"
+                            margin="normal"
+                            variant="outlined"
+                            label="count"
+                            onChange={this.handleChange()}
+
+                />
+                <br/>
                 <Checkbox
                     onChange={this.handleFarmChange}
                     value="farm"
@@ -113,6 +131,8 @@ class AdminAddMeal extends Component {
                     color="primary"
                 />
                 <ListItemText style={checkboxStyle} primary="Summer Meal" />
+                <br/> 
+                <Button variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
                 
             </div>
         )

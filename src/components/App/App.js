@@ -22,8 +22,8 @@ import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
 import OnSiteDemo from '../OnSite/OnSiteDemo/OnSiteDemo';
 import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
-import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
-import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
+import AdminManageOutletCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+import AdminAddOutletCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
 import AdminAddMeal from '../Admin/AdminAddMeals/AdminAddMeal/AdminAddMeal';
@@ -80,12 +80,12 @@ class App extends Component {
              <AdminRoute
               exact
               path="/adminCategories"
-              component={AdminCategories}
+              component={AdminManageOutletCategories}
             />
              <AdminRoute
               exact
               path="/adminAddCategories"
-              component={AdminAddCategories}
+              component={AdminAddOutletCategories}
             />
             <ProtectedRoute
               exact
