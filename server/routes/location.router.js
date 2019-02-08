@@ -7,7 +7,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
-        const queryText = `SELECT * FROM "location" ORDER BY "location".location_name ASC;`;
+        const queryText = `SELECT * FROM "location";`;
         pool.query(queryText)
             .then(result => {
                 res.send(result.rows);
@@ -24,16 +24,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         const newOutletLocation = req.body;
-        // const queryText = `INSERT INTO RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `INSERT INTO "location" ("location_name", "street_address", "city", "state", "zip", "county", "notes", "updated_by")
+                           VALUES($1, $2, $3, $4, $5, $6, $7, $8);`;
         const queryValues = [
-            newOutletLocation.location_name, // update with database column name 
-            newOutletLocation.street_address, // update with database column name 
-            newOutletLocation.city, // update with database column name 
-            newOutletLocation.state, // update with database column name 
-            newOutletLocation.zip, // update with database column name 
-            newOutletLocation.county, // update with database column name 
-            newOutletLocation.description, // update with database column name 
-            newOutletLocation.notes, // update with database column name 
+            newOutletLocation.locationName, 
+            newOutletLocation.street, 
+            newOutletLocation.city, 
+            newOutletLocation.state, 
+            newOutletLocation.zip, 
+            newOutletLocation.county,
+            newOutletLocation.notes,
             req.user.id
         ];
         pool.query(queryText, queryValues).then(result => {
@@ -48,21 +48,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 // Delete outlet location
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
-        const reqId = req.params.id;
-        console.log('route id: ', reqId);
-        // const queryText = `DELETE FROM RYAN MUNDAY PLEASE UPDATE;`;
-        pool.query(queryText, [reqId])
-            .then(result => {
-                res.sendStatus(204);
-            }).catch(error => {
-                console.log('in outlet location DELETE ROUTER error', error);
-                res.sendStatus(500);
-            })
-    } else {
-        res.sendStatus(403);
-    }
+router.delete('/:id', (req, res) => {
+    console.log('testing delete route', req.params.id);
+    let id = req.params.id
+    let queryText = `DELETE FROM "location" WHERE id = $1;`;
+    pool.query(queryText, [id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
 });
 
 // Update outlet location

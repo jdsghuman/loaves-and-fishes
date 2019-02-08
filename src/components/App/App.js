@@ -14,15 +14,20 @@ import Footer from '../Footer/Footer';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 
 import AboutPage from '../AboutPage/AboutPage';
-// import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import AdminHome from '../Admin/AdminHome/AdminHome';
 import AdminRoute from '../AdminRoute/AdminRoute';
 import AdminUsers from '../Admin/AdminUsers/AdminUsers';
-import OnSiteHome from '../OnSite/OnSiteHome/OnSiteHome';
-import OnSiteDemo from '../OnSite/OnSiteDemo/OnSiteDemo';
-import OnSiteMeal from '../OnSite/OnSiteMeal/OnSiteMeal';
+import OnSiteHome from '../Onsite/OnSiteHome/OnSiteHome';
+import OnSiteDemo from '../Onsite/OnSiteDemo/OnSiteDemo';
+import OnSiteMeal from '../Onsite/OnSiteMeal/OnSiteMeal';
 import NewUserMessage from '../NewUserMessage/NewUserMessage';
+import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
+import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
+import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
+import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+import AdminAddCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
+import AdminCategories from '../Admin/Categories/AdminManageOutletCategories/AdminManageOutletCategories';
 
 
 import './App.css';
@@ -73,6 +78,16 @@ class App extends Component {
               path="/adminUser"
               component={AdminUsers}
             />
+             <AdminRoute
+              exact
+              path="/adminCategories"
+              component={AdminCategories}
+            />
+             <AdminRoute
+              exact
+              path="/adminAddCategories"
+              component={AdminAddCategories}
+            />
             <ProtectedRoute
               exact
               path="/onSiteDemo"
@@ -87,6 +102,16 @@ class App extends Component {
               exact
               path="/NewUser"
               component={NewUserMessage}
+            />
+            <AdminRoute
+              exact
+              path="/adminAddLocations"
+              component={AdminAddLocations}
+            />
+            <AdminRoute
+              exact
+              path="/adminManageOutletLocations"
+              component={AdminManageOutletLocations}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

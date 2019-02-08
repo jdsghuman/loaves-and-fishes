@@ -4,19 +4,14 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 // Get all outlet categories
-router.get('/', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
-        console.log('authenticated', req.isAuthenticated());
-        // const queryText = `SELECT RYAN MUNDY PLEASE UPDATE;`;
-        pool.query(queryText)
-            .then(result => {
-                res.send(result.rows);
-            }).catch(error => {
-                console.log('in outlet categories GET error', error);
-            })
-    } else {
-        res.sendStatus(403);
-    }
+router.get('/', (req, res) => {
+    let sql = `SELECT * FROM "meal_outlet_category";`
+    pool.query(sql).then((response) => {
+        res.send(response.rows)
+    }).catch((error) => {
+        console.log(error);
+        res.sendStatus(500);
+    })
 });
 
 // Add outlet category
@@ -24,10 +19,11 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         const newOutletCategory = req.body;
-        // const queryText = `INSERT INTO RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "updated_by")
+                           VALUES($1, $2, $3);`;
         const queryValues = [
-            newOutletCategory.category_name, // update with database column name 
-            newOutletCategory.sub_category, // update with database column name 
+            newOutletCategory.categoryname, // update with state name 
+            newOutletCategory.sub_category, // update with state name 
             req.user.id
         ];
         pool.query(queryText, queryValues).then(result => {
@@ -42,21 +38,16 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 // Delete outlet category
-router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
-        const reqId = req.params.id;
-        console.log('route id: ', reqId);
-        // const queryText = `DELETE FROM RYAN MUNDAY PLEASE UPDATE;`;
-        pool.query(queryText, [reqId])
-            .then(result => {
-                res.sendStatus(204);
-            }).catch(error => {
-                console.log('in outlet category DELETE ROUTER error', error);
-                res.sendStatus(500);
-            })
-    } else {
-        res.sendStatus(403);
-    }
+router.delete('/:id', (req, res) => {
+    console.log('testing delete route', req.params.id);
+    let id = req.params.id
+    let queryText = `DELETE FROM "meal_outlet_category" WHERE id = $1;`;
+    pool.query(queryText, [id]).then((result) => {
+        res.send(result.rows);
+    }).catch((error) => {
+        console.log('error in delete route', error);
+        res.sendStatus(500)
+    })
 });
 
 // Update outlet category
