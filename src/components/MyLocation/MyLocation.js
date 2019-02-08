@@ -9,7 +9,7 @@ class MyLocation extends Component {
 
     return (
       <>
-      <h3 className="location__banner">{locationName}</h3>
+      <h3 className="location__banner"><span style={{fontWeight: '300'}}>Location: </span>{locationName}</h3>
       </>
     )
   }
