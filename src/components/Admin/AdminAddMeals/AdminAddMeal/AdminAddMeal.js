@@ -16,7 +16,8 @@ class AdminAddMeal extends Component {
         selectedLocation: this.props.reduxStore.locationReducer || '',
         farm: false,
         summer: false,
-        time: moment().format()
+        time: moment().format(), 
+        count: 0
     };
 
 
@@ -62,9 +63,16 @@ class AdminAddMeal extends Component {
         this.props.dispatch({ type: 'FETCH_LOCATIONS' })
     }
 
-    handleClick = () => {
+    
 
-    }
+    handleChange = name => event => {
+        this.setState({
+            count: event.target.value,
+        });
+    };
+
+
+    
 
 
     render() {
@@ -105,6 +113,7 @@ class AdminAddMeal extends Component {
                     color="primary"
                 />
                 <ListItemText style={checkboxStyle} primary="Summer Meal" />
+                
             </div>
         )
     }
