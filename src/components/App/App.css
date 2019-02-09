@@ -87,7 +87,7 @@ input {
 
 .log-in:hover, .log-out:hover, .register:hover {
   background-color: #b3b428;
-  color: #98223e;
+  color: #ddced2;
 }
 
 .login__title {

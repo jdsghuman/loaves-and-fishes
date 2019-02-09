@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './OnSiteMeal.css';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import AddCircle from '@material-ui/icons/AddCircle';
 import RemoveCircle from '@material-ui/icons/RemoveCircleOutline';
 import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
@@ -171,6 +172,7 @@ class OnSiteMeal extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <div className="div__container container__background">
                 <Title>OnSite Meal</Title>
@@ -251,10 +253,18 @@ class OnSiteMeal extends Component {
                         <AddCircle onClick={() => this.changeCount('add', 'child')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
                     </div>
                 }
-                <Button disabled={this.state.count === 0 ? true : false} variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+                <Button disabled={this.state.count === 0 ? true : false}
+                    className={classNames(classes.margin, classes.cssRoot)}
+                    onClick={this.handleSubmit}>Submit
+                </Button>
             </div>
         )
     }
+}
+
+const checkboxStyle = {
+    display: 'inline-block',
+    paddingRight: '0'
 }
 
 const styles = theme => ({
@@ -272,12 +282,22 @@ const styles = theme => ({
     resize: {
         fontSize: '1.5rem'
     },
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    },
 });
-
-const checkboxStyle = {
-    display: 'inline-block',
-    paddingRight: '0'
-}
 
 const mapStateToProps = store => ({
     onSite: store.onSiteReducer,

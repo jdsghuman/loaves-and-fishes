@@ -13,6 +13,8 @@ import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import moment from 'moment';
 import Title from '../../Title/Title';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 class OnSiteHome extends Component {
 
@@ -90,16 +92,13 @@ class OnSiteHome extends Component {
     }
 
     render() {
-
+        const { classes } = this.props;
         let locations =
             this.props.reduxStore.locationReducer.map(location => {
                 return (
                     <MenuItem key={location.id} value={location.id} id={location.id}>{location.location_name}</MenuItem>
                 );
             })
-
-        console.log(this.state);
-
         return (
             <div className="div__container container__background">
                 <Title>OnSite Home</Title>
@@ -118,9 +117,9 @@ class OnSiteHome extends Component {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{marginBottom: '0'}}>
+                <div style={{ marginBottom: '0' }}>
                     <div>
-                    <FormLabel style={formLabelStyle}>Meal Details</FormLabel>
+                        <FormLabel style={formLabelStyle}>Meal Details</FormLabel>
 
                         <Checkbox
                             onChange={this.handleFarmChange}
@@ -129,7 +128,7 @@ class OnSiteHome extends Component {
                         />
                         <ListItemText style={checkboxStyle} primary="Farm to Table" />
                     </div>
-                    <div style={{transform: 'translateY(-40%)'}}>
+                    <div style={{ transform: 'translateY(-40%)' }}>
                         <Checkbox
                             onChange={this.handleSummerChange}
                             value="summer"
@@ -154,7 +153,10 @@ class OnSiteHome extends Component {
                         </RadioGroup>
                     </FormControl>
                 </div>
-                <Button variant="contained" color="primary" onClick={this.handleClick}>Collect Data</Button>
+                <Button
+                    className={classNames(classes.margin, classes.cssRoot)}
+                    onClick={this.handleClick}>Collect Data
+                </Button>
             </div>
         )
     }
@@ -178,10 +180,28 @@ const formLabelStyle = {
     color: '#98223e'
 }
 
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    },
+});
+
 const mapStateToProps = (reduxStore) => {
     return {
         reduxStore
     }
 }
 
-export default connect(mapStateToProps)(withRouter(OnSiteHome));
+export default withStyles(styles)(connect(mapStateToProps)(withRouter(OnSiteHome)));

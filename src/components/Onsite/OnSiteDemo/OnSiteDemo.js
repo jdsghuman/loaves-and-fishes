@@ -6,13 +6,15 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import './OnSiteDemo.css';
 
 class OnSiteDemo extends Component {
     state = {
-        selectedGender: [],
-        selectedRace: [],
-        selectedAge: [],
+        selectedGender: '',
+        selectedRace: '',
+        selectedAge: '',
         value: 1,
         location: this.props.onSite.selectedLocation,
         farm: '',
@@ -77,6 +79,8 @@ class OnSiteDemo extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         let genderList =
             this.props.gender.map(gender => {
                 return (
@@ -120,7 +124,7 @@ class OnSiteDemo extends Component {
                             native
                             value={this.state.selectedGender}
                             onChange={this.handleGenderChange}
-                            underlineStyle={{ 'border-color': 'red !important' }}
+                            underlinestyle={{ 'border-color': 'red !important' }}
                             inputProps={{
                                 id: 'select-multiple-native',
                             }}
@@ -172,8 +176,10 @@ class OnSiteDemo extends Component {
                     </Select>
                     </FormControl>
                 </div>
-                <Button disabled={this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false}
-                    variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+                <Button disabled={(this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false) || (this.state.selectedAge.length === 0 && this.state.selectedGender.length === 0 && this.state.selectedRace.length === 0 ? true : false)}
+                    className={classNames(classes.margin, classes.cssRoot)}
+                    onClick={this.handleSubmit}>Submit
+                </Button>
             </div>
         )
     }
@@ -190,6 +196,27 @@ const formLabelStyle = {
     color: '#98223e'
 }
 
+const styles = theme => ({
+    resize: {
+        fontSize: '1.5rem'
+    },
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    },
+});
+
 const mapStateToProps = (reduxStore) => ({
     onSite: reduxStore.onSiteReducer,
     age: reduxStore.ageReducer,
@@ -197,4 +224,4 @@ const mapStateToProps = (reduxStore) => ({
     race: reduxStore.raceReducer,
 });
 
-export default connect(mapStateToProps)(OnSiteDemo);
+export default withStyles(styles)(connect(mapStateToProps)(OnSiteDemo));
