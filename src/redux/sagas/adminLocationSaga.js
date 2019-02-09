@@ -18,11 +18,6 @@ function* fetchAdminLocation() {
 
 function* postAdminLocation(action) {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-
         yield axios.post('/api/location', action.payload);
         yield put({ type: 'FETCH_ADMIN_LOCATION' });
     } catch (error) {

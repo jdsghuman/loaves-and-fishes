@@ -11,7 +11,6 @@ import { FormControlLabel } from '@material-ui/core';
 import FormLabel from '@material-ui/core/FormLabel';
 import { withRouter } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import InputLabel from '@material-ui/core/InputLabel';
 import moment from 'moment';
 import Title from '../../Title/Title';
 
@@ -90,8 +89,6 @@ class OnSiteHome extends Component {
         }
     }
 
-    
-
     render() {
 
         let locations =
@@ -102,54 +99,61 @@ class OnSiteHome extends Component {
             })
 
         console.log(this.state);
-        
-    
 
         return (
             <div className="div__container container__background">
                 <Title>OnSite Home</Title>
-                <FormControl >
-                    <InputLabel>Location</InputLabel>
-                    <Select
-                        // label="Select Location"
-                        onChange={this.handleLocationChange}
-                        value={this.state.selectedLocation}
-                        style={{ height: '40px', width: '150px' }}
-                    >
-                        {locations}
-                    </Select>
-                </FormControl>
-                <br />
-                <Checkbox
-                    onChange={this.handleFarmChange}
-                    value="farm"
-                    color="primary"
-                />
-                <ListItemText style={checkboxStyle} primary="Farm to Table" />
-                <br />
-                <Checkbox
-                    onChange={this.handleSummerChange}
-                    value="summer"
-                    color="primary"
-                />
-                <ListItemText style={checkboxStyle} primary="Summer Meal" />
-                <br />
-                <br/>
-                <FormControl>
-                    <FormLabel>Collect Demographics</FormLabel>
-                    <RadioGroup
-                        aria-label="Collect Demographics"
-                        name="Collect Demographics"
-                        value={this.state.value}
-                        onChange={this.handleChange}
-                        style={checkboxStyle}
-                    >
-                        
-                        <FormControlLabel value="yes" control={<Radio color="primary" />} label="Yes" />
-                        <FormControlLabel value="no" control={<Radio color="primary" />} label="No" />
-                    </RadioGroup>
-                </FormControl>
-                <br />
+                <div style={divStyle}>
+                    <FormControl >
+                        <FormLabel style={formLabelStyle}>Location</FormLabel>
+
+                        {/* <InputLabel>Location</InputLabel> */}
+                        <Select
+                            // label="Select Location"
+                            onChange={this.handleLocationChange}
+                            value={this.state.selectedLocation}
+                            style={{ height: '40px', width: '150px' }}
+                        >
+                            {locations}
+                        </Select>
+                    </FormControl>
+                </div>
+                <div style={{marginBottom: '0'}}>
+                    <div>
+                    <FormLabel style={formLabelStyle}>Meal Details</FormLabel>
+
+                        <Checkbox
+                            onChange={this.handleFarmChange}
+                            value="farm"
+                            color="primary"
+                        />
+                        <ListItemText style={checkboxStyle} primary="Farm to Table" />
+                    </div>
+                    <div style={{transform: 'translateY(-40%)'}}>
+                        <Checkbox
+                            onChange={this.handleSummerChange}
+                            value="summer"
+                            color="primary"
+                        />
+                        <ListItemText style={checkboxStyle} primary="Summer Meal" />
+                    </div>
+                </div>
+                <div style={divStyle}>
+                    <FormControl>
+                        <FormLabel style={formLabelStyle}>Collect Demographics</FormLabel>
+                        <RadioGroup
+                            aria-label="Collect Demographics"
+                            name="Collect Demographics"
+                            value={this.state.value}
+                            onChange={this.handleChange}
+                            style={checkboxStyle}
+                        >
+
+                            <FormControlLabel value="yes" control={<Radio color="primary" />} label="Yes" />
+                            <FormControlLabel value="no" control={<Radio color="primary" />} label="No" />
+                        </RadioGroup>
+                    </FormControl>
+                </div>
                 <Button variant="contained" color="primary" onClick={this.handleClick}>Collect Data</Button>
             </div>
         )
@@ -158,7 +162,20 @@ class OnSiteHome extends Component {
 
 const checkboxStyle = {
     display: 'inline-block',
-    margin: '5px'
+    margin: '5px',
+    marginLeft: '0',
+    paddingLeft: '0'
+}
+
+const divStyle = {
+    marginBottom: '30px'
+}
+
+const formLabelStyle = {
+    display: 'block',
+    marginBottom: '0',
+    paddingBottom: '0',
+    color: '#98223e'
 }
 
 const mapStateToProps = (reduxStore) => {

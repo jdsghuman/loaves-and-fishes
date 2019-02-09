@@ -151,7 +151,7 @@ class OnSiteMeal extends Component {
     setGenericAgeId = () => {
         let ageChild;
         let ageAdult;
-        this.props.age.map(age => {
+        this.props.age.forEach(age => {
             if (age.age_category === 'Generic Adult') {
                 ageAdult = age.id;
             }
@@ -178,7 +178,7 @@ class OnSiteMeal extends Component {
                 <MyLocation />
                 {/* Categorize by age */}
                 <div style={{ textAlign: 'center' }}>
-                    <ListItemText style={checkboxStyle} primary="Categorize by age" />
+                    <ListItemText style={checkboxStyle} primary="Categorize by age group" />
                     <Checkbox
                         checked={this.state.categorizebyage}
                         onChange={this.handleGenericAgeChange}
@@ -276,11 +276,12 @@ const styles = theme => ({
 
 const checkboxStyle = {
     display: 'inline-block',
+    paddingRight: '0'
 }
 
 const mapStateToProps = store => ({
     onSite: store.onSiteReducer,
-    age: store.ageReducer
+    age: store.ageReducer,
 })
 
 export default withStyles(styles)(connect(mapStateToProps)(OnSiteMeal));

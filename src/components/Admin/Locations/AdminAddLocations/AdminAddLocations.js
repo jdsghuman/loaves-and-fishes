@@ -7,6 +7,7 @@ import moment from 'moment';
 
 const style = {
     width: '70%',
+    maxWidth: '900px',
     marginTop: '7em'
 }
 

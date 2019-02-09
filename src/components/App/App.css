@@ -25,6 +25,18 @@ body {
     border-radius: 5px;
     padding: 5px;
     padding-bottom: 15px;
+    margin-bottom: 80px;
+}
+
+.container__background--large {
+    background: #EEE;
+    width: 700px;
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 5px;
+    padding: 5px;
+    padding-bottom: 15px;
+    margin-bottom: 80px;
 }
 
 .alert {
@@ -47,7 +59,7 @@ form {
     margin: 20px auto;
     margin-bottom: 40px;
     padding: 25px;
-    border-radius: 2px;
+    border-radius: 10px;
     text-align: center;
 }
 
@@ -105,7 +117,10 @@ input {
     .alert {
     /* transform: translateX(46%); */
     font-size: .8rem;
-}
+    }
+    .container__background--large {
+        width: 450px;
+    }
 }
 
 @media only screen and (max-width: 475px) {
@@ -115,5 +130,8 @@ input {
     .div__container {
         padding-left: 10px;
         padding-right: 10px;
+    }
+    .container__background--large {
+        width: 350px;
     }
 }
