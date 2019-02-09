@@ -1,11 +1,10 @@
-const allMealReducer = (state = [], action) => {
+const ageReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_ALL_MEALS':
+        case 'SET_AGE':
             return action.payload;
         default:
             return state;
     }
 };
 
-
-export default allMealReducer;
+export default ageReducer;

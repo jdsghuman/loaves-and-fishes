@@ -42,6 +42,7 @@ class AdminReportGenerations extends Component {
     handleClick = () => {
         if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
             this.props.dispatch({ type: 'FETCH_ALL_MEALS', payload: this.state })
+            this.props.history.push('/AdminReportView');
         }
     }
 

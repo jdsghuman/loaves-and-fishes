@@ -11,8 +11,8 @@ router.get('/all', rejectUnauthenticated, (req, res) => {
         const report=req.query;
         console.log(report);
         
-        const queryText = `SELECT "count".meal_count, "count".farm, "count".summer, "location".location_name,
-"meal_outlet_category".category_name, "age".age_category, "gender".gender_name, "race".race_name FROM "count"
+    const queryText = `SELECT "meal_outlet_category".category_name, "count".timestamp, "count".meal_count, "count".farm, "count".summer, "location".location_name,
+ "age".age_category, "gender".gender_name, "race".race_name FROM "count"
 JOIN "location" ON "count".location_id = "location".id
 LEFT JOIN "location_outlet" ON "location".id = "location_outlet".location_id
 LEFT JOIN "meal_outlet_category" ON "location_outlet".outlet_id = "meal_outlet_category".id
@@ -20,7 +20,7 @@ LEFT JOIN "age" ON "count".age_id = "age".id
 LEFT JOIN "gender" ON "count".gender_id = "gender".id
 LEFT JOIN "race" ON "count".race_id = "race".id
 WHERE "count".timestamp BETWEEN $1 AND $2
-ORDER BY "count".timestamp ASC;`;
+ORDER BY "meal_outlet_category".id ASC;`;
         const queryValues = [
             report.startDate,
             report.endDate

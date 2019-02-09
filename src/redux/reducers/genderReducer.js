@@ -1,11 +1,10 @@
-const allMealReducer = (state = [], action) => {
+const genderReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_ALL_MEALS':
+        case 'SET_GENDER':
             return action.payload;
         default:
             return state;
     }
 };
 
-
-export default allMealReducer;
+export default genderReducer;

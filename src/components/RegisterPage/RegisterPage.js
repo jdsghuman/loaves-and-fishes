@@ -15,6 +15,10 @@ const styles = theme => ({
   }
 });
 
+const btnStyle = {
+  marginTop: '15px'
+}
+
 class RegisterPage extends Component {
   state = {
     name: '',
@@ -112,6 +116,7 @@ class RegisterPage extends Component {
               type="submit"
               name="submit"
               value="Register"
+              style={btnStyle}
             >Register</button>
           </div>
         </form>
@@ -119,6 +124,7 @@ class RegisterPage extends Component {
           <button
             type="button"
             className="link-button"
+            style={btnStyle}
             onClick={() => { this.props.dispatch({ type: 'SET_TO_LOGIN_MODE' }) }}
           >
             Login
