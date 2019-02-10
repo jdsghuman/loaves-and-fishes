@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 // Add outlet category
 router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
         const newOutletCategory = req.body;
         const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "updated_by")
                            VALUES($1, $2, $3);`;
@@ -38,21 +38,25 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 // Delete outlet category
-router.delete('/:id', (req, res) => {
-    console.log('testing delete route', req.params.id);
-    let id = req.params.id
-    let queryText = `DELETE FROM "meal_outlet_category" WHERE id = $1;`;
-    pool.query(queryText, [id]).then((result) => {
-        res.send(result.rows);
-    }).catch((error) => {
-        console.log('error in delete route', error);
-        res.sendStatus(500)
-    })
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+    if(req.user.admin) {
+        console.log('testing delete route', req.params.id);
+        let id = req.params.id
+        let queryText = `DELETE FROM "meal_outlet_category" WHERE id = $1;`;
+        pool.query(queryText, [id]).then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log('error in delete route', error);
+            res.sendStatus(500)
+        })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 // Update outlet category
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
         const reqId = req.params.id;
         const categoryToUpdate = req.body; 
         // const queryText = `UPDATE RYAN MUNDY PLEASE UPDATE;`;
