@@ -61,7 +61,22 @@ class AdminReportGenerations extends Component {
         }
         //Total Farm Meals
         else if (this.state.reportType === 2) {
-
+            if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+                this.props.dispatch({ type: 'FETCH_ALL_FARM_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
+                this.props.dispatch({ type: 'FETCH_LOCATION_FARM_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
+                this.props.dispatch({ type: 'FETCH_CATEGORY_FARM_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
+                this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_FARM_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
         }
     }
 
@@ -96,10 +111,10 @@ class AdminReportGenerations extends Component {
                         value={this.state.reportType}
                         style={{ height: '40px', width: '200px' }}
                     >
-                        <MenuItem value={1}>Total Meals</MenuItem>
-                        <MenuItem value={2}>Total Farm to Table</MenuItem>
-                        <MenuItem value={3}>Total Summer</MenuItem>
-                        <MenuItem value={4}>Demographic Totals</MenuItem>
+                        <MenuItem value={1}>All Meals</MenuItem>
+                        <MenuItem value={2}>Farm to Table</MenuItem>
+                        <MenuItem value={3}>Summer</MenuItem>
+                        <MenuItem value={4}>Demographics</MenuItem>
                         <MenuItem value={5}>Comparison of Years</MenuItem>
                     </Select>
                 </FormControl>
