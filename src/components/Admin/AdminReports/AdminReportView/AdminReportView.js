@@ -9,7 +9,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { CSVLink } from "react-csv";
-
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 class AdminReportView extends Component {
 
@@ -27,10 +28,11 @@ class AdminReportView extends Component {
             dataToExport: []
         })
         console.log('in handleClear', this.state);
-        
+
     }
 
     render() {
+        const { classes } = this.props;
 
         let report =
             this.props.reduxStore.reportMealReducer.map((meal) => {
@@ -52,35 +54,77 @@ class AdminReportView extends Component {
 
         console.log(this.state);
 
-
         return (
             <div>
                 <Title>Report</Title>
-                <Button variant="contained" color="primary" onClick={this.handleReturnClick}>Return to Reports</Button>
-                <br />
-                <CSVLink data={this.state.dataToExport}><Button variant="contained" >Export</Button></CSVLink>
-                <Table style={{marginTop: '20px', marginBottom: '50px'}}>
-                    <TableHead>
-                        <TableRow id="tableHead">
-                            <TableCell >Outlet Category</TableCell>
-                            <TableCell >Location Name</TableCell>
-                            <TableCell >Date Collected</TableCell>
-                            <TableCell >Total Served</TableCell>
-                            <TableCell >Farm to Table</TableCell>
-                            <TableCell >Summer Meal</TableCell>
-                            <TableCell >Gender</TableCell>
-                            <TableCell >Race</TableCell>
-                            <TableCell >Age</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {report}
-                    </TableBody>
-                </Table>
+                <Button
+                    className={classNames(classes.margin, classes.cssRoot)}
+                    onClick={this.handleReturnClick}>Return to Reports
+                </Button>
+                <div>
+                    <CSVLink data={this.state.dataToExport}>
+                        <Button
+                            className={classNames(classes.margin, classes.exportButton)}>Export
+                        </Button>
+                    </CSVLink>
+                </div>
+                <div className={classes.root}>
+                    <Table style={{ marginTop: '20px', marginBottom: '50px' }}>
+                        <TableHead>
+                            <TableRow id="tableHead">
+                                <TableCell >Outlet Category</TableCell>
+                                <TableCell >Location Name</TableCell>
+                                <TableCell >Date Collected</TableCell>
+                                <TableCell >Total Served</TableCell>
+                                <TableCell >Farm to Table</TableCell>
+                                <TableCell >Summer Meal</TableCell>
+                                <TableCell >Gender</TableCell>
+                                <TableCell >Race</TableCell>
+                                <TableCell >Age</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {report}
+                        </TableBody>
+                    </Table>
+                </div>
             </div>
         )
     }
 }
+
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    table: {
+        minWidth: 700,
+    },
+    row: {
+        '&:nth-of-type(odd)': {
+            backgroundColor: theme.palette.background.default,
+        },
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    },
+    exportButton: {
+        color: theme.palette.getContrastText('#d5d5d5'),
+        backgroundColor: '#d5d5d5',
+        '&:hover': {
+            backgroundColor: '#767676',
+        },
+    }
+});
 
 const mapStateToProps = (reduxStore) => {
     return {
@@ -88,4 +132,4 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default connect(mapStateToProps)(withRouter(AdminReportView));
+export default withStyles(styles)(connect(mapStateToProps)(withRouter(AdminReportView)));
