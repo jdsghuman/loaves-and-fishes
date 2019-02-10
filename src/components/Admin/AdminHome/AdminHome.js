@@ -16,10 +16,18 @@ class AdminHome extends Component {
     handleClickManageOutletLocations = () => {
         this.props.history.push('/adminManageOutletLocations');
     }
+    handleClickReportGeneration = () => {
+        this.props.history.push('/adminReportGeneration');
+    }
+    
 
     render() {
         const { classes } = this.props;
         return (
+
+            
+                // <Button variant="contained" color="primary" onClick={this.handleClickReportGeneration}>Report Generation </Button>
+
             <div className="div__container container__background--large">
                 <Title>Admin</Title>
                 <div style={divStyle}>
@@ -38,6 +46,12 @@ class AdminHome extends Component {
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
                         style={btnStyle} onClick={this.handleClickManageOutletLocations}>Manage Outlet Locations
+                    </Button>
+                </div>
+                <div style={divStyle}>
+                    <Button
+                        className={classNames(classes.margin, classes.cssRoot)}
+                        style={btnStyle} onClick={this.handleClickReportGeneration}>Report Generation
                     </Button>
                 </div>
             </div>
