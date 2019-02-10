@@ -1,6 +1,18 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
 
+function* fetchTotal(action) {
+    try {
+        const config = {
+            params: action.payload
+        }
+        const response = yield axios.get(`/api/report/total`, config)
+        yield put({ type: 'SET_TOTAL', payload: response.data });
+    } catch (error) {
+        console.log(`Error getting all meals ${error}`);
+    }
+}
+
 function* fetchReportMeals(action) {
     try {
         const config = {
@@ -146,6 +158,8 @@ function* fetchLocationCategorySummerMeals(action) {
 }
 
 function* reportSaga() {
+    yield takeEvery('FETCH_TOTAL', fetchTotal);
+
     yield takeEvery('FETCH_ALL_MEALS', fetchReportMeals);
     yield takeEvery('FETCH_LOCATION_MEALS', fetchLocationMeals);
     yield takeEvery('FETCH_CATEGORY_MEALS', fetchCategoryMeals);

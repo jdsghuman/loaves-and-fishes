@@ -40,61 +40,66 @@ class AdminReportGenerations extends Component {
     };
 
     handleClick = () => {
-        //Total Meals
-        if (this.state.reportType === 1) {
-            if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
-                this.props.dispatch({ type: 'FETCH_ALL_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
+        if (this.state.startDate === '' || this.state.endDate === '') {
+            alert('Please specify a start and end date to search')
+        } else {
+            //Total Meals
+            this.props.dispatch({ type: 'FETCH_TOTAL', payload: this.state })
+            if (this.state.reportType === 1) {
+                if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+                    this.props.dispatch({ type: 'FETCH_ALL_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
+                    this.props.dispatch({ type: 'FETCH_LOCATION_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
+                    this.props.dispatch({ type: 'FETCH_CATEGORY_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
+                    this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
             }
-            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
-                this.props.dispatch({ type: 'FETCH_LOCATION_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
+            //Total Farm Meals
+            else if (this.state.reportType === 2) {
+                if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+                    this.props.dispatch({ type: 'FETCH_ALL_FARM_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
+                    this.props.dispatch({ type: 'FETCH_LOCATION_FARM_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
+                    this.props.dispatch({ type: 'FETCH_CATEGORY_FARM_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
+                    this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_FARM_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
             }
-            else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
-                this.props.dispatch({ type: 'FETCH_CATEGORY_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
-                this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-        }
-        //Total Farm Meals
-        else if (this.state.reportType === 2) {
-            if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
-                this.props.dispatch({ type: 'FETCH_ALL_FARM_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
-                this.props.dispatch({ type: 'FETCH_LOCATION_FARM_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
-                this.props.dispatch({ type: 'FETCH_CATEGORY_FARM_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
-                this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_FARM_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-        }
-        //Total Summer Meals
-        else if (this.state.reportType === 3) {
-            if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
-                this.props.dispatch({ type: 'FETCH_ALL_SUMMER_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
-                this.props.dispatch({ type: 'FETCH_LOCATION_SUMMER_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
-                this.props.dispatch({ type: 'FETCH_CATEGORY_SUMMER_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
-            }
-            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
-                this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_SUMMER_MEALS', payload: this.state })
-                this.props.history.push('/AdminReportView');
+            //Total Summer Meals
+            else if (this.state.reportType === 3) {
+                if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+                    this.props.dispatch({ type: 'FETCH_ALL_SUMMER_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
+                    this.props.dispatch({ type: 'FETCH_LOCATION_SUMMER_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
+                    this.props.dispatch({ type: 'FETCH_CATEGORY_SUMMER_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
+                    this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_SUMMER_MEALS', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
             }
         }
     }

@@ -15,7 +15,8 @@ import classNames from 'classnames';
 class AdminReportView extends Component {
 
     state = {
-        dataToExport: []
+        dataToExport: [],
+        counter: 0
     }
 
     handleReturnClick = () => {
@@ -25,7 +26,8 @@ class AdminReportView extends Component {
 
     handleClear = () => {
         this.setState({
-            dataToExport: []
+            dataToExport: [],
+            counter: 0
         })
         console.log('in handleClear', this.state);
 
@@ -37,6 +39,7 @@ class AdminReportView extends Component {
         let report =
             this.props.reduxStore.reportMealReducer.map((meal) => {
                 this.state.dataToExport.push(meal);
+                this.state.counter = this.state.counter + meal.meal_count
                 return (
                     <TableRow key={meal.id}>
                         <TableCell >{meal.category_name}</TableCell>
@@ -57,6 +60,7 @@ class AdminReportView extends Component {
         return (
             <div>
                 <Title>Report</Title>
+                <Title>Total Meals: {this.state.counter}</Title>
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleReturnClick}>Return to Reports

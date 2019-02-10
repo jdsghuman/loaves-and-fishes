@@ -4,6 +4,27 @@ const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const moment = require('moment')
 
+//GET Total
+router.get('/total', rejectUnauthenticated, (req, res) => {
+    console.log('authenticated', req.isAuthenticated());
+    const report = req.query;
+    console.log(report);
+    const queryText = `SELECT SUM("count".meal_count) FROM "count"
+WHERE "count".timestamp BETWEEN $1 AND $2;`;
+    const queryValues = [
+        report.startDate,
+        report.endDate
+    ];
+    pool.query(queryText, queryValues)
+        .then(result => {
+            res.send(result.rows);
+        }).catch(error => {
+            console.log('in reports GET error', error);
+            res.sendStatus(500);
+        })
+});//end Get all meals
+
+
 // Get all meals
 router.get('/all', rejectUnauthenticated, (req, res) => {
         console.log('authenticated', req.isAuthenticated());

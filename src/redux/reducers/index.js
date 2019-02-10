@@ -11,6 +11,7 @@ import adminLocationReducer from './adminLocationReducer';
 import reportMealReducer from './reportMealReducer';
 import ageReducer from './ageReducer';
 import raceReducer from './raceReducer';
+import totalReducer from './totalReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -29,7 +30,8 @@ const rootReducer = combineReducers({
   adminLocationReducer,
   reportMealReducer,
   ageReducer,
-  raceReducer
+  raceReducer,
+  totalReducer
 });
 
 export default rootReducer;
