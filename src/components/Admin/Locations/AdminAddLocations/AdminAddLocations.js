@@ -6,18 +6,7 @@ import Title from '../../../Title/Title';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-
-const style = {
-    width: '70%',
-    maxWidth: '900px',
-    marginTop: '7em'
-}
-
-const spacing = {
-    margin: '0.5em',
-    backgroundColor: '#ffffff',
-    width: '30%'
-}
+import './AdminAddLocations.css';
 
 const btnStyle = {
     marginTop: '10px'
@@ -48,6 +37,7 @@ class AdminAddLocations extends Component {
         event.preventDefault();
         console.log('in handleClick', this.state);
         this.props.dispatch({ type: "ADD_LOCATION", payload: this.state });
+        alert(`${this.state.locationName} location added`);
         this.setState({
             ...this.state,
             locationName: '',
@@ -65,7 +55,7 @@ class AdminAddLocations extends Component {
     render() {
         const { classes } = this.props;
         return (
-            <div className="div__container container__background" style={style}>
+            <div className="div__container container__background--large">
                 <Title>Add Location</Title>
                 <TextField
                     label="Location Name"
@@ -76,7 +66,7 @@ class AdminAddLocations extends Component {
                     margin="normal"
                     variant="outlined"
                     color="secondary"
-                    style={spacing}
+                    className={classes.textField}
                 />
                 <TextField
                     label="Street"
@@ -86,7 +76,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('street')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
+                    className={classes.textField}
                 />
                 <TextField
                     label="City"
@@ -96,8 +86,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('city')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
-
+                    className={classes.textField}
                 />
                 <TextField
                     label="State"
@@ -107,7 +96,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('state')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
+                    className={classes.textField}
                 />
                 <TextField
                     label="Zip"
@@ -117,7 +106,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('zip')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
+                    className={classes.textField}
                 />
                 <TextField
                     label="County"
@@ -127,7 +116,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('county')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
+                    className={classes.textField}
                 />
                 <TextField
                     label="Notes"
@@ -137,7 +126,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('notes')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
+                    className={classes.textField}
                     multiline
                     rows="4"
                 />
@@ -168,6 +157,10 @@ const styles = theme => ({
             backgroundColor: '#6a172b',
         },
     },
+    textField: {
+        backgroundColor: '#ffffff',
+        margin: '5px'
+    }
 });
 
 export default withStyles(styles)(connect()(AdminAddLocations));
