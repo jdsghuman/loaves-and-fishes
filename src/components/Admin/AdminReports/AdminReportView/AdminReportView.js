@@ -33,7 +33,7 @@ class AdminReportView extends Component {
     render() {
 
         let report =
-            this.props.reduxStore.allMealReducer.map((meal) => {
+            this.props.reduxStore.reportMealReducer.map((meal) => {
                 this.state.dataToExport.push(meal);
                 return (
                     <TableRow key={meal.id}>

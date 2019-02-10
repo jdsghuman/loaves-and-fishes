@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 class AdminReportGenerations extends Component {
 
     state = {
-        reportType: '',
+        reportType: 1,
         startDate: '',
         endDate: '',
         selectedLocation: '',
@@ -40,9 +40,28 @@ class AdminReportGenerations extends Component {
     };
 
     handleClick = () => {
+        //Total Meals
         if (this.state.reportType === 1) {
-            this.props.dispatch({ type: 'FETCH_ALL_MEALS', payload: this.state })
-            this.props.history.push('/AdminReportView');
+            if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+                this.props.dispatch({ type: 'FETCH_ALL_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
+                this.props.dispatch({ type: 'FETCH_LOCATION_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
+                this.props.dispatch({ type: 'FETCH_CATEGORY_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
+                this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+        }
+        //Total Farm Meals
+        else if (this.state.reportType === 2) {
+
         }
     }
 
@@ -64,7 +83,7 @@ class AdminReportGenerations extends Component {
 
         console.log(this.state);
 
-       
+
 
 
         return (
@@ -125,7 +144,7 @@ class AdminReportGenerations extends Component {
                     margin="normal"
                     variant="outlined"
                 />
-                <br/>
+                <br />
                 <Button onClick={this.handleClick} variant="contained" color="primary">Generate Report</Button>
             </div>
         )

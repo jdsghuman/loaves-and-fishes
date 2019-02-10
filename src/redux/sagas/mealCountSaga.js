@@ -9,18 +9,6 @@ function* addMealCount(action) {
   }
 }
 
-function* fetchAllMeals(action) {
-  try {
-    const config = {
-      params : action.payload
-    }
-    const response = yield axios.get(`/api/report/all`, config)
-    yield put({ type: 'SET_ALL_MEALS', payload: response.data });
-  } catch (error) {
-    console.log(`Error getting all meals ${error}`);
-  }
-}
-
 function* addMealCountAdult(action) {
   try {
     yield axios.post('/api/count/adult', action.payload);
@@ -39,7 +27,6 @@ function* addMealCountChild(action) {
 
 function* mealCountSaga() {
   yield takeEvery('ADD_MEAL_COUNT', addMealCount);
-  yield takeEvery('FETCH_ALL_MEALS', fetchAllMeals);
   yield takeEvery('ADD_MEAL_COUNT_ADULT', addMealCountAdult);
   yield takeEvery('ADD_MEAL_COUNT_CHILD', addMealCountChild);
 }
