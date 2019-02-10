@@ -40,7 +40,7 @@ class AdminReportGenerations extends Component {
     };
 
     handleClick = () => {
-        if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+        if (this.state.reportType === 1) {
             this.props.dispatch({ type: 'FETCH_ALL_MEALS', payload: this.state })
             this.props.history.push('/AdminReportView');
         }
@@ -88,7 +88,6 @@ class AdminReportGenerations extends Component {
                 <FormControl >
                     <InputLabel>Location</InputLabel>
                     <Select
-                        // label="Select Location"
                         onChange={this.handleInputChangeFor('selectedLocation')}
                         value={this.state.selectedLocation}
                         style={{ height: '40px', width: '150px' }}
@@ -126,6 +125,7 @@ class AdminReportGenerations extends Component {
                     margin="normal"
                     variant="outlined"
                 />
+                <br/>
                 <Button onClick={this.handleClick} variant="contained" color="primary">Generate Report</Button>
             </div>
         )

@@ -59,7 +59,7 @@ class AdminReportView extends Component {
                 <Button variant="contained" color="primary" onClick={this.handleReturnClick}>Return to Reports</Button>
                 <br />
                 <CSVLink data={this.state.dataToExport}><Button variant="contained" >Export</Button></CSVLink>
-                <Table >
+                <Table style={{marginTop: '20px', marginBottom: '50px'}}>
                     <TableHead>
                         <TableRow id="tableHead">
                             <TableCell >Outlet Category</TableCell>

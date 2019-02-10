@@ -24,8 +24,6 @@ ORDER BY "meal_outlet_category".id ASC;`;
         const queryValues = [
             report.startDate,
             report.endDate
-            // moment(report.startDate).format(),
-            // moment(report.endDate).format()
         ];
         pool.query(queryText, queryValues)
             .then(result => {
