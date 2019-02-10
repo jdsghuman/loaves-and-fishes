@@ -27,7 +27,11 @@ class AdminManageOutletLocations extends Component {
 
   removeAdminLocations = (id) => {
     console.log('in remove categories', id)
-    this.props.dispatch({ type: 'DELETE_ADMIN_LOCATION', payload: id })
+    // Prompt user with alert before deleting location
+    const confirmed = window.confirm('This will permanently delete the location. Are you sure you want to delete this location?');
+    if (confirmed) {
+      this.props.dispatch({ type: 'DELETE_ADMIN_LOCATION', payload: id });
+    }
   }
 
   render() {
@@ -66,7 +70,9 @@ class AdminManageOutletLocations extends Component {
                   <TableCell >{location.county}</TableCell>
                   <TableCell >{location.active ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{location.notes}</TableCell>
-                  <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button></TableCell>
+                  <TableCell >
+                    <Button size="small" variant="contained" color="secondary" onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
+                  </TableCell>
                 </TableRow>
               );
             })}
