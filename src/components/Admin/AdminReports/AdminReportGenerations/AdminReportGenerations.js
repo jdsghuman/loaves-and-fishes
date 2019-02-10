@@ -78,6 +78,25 @@ class AdminReportGenerations extends Component {
                 this.props.history.push('/AdminReportView');
             }
         }
+        //Total Summer Meals
+        else if (this.state.reportType === 3) {
+            if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory === '') {
+                this.props.dispatch({ type: 'FETCH_ALL_SUMMER_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory === '') {
+                this.props.dispatch({ type: 'FETCH_LOCATION_SUMMER_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation === '' && this.state.selectedCategory !== '') {
+                this.props.dispatch({ type: 'FETCH_CATEGORY_SUMMER_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+            else if (this.state.reportType !== '' && this.state.selectedLocation !== '' && this.state.selectedCategory !== '') {
+                this.props.dispatch({ type: 'FETCH_LOCATION_CATEGORY_SUMMER_MEALS', payload: this.state })
+                this.props.history.push('/AdminReportView');
+            }
+        }
     }
 
     render() {
