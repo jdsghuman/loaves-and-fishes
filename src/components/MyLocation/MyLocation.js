@@ -8,7 +8,7 @@ class MyLocation extends Component {
     let selectedLocation
     let location = this.props.reduxStore.locationReducer.map(location => {
       if (location.id === this.props.reduxStore.onSiteReducer.selectedLocation) {
-        selectedLocation = <h3 className="location__banner">{location.location_name}</h3>
+        selectedLocation = <h3 key={location.id} className="location__banner"><span style={{fontWeight: '300'}}>Location:</span> {location.location_name}</h3>
       }
       else if (this.props.reduxStore.onSiteReducer.selectedLocation === '') {
         selectedLocation = <h3 className="location__banner">Location Unavailable</h3>
