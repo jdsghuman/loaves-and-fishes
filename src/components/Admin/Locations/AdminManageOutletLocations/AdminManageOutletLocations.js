@@ -43,6 +43,7 @@ class AdminManageOutletLocations extends Component {
           className={classNames(classes.margin, classes.cssRoot)}
           onClick={this.handleAddNewLocation}>Add New Location
         </Button>
+        <div className={classes.root}>
         <Table >
           <TableHead>
             <TableRow>
@@ -78,6 +79,7 @@ class AdminManageOutletLocations extends Component {
             })}
           </TableBody>
         </Table>
+        </div>
       </div>
     )
   }

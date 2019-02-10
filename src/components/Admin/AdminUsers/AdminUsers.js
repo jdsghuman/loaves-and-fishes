@@ -13,34 +13,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Title from '../../Title/Title';
 
-const CustomTableCell = withStyles(theme => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
-
-const styles = theme => ({
-  root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
-    overflowX: 'auto',
-  },
-  table: {
-    minWidth: 700,
-  },
-  row: {
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.background.default,
-    },
-  },
-});
-
 class AdminUsers extends Component {
-
 
   getListofUsers = () => {
     this.props.dispatch({ type: 'FETCH_USER_LIST' });
@@ -59,12 +32,12 @@ class AdminUsers extends Component {
     }
   }
 
-
-
   render() {
+    const { classes } = this.props;
     return (
       <div>
         <Title>Users</Title>
+        <div className={classes.root}>
         <Table >
           <TableHead>
             <TableRow>
@@ -92,12 +65,37 @@ class AdminUsers extends Component {
             })}
           </TableBody>
         </Table>
-
+        </div>
       </div>
     )
   }
 }
 
+const CustomTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white,
+  },
+  body: {
+    fontSize: 14,
+  },
+}))(TableCell);
+
+const styles = theme => ({
+  root: {
+    width: '100%',
+    marginTop: theme.spacing.unit * 3,
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 700,
+  },
+  row: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.background.default,
+    },
+  },
+});
 const mapReduxStateToProps = (reduxStore) => ({
   reduxStore
 })

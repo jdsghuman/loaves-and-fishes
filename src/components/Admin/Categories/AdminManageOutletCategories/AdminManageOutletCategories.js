@@ -40,7 +40,8 @@ class AdminManageOutletCategories extends Component {
           className={classNames(classes.margin, classes.cssRoot)}
           onClick={this.handleAddCategories}>Add New Category Outlet
         </Button>
-        <Table >
+        <div className={classes.root}>
+        <Table>
           <TableHead>
             <TableRow>
               <CustomTableCell>Category Name</CustomTableCell>
@@ -63,6 +64,7 @@ class AdminManageOutletCategories extends Component {
             })}
           </TableBody>
         </Table>
+        </div>
       </div>
     )
   }
