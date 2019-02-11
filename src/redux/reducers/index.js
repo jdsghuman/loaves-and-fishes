@@ -11,6 +11,7 @@ import adminLocationReducer from './adminLocationReducer';
 import reportMealReducer from './reportMealReducer';
 import ageReducer from './ageReducer';
 import raceReducer from './raceReducer';
+import totalReducer from './totalReducer';
 import subCategoryReducer from './subCategoryReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -31,7 +32,8 @@ const rootReducer = combineReducers({
   reportMealReducer,
   ageReducer,
   raceReducer,
-  subCategoryReducer,
+  totalReducer,
+  subCategoryReducer
 });
 
 export default rootReducer;

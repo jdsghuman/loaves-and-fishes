@@ -11,11 +11,13 @@ import TableRow from '@material-ui/core/TableRow';
 import { CSVLink } from "react-csv";
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import moment from 'moment';
 
 class AdminReportView extends Component {
 
     state = {
-        dataToExport: []
+        dataToExport: [],
+        counter: 0
     }
 
     handleReturnClick = () => {
@@ -26,7 +28,8 @@ class AdminReportView extends Component {
 
     handleClear = () => {
         this.setState({
-            dataToExport: []
+            dataToExport: [],
+            counter: 0
         })
         console.log('in handleClear', this.state);
 
@@ -38,12 +41,13 @@ class AdminReportView extends Component {
         let report =
             this.props.reduxStore.reportMealReducer.map((meal) => {
                 this.state.dataToExport.push(meal);
+                this.state.counter = this.state.counter + meal.meal_count
                 return (
                     <TableRow key={meal.id}>
-                        <TableCell >{meal.category_name}</TableCell>
-                        <TableCell >{meal.location_name}</TableCell>
-                        <TableCell >{meal.timestamp}</TableCell>
+                        {/* <TableCell >{meal.category_name}</TableCell> */}
+                        <TableCell >{moment(meal.timestamp).format('l')}</TableCell>
                         <TableCell >{meal.meal_count}</TableCell>
+                        <TableCell >{meal.location_name}</TableCell>
                         <TableCell >{String(meal.farm)}</TableCell>
                         <TableCell >{String(meal.summer)}</TableCell>
                         <TableCell >{meal.gender_name || 'no gender specified'}</TableCell>
@@ -58,6 +62,7 @@ class AdminReportView extends Component {
         return (
             <div>
                 <Title>Report</Title>
+                <Title>Total Meals: {this.state.counter}</Title>
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleReturnClick}>Return to Reports
@@ -73,10 +78,10 @@ class AdminReportView extends Component {
                     <Table style={{ marginTop: '20px', marginBottom: '50px' }}>
                         <TableHead>
                             <TableRow id="tableHead">
-                                <TableCell >Outlet Category</TableCell>
-                                <TableCell >Location Name</TableCell>
+                                {/* <TableCell >Outlet Category</TableCell> */}
                                 <TableCell >Date Collected</TableCell>
                                 <TableCell >Total Served</TableCell>
+                                <TableCell >Location Name</TableCell>
                                 <TableCell >Farm to Table</TableCell>
                                 <TableCell >Summer Meal</TableCell>
                                 <TableCell >Gender</TableCell>
