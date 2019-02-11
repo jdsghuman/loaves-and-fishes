@@ -6,11 +6,6 @@ import Title from '../../../Title/Title';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import './AdminAddLocations.css';
-
-const btnStyle = {
-    marginTop: '10px'
-}
 
 class AdminAddLocations extends Component {
 
@@ -161,5 +156,9 @@ const styles = theme => ({
         margin: '5px'
     }
 });
+
+const btnStyle = {
+    marginTop: '10px'
+}
 
 export default withStyles(styles)(connect()(AdminAddLocations));
