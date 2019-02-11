@@ -43,7 +43,7 @@ class AdminReportView extends Component {
                 this.state.counter = this.state.counter + meal.meal_count
                 return (
                     <TableRow key={meal.id}>
-                        <TableCell >{meal.category_name}</TableCell>
+                        {/* <TableCell >{meal.category_name}</TableCell> */}
                         <TableCell >{meal.location_name}</TableCell>
                         <TableCell >{meal.timestamp}</TableCell>
                         <TableCell >{meal.meal_count}</TableCell>
@@ -77,7 +77,7 @@ class AdminReportView extends Component {
                     <Table style={{ marginTop: '20px', marginBottom: '50px' }}>
                         <TableHead>
                             <TableRow id="tableHead">
-                                <TableCell >Outlet Category</TableCell>
+                                {/* <TableCell >Outlet Category</TableCell> */}
                                 <TableCell >Location Name</TableCell>
                                 <TableCell >Date Collected</TableCell>
                                 <TableCell >Total Served</TableCell>
