@@ -4,21 +4,6 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = theme => ({
-  textField: {
-    width: '70%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    padding: '5px',
-    marginTop: '10px',
-    height: '40px',
-  }
-});
-
-const btnStyle = {
-  marginTop: '15px'
-}
-
 class RegisterPage extends Component {
   state = {
     name: '',
@@ -135,9 +120,21 @@ class RegisterPage extends Component {
   }
 }
 
-// Instead of taking everything from state, we just want the error messages.
-// if you wanted you could write this code like this:
-// const mapStateToProps = ({errors}) => ({ errors });
+const styles = theme => ({
+  textField: {
+    width: '70%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    padding: '5px',
+    marginTop: '10px',
+    height: '40px',
+  }
+});
+
+const btnStyle = {
+  marginTop: '15px'
+}
+
 const mapStateToProps = state => ({
   errors: state.errors,
 });
