@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
-const moment = require('moment')
+// const moment = require('moment')
 
 //GET Total
 router.get('/total', rejectUnauthenticated, (req, res) => {
