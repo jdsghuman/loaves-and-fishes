@@ -8,6 +8,7 @@ import demoSaga from './demoSaga';
 import mealCountSaga from './mealCountSaga';
 import categorySaga from './categorySaga';
 import adminLocationSaga from './adminLocationSaga';
+import subCategorySaga from './subCategorySaga';
 import reportSaga from './reportSaga';
 
 // rootSaga is the primary saga.
@@ -28,6 +29,7 @@ export default function* rootSaga() {
     mealCountSaga(),
     categorySaga(),
     adminLocationSaga(),
+    subCategorySaga(),
     reportSaga(),
   ]);
 }

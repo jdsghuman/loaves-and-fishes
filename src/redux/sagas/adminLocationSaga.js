@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import swal from "sweetalert";
 
 
 function* fetchAdminLocation() {
@@ -9,7 +10,7 @@ function* fetchAdminLocation() {
             withCredentials: true,
         };
 
-        const response = yield axios.get('/api/location', config);
+        const response = yield axios.get('/api/location/adminlocations', config);
         yield put({ type: 'SET_ADMIN_LOCATION', payload: response.data });
     } catch (error) {
         console.log('fetchAdminLocation GET request failed', error);
@@ -20,6 +21,12 @@ function* postAdminLocation(action) {
     try {
         yield axios.post('/api/location', action.payload);
         yield put({ type: 'FETCH_ADMIN_LOCATION' });
+        swal({
+            title: "Successfully submitted!",
+            text: "New location has been added.",
+            icon: "success",
+            button: "Ok"
+        });
     } catch (error) {
         console.log('adminLocation POST request failed', error);
     }
