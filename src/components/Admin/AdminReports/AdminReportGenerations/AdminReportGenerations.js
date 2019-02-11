@@ -8,6 +8,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 class AdminReportGenerations extends Component {
 
@@ -187,6 +189,7 @@ class AdminReportGenerations extends Component {
     }
 
     render() {
+        const { classes } = this.props;
 
         let optionDisplay;
 
@@ -329,11 +332,24 @@ class AdminReportGenerations extends Component {
                     style={{ width: '175px' }}
                 />
                 <br />
-                <Button onClick={this.handleClick} variant="contained" color="primary">Generate Report</Button>
+                <Button className={classNames(classes.margin, classes.cssRoot)} onClick={this.handleClick} variant="contained" color="primary">Generate Report</Button>
             </div>
         )
     }
 }
+
+const styles = theme => ({
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    }
+});
 
 const mapStateToProps = (reduxStore) => {
     return {
@@ -341,4 +357,4 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default connect(mapStateToProps)(withRouter(AdminReportGenerations));
+export default withStyles(styles)(connect(mapStateToProps)(withRouter(AdminReportGenerations)));

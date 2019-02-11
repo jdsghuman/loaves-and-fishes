@@ -219,8 +219,8 @@ class OnSiteMeal extends Component {
                         <RemoveCircle onClick={() => this.changeCount('subtract', 'adult')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
                         <TextField
                             value={this.state.genericAdult}
-                            onChange={this.handleChange()}
                             type="number"
+                            readOnly="true"
                             className={this.props.classes.textField}
                             margin="normal"
                             variant="outlined"
@@ -237,10 +237,10 @@ class OnSiteMeal extends Component {
                         <RemoveCircle onClick={() => this.changeCount('subtract', 'child')} style={{ cursor: 'pointer', fontSize: '4rem', marginRight: '15px', marginTop: '8px' }} />
                         <TextField
                             value={this.state.genericChild}
-                            onChange={this.handleChange()}
                             type="number"
                             className={this.props.classes.textField}
                             margin="normal"
+                            readOnly="true"
                             variant="outlined"
                             InputProps={{
                                 classes: {

@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Title from '../../Title/Title';
@@ -24,8 +25,12 @@ class AdminUsers extends Component {
     this.getListofUsers();
   }
 
-  removeUsers = (id) => {
-    console.log('in remove users', id);
+  handleEditUser = (id) => {
+    this.props.history.push(`/admin/edituser/${id}`);
+  }
+
+  removeUser = (id) => {
+    console.log('in remove user', id);
     // Prompt user with alert before deleting user
     swal({
       title: "Are you sure?",
@@ -49,7 +54,7 @@ class AdminUsers extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Title>Users</Title>
+        <Title>Manage Users</Title>
         <div className={classes.root}>
         <Table >
           <TableHead>
@@ -59,6 +64,7 @@ class AdminUsers extends Component {
               <CustomTableCell>Email</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Role</CustomTableCell>
+              <CustomTableCell>Edit</CustomTableCell>
               <CustomTableCell>Delete</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -72,7 +78,8 @@ class AdminUsers extends Component {
                   <TableCell >{list.email}</TableCell>
                   <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                  <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}><DeleteIcon /></Button>
+                  <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
+                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );
             })}
@@ -108,6 +115,20 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
+  editButton: {
+    background: '#b3b428',
+    color: '#ffffff', 
+    '&:hover': {
+      backgroundColor: '#939324',
+  },
+  },
+  deleteButton: {
+    background: '#98223e',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#6a172b',
+  },
+  }
 });
 const mapReduxStateToProps = (reduxStore) => ({
   reduxStore
