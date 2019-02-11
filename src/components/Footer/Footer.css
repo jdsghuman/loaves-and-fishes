@@ -5,6 +5,13 @@ footer {
     font-size: .8rem;
     text-align: center;
     background: #d3d3d3;
-    padding: 5px;
-    height: 20px;
+    padding: 8px;
+    color: #333333;
+    /* height: 20px; */
+}
+
+@media only screen and (max-width: 475px) {
+    footer {
+        font-size: .6rem;
+    }
 }
