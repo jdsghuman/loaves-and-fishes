@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import Select from '@material-ui/core/Select';
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import './OnSiteDemo.css';
 
 class OnSiteDemo extends Component {
@@ -22,7 +24,7 @@ class OnSiteDemo extends Component {
     }
 
     componentWillMount() {
-        if(this.props.onSite.selectedLocation.location_name === '') {
+        if (this.props.onSite.selectedLocation.location_name === '') {
             this.props.history.push('/home');
         }
     }
@@ -77,6 +79,8 @@ class OnSiteDemo extends Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         let genderList =
             this.props.gender.map(gender => {
                 return (
@@ -108,72 +112,110 @@ class OnSiteDemo extends Component {
                 </div>
                 <MyLocation />
                 <br />
-                <FormControl>
-                    <InputLabel shrink htmlFor="select-multiple-native">
-                        Select Gender
-                    </InputLabel>
-                    <Select
-                        multiple
-                        native
-                        value={this.state.selectedGender}
-                        onChange={this.handleGenderChange}
-                        underlineStyle={{ 'border-color': 'red !important' }}
-                        inputProps={{
-                            id: 'select-multiple-native',
-                        }}
-                    >
-                        {genderList}
-                        ))}
+                <div style={divStyle}>
+                    <FormControl>
+                        {/* <InputLabel style={selectLabelStyle} htmlFor="select-multiple-native">
+                            Select Gender
+                    </InputLabel> */}
+                        <FormLabel style={formLabelStyle}>Select Gender</FormLabel>
+
+                        <Select
+                            multiple
+                            native
+                            value={this.state.selectedGender}
+                            onChange={this.handleGenderChange}
+                            underlinestyle={{ 'border-color': 'red !important' }}
+                            inputProps={{
+                                id: 'select-multiple-native',
+                            }}
+                        >
+                            {genderList}
+                            ))}
                     </Select>
-                </FormControl>
-                <br />
-                <br />
-                <br />
-                <FormControl>
-                    <InputLabel shrink htmlFor="select-multiple-native">
-                        Select Race
-                    </InputLabel>
-                    <Select
-                        multiple
-                        native
-                        value={this.state.selectedRace}
-                        onChange={this.handleRaceChange}
-                        inputProps={{
-                            id: 'select-multiple-native',
-                        }}
-                    >
-                        {raceList}
-                        ))}
+                    </FormControl>
+                </div>
+
+                <div style={divStyle}>
+                    <FormControl>
+                        {/* <InputLabel shrink htmlFor="select-multiple-native">
+                            Select Race
+                    </InputLabel> */}
+                        <FormLabel style={formLabelStyle}>Select Race</FormLabel>
+                        <Select
+                            multiple
+                            native
+                            value={this.state.selectedRace}
+                            onChange={this.handleRaceChange}
+                            inputProps={{
+                                id: 'select-multiple-native',
+                            }}
+                        >
+                            {raceList}
+                            ))}
                     </Select>
-                </FormControl>
-                <br />
-                <br />
-                <br />
-                <FormControl>
-                    <InputLabel shrink htmlFor="select-multiple-native">
-                        Select Age
-                    </InputLabel>
-                    <Select
-                        multiple
-                        native
-                        value={this.state.selectedAge}
-                        onChange={this.handleAgeChange}
-                        inputProps={{
-                            id: 'select-multiple-native',
-                        }}
-                    >
-                        {ageList}
-                        ))}
+                    </FormControl>
+                </div>
+
+                <div style={divStyle}>
+                    <FormControl>
+                        {/* <InputLabel shrink htmlFor="select-multiple-native">
+                            Select Age
+                    </InputLabel> */}
+                        <FormLabel style={formLabelStyle}>Select Age</FormLabel>
+                        <Select
+                            multiple
+                            native
+                            value={this.state.selectedAge}
+                            onChange={this.handleAgeChange}
+                            inputProps={{
+                                id: 'select-multiple-native',
+                            }}
+                        >
+                            {ageList}
+                            ))}
                     </Select>
-                </FormControl>
-                <br />
-                <br />
-                <Button disabled={this.state.selectedAge == '' && this.state.selectedGender == '' && this.state.selectedRace == '' ? true : false} 
-                    variant="contained" color="primary" onClick={this.handleSubmit}>Submit</Button>
+                    </FormControl>
+                </div>
+                <Button disabled={(this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false) || (this.state.selectedAge.length === 0 && this.state.selectedGender.length === 0 && this.state.selectedRace.length === 0 ? true : false)}
+                    className={classNames(classes.margin, classes.cssRoot)}
+                    onClick={this.handleSubmit}>Submit
+                </Button>
             </div>
         )
     }
 }
+
+const divStyle = {
+    marginBottom: '40px'
+}
+
+const formLabelStyle = {
+    display: 'block',
+    marginBottom: '-5px',
+    paddingBottom: '0',
+    color: '#98223e'
+}
+
+const styles = theme => ({
+    resize: {
+        fontSize: '1.5rem'
+    },
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    },
+});
 
 const mapStateToProps = (reduxStore) => ({
     onSite: reduxStore.onSiteReducer,
@@ -182,4 +224,4 @@ const mapStateToProps = (reduxStore) => ({
     race: reduxStore.raceReducer,
 });
 
-export default connect(mapStateToProps)(OnSiteDemo);
+export default withStyles(styles)(connect(mapStateToProps)(OnSiteDemo));

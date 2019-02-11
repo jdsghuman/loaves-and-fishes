@@ -4,9 +4,9 @@ import { put, takeEvery } from 'redux-saga/effects';
 function* addMealCount(action) {
   try {
     yield axios.post('/api/count', action.payload);
-  } catch(error) {
+  } catch (error) {
     console.log(`Error adding meal count ${error}`);
-  } 
+  }
 }
 
 function* addMealCountAdult(action) {

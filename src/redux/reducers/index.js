@@ -8,6 +8,7 @@ import onSiteReducer from './onsiteReducer';
 import genderReducer from './genderReducer';
 import categoryReducer from './categoryReducer';
 import adminLocationReducer from './adminLocationReducer';
+import reportMealReducer from './reportMealReducer';
 import ageReducer from './ageReducer';
 import raceReducer from './raceReducer';
 // rootReducer is the primary reducer for our entire project
@@ -26,8 +27,9 @@ const rootReducer = combineReducers({
   genderReducer, 
   categoryReducer,
   adminLocationReducer,
+  reportMealReducer,
   ageReducer,
-  raceReducer,
+  raceReducer
 });
 
 export default rootReducer;

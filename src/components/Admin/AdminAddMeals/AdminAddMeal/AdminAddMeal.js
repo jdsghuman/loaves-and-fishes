@@ -14,12 +14,19 @@ class AdminAddMeal extends Component {
 
 
     state = {
-        value: 'no',
-        selectedLocation: this.props.reduxStore.locationReducer || '',
+        count: 0,
+        categorizebyage: false,
+        selectedGender: null,
+        selectedRace: null,
+        selectedAge: null,
+        location: '',
         farm: false,
         summer: false,
-        time: moment().format(), 
-        count: 0
+        time: moment().format(),
+        genericAdult: 0,
+        genericChild: 0,
+        selectedAgeAdult: '',
+        selectedAgeChild: ''
     };
 
 
@@ -28,7 +35,7 @@ class AdminAddMeal extends Component {
         console.log('in handleLocationChange');
         this.setState({
             ...this.state,
-            selectedLocation: event.target.value
+            location: event.target.value
         })
     }
 
@@ -65,11 +72,16 @@ class AdminAddMeal extends Component {
         this.props.dispatch({ type: 'FETCH_LOCATIONS' })
     }
 
-    
-
     handleChange = name => event => {
         this.setState({
             count: event.target.value,
+        });
+    };
+
+    handleChangeDate = propertyName => event => {
+        this.setState({
+            ...this.state,
+            [propertyName]: event.target.value
         });
     };
 
@@ -80,9 +92,10 @@ class AdminAddMeal extends Component {
                 count: 0,
                 farm: false,
                 summer: false,
+                time: '',
+                location: ''
             })
     }
-
     render() {
         let locations =
         this.props.reduxStore.locationReducer.map(location => {
@@ -90,23 +103,32 @@ class AdminAddMeal extends Component {
                 <MenuItem key={location.id} value={location.id} id={location.id}>{location.location_name}</MenuItem>
             );
         })
-      
 
     console.log(this.state);
 
         return (
             <div className="div__container container__background">
             <h1>Add Meal </h1> 
+            {JSON.stringify(this.state)}
             <FormControl >
                     <InputLabel>Location</InputLabel>
                     <Select
                         onChange={this.handleLocationChange}
-                        value={this.state.selectedLocation}
+                        value={this.state.location}
                         style={{ height: '40px', width: '150px' }}
                     >
                         {locations}
                     </Select>
                 </FormControl> 
+                <br/>
+                <TextField
+                    name="Time"
+                    type="date"
+                    value={this.state.time}
+                    onChange={this.handleChangeDate('time')}
+                    margin="normal"
+                    variant="outlined"
+                />
                 <br />
                 <TextField
                             value={this.state.count}
@@ -115,19 +137,18 @@ class AdminAddMeal extends Component {
                             variant="outlined"
                             label="count"
                             onChange={this.handleChange()}
-
                 />
                 <br/>
                 <Checkbox
                     onChange={this.handleFarmChange}
-                    value="farm"
+                    value={this.state.farm}
                     color="primary"
                 />
                 <ListItemText style={checkboxStyle} primary="Farm to Table" />
                 <br />
                 <Checkbox
                     onChange={this.handleSummerChange}
-                    value="summer"
+                    value={this.state.summer}
                     color="primary"
                 />
                 <ListItemText style={checkboxStyle} primary="Summer Meal" />
