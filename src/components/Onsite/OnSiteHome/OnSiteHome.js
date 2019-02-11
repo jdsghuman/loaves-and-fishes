@@ -36,7 +36,6 @@ class OnSiteHome extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_LOCATIONS' });
-        this.props.dispatch({ type: 'FETCH_AGE' });
     }
 
     handleLocationChange = (event) => {
@@ -99,6 +98,9 @@ class OnSiteHome extends Component {
                     <MenuItem key={location.id} value={location.id} id={location.id}>{location.location_name}</MenuItem>
                 );
             })
+
+            console.log(this.state);
+            
         return (
             <div className="div__container container__background">
                 <Title>OnSite Home</Title>
