@@ -293,7 +293,6 @@ class AdminReportGenerations extends Component {
                         <MenuItem value={2}>Farm to Table</MenuItem>
                         <MenuItem value={3}>Summer</MenuItem>
                         <MenuItem value={4}>Demographics</MenuItem>
-                        <MenuItem value={5}>Comparison of Years</MenuItem>
                     </Select>
                 </FormControl>
                 <br />
@@ -309,17 +308,6 @@ class AdminReportGenerations extends Component {
                 </FormControl>
                 <br />
                 {optionDisplay}
-                {/* <FormControl >
-                    <InputLabel>Outlet Category</InputLabel>
-                    <Select
-                        // label="Select Location"
-                        onChange={this.handleInputChangeFor('selectedCategory')}
-                        value={this.state.selectedCategory}
-                        style={{ height: '40px', width: '150px' }}
-                    >
-                        {categories}
-                    </Select>
-                </FormControl> */}
                 <p>From</p>
                 <TextField
                     name="Start Date"
@@ -328,6 +316,7 @@ class AdminReportGenerations extends Component {
                     onChange={this.handleInputChangeFor('startDate')}
                     margin="normal"
                     variant="outlined"
+                    style={{ width: '175px' }}
                 />
                 <p>To</p>
                 <TextField
@@ -337,6 +326,7 @@ class AdminReportGenerations extends Component {
                     onChange={this.handleInputChangeFor('endDate')}
                     margin="normal"
                     variant="outlined"
+                    style={{ width: '175px' }}
                 />
                 <br />
                 <Button onClick={this.handleClick} variant="contained" color="primary">Generate Report</Button>
