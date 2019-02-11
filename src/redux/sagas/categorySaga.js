@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import swal from "sweetalert";
 
 
 function* fetchCategory() {
@@ -8,6 +9,26 @@ function* fetchCategory() {
         yield put({ type: 'SET_CATEGORY_OUTLET', payload: response.data });
     } catch (error) {
         console.log('category get request failed', error);
+    }
+}
+
+function* postNewCategory(action) {
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        };
+
+        yield axios.post('/api/category', action.payload);
+        yield put({ type: 'FETCH_NEW_CATEGORY' });
+        swal({
+            title: "Successfully submitted!",
+            text: "New outlet category has been added!",
+            icon: "success",
+            button: "Ok"
+        });
+    } catch (error) {
+        console.log(' POST request failed', error);
     }
 }
 
@@ -24,6 +45,7 @@ function* deleteCategories(action) {
 
 function* categorySaga() {
     yield takeEvery('FETCH_CATEGORY_OUTLET', fetchCategory);
+    yield takeEvery('ADD_NEW_CATEGORY', postNewCategory);
     yield takeEvery('DELETE_CATEGORY_OUTLET', deleteCategories);
 }
 

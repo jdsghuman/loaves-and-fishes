@@ -10,6 +10,8 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Title from '../../../Title/Title';
+import moment from 'moment';
+import swal from "sweetalert";
 
 class AdminManageOutletCategories extends Component {
 
@@ -22,12 +24,27 @@ class AdminManageOutletCategories extends Component {
   }
 
   handleAddCategories = () => {
-    this.props.history.push('/adminAddCategories');
+    this.props.history.push('/adminAddOutletCategories');
   }
 
   removeCategories = (id) => {
     console.log('in remove categories', id)
-    this.props.dispatch({ type: 'DELETE_CATEGORY_OUTLET', payload: id })
+    swal({
+      title: "Are you sure?",
+      text: "This will permanently delete the outlet category. Are you sure you want to delete this category?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then(willDelete => {
+        if (willDelete) {
+          this.props.dispatch({ type: 'DELETE_CATEGORY_OUTLET', payload: id });
+          swal("Deleted!", "Outlet category has been deleted!", "success");
+        }
+        else {
+          swal("Deletion has been canceled")
+        }
+      });
   }
 
   render() {
@@ -47,6 +64,9 @@ class AdminManageOutletCategories extends Component {
               <CustomTableCell>Category Name</CustomTableCell>
               <CustomTableCell>Sub-Category</CustomTableCell>
               <CustomTableCell>Notes</CustomTableCell>
+              <CustomTableCell>Status</CustomTableCell>
+              <CustomTableCell>Updated By</CustomTableCell>
+              <CustomTableCell>Date</CustomTableCell>
               <CustomTableCell>Delete</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -56,8 +76,11 @@ class AdminManageOutletCategories extends Component {
               return (
                 <TableRow key={category.id} >
                   <TableCell >{category.category_name}</TableCell>
-                  <TableCell >{category.sub_category}</TableCell>
+                  <TableCell >{category.sub_category_name}</TableCell>
                   <TableCell >{category.notes}</TableCell>
+                  <TableCell >{String(category.active)}</TableCell>
+                  <TableCell >{category.name}</TableCell>
+                  <TableCell >{moment(category.date_updated).format('l')}</TableCell>
                   <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );

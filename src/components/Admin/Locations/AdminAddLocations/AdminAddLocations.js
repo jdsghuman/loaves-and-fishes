@@ -37,7 +37,6 @@ class AdminAddLocations extends Component {
         event.preventDefault();
         console.log('in handleClick', this.state);
         this.props.dispatch({ type: "ADD_LOCATION", payload: this.state });
-        alert(`${this.state.locationName} location added`);
         this.setState({
             ...this.state,
             locationName: '',
@@ -48,8 +47,8 @@ class AdminAddLocations extends Component {
             county: '',
             notes: '',
             time: moment().format(),
-
         })
+        this.props.history.push('/adminManageOutletLocations')
     }
 
     render() {
