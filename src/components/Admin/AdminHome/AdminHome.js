@@ -13,7 +13,7 @@ class AdminHome extends Component {
         this.props.history.push('/adminUser');
     }
     handleSubmitCategories = () => {
-        this.props.history.push('/adminCategories');
+        this.props.history.push('/adminManageOutletCategories');
     }
     handleClickManageOutletLocations = () => {
         this.props.history.push('/adminManageOutletLocations');

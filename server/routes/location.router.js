@@ -3,11 +3,12 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// Get all outlet locations
+// Get all outlet locations for onSiteHome
 router.get('/', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
-        const queryText = `SELECT * FROM "location";`;
+        const queryText = `SELECT * FROM "location"
+                           ORDER BY "location"."location_name" ASC;`;
         pool.query(queryText)
             .then(result => {
                 res.send(result.rows);
@@ -18,6 +19,28 @@ router.get('/', rejectUnauthenticated, (req, res) => {
         res.sendStatus(403);
     }
 });
+
+// Get all outlet locations for Admin
+router.get('/adminlocations', rejectUnauthenticated, (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('authenticated', req.isAuthenticated());
+        const queryText = `SELECT "location".id, "location".location_name, "meal_outlet_category".category_name, "location".street_address, "location".city, "location".state,
+                          "location".zip, "location".county, "location".active, "location".notes, "person"."name", "location".date_updated FROM "location"
+                          LEFT JOIN "location_outlet" ON "location".id = "location_outlet".location_id
+                          LEFT JOIN "meal_outlet_category" ON "location_outlet".outlet_id = "meal_outlet_category".id
+                          LEFT JOIN "person" ON "location".updated_by = "person".id
+                          ORDER BY "location".location_name ASC;;`;
+        pool.query(queryText)
+            .then(result => {
+                res.send(result.rows);
+            }).catch(error => {
+                console.log('in Admin outlet location GET ROUTER error', error);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
 
 // Add outlet location
 router.post('/', rejectUnauthenticated, (req, res) => {

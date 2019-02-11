@@ -2,10 +2,15 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const moment = require('moment')
 
 // Get all outlet categories
 router.get('/', (req, res) => {
-    let sql = `SELECT * FROM "meal_outlet_category";`
+    let sql = `SELECT "meal_outlet_category".id, "meal_outlet_category".category_name, "meal_outlet_category".sub_category,
+              "meal_outlet_category".notes, "meal_outlet_category".active, "meal_outlet_category".updated_by, "meal_outlet_category".date_updated, "outlet_sub_category".category_name AS "sub_category_name", "person"."name" FROM "meal_outlet_category"
+              LEFT JOIN "outlet_sub_category" ON "meal_outlet_category".sub_category = "outlet_sub_category".id
+              LEFT JOIN "person" ON "meal_outlet_category".updated_by = "person".id
+              ORDER BY "meal_outlet_category".category_name ASC;`;
     pool.query(sql).then((response) => {
         res.send(response.rows)
     }).catch((error) => {
@@ -19,12 +24,14 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.user.admin) {
         const newOutletCategory = req.body;
-        const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "updated_by")
-                           VALUES($1, $2, $3);`;
+        const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "notes", "updated_by", "date_updated")
+                           VALUES($1, $2, $3, $4, $5);`;
         const queryValues = [
-            newOutletCategory.categoryname, // update with state name 
-            newOutletCategory.sub_category, // update with state name 
-            req.user.id
+            newOutletCategory.categoryName,
+            newOutletCategory.selectedSubCategory, 
+            newOutletCategory.notes, 
+            req.user.id,
+            moment().format(),
         ];
         pool.query(queryText, queryValues).then(result => {
             res.sendStatus(204);
