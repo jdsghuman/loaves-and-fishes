@@ -122,9 +122,6 @@ class AdminReportGenerations extends Component {
 
         console.log(this.state);
 
-
-
-
         return (
             <div className="div__container container__background">
                 <Title>Reports</Title>
