@@ -8,6 +8,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
+import moment from 'moment';
+import Title from '../../../Title/Title';
 
 const CustomTableCell = withStyles(theme => ({
     head: {
@@ -58,12 +60,15 @@ class AdminManageOutletLocations extends Component {
     render() {
         return (
             <div>
-                <p>admin manage outlet locations</p>
-                <Button variant="contained" color="primary" onClick={this.handleAddNewLocation}>Add New Location</Button>
+                <Title>Manage Outlet Locations</Title>
+            <center><Button variant="contained" color="primary" onClick={this.handleAddNewLocation}>Add New Location</Button></center>
+                <br/>
+                <br/>
                 <Table >
             <TableHead>
               <TableRow>
                 <CustomTableCell>Meal Locations</CustomTableCell>
+                <CustomTableCell>Category Outlet</CustomTableCell>
                 <CustomTableCell>Street</CustomTableCell>
                 <CustomTableCell>City</CustomTableCell>
                 <CustomTableCell>State</CustomTableCell>
@@ -71,6 +76,8 @@ class AdminManageOutletLocations extends Component {
                 <CustomTableCell>County</CustomTableCell>
                 <CustomTableCell>Status</CustomTableCell>
                 <CustomTableCell>Notes</CustomTableCell>
+                <CustomTableCell>Updated By</CustomTableCell>
+                <CustomTableCell>Date</CustomTableCell>
                 <CustomTableCell>Delete</CustomTableCell>
               </TableRow>
             </TableHead>
@@ -80,6 +87,7 @@ class AdminManageOutletLocations extends Component {
                 return (
                   <TableRow key={location.id} >
                     <TableCell >{location.location_name}</TableCell>
+                    <TableCell >{location.category_name}</TableCell>
                     <TableCell >{location.street_address}</TableCell>
                     <TableCell >{location.city}</TableCell>
                     <TableCell >{location.state}</TableCell>
@@ -87,6 +95,8 @@ class AdminManageOutletLocations extends Component {
                     <TableCell >{location.county}</TableCell>
                     <TableCell >{location.active  ? 'Active' : 'Inactive'}</TableCell>
                     <TableCell >{location.notes}</TableCell>
+                    <TableCell >{location.name}</TableCell>
+                    <TableCell >{moment(location.date_updated).format('LL')}</TableCell>
                     <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon/></Button></TableCell>
                   </TableRow>
                 );

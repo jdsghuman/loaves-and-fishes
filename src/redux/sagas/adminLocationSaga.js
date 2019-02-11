@@ -9,7 +9,7 @@ function* fetchAdminLocation() {
             withCredentials: true,
         };
 
-        const response = yield axios.get('/api/location', config);
+        const response = yield axios.get('/api/location/adminlocations', config);
         yield put({ type: 'SET_ADMIN_LOCATION', payload: response.data });
     } catch (error) {
         console.log('fetchAdminLocation GET request failed', error);

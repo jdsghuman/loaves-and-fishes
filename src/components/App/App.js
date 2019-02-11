@@ -87,12 +87,12 @@ class App extends Component {
             />
              <AdminRoute
               exact
-              path="/adminCategories"
+              path="/adminManageOutletCategories"
               component={AdminManageOutletCategories}
             />
              <AdminRoute
               exact
-              path="/adminAddCategories"
+              path="/adminAddOutletCategories"
               component={AdminAddOutletCategories}
             />
             <ProtectedRoute

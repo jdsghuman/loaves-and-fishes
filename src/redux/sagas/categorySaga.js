@@ -11,6 +11,20 @@ function* fetchCategory() {
     }
 }
 
+function* postNewCategory(action) {
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        };
+
+        yield axios.post('/api/category', action.payload);
+        yield put({ type: 'FETCH_NEW_CATEGORY' });
+    } catch (error) {
+        console.log(' POST request failed', error);
+    }
+}
+
 
 function* deleteCategories(action) {
     try{
@@ -24,6 +38,7 @@ function* deleteCategories(action) {
 
 function* categorySaga() {
     yield takeEvery('FETCH_CATEGORY_OUTLET', fetchCategory);
+    yield takeEvery('ADD_NEW_CATEGORY', postNewCategory);
     yield takeEvery('DELETE_CATEGORY_OUTLET', deleteCategories);
 }
 

@@ -19,11 +19,13 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         const newOutletCategory = req.body;
-        const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "updated_by")
-                           VALUES($1, $2, $3);`;
+        const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "notes", "updated_by")
+                           VALUES($1, $2, $3, $4);`;
         const queryValues = [
-            newOutletCategory.categoryname, // update with state name 
-            newOutletCategory.sub_category, // update with state name 
+            newOutletCategory.categoryName,
+            newOutletCategory.selectedCategory, 
+            newOutletCategory.notes, 
+            // newOutletCategory.time, 
             req.user.id
         ];
         pool.query(queryText, queryValues).then(result => {
