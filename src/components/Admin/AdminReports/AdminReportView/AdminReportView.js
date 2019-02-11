@@ -20,7 +20,8 @@ class AdminReportView extends Component {
     }
 
     handleReturnClick = () => {
-        this.handleClear()
+        this.handleClear();
+        this.props.dispatch({ type: 'CLEAR_REPORT_MEALS'})
         this.props.history.push('/adminReportGeneration')
     }
 
