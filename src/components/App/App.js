@@ -28,8 +28,17 @@ import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLoca
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
 import AdminAddMeal from '../Admin/AdminAddMeals/AdminAddMeal/AdminAddMeal';
 
+import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 import './App.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: "#98223e" },
+    secondary: { main: "#98223e" }
+  },
+});
 
 class App extends Component {
   componentDidMount () {
@@ -38,6 +47,7 @@ class App extends Component {
 
   render() {
     return (
+      <MuiThemeProvider theme={theme}>
       <Router>
         <div>
           <Nav />
@@ -123,6 +133,7 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
+      </MuiThemeProvider>
   )}
 }
 

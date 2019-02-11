@@ -24,8 +24,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
     console.log(req.user);
     if (req.isAuthenticated()) {
         const newOutletLocation = req.body;
-        const queryText = `INSERT INTO "location" ("location_name", "street_address", "city", "state", "zip", "county", "notes", "updated_by")
-                           VALUES($1, $2, $3, $4, $5, $6, $7, $8);`;
+        const queryText = `INSERT INTO "location" ("location_name", "street_address", "city", "state", "zip", "county", "notes", "updated_by", "date_updated")
+                           VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
         const queryValues = [
             newOutletLocation.locationName, 
             newOutletLocation.street, 
@@ -34,7 +34,8 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             newOutletLocation.zip, 
             newOutletLocation.county,
             newOutletLocation.notes,
-            req.user.id
+            req.user.id,
+            newOutletLocation.time,
         ];
         pool.query(queryText, queryValues).then(result => {
             res.sendStatus(204);

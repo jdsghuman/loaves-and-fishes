@@ -5,9 +5,11 @@ import user from './userReducer';
 import userListReducer from './userListReducer';
 import locationReducer from './locationReducer';
 import onSiteReducer from './onsiteReducer';
-import demoReducer from './demoReducer';
+import genderReducer from './genderReducer';
 import categoryReducer from './categoryReducer';
 import adminLocationReducer from './adminLocationReducer';
+import ageReducer from './ageReducer';
+import raceReducer from './raceReducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -21,9 +23,11 @@ const rootReducer = combineReducers({
   userListReducer,
   locationReducer,
   onSiteReducer,
-  demoReducer, 
+  genderReducer, 
   categoryReducer,
   adminLocationReducer,
+  ageReducer,
+  raceReducer,
 });
 
 export default rootReducer;

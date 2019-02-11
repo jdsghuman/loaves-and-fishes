@@ -64,9 +64,9 @@ router.post('/', rejectUnauthenticated, (req, res) => {
             newDemo.summer,
             newDemo.farm, 
             newDemo.location,
-            newDemo.selectedGender,
-            newDemo.selectedRace,
-            newDemo.selectedAge,
+            newDemo.selectedGender || null,
+            newDemo.selectedRace || null,
+            newDemo.selectedAge || null,
         ];
         pool.query(queryText, queryValues).then(result => {
             res.sendStatus(204);
