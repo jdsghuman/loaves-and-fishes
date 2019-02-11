@@ -12,7 +12,6 @@ import TextField from '@material-ui/core/TextField';
 
 class AdminAddMeal extends Component {
 
-
     state = {
         count: 0,
         categorizebyage: false,
@@ -28,7 +27,6 @@ class AdminAddMeal extends Component {
         selectedAgeAdult: '',
         selectedAgeChild: ''
     };
-
 
     handleLocationChange = (event) => {
         console.log(event.target.value)
@@ -68,6 +66,7 @@ class AdminAddMeal extends Component {
             })
         }
     }
+
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_LOCATIONS' })
     }
@@ -95,6 +94,7 @@ class AdminAddMeal extends Component {
                 time: '',
                 location: ''
             })
+            this.props.history.push('/admin');
     }
     render() {
         let locations =
@@ -109,7 +109,6 @@ class AdminAddMeal extends Component {
         return (
             <div className="div__container container__background">
             <h1>Add Meal </h1> 
-            {JSON.stringify(this.state)}
             <FormControl >
                     <InputLabel>Location</InputLabel>
                     <Select
