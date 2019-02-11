@@ -11,6 +11,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { CSVLink } from "react-csv";
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import moment from 'moment';
 
 class AdminReportView extends Component {
 
@@ -44,9 +45,9 @@ class AdminReportView extends Component {
                 return (
                     <TableRow key={meal.id}>
                         {/* <TableCell >{meal.category_name}</TableCell> */}
-                        <TableCell >{meal.location_name}</TableCell>
-                        <TableCell >{meal.timestamp}</TableCell>
+                        <TableCell >{moment(meal.timestamp).format('l')}</TableCell>
                         <TableCell >{meal.meal_count}</TableCell>
+                        <TableCell >{meal.location_name}</TableCell>
                         <TableCell >{String(meal.farm)}</TableCell>
                         <TableCell >{String(meal.summer)}</TableCell>
                         <TableCell >{meal.gender_name || 'no gender specified'}</TableCell>
@@ -78,9 +79,9 @@ class AdminReportView extends Component {
                         <TableHead>
                             <TableRow id="tableHead">
                                 {/* <TableCell >Outlet Category</TableCell> */}
-                                <TableCell >Location Name</TableCell>
                                 <TableCell >Date Collected</TableCell>
                                 <TableCell >Total Served</TableCell>
+                                <TableCell >Location Name</TableCell>
                                 <TableCell >Farm to Table</TableCell>
                                 <TableCell >Summer Meal</TableCell>
                                 <TableCell >Gender</TableCell>
