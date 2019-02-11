@@ -21,7 +21,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 // Add outlet sub-category
 router.post('/', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
         const newSubCategory = req.body;
         const queryText = `INSERT INTO "outlet_sub_category" ("category_name")
                            VALUES($1);`;
@@ -41,7 +41,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // Delete outlet sub-category
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
         const reqId = req.params.id;
         console.log('route id: ', reqId);
         // const queryText = `DELETE FROM RYAN MUNDY PLEASE UPDATE;`;
@@ -59,7 +59,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 // Update outlet sub-category
 router.put('/:id', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
         const reqId = req.params.id;
         const subCategoryToUpdate = req.body;
         // const queryText = `UPDATE RYAN MUNDY PLEASE UPDATE;`;

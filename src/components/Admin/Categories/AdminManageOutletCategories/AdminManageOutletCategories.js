@@ -7,8 +7,91 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Title from '../../../Title/Title';
+import moment from 'moment';
+import swal from "sweetalert";
+
+class AdminManageOutletCategories extends Component {
+
+  getCategories = () => {
+    this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' });
+  }
+
+  componentDidMount() {
+    this.getCategories();
+  }
+
+  handleAddCategories = () => {
+    this.props.history.push('/adminAddOutletCategories');
+  }
+
+  removeCategories = (id) => {
+    console.log('in remove categories', id)
+    swal({
+      title: "Are you sure?",
+      text: "This will permanently delete the outlet category. Are you sure you want to delete this category?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then(willDelete => {
+        if (willDelete) {
+          this.props.dispatch({ type: 'DELETE_CATEGORY_OUTLET', payload: id });
+          swal("Deleted!", "Outlet category has been deleted!", "success");
+        }
+        else {
+          swal("Deletion has been canceled")
+        }
+      });
+  }
+
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <div>
+        <Title>Manage Outlet Categories</Title>
+        <Button
+          className={classNames(classes.margin, classes.cssRoot)}
+          onClick={this.handleAddCategories}>Add New Category Outlet
+        </Button>
+        <div className={classes.root}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <CustomTableCell>Category Name</CustomTableCell>
+              <CustomTableCell>Sub-Category</CustomTableCell>
+              <CustomTableCell>Notes</CustomTableCell>
+              <CustomTableCell>Status</CustomTableCell>
+              <CustomTableCell>Updated By</CustomTableCell>
+              <CustomTableCell>Date</CustomTableCell>
+              <CustomTableCell>Delete</CustomTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {this.props.reduxStore.categoryReducer.map((category) => {
+              console.log('checking ', category);
+              return (
+                <TableRow key={category.id} >
+                  <TableCell >{category.category_name}</TableCell>
+                  <TableCell >{category.sub_category_name}</TableCell>
+                  <TableCell >{category.notes}</TableCell>
+                  <TableCell >{String(category.active)}</TableCell>
+                  <TableCell >{category.name}</TableCell>
+                  <TableCell >{moment(category.date_updated).format('l')}</TableCell>
+                  <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
+        </div>
+      </div>
+    )
+  }
+}
 
 const CustomTableCell = withStyles(theme => ({
   head: {
@@ -34,67 +117,17 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
+  margin: {
+    margin: theme.spacing.unit,
+  },
+  cssRoot: {
+    color: theme.palette.getContrastText('#98223e'),
+    backgroundColor: '#98223e',
+    '&:hover': {
+      backgroundColor: '#6a172b',
+    },
+  },
 });
-
-class AdminManageOutletCategories extends Component {
-
-  getCategories = () => {
-    this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' });
-  }
-
-  componentDidMount() {
-    this.getCategories();
-  }
-
-  handleAddCategories = () => {
-    this.props.history.push('/adminAddOutletCategories');
-  }
-
-  removeCategories = (id) => {
-    console.log('in remove categories', id)
-    this.props.dispatch({ type: 'DELETE_CATEGORY_OUTLET', payload: id })
-  }
-
-  render() {
-    return (
-      <div>
-        <Title>Manage Outlet Categories</Title>
-        <center><Button size="Large" variant="contained" color="secondary" onClick={this.handleAddCategories}>Add New Outlet Categories</Button></center>
-        <br />
-        <br />
-        <Table >
-          <TableHead>
-            <TableRow>
-              <CustomTableCell>Category Name</CustomTableCell>
-              <CustomTableCell>Sub-Category</CustomTableCell>
-              <CustomTableCell>Notes</CustomTableCell>
-              <CustomTableCell>Status</CustomTableCell>
-              <CustomTableCell>Updated By</CustomTableCell>
-              <CustomTableCell>Date</CustomTableCell>
-              <CustomTableCell>Delete</CustomTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.reduxStore.categoryReducer.map((category) => {
-              console.log('checking ', category);
-              return (
-                <TableRow key={category.id} >
-                  <TableCell >{category.category_name}</TableCell>
-                  <TableCell >{category.sub_category}</TableCell>
-                  <TableCell >{category.notes}</TableCell>
-                  <TableCell >{category.active}</TableCell>
-                  <TableCell >{category.updated_by}</TableCell>
-                  <TableCell >{category.date_updated}</TableCell>
-                  <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </div>
-    )
-  }
-}
 
 const mapReduxStateToProps = (reduxStore) => ({
   reduxStore

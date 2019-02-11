@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import swal from "sweetalert";
 
 
 function* fetchSubCategory() {
@@ -25,6 +26,12 @@ function* postSubCategory(action) {
 
         yield axios.post('/api/subcategory', action.payload);
         yield put({ type: 'FETCH_SUB_CATEGORY' });
+        swal({
+            title: "Sub-Category Successfully Submitted!",
+            text: "Sub-Category is now a selection in the drop down above",
+            icon: "success",
+            button: "Ok"
+        });
     } catch (error) {
         console.log('subCategory POST request failed', error);
     }

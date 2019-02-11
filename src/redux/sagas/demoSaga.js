@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeEvery, actionChannel } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
 
 function* fetchGender() {
@@ -46,11 +46,6 @@ function* fetchAge() {
 
 function* postDemo(action) {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-
         yield axios.post('/api/onsite', action.payload);
         yield put({ type: 'FETCH_GENDER' });
         yield put({ type: 'FETCH_RACE' });

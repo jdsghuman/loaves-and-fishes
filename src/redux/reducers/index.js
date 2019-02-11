@@ -8,6 +8,7 @@ import onSiteReducer from './onsiteReducer';
 import genderReducer from './genderReducer';
 import categoryReducer from './categoryReducer';
 import adminLocationReducer from './adminLocationReducer';
+import reportMealReducer from './reportMealReducer';
 import ageReducer from './ageReducer';
 import raceReducer from './raceReducer';
 import subCategoryReducer from './subCategoryReducer';
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   genderReducer, 
   categoryReducer,
   adminLocationReducer,
+  reportMealReducer,
   ageReducer,
   raceReducer,
   subCategoryReducer,

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import swal from "sweetalert";
 
 
 function* fetchCategory() {
@@ -20,6 +21,12 @@ function* postNewCategory(action) {
 
         yield axios.post('/api/category', action.payload);
         yield put({ type: 'FETCH_NEW_CATEGORY' });
+        swal({
+            title: "Successfully submitted!",
+            text: "New outlet category has been added!",
+            icon: "success",
+            button: "Ok"
+        });
     } catch (error) {
         console.log(' POST request failed', error);
     }

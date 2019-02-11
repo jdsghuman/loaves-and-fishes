@@ -10,26 +10,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import AdminAddSubCategories from '../AdminAddSubCategories/AdminAddSubCategories';
 
-const style = {
-    width: '70%',
-    marginTop: '7em'
-}
-
-const spacing = {
-    margin: '0.5em',
-    backgroundColor: '#ffffff',
-    width: '30%'
-}
-
-const btnStyle = {
-    marginTop: '10px'
-}
-
 class AdminAddOutletCategories extends Component {
 
     state = {
         categoryName: '',
-        selectSubCategory: '',
+        selectedSubCategory: '',
         notes: '',
         time: moment().format(),
     }
@@ -53,11 +38,11 @@ class AdminAddOutletCategories extends Component {
         this.setState({
             ...this.state,
             categoryName: '',
-            selectSubCategory: '',
+            selectedSubCategory: '',
             notes: '',
-            time: moment().format(),
-
+            time: moment().format()
         })
+        this.props.history.push('/adminManageOutletCategories');
     }
 
     render() {
@@ -67,6 +52,8 @@ class AdminAddOutletCategories extends Component {
                     <MenuItem key={subCategories.id} value={subCategories.id} id={subCategories.id}>{subCategories.category_name}</MenuItem>
                 );
             })
+            console.log('after Click', this.state);
+            
         return (
             <div className="div__container container__background" style={style}>
                 <Title>Add New Category</Title>
@@ -84,8 +71,8 @@ class AdminAddOutletCategories extends Component {
                 <FormControl >
                     <InputLabel>Sub-Category</InputLabel>
                     <Select
-                        onChange={this.handleInputChangeFor('selectedCategory')}
-                        value={this.state.selectSubCategory}
+                        onChange={this.handleInputChangeFor('selectedSubCategory')}
+                        value={this.state.selectedSubCategory}
                         style={{ height: '47px', width: '250px' }}
                     >
                     {subCategoryList}
@@ -110,6 +97,21 @@ class AdminAddOutletCategories extends Component {
             </div>
         )
     }
+}
+
+const style = {
+    width: '70%',
+    marginTop: '7em'
+}
+
+const spacing = {
+    margin: '0.5em',
+    backgroundColor: '#ffffff',
+    width: '30%'
+}
+
+const btnStyle = {
+    marginTop: '10px'
 }
 
 const mapStateToProps = (reduxStore) => {

@@ -44,17 +44,17 @@ router.get('/adminlocations', rejectUnauthenticated, (req, res) => {
 
 // Add outlet location
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.user);
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
+        console.log(req.user);
         const newOutletLocation = req.body;
         const queryText = `INSERT INTO "location" ("location_name", "street_address", "city", "state", "zip", "county", "notes", "updated_by", "date_updated")
                            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
         const queryValues = [
-            newOutletLocation.locationName, 
-            newOutletLocation.street, 
-            newOutletLocation.city, 
-            newOutletLocation.state, 
-            newOutletLocation.zip, 
+            newOutletLocation.locationName,
+            newOutletLocation.street,
+            newOutletLocation.city,
+            newOutletLocation.state,
+            newOutletLocation.zip,
             newOutletLocation.county,
             newOutletLocation.notes,
             req.user.id,
@@ -73,16 +73,19 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 
 // Delete outlet location
 router.delete('/:id', (req, res) => {
-    console.log('testing delete route', req.params.id);
-    let id = req.params.id
-    let queryText = `DELETE FROM "location" WHERE id = $1;`;
-    pool.query(queryText, [id])
-    .then((result) => {
-        res.sendStatus(204);
-    }).catch((error) => {
-        console.log('error in delete route', error);
-        res.sendStatus(500)
-    })
+    if (req.user.admin) {
+        console.log('testing delete route', req.params.id);
+        let id = req.params.id
+        let queryText = `DELETE FROM "location" WHERE id = $1;`;
+        pool.query(queryText, [id]).then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log('error in delete route', error);
+            res.sendStatus(500)
+        })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 // Update outlet location
