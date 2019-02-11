@@ -9,7 +9,9 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
+import moment from 'moment';
 import Title from '../../../Title/Title';
+import swal from "sweetalert";
 
 class AdminManageOutletLocations extends Component {
 
@@ -28,10 +30,22 @@ class AdminManageOutletLocations extends Component {
   removeAdminLocations = (id) => {
     console.log('in remove categories', id)
     // Prompt user with alert before deleting location
-    const confirmed = window.confirm('This will permanently delete the location. Are you sure you want to delete this location?');
-    if (confirmed) {
-      this.props.dispatch({ type: 'DELETE_ADMIN_LOCATION', payload: id });
-    }
+    swal({
+      title: "Are you sure?",
+      text: "This will permanently delete the location. Are you sure you want to delete this location?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then(willDelete => {
+        if (willDelete) {
+          this.props.dispatch({ type: 'DELETE_ADMIN_LOCATION', payload: id });
+          swal("Deleted!", "Location has been deleted!", "success");
+        }
+        else {
+          swal("Deletion has been canceled")
+        }
+      });
   }
 
   render() {
@@ -48,6 +62,7 @@ class AdminManageOutletLocations extends Component {
           <TableHead>
             <TableRow>
               <CustomTableCell>Meal Locations</CustomTableCell>
+              <CustomTableCell>Category Outlet</CustomTableCell>
               <CustomTableCell>Street</CustomTableCell>
               <CustomTableCell>City</CustomTableCell>
               <CustomTableCell>State</CustomTableCell>
@@ -55,6 +70,8 @@ class AdminManageOutletLocations extends Component {
               <CustomTableCell>County</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Notes</CustomTableCell>
+              <CustomTableCell>Updated By</CustomTableCell>
+              <CustomTableCell>Date</CustomTableCell>
               <CustomTableCell>Delete</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -64,6 +81,7 @@ class AdminManageOutletLocations extends Component {
               return (
                 <TableRow key={location.id} >
                   <TableCell >{location.location_name}</TableCell>
+                  <TableCell >{location.category_name}</TableCell>
                   <TableCell >{location.street_address}</TableCell>
                   <TableCell >{location.city}</TableCell>
                   <TableCell >{location.state}</TableCell>
@@ -71,6 +89,8 @@ class AdminManageOutletLocations extends Component {
                   <TableCell >{location.county}</TableCell>
                   <TableCell >{location.active ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{location.notes}</TableCell>
+                  <TableCell >{location.name}</TableCell>
+                  <TableCell >{moment(location.date_updated).format('l')}</TableCell>
                   <TableCell >
                     <Button size="small" variant="contained" color="secondary" onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
                   </TableCell>

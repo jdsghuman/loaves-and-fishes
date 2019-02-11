@@ -12,6 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Title from '../../Title/Title';
+import swal from "sweetalert";
 
 class AdminUsers extends Component {
 
@@ -26,10 +27,22 @@ class AdminUsers extends Component {
   removeUsers = (id) => {
     console.log('in remove users', id);
     // Prompt user with alert before deleting user
-    const confirmed = window.confirm('This will permanently delete the User. Are you sure you want to delete this User?');
-    if (confirmed) {
-      this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-    }
+    swal({
+      title: "Are you sure?",
+      text: "This will permanently delete a user. Are you sure you want to delete this user?",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+      .then(willDelete => {
+        if (willDelete) {
+          this.props.dispatch({ type: 'DELETE_USERS', payload: id });
+          swal("Deleted!", "User has been deleted!", "success");
+        }
+        else {
+          swal("Deletion has been canceled")
+        }
+      });
   }
 
   render() {

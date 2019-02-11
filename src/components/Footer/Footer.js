@@ -8,7 +8,7 @@ import './Footer.css'
 
 const Footer = () => (
   <footer>
-    <span style={{color: '#98223e', fontWeight: '600'}}>Loaves & Fishes</span> | 721 Kasota Avenue SE, Minneapolis, MN 55414 | 612.377.9810
+    <span style={{color: '#98223e', fontWeight: '600'}}>Loaves & fishes</span> | 721 Kasota Avenue SE, Minneapolis, MN 55414 | 612.377.9810
   </footer>
 );
 
