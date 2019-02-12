@@ -44,7 +44,6 @@ class AdminReportView extends Component {
                 this.state.counter = this.state.counter + meal.meal_count
                 return (
                     <TableRow key={meal.id}>
-                        {/* <TableCell >{meal.category_name}</TableCell> */}
                         <TableCell >{moment(meal.timestamp).format('l')}</TableCell>
                         <TableCell >{meal.meal_count}</TableCell>
                         <TableCell >{meal.location_name}</TableCell>
@@ -58,11 +57,13 @@ class AdminReportView extends Component {
             })
 
         console.log(this.state);
+        
 
         return (
             <div>
                 <Title>Report</Title>
                 <Title>Total Meals: {this.state.counter.toLocaleString()}</Title>
+                <div className="div__container container__background">
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleReturnClick}>Return to Reports
@@ -73,6 +74,7 @@ class AdminReportView extends Component {
                             className={classNames(classes.margin, classes.exportButton)}>Export
                         </Button>
                     </CSVLink>
+                </div>
                 </div>
                 <div className={classes.root}>
                     <Table style={{ marginTop: '20px', marginBottom: '50px' }}>
