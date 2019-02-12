@@ -98,8 +98,6 @@ class OnSiteMeal extends Component {
             }
         }
 
-
-
     }
 
     handleChange = name => event => {
