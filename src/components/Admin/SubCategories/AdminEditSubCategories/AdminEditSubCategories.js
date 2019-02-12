@@ -6,31 +6,43 @@ import Title from '../../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-class AdminEditSubCategories extends Component {
+class AdminEditSubCategories extends Component { 
 
     state = {
-        editSubCategory: '',
+        editSubCategory: {
+            subCategory: '',
+        }
     }
 
-    componentWillMount = () => {
-        this.props.dispatch({ type: "FETCH_SUB_CATEGORY" })
-        this.loadSubCategory();
-    }
+      componentDidMount() {
+    this.getSubCategoryData();
+    this.checkData();
+  }
 
-    loadSubCategory = () => {
-        const id = this.props.subCategories;
-        let subCategory = {};
-        this.props.subCategories.forEach(element => {
-            if (element.id === id) {
-                subCategory = element;
-            }
-        });
-        console.log('in loadSubCategory', subCategory);
-        this.setState({
-            editSubCategory: subCategory.category_name,
-            id: id
-        });
+  checkData = () => {
+    if(Object.keys(this.state.editSubCategory).length == 0) {
+        this.props.history.push('/adminEditSubCategories');
     }
+  }
+
+  componentWillMount() {
+    // Redirect the user to the Admin home screen if page is refreshed 
+    if (this.props.subCategories.length === 0) {
+        this.props.history.push('/adminEditSubCategories');
+    }
+}
+
+  getSubCategoryData = () => {
+    // Get id of sub Category
+    let subCategoryId = parseInt(this.props.match.params.id);
+    // Filter to show selected subCategory
+    const result = this.props.subCategories.filter(subCategory => subCategory.id === subCategoryId);
+    this.setState({
+      editSubCategory: {
+        ...result[0]
+      }
+    })
+  }
 
     handleChange = (event) => {
         console.log("in handleChange");
