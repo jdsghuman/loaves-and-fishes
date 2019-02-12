@@ -61,7 +61,6 @@ class AdminAddOutletCategories extends Component {
                 <Title>Add New Category</Title>
                 <FormLabel style={formLabelStyle}>Outlet Category</FormLabel>
                 <TextField
-                    label="Outlet Category"
                     name="Outlet Category"
                     type="text"
                     value={this.state.categoryName}
@@ -78,7 +77,8 @@ class AdminAddOutletCategories extends Component {
                     <Select
                         onChange={this.handleInputChangeFor('selectedSubCategory')}
                         value={this.state.selectedSubCategory}
-                        className={classNames(classes.dropDown)}
+                        className={classNames(classes.textField, classes.dropDown)}
+
                     >
                     {subCategoryList}
                     </Select>
@@ -87,22 +87,24 @@ class AdminAddOutletCategories extends Component {
                 <br/>
                 <FormLabel style={formLabelStyle}>Notes</FormLabel>
                 <TextField
-                    label="Notes"
                     name="Notes"
                     type="text"
                     value={this.state.notes}
                     onChange={this.handleInputChangeFor('notes')}
                     margin="normal"
                     variant="outlined"
-                    className={classes.textField}
                     multiline
                     rows="4"
+                    className={classes.textField}
                 />
                 <br/>
                 <Button 
                     className={classNames(classes.margin, classes.cssRoot)}
-                    style={btnStyle} variant="contained" color="secondary"
-                    onClick={this.handleClick}>Add Category</Button>
+                    style={btnStyle} 
+                    onClick={this.handleClick}>
+                    Add Category
+                    </Button>
+
             </div>
         )
     }
@@ -154,4 +156,5 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default (withStyles(styles)(connect(mapStateToProps)(AdminAddOutletCategories)));
+
+export default withStyles(styles)(connect(mapStateToProps)(AdminAddOutletCategories));

@@ -5,12 +5,7 @@ import swal from "sweetalert";
 
 function* fetchSubCategory() {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-
-        const response = yield axios.get('/api/subcategory', config);
+        const response = yield axios.get('/api/subcategory');
         yield put({ type: 'SET_SUB_CATEGORY', payload: response.data });
     } catch (error) {
         console.log('subCategory GET request failed', error);
@@ -19,16 +14,11 @@ function* fetchSubCategory() {
 
 function* postSubCategory(action) {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-
         yield axios.post('/api/subcategory', action.payload);
         yield put({ type: 'FETCH_SUB_CATEGORY' });
         swal({
-            title: "Sub-Category Successfully Submitted!",
-            text: "Sub-Category is now a selection in the drop down above",
+            title: "Successfully submitted!",
+            text: "Sub-Category will display in drop down when adding a new location.",
             icon: "success",
             button: "Ok"
         });
@@ -37,9 +27,30 @@ function* postSubCategory(action) {
     }
 }
 
+function* deleteSubCategory(action) {
+    try {
+        yield axios.delete(`/api/subcategory/${action.payload}`);
+        yield put({ type: 'FETCH_SUB_CATEGORY' });
+    } catch (error) {
+        console.log('delete saga failed for SUB CATEGORY', error);
+    }
+}
+
+function* updateSubCategory(action) {
+    console.log('updateSubCategory');
+    try {
+        yield axios.put(`/api/subcategory/${action.payload.id}`, action.payload);
+        yield put({ type: 'FETCH_SUB_CATEGORY' });
+    } catch (error) {
+        console.log(`Error with edit sub category saga ${error}`);
+    }
+}
+
 function* subCategorySaga() {
     yield takeEvery('FETCH_SUB_CATEGORY', fetchSubCategory);
     yield takeEvery('ADD_SUB_CATEGORY', postSubCategory);
+    yield takeEvery('DELETE_SUB_CATEGORY', deleteSubCategory);
+    yield takeEvery('UPDATE_SUB_CATEGORY', updateSubCategory);
 }
 
 export default subCategorySaga;
