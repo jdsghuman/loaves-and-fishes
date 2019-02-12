@@ -35,10 +35,10 @@ class AdminAddSubCategories extends Component {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
-                <Title>Add New Sub-Category</Title>
+                <Title>Add New Sub Category</Title>
                 <TextField
-                    label="Outlet Sub-Category"
-                    name="Outlet Sub-Category"
+                    label="Outlet Sub Category"
+                    name="Outlet Sub Category"
                     type="text"
                     value={this.state.subCategory}
                     onChange={this.handleChange}
@@ -51,7 +51,7 @@ class AdminAddSubCategories extends Component {
                 className={classNames(classes.margin, classes.cssRoot)}
                 style={btnStyle} 
                 onClick={this.handleClick}>
-                Add Sub-Category
+                Add Sub Category
                 </Button>
             </div>
         )

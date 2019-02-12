@@ -29,11 +29,10 @@ class AdminManageSubCategories extends Component {
 
 
     removeSubCategories = (id) => {
-        console.log('in remove sub-categories', id)
         // Prompt user with alert before deleting sub-category
         swal({
             title: "Are you sure?",
-            text: "This will permanently delete the sub-category. Are you sure you want to delete this sub-category?",
+            text: "This will permanently delete the Sub Category. Are you sure you want to delete this Sub Category?",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -41,7 +40,7 @@ class AdminManageSubCategories extends Component {
             .then(willDelete => {
                 if (willDelete) {
                     this.props.dispatch({ type: 'DELETE_SUB_CATEGORY', payload: id });
-                    swal("Deleted!", "Sub-Category has been deleted!", "success");
+                    swal("Deleted!", "Sub Category has been deleted!", "success");
                 }
                 else {
                     swal("Deletion has been canceled")
@@ -53,10 +52,10 @@ class AdminManageSubCategories extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <Title>Manage Sub-Category</Title>
+                <Title>Manage Sub Category</Title>
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
-                    onClick={this.handleAddNewSubCategory}>Add New Sub-Category
+                    onClick={this.handleAddNewSubCategory}>Add New Sub Category
         </Button>
                 <div className={classes.root}>
                     <Table >

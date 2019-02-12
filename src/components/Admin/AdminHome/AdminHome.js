@@ -69,7 +69,7 @@ class AdminHome extends Component {
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
-                        style={btnStyle} onClick={this.handleClickManageSubCategories}>Manage Sub-Categories
+                        style={btnStyle} onClick={this.handleClickManageSubCategories}>Manage Sub Categories
                     </Button>
                 </div>
             </div>

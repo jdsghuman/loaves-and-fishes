@@ -73,10 +73,10 @@ class AdminEditSubCategories extends Component {
         console.log('after Click', this.state.updateSubCategory);
         return (
             <div className="div__container container__background--large">
-                <Title>Edit Sub-Category</Title>
+                <Title>Edit Sub Category</Title>
                 <TextField
-                    label="Outlet Sub-Category"
-                    name="Outlet Sub-Category"
+                    label="Outlet Sub Category"
+                    name="Outlet Sub Category"
                     type="text"
                     value={this.state.updateSubCategory.subCategoryUpdated}
                     onChange={this.handleChange}
@@ -90,7 +90,7 @@ class AdminEditSubCategories extends Component {
                     style={btnStyle}
                     color="secondary"
                     onClick={this.handleClick}>
-                    Update Sub-Category
+                    Update Sub Category
                 </Button>
             </div>
         )
