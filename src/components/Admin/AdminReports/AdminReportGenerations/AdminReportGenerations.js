@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import swal from "sweetalert";
 
 class AdminReportGenerations extends Component {
 
@@ -49,7 +50,8 @@ class AdminReportGenerations extends Component {
 
     handleClick = () => {
         if (this.state.startDate === '' || this.state.endDate === '') {
-            alert('Please specify a start and end date to search')
+            // alert('Please specify a start and end date to search')
+            swal("Please specify a start and end date to search");
         } else {
             //Total Meals
             this.props.dispatch({ type: 'FETCH_TOTAL', payload: this.state })
@@ -111,6 +113,11 @@ class AdminReportGenerations extends Component {
             }
             //Demographic Reports
             else if(this.state.reportType === 4){
+                if (this.state.reportType !== '' &&
+                    this.state.selectedGender === '' && this.state.selectedRace === '' &&
+                    this.state.selectedAge === ''){
+                    swal("Please specify a demographic to search", "(gender, race, or age)");
+                    }
                 if (this.state.reportType !== '' && this.state.selectedLocation === '' &&
                 this.state.selectedGender !== '' && this.state.selectedRace === '' &&
                 this.state.selectedAge === ''){
@@ -188,6 +195,19 @@ class AdminReportGenerations extends Component {
         }
     }
 
+    handleClear=()=>{
+        this.setState({
+                reportType: 1,
+                startDate: '',
+                endDate: '',
+                selectedLocation: '',
+                selectedCategory: '',
+                selectedGender: '',
+                selectedRace: '',
+                selectedAge: '',
+        })
+    }
+
     render() {
         const { classes } = this.props;
 
@@ -252,29 +272,29 @@ class AdminReportGenerations extends Component {
                         <Select
                             onChange={this.handleInputChangeFor('selectedGender')}
                             value={this.state.selectedGender}
-                            style={{ height: '40px', width: '150px' }}
+                            style={{ height: '40px', width: '175px', margin: 10}}
                         >
                             {genders}
                         </Select>
                     </FormControl>
-                    <br />
+                    {/* <br /> */}
                     <FormControl >
                         <InputLabel>Race</InputLabel>
                         <Select
                             onChange={this.handleInputChangeFor('selectedRace')}
                             value={this.state.selectedRace}
-                            style={{ height: '40px', width: '150px' }}
+                            style={{ height: '40px', width: '175px', margin: 10 }}
                         >
                             {races}
                         </Select>
                     </FormControl>
-                    <br />
+                    {/* <br /> */}
                     <FormControl >
                         <InputLabel>Age</InputLabel>
                         <Select
                             onChange={this.handleInputChangeFor('selectedAge')}
                             value={this.state.selectedAge}
-                            style={{ height: '40px', width: '150px' }}
+                            style={{ height: '40px', width: '175px', margin: 10 }}
                         >
                             {ages}
                         </Select>
@@ -283,7 +303,7 @@ class AdminReportGenerations extends Component {
         }
 
         return (
-            <div className="div__container container__background">
+            <div className="div__container container__background--large">
                 <Title>Reports</Title>
                 <FormControl >
                     <InputLabel>Report Type</InputLabel>
@@ -311,28 +331,38 @@ class AdminReportGenerations extends Component {
                 </FormControl>
                 <br />
                 {optionDisplay}
-                <p>From</p>
+                <br/>
                 <TextField
+                    label="Start Date"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     name="Start Date"
                     type="date"
                     value={this.state.startDate}
                     onChange={this.handleInputChangeFor('startDate')}
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '175px' }}
+                    style={{ width: '175px', margin: 20 }}
+                    display="inlineBlock"
                 />
-                <p>To</p>
                 <TextField
+                    label="End Date"
+                    InputLabelProps={{
+                        shrink: true,
+                    }}
                     name="End Date"
                     type="date"
                     value={this.state.endDate}
                     onChange={this.handleInputChangeFor('endDate')}
                     margin="normal"
                     variant="outlined"
-                    style={{ width: '175px' }}
+                    style={{ width: '175px', margin: 20 }}
                 />
                 <br />
                 <Button className={classNames(classes.margin, classes.cssRoot)} onClick={this.handleClick} variant="contained" color="primary">Generate Report</Button>
+                <br/>
+                <Button className={classNames(classes.margin, classes.cssRoot)} onClick={this.handleClear}>Clear Search Fields</Button>
             </div>
         )
     }
