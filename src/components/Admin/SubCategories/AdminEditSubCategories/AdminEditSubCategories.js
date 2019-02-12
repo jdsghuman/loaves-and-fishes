@@ -88,6 +88,7 @@ class AdminEditSubCategories extends Component {
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     style={btnStyle}
+                    color="secondary"
                     onClick={this.handleClick}>
                     Update Sub-Category
                 </Button>

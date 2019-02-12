@@ -74,7 +74,7 @@ class AdminManageSubCategories extends Component {
                                     <TableRow key={subCategory.id} >
                                         <TableCell >{subCategory.category_name}</TableCell>
                                         <TableCell >
-                                            <Button size="small" variant="contained" color="secondary" onClick={() => this.editSubCategories(subCategory.id)}><EditIcon /></Button>
+                                            <Button className={classes.editButton} onClick={() => this.editSubCategories(subCategory.id)}><EditIcon /></Button>
                                         </TableCell>
                                         <TableCell >
                                             <Button 
@@ -117,6 +117,13 @@ const styles = theme => ({
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
+        },
+    },
+    editButton: {
+        background: '#b3b428',
+        color: '#ffffff',
+        '&:hover': {
+            backgroundColor: '#939324',
         },
     },
     margin: {

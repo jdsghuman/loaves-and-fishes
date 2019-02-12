@@ -7,7 +7,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 router.get('/', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
         console.log('authenticated', req.isAuthenticated());
-        const queryText = `SELECT * FROM "outlet_sub_category";`;
+        const queryText = `SELECT * FROM "outlet_sub_category"
+                           ORDER BY "category_name" ASC;`;
         pool.query(queryText)
             .then(result => {
                 res.send(result.rows);
