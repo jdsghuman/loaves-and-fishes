@@ -5,8 +5,10 @@ import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 
-class AdminHome extends Component {
 
+
+class AdminHome extends Component {
+    
     handleSubmitUsers = () => {
         this.props.history.push('/adminUser');
     }
@@ -15,6 +17,9 @@ class AdminHome extends Component {
     }
     handleClickManageOutletLocations = () => {
         this.props.history.push('/adminManageOutletLocations');
+    }
+    handleSubmitAdminAddMeals = () => {
+        this.props.history.push('/adminAddMeal');
     }
     handleClickReportGeneration = () => {
         this.props.history.push('/adminReportGeneration');
@@ -27,8 +32,6 @@ class AdminHome extends Component {
     render() {
         const { classes } = this.props;
         return (
-
-            
                 // <Button variant="contained" color="primary" onClick={this.handleClickReportGeneration}>Report Generation </Button>
 
             <div className="div__container container__background--large">
@@ -60,6 +63,12 @@ class AdminHome extends Component {
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
+                        style={btnStyle} onClick={this.handleSubmitAdminAddMeals}>Add Meal
+                    </Button>
+                </div>
+                <div style={divStyle}>
+                    <Button
+                        className={classNames(classes.margin, classes.cssRoot)}
                         style={btnStyle} onClick={this.handleClickManageSubCategories}>Manage Sub-Categories
                     </Button>
                 </div>
@@ -71,6 +80,7 @@ class AdminHome extends Component {
 const mapReduxStateToProps = (reduxStore) => ({
     reduxStore
 })
+
 
 const divStyle = {
     display: 'inline-block',
@@ -102,3 +112,4 @@ const styles = theme => ({
 });
 
 export default withStyles(styles)(connect(mapReduxStateToProps)(AdminHome));
+

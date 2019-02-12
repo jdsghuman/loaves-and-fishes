@@ -26,6 +26,8 @@ import AdminManageOutletCategories from '../Admin/Categories/AdminManageOutletCa
 import AdminAddOutletCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+import AdminAddMeal from '../Admin/AdminAddMeals/AdminAddMeal/AdminAddMeal';
+
 import AdminReportGenerations from '../Admin/AdminReports/AdminReportGenerations/AdminReportGenerations';
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -126,6 +128,11 @@ class App extends Component {
                 component={AdminAddLocations}
               />
               <AdminRoute
+              exact
+              path="/adminAddMeal"
+              component={AdminAddMeal}
+             />
+              <AdminRoute
                 exact
                 path="/adminManageOutletLocations"
                 component={AdminManageOutletLocations}
@@ -152,7 +159,7 @@ class App extends Component {
               />
               <AdminRoute
                 exact
-                path="/adminEditSubCategories"
+                path="/adminEditSubCategories/:id"
                 component={AdminEditSubCategories}
               />
               {/* If none of the other routes matched, we will show a 404. */}

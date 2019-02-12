@@ -37,11 +37,12 @@ function* deleteSubCategory(action) {
 }
 
 function* updateSubCategory(action) {
+    console.log('updateSubCategory');
     try {
-        yield axios.put(`/api/subcategory/${action.payload}`);
+        yield axios.put(`/api/subcategory/${action.payload.id}`, action.payload);
         yield put({ type: 'FETCH_SUB_CATEGORY' });
     } catch (error) {
-        console.log('put saga failed for SUB CATEGORY', error);
+        console.log(`Error with edit sub category saga ${error}`);
     }
 }
 

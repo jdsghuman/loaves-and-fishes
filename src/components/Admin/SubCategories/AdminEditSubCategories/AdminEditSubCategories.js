@@ -5,66 +5,72 @@ import Button from '@material-ui/core/Button';
 import Title from '../../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import swal from 'sweetalert';
 
-class AdminEditSubCategories extends Component { 
+class AdminEditSubCategories extends Component {
 
     state = {
-        editSubCategory: {
-            subCategory: '',
+        updateSubCategory: {
+            subCategoryUpdated: '',
         }
     }
 
-      componentDidMount() {
-    this.getSubCategoryData();
-    this.checkData();
-  }
-
-  checkData = () => {
-    if(Object.keys(this.state.editSubCategory).length == 0) {
-        this.props.history.push('/adminEditSubCategories');
+    checkData = () => {
+        if (Object.keys(this.state.updateSubCategory).length == 0) {
+            this.props.history.push('/admin');
+        }
     }
-  }
 
-  componentWillMount() {
-    // Redirect the user to the Admin home screen if page is refreshed 
-    if (this.props.subCategories.length === 0) {
-        this.props.history.push('/adminEditSubCategories');
+    componentDidMount() {
+        this.getSubCategoryData();
+        this.checkData();
     }
-}
 
-  getSubCategoryData = () => {
-    // Get id of sub Category
-    let subCategoryId = parseInt(this.props.match.params.id);
-    // Filter to show selected subCategory
-    const result = this.props.subCategories.filter(subCategory => subCategory.id === subCategoryId);
-    this.setState({
-      editSubCategory: {
-        ...result[0]
-      }
-    })
-  }
+    componentWillMount() {
+        // Redirect the user to the Admin home screen if page is refreshed 
+        if (this.props.subCategories.length === 0) {
+            this.props.history.push('/admin');
+        }
+    }
 
-    handleChange = (event) => {
+    getSubCategoryData = () => {
+        // Get id of sub Category
+        let subCategoryId = parseInt(this.props.match.params.id);
+        // Filter to show selected subCategory
+        const result = this.props.subCategories.filter(subCategory => subCategory.id === subCategoryId);
+        this.setState({
+            updateSubCategory: {
+                ...result[0]
+            }
+        })
+    }
+
+    handleChange = event => {
         console.log("in handleChange");
         this.setState({
-            ...this.state,
-            editSubCategory: event.target.value,
+            updateSubCategory: {
+                ...this.state.updateSubCategory,
+                subCategoryUpdated: event.target.value,
+            }
         });
     };
 
+
     handleClick = event => {
-        event.preventDefault();
-        console.log('in handleClick');
-        this.props.dispatch({ type: "EDIT_SUB_CATEGORY", payload: this.state });
-        this.setState({
-            ...this.state,
-            editSubCategory: this.props.subCategories,
+        console.log('in handleClick', this.state.updateSubCategory);
+        this.props.dispatch({ type: "UPDATE_SUB_CATEGORY", payload: this.state.updateSubCategory });
+        swal({
+            title: `Updated Sub Category`,
+            text: "Sub Category successfully updated",
+            icon: "success",
+            buttons: "Ok",
         })
         this.props.history.push('/adminManageSubCategories');
     }
 
     render() {
         const { classes } = this.props;
+        console.log('after Click', this.state.updateSubCategory);
         return (
             <div className="div__container container__background--large">
                 <Title>Edit Sub-Category</Title>
@@ -72,7 +78,7 @@ class AdminEditSubCategories extends Component {
                     label="Outlet Sub-Category"
                     name="Outlet Sub-Category"
                     type="text"
-                    value={this.state.editSubCategory}
+                    value={this.state.updateSubCategory.subCategoryUpdated}
                     onChange={this.handleChange}
                     margin="normal"
                     variant="outlined"

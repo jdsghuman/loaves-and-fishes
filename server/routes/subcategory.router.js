@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 
 // Get all sub-categories
 router.get('/', rejectUnauthenticated, (req, res) => {
-    if (req.isAuthenticated()) {
+    if (req.user.admin) {
         console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT * FROM "outlet_sub_category";`;
         pool.query(queryText)
@@ -60,14 +60,16 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 // Update outlet sub-category
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
-        const reqId = req.params.id;
+        const subCategoryId = req.params.id;
+        console.log('subcategory id ----', subCategoryId);
         const subCategoryToUpdate = req.body;
+        console.log('checking req.body', subCategoryToUpdate);
         const queryText = `UPDATE "outlet_sub_category" 
                            SET "category_name" = $1
-                           WHERE "id" = $1;`;
+                           WHERE "id" = $2;`;
         const queryValues = [
-            subCategoryToUpdate.category_name, 
-            reqId
+            subCategoryToUpdate.subCategoryUpdated, 
+            subCategoryId
         ];
         pool.query(queryText, queryValues)
             .then((result) => {

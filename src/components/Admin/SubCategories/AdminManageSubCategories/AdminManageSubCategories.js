@@ -23,11 +23,12 @@ class AdminManageSubCategories extends Component {
         this.props.history.push('/adminAddSubCategories');
     }
 
-    editAdminSubCategories = () => {
-        this.props.history.push('/adminEditSubCategories');
+    editSubCategories = (id) => {
+        this.props.history.push(`/adminEditSubCategories/${id}`);
     }
 
-    removeAdminSubCategories = (id) => {
+
+    removeSubCategories = (id) => {
         console.log('in remove sub-categories', id)
         // Prompt user with alert before deleting sub-category
         swal({
@@ -73,13 +74,13 @@ class AdminManageSubCategories extends Component {
                                     <TableRow key={subCategory.id} >
                                         <TableCell >{subCategory.category_name}</TableCell>
                                         <TableCell >
-                                            <Button size="small" variant="contained" color="secondary" onClick={() => this.editAdminSubCategories(subCategory.id)}><EditIcon /></Button>
+                                            <Button size="small" variant="contained" color="secondary" onClick={() => this.editSubCategories(subCategory.id)}><EditIcon /></Button>
                                         </TableCell>
                                         <TableCell >
                                             <Button 
                                                 className={classNames(classes.margin, classes.cssRoot)}
                                                 style={btnStyle}
-                                                onClick={() => this.removeAdminSubCategories(subCategory.id)}>
+                                                onClick={() => this.removeSubCategories(subCategory.id)}>
                                                 <DeleteIcon/>
                                                 </Button>
                                         </TableCell>
