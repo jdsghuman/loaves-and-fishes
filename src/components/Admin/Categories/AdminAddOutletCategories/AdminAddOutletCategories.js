@@ -6,9 +6,10 @@ import Title from '../../../Title/Title';
 import moment from 'moment';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-import AdminAddSubCategories from '../AdminAddSubCategories/AdminAddSubCategories';
+import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
 class AdminAddOutletCategories extends Component {
 
@@ -46,6 +47,7 @@ class AdminAddOutletCategories extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         let subCategoryList =
             this.props.subCategory.map(subCategories => {
                 return (
@@ -55,10 +57,10 @@ class AdminAddOutletCategories extends Component {
             console.log('after Click', this.state);
             
         return (
-            <div className="div__container container__background" style={style}>
+            <div className="div__container container__background--large">
                 <Title>Add New Category</Title>
+                <FormLabel style={formLabelStyle}>Outlet Category</FormLabel>
                 <TextField
-                    label="Outlet Category"
                     name="Outlet Category"
                     type="text"
                     value={this.state.categoryName}
@@ -66,48 +68,77 @@ class AdminAddOutletCategories extends Component {
                     margin="normal"
                     variant="outlined"
                     color="secondary"
-                    style={spacing}
+                    className={classes.textField}
                 />
+                <br/>
+                <br/>
                 <FormControl >
-                    <InputLabel>Sub-Category</InputLabel>
+                    <FormLabel style={formLabelStyle}>Sub-Category</FormLabel>
                     <Select
                         onChange={this.handleInputChangeFor('selectedSubCategory')}
                         value={this.state.selectedSubCategory}
-                        style={{ height: '47px', width: '250px' }}
+                        className={classNames(classes.textField, classes.dropDown)}
                     >
                     {subCategoryList}
                     </Select>
                 </FormControl>
                 <br/>
+                <br/>
+                <FormLabel style={formLabelStyle}>Notes</FormLabel>
                 <TextField
-                    label="Notes"
                     name="Notes"
                     type="text"
                     value={this.state.notes}
                     onChange={this.handleInputChangeFor('notes')}
                     margin="normal"
                     variant="outlined"
-                    style={spacing}
                     multiline
                     rows="4"
+                    className={classes.textField}
                 />
                 <br/>
-                <Button style={btnStyle} variant="contained" color="secondary" onClick={this.handleClick}>Add Category</Button>
-                <AdminAddSubCategories/>
+                <Button 
+                    className={classNames(classes.margin, classes.cssRoot)}
+                    style={btnStyle} 
+                    onClick={this.handleClick}>
+                    Add Category
+                    </Button>
             </div>
         )
     }
 }
 
-const style = {
-    width: '70%',
-    marginTop: '7em'
-}
+const styles = theme => ({
+    root: {
+        width: '100%',
+        marginTop: theme.spacing.unit * 3,
+        overflowX: 'auto',
+    },
+    margin: {
+        margin: theme.spacing.unit,
+    },
+    cssRoot: {
+        color: theme.palette.getContrastText('#98223e'),
+        backgroundColor: '#98223e',
+        '&:hover': {
+            backgroundColor: '#6a172b',
+        },
+    },
+    textField: {
+        backgroundColor: '#ffffff',
+        margin: '5px'
+    },
+    dropDown: {
+        width: '195px',
+        height: '50px'
+    }
+});
 
-const spacing = {
-    margin: '0.5em',
-    backgroundColor: '#ffffff',
-    width: '30%'
+const formLabelStyle = {
+    display: 'block',
+    marginBottom: '0',
+    paddingBottom: '0',
+    color: '#98223e'
 }
 
 const btnStyle = {
@@ -120,4 +151,4 @@ const mapStateToProps = (reduxStore) => {
     }
 }
 
-export default connect(mapStateToProps)(AdminAddOutletCategories);
+export default withStyles(styles)(connect(mapStateToProps)(AdminAddOutletCategories));

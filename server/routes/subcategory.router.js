@@ -44,7 +44,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
         const reqId = req.params.id;
         console.log('route id: ', reqId);
-        // const queryText = `DELETE FROM RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `DELETE FROM "outlet_sub_category" WHERE id = $1;`;
         pool.query(queryText, [reqId])
             .then(result => {
                 res.sendStatus(204);
@@ -62,11 +62,11 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
         const reqId = req.params.id;
         const subCategoryToUpdate = req.body;
-        // const queryText = `UPDATE RYAN MUNDY PLEASE UPDATE;`;
+        const queryText = `UPDATE "outlet_sub_category" 
+                           SET "category_name" = $1
+                           WHERE "id" = $1;`;
         const queryValues = [
-            subCategoryToUpdate.category_name, // update with database column name 
-            subCategoryToUpdate.sub_category, // update with database column name 
-            subCategoryToUpdate.notes, // update with database column name 
+            subCategoryToUpdate.category_name, 
             reqId
         ];
         pool.query(queryText, queryValues)
