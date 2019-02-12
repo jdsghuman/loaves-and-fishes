@@ -9,6 +9,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import swal from "sweetalert";
 
 class AdminAddMeal extends Component {
 
@@ -94,7 +95,23 @@ class AdminAddMeal extends Component {
                 time: '',
                 location: ''
             })
-            this.props.history.push('/admin');
+            swal({
+                title: "Are you sure?",
+                text: "This will permanently submit the meal count. Are you sure you want to submit this meal count?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+                .then(willSubmit => {
+                  if (willSubmit) {
+                    this.props.history.push('/admin');
+                    swal("Submited!", "Meal count has been submited!", "success");
+                  }
+                  else {
+                    swal("Submission has been canceled")
+                  }
+                });
+            
     }
     render() {
         let locations =
