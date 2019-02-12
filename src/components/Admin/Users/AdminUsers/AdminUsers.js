@@ -29,25 +29,36 @@ class AdminUsers extends Component {
     this.props.history.push(`/admin/user/${id}`);
   }
 
-  removeUser = (id) => {
+  removeUser = (id, admin) => {
     console.log('in remove user', id);
+    console.log('get admin ', admin);
     // Prompt user with alert before deleting user
-    swal({
-      title: "Are you sure?",
-      text: "This will permanently delete a user. Are you sure you want to delete this user?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-      .then(willDelete => {
-        if (willDelete) {
-          this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-          swal("Deleted!", "User has been deleted!", "success");
-        }
-        else {
-          swal("Deletion has been canceled")
-        }
-      });
+    if(admin) {
+      swal({
+        title: `Admin user`,
+        text: "Admin Users cannot be deleted!",
+        icon: "warning",
+        buttons: "Ok",
+        // dangerMode: true,
+      })
+    } else {
+      swal({
+        title: "Are you sure?",
+        text: "This will permanently delete a user. Are you sure you want to delete this user?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then(willDelete => {
+          if (willDelete) {
+            this.props.dispatch({ type: 'DELETE_USERS', payload: id });
+            swal("Deleted!", "User has been deleted!", "success");
+          }
+          else {
+            swal("Deletion has been canceled")
+          }
+        });
+    }
   }
 
   render() {
@@ -81,7 +92,7 @@ class AdminUsers extends Component {
                   <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
                   <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
-                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id)}><DeleteIcon /></Button></TableCell>
+                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );
             })}
