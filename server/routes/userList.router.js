@@ -39,23 +39,25 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 /**
  * PUT route template 
  */
-// router.put(`/:id`, rejectUnauthenticated, (req, res) => {
-//     if(req.user.admin) {
-//         const personId = req.params.id;
-//         const {admin, status } = req.body;
-//         console.log('in put route', req.body);
-//         const queryText = `UPDATE "person" SET "admin"=$1, "status"=$2 WHERE id=$3;`;
-//         pool.query(queryText, [admin, status, personId ] )
-//         .then(result => {
-//             res.sendStatus(204);
-//         })
-//         .catch( (error) => {
-//             console.log('error in PUT', error);
-//             res.sendStatus(500);
-//         })
-//     } else {
-//         res.sendStatus(403);
-//     }
-// })// end of PUT route
+router.put(`/:id`, rejectUnauthenticated, (req, res) => {
+    if(req.user.admin) {
+        const personId = req.params.id;
+        console.log('person id ----', personId);
+        const newStatus = false;
+        const {name, username, email, status, admin } = req.body;
+        console.log('in put route', req.body);
+        const queryText = `UPDATE "person" SET "name"=$1, "username"=$2, "email"=$3, "status"=$4, "new"=$5, "admin"=$6 WHERE id=$7;`;
+        pool.query(queryText, [name, username, email, status, newStatus, admin, personId])
+        .then(result => {
+            res.sendStatus(204);
+        })
+        .catch( (error) => {
+            console.log(`Error in User update ${error}`);
+            res.sendStatus(500);
+        })
+    } else {
+        res.sendStatus(403);
+    }
+})// end of PUT route
 
 module.exports = router;

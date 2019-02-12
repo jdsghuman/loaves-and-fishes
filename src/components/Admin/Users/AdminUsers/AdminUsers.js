@@ -12,7 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Title from '../../Title/Title';
+import Title from '../../../Title/Title';
 import swal from "sweetalert";
 
 class AdminUsers extends Component {
@@ -26,28 +26,39 @@ class AdminUsers extends Component {
   }
 
   handleEditUser = (id) => {
-    this.props.history.push(`/admin/edituser/${id}`);
+    this.props.history.push(`/admin/user/${id}`);
   }
 
-  removeUser = (id) => {
+  removeUser = (id, admin) => {
     console.log('in remove user', id);
+    console.log('get admin ', admin);
     // Prompt user with alert before deleting user
-    swal({
-      title: "Are you sure?",
-      text: "This will permanently delete a user. Are you sure you want to delete this user?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-      .then(willDelete => {
-        if (willDelete) {
-          this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-          swal("Deleted!", "User has been deleted!", "success");
-        }
-        else {
-          swal("Deletion has been canceled")
-        }
-      });
+    if(admin) {
+      swal({
+        title: `Admin user`,
+        text: "Admin Users cannot be deleted!",
+        icon: "warning",
+        buttons: "Ok",
+        // dangerMode: true,
+      })
+    } else {
+      swal({
+        title: "Are you sure?",
+        text: "This will permanently delete a user. Are you sure you want to delete this user?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then(willDelete => {
+          if (willDelete) {
+            this.props.dispatch({ type: 'DELETE_USERS', payload: id });
+            swal("Deleted!", "User has been deleted!", "success");
+          }
+          else {
+            swal("Deletion has been canceled")
+          }
+        });
+    }
   }
 
   render() {
@@ -61,6 +72,7 @@ class AdminUsers extends Component {
             <TableRow>
               <CustomTableCell>New</CustomTableCell>
               <CustomTableCell>Name</CustomTableCell>
+              <CustomTableCell>Username</CustomTableCell>
               <CustomTableCell>Email</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Role</CustomTableCell>
@@ -75,11 +87,12 @@ class AdminUsers extends Component {
                 <TableRow key={list.id}>
                   <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                   <TableCell >{list.name}</TableCell>
+                  <TableCell >{list.username}</TableCell>
                   <TableCell >{list.email}</TableCell>
                   <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
                   <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
-                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id)}><DeleteIcon /></Button></TableCell>
+                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );
             })}
