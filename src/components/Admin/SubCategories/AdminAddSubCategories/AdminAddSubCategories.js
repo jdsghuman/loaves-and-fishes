@@ -3,18 +3,17 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Title from '../../../Title/Title';
-import FormLabel from '@material-ui/core/FormLabel';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
+import classNames from 'classnames';
 
-class AdminAddOutletCategories extends Component {
+class AdminAddSubCategories extends Component {
 
     state = {
         subCategory: '',
     }
 
-    handleChangeFor = (event) => {
-        console.log("in handleChangeFor");
+    handleChange = (event) => {
+        console.log("in handleChange");
         this.setState({
             ...this.state,
             subCategory: event.target.value,
@@ -29,42 +28,34 @@ class AdminAddOutletCategories extends Component {
             ...this.state,
             subCategory: '',
         })
+        this.props.history.push('/adminManageSubCategories')
     }
 
     render() {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
-                <Title>Add New Sub-Category</Title>
-                <FormLabel style={formLabelStyle}>Sub-Category</FormLabel>
+                <Title>Add New Sub Category</Title>
                 <TextField
-                    label="Outlet Sub-Category"
-                    name="Outlet Sub-Category"
+                    label="Outlet Sub Category"
+                    name="Outlet Sub Category"
                     type="text"
                     value={this.state.subCategory}
-                    onChange={this.handleChangeFor}
+                    onChange={this.handleChange}
                     margin="normal"
                     variant="outlined"
                     className={classes.textField}
                 />
                 <br />
-                <Button className={classNames(classes.margin, classes.cssRoot)}
-                style={btnStyle} variant="contained" color="secondary" 
-                onClick={this.handleClick}>Add Sub-Category</Button>
+                <Button 
+                className={classNames(classes.margin, classes.cssRoot)}
+                style={btnStyle} 
+                onClick={this.handleClick}>
+                Add Sub Category
+                </Button>
             </div>
         )
     }
-}
-
-const formLabelStyle = {
-    display: 'block',
-    marginBottom: '0',
-    paddingBottom: '0',
-    color: '#98223e'
-}
-
-const btnStyle = {
-    marginTop: '10px'
 }
 
 const styles = theme => ({
@@ -89,4 +80,8 @@ const styles = theme => ({
     }
 });
 
-export default withStyles(styles)(connect()(AdminAddOutletCategories));
+const btnStyle = {
+    marginTop: '10px'
+}
+
+export default withStyles(styles)(connect()(AdminAddSubCategories));

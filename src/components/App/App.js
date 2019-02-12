@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 import AboutPage from '../AboutPage/AboutPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -34,8 +34,10 @@ import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
 import { createMuiTheme } from "@material-ui/core/styles";
 import AdminReportView from '../Admin/AdminReports/AdminReportView/AdminReportView';
 import AdminEditUser from '../Admin/Users/AdminEditUser/AdminEditUser';
-
 import './App.css';
+import AdminManageSubCategories from '../Admin/SubCategories/AdminManageSubCategories/AdminManageSubCategories';
+import AdminAddSubCategories from '../Admin/SubCategories/AdminAddSubCategories/AdminAddSubCategories';
+import AdminEditSubCategories from '../Admin/SubCategories/AdminEditSubCategories/AdminEditSubCategories';
 
 const theme = createMuiTheme({
   palette: {
@@ -150,6 +152,21 @@ class App extends Component {
                 exact
                 path="/adminReportView"
                 component={AdminReportView}
+              />
+              <AdminRoute
+                exact
+                path="/adminManageSubCategories"
+                component={AdminManageSubCategories}
+              />
+              <AdminRoute
+                exact
+                path="/adminAddSubCategories"
+                component={AdminAddSubCategories}
+              />
+              <AdminRoute
+                exact
+                path="/adminEditSubCategories/:id"
+                component={AdminEditSubCategories}
               />
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />
