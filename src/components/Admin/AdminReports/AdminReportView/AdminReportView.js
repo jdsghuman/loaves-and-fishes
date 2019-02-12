@@ -62,7 +62,7 @@ class AdminReportView extends Component {
         return (
             <div>
                 <Title>Report</Title>
-                <Title>Total Meals: {this.state.counter}</Title>
+                <Title>Total Meals: {this.state.counter.toLocaleString()}</Title>
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleReturnClick}>Return to Reports

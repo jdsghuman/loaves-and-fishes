@@ -67,8 +67,8 @@ class AdminAddOutletCategories extends Component {
                     onChange={this.handleInputChangeFor('categoryName')}
                     margin="normal"
                     variant="outlined"
-                    color="secondary"
                     className={classes.textField}
+                    color="secondary"
                 />
                 <br/>
                 <br/>
@@ -78,6 +78,7 @@ class AdminAddOutletCategories extends Component {
                         onChange={this.handleInputChangeFor('selectedSubCategory')}
                         value={this.state.selectedSubCategory}
                         className={classNames(classes.textField, classes.dropDown)}
+
                     >
                     {subCategoryList}
                     </Select>
@@ -103,9 +104,21 @@ class AdminAddOutletCategories extends Component {
                     onClick={this.handleClick}>
                     Add Category
                     </Button>
+
             </div>
         )
     }
+}
+
+const formLabelStyle = {
+    display: 'block',
+    marginBottom: '0',
+    paddingBottom: '0',
+    color: '#98223e'
+}
+
+const btnStyle = {
+    marginTop: '10px'
 }
 
 const styles = theme => ({
@@ -129,26 +142,19 @@ const styles = theme => ({
         margin: '5px'
     },
     dropDown: {
-        width: '195px',
-        height: '50px'
+        height: '55px',
+        width: '198px',
+        margin: '5px',
+        backgroundColor: '#ffffff',
+        color: '#cccccc'
     }
 });
-
-const formLabelStyle = {
-    display: 'block',
-    marginBottom: '0',
-    paddingBottom: '0',
-    color: '#98223e'
-}
-
-const btnStyle = {
-    marginTop: '10px'
-}
 
 const mapStateToProps = (reduxStore) => {
     return {
         subCategory: reduxStore.subCategoryReducer
     }
 }
+
 
 export default withStyles(styles)(connect(mapStateToProps)(AdminAddOutletCategories));

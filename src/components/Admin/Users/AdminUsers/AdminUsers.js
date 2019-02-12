@@ -9,9 +9,10 @@ import { withStyles } from '@material-ui/core/styles';
 import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Title from '../../Title/Title';
+import Title from '../../../Title/Title';
 import swal from "sweetalert";
 
 class AdminUsers extends Component {
@@ -24,41 +25,58 @@ class AdminUsers extends Component {
     this.getListofUsers();
   }
 
-  removeUsers = (id) => {
-    console.log('in remove users', id);
+  handleEditUser = (id) => {
+    this.props.history.push(`/admin/user/${id}`);
+  }
+
+  removeUser = (id, admin) => {
+    console.log('in remove user', id);
+    console.log('get admin ', admin);
     // Prompt user with alert before deleting user
-    swal({
-      title: "Are you sure?",
-      text: "This will permanently delete a user. Are you sure you want to delete this user?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-      .then(willDelete => {
-        if (willDelete) {
-          this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-          swal("Deleted!", "User has been deleted!", "success");
-        }
-        else {
-          swal("Deletion has been canceled")
-        }
-      });
+    if(admin) {
+      swal({
+        title: `Admin user`,
+        text: "Admin Users cannot be deleted!",
+        icon: "warning",
+        buttons: "Ok",
+        // dangerMode: true,
+      })
+    } else {
+      swal({
+        title: "Are you sure?",
+        text: "This will permanently delete a user. Are you sure you want to delete this user?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+        .then(willDelete => {
+          if (willDelete) {
+            this.props.dispatch({ type: 'DELETE_USERS', payload: id });
+            swal("Deleted!", "User has been deleted!", "success");
+          }
+          else {
+            swal("Deletion has been canceled")
+          }
+        });
+    }
   }
 
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <Title>Users</Title>
+        <Title>Manage Users</Title>
         <div className={classes.root}>
         <Table >
           <TableHead>
             <TableRow>
               <CustomTableCell>New</CustomTableCell>
               <CustomTableCell>Name</CustomTableCell>
+              <CustomTableCell>Username</CustomTableCell>
               <CustomTableCell>Email</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Role</CustomTableCell>
+              <CustomTableCell>Edit</CustomTableCell>
               <CustomTableCell>Delete</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -69,10 +87,12 @@ class AdminUsers extends Component {
                 <TableRow key={list.id}>
                   <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                   <TableCell >{list.name}</TableCell>
+                  <TableCell >{list.username}</TableCell>
                   <TableCell >{list.email}</TableCell>
                   <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                  <Button size="small" variant="contained" color="secondary" onClick={() => this.removeUsers(list.id)}><DeleteIcon /></Button>
+                  <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
+                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );
             })}
@@ -108,6 +128,20 @@ const styles = theme => ({
       backgroundColor: theme.palette.background.default,
     },
   },
+  editButton: {
+    background: '#b3b428',
+    color: '#ffffff', 
+    '&:hover': {
+      backgroundColor: '#939324',
+  },
+  },
+  deleteButton: {
+    background: '#98223e',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#6a172b',
+  },
+  }
 });
 const mapReduxStateToProps = (reduxStore) => ({
   reduxStore
