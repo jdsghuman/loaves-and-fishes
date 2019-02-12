@@ -132,7 +132,7 @@ class App extends Component {
               exact
               path="/adminAddMeal"
               component={AdminAddMeal}
-             />
+            />
               <AdminRoute
                 exact
                 path="/adminManageOutletLocations"
