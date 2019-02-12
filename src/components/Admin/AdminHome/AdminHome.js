@@ -24,6 +24,9 @@ class AdminHome extends Component {
     handleClickReportGeneration = () => {
         this.props.history.push('/adminReportGeneration');
     }
+    handleClickManageSubCategories = () => {
+        this.props.history.push('/adminManageSubCategories');
+    }
     
 
     render() {
@@ -61,6 +64,12 @@ class AdminHome extends Component {
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
                         style={btnStyle} onClick={this.handleSubmitAdminAddMeals}>Add Meal
+                    </Button>
+                </div>
+                <div style={divStyle}>
+                    <Button
+                        className={classNames(classes.margin, classes.cssRoot)}
+                        style={btnStyle} onClick={this.handleClickManageSubCategories}>Manage Sub Categories
                     </Button>
                 </div>
             </div>
