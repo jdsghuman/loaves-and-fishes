@@ -12,7 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import Title from '../../Title/Title';
+import Title from '../../../Title/Title';
 import swal from "sweetalert";
 
 class AdminUsers extends Component {
@@ -26,7 +26,7 @@ class AdminUsers extends Component {
   }
 
   handleEditUser = (id) => {
-    this.props.history.push(`/admin/edituser/${id}`);
+    this.props.history.push(`/admin/user/${id}`);
   }
 
   removeUser = (id) => {
@@ -61,6 +61,7 @@ class AdminUsers extends Component {
             <TableRow>
               <CustomTableCell>New</CustomTableCell>
               <CustomTableCell>Name</CustomTableCell>
+              <CustomTableCell>Username</CustomTableCell>
               <CustomTableCell>Email</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Role</CustomTableCell>
@@ -75,6 +76,7 @@ class AdminUsers extends Component {
                 <TableRow key={list.id}>
                   <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                   <TableCell >{list.name}</TableCell>
+                  <TableCell >{list.username}</TableCell>
                   <TableCell >{list.email}</TableCell>
                   <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>

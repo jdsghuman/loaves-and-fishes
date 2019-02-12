@@ -20,27 +20,27 @@ function* deleteUsers(action) {
     try{
         yield axios.delete(`/api/userList/${action.payload}`);
         yield put({ type: 'FETCH_USER_LIST' });
-        yield put({ type: 'FETCH_USER', payload: action.payload.user });
+        yield put({ type: 'FETCH_USER', payload: action.payload });
 
     }catch (error){
         console.log('delete saga failed for USERS', error);
     }
 }
 
-// function* editUsers(action) {
-//     console.log('editUsers');
-//     try{
-//         yield axios.put(`/api/userList/${action.payload.id}`, action.payload );
-//         yield put({ type: 'FETCH_USER_LIST' });
-//     }catch (error) {
-//         console.log('problem with edit saga', error)
-//     }
-// }
+function* editUsers(action) {
+    console.log('editUsers');
+    try{
+        yield axios.put(`/api/userList/${action.payload.id}`, action.payload );
+        yield put({ type: 'FETCH_USER_LIST' });
+    }catch (error) {
+        console.log(`Error with edit user saga ${error}`);
+    }
+}
 
 function* userListSaga() {
     yield takeEvery('FETCH_USER_LIST', fetchUserList);
     yield takeEvery('DELETE_USERS', deleteUsers);
-    // yield takeEvery('EDIT_USERS', editUsers);
+    yield takeEvery('EDIT_USER', editUsers);
 }
 
 export default userListSaga;
