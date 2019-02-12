@@ -70,17 +70,8 @@ class AdminEditUser extends Component {
       text: "User successfully updated",
       icon: "success",
       buttons: "Ok",
-      // dangerMode: true,
     })
-      // .then(willDelete => {
-      //   if (willDelete) {
-      //     this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-      //     swal("Deleted!", "User has been deleted!", "success");
-      //   }
-      //   else {
-      //     swal("Deletion has been canceled")
-      //   }
-      // });    
+     
     this.props.history.push('/admin');
   }
 
