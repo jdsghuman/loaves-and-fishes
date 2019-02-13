@@ -29,7 +29,7 @@ class AdminManageOutletCategories extends Component {
   }
 
   editCategories = (id) => {
-    this.props.history.push(`adminEditOutletCategories/:id`);
+    this.props.history.push(`adminEditOutletCategories/${id}`);
   }
 
   removeCategories = (id) => {

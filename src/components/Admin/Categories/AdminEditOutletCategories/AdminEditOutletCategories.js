@@ -16,24 +16,24 @@ import moment from 'moment';
 class AdminEditOutletCategories extends Component {
 
     state = {
-        editCategories: {
-            categoryName: '',
-            selectedSubCategory: '',
+        editCategory: {
+            category_name: '',
+            sub_category: '',
             notes: '',
-            status: '',
-            time: moment().format(),
+            active: '',
+            name: '',
+            date_updated: ''
         }
     }
 
-    checkData = () => {
-        if (Object.keys(this.state.editCategories).length == 0) {
-            this.props.history.push('/admin');
-        }
-    }
+    // checkData = () => {
+    //     if (Object.keys(this.state.editCategory).length == 0) {
+    //         this.props.history.push('/admin');
+    //     }
+    // }
 
     componentDidMount() {
         this.getCategoryData();
-        this.checkData();
         this.props.dispatch({ type: 'FETCH_SUB_CATEGORY' })
     }
 
@@ -50,39 +50,30 @@ class AdminEditOutletCategories extends Component {
         // Filter to show selected category
         const result = this.props.categories.filter(category => category.id === categoryId);
         this.setState({
-            editCategories: {
+            editCategory: {
                 ...result[0]
             }
         })
     }
 
-    handleChange = propertyName => event => {
+    handleChange = event => {
         console.log('in handleChange');
-        
         this.setState({
-            editCategories: {
-                ...this.state.editCategories,
-                [propertyName]: event.target.value
+            editCategory: {
+                ...this.state.editCategory,
+                [event.target.name]: event.target.value,
             }
         })
     }
 
-    handleInputChange = propertyName => event => {
-        console.log('in handleInputChange', this.state, 'why');
-        this.setState({
-            [propertyName]: event.target.value
-        })
-        console.log(this.state);
-    }
-
     handleClick = () => {
-        this.props.dispatch({ type: 'EDIT_CATEGORY', payload: this.state.editCategories });
-        swal({
-            title: `Updated Category`,
-            text: "Category successfully updated",
-            icon: "success",
-            buttons: "Ok",
-        })   
+        this.props.dispatch({ type: 'EDIT_CATEGORY', payload: this.state.editCategory });
+        // swal({
+        //     title: `Updated Category`,
+        //     text: "Category successfully updated",
+        //     icon: "success",
+        //     buttons: "Ok",
+        // })   
         this.props.history.push('/adminManageOutletCategories');
     }
 
@@ -95,9 +86,12 @@ class AdminEditOutletCategories extends Component {
                     <MenuItem key={subcategory.id} value={subcategory.id}>{subcategory.category_name}</MenuItem>
                 );
             })
-            console.log('afterClick', this.state.editCategories);
+            console.log('afterClick', this.state);
         return (
             <div className="div__container container__background--large">
+                {JSON.stringify(this.state)}
+                <p>--------</p>
+                {JSON.stringify(this.props.categories)}
                 <Title>Edit Outlet Category</Title>
                 {/* Edit Category */}
                 <div>
@@ -106,7 +100,7 @@ class AdminEditOutletCategories extends Component {
                         id="outlined-name"
                         label="Category"
                         name="category"
-                        value={this.state.editCategories.categoryName}
+                        value={this.state.editCategory.category_name}
                         onChange={this.handleChange}
                         className={classes.textField}
                         margin="normal"
@@ -123,7 +117,7 @@ class AdminEditOutletCategories extends Component {
                 <FormLabel style={formLabelStyle}>Sub Category</FormLabel>
                 <FormControl className={this.props.classes.formControl}>
                     <Select
-                        value={this.state.editCategories.selectedSubCategory}
+                        value={this.state.editCategory.sub_category}
                         name="sub category"
                         style={{ height: '40px', width: '200px' }}
                         onChange={this.handleChange}
@@ -141,7 +135,7 @@ class AdminEditOutletCategories extends Component {
                         id="outlined-name"
                         label="Notes"
                         name="notes"
-                        value={this.state.editCategories.notes}
+                        value={this.state.editCategory.notes}
                         onChange={this.handleChange}
                         className={classes.textField}
                         margin="normal"
@@ -158,7 +152,7 @@ class AdminEditOutletCategories extends Component {
                 <FormLabel style={formLabelStyle}>Status</FormLabel>
                 <FormControl className={this.props.classes.formControl}>
                     <Select
-                        value={this.state.editCategories.status}
+                        value={this.state.editCategory.active}
                         name="status"
                         style={{ height: '40px', width: '200px' }}
                         onChange={this.handleChange}
@@ -179,7 +173,7 @@ class AdminEditOutletCategories extends Component {
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
-                        onClick={this.handleUpdateUserClick}>Update Outlet Category</Button>
+                        onClick={this.handleClick}>Update Outlet Category</Button>
                 </div>
             </div>
         )
