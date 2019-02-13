@@ -27,19 +27,21 @@ class RegisterPage extends Component {
         },
       });
     } else {
-      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' });
+      this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' }); 
+      this.props.history.push('/home');
+
     }
-    swal({
-      title: "Thank you for registering",
-      text: "Upon approval you will receive an email and be able to log in, contact the administrator with any questions at 612-379-2346",
-      dangerMode: true,
-    })
-      .then(willSubmit => {
-        if (willSubmit) {
-          this.props.history.push('/home');
-          swal("Submited!", "Account created!", "success");
-        }
-      });
+    // swal({
+    //   title: "Thank you for registering",
+    //   text: "Upon approval you will receive an email and be able to log in, contact the administrator with any questions at 612-379-2346",
+    //   dangerMode: true,
+    // })
+    //   .then(willSubmit => {
+    //     if (willSubmit) {
+    //       this.props.history.push('/home');
+    //       swal("Submited!", "Account created!", "success");
+    //     }
+    //   });
   
 
   } // end registerUser
