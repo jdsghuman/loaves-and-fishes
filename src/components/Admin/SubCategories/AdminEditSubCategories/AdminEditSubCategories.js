@@ -10,20 +10,20 @@ import swal from 'sweetalert';
 class AdminEditSubCategories extends Component {
 
     state = {
-        updateSubCategory: {
-            subCategoryUpdated: '',
+        editSubCategory: {
+            category_name: ''
         }
     }
 
     checkData = () => {
-        if (Object.keys(this.state.updateSubCategory).length == 0) {
+        if (Object.keys(this.state.editSubCategory).length == 0) {
             this.props.history.push('/admin');
         }
     }
 
     componentDidMount() {
         this.getSubCategoryData();
-        this.checkData();
+        // this.checkData();
     }
 
     componentWillMount() {
@@ -39,32 +39,25 @@ class AdminEditSubCategories extends Component {
         // Filter to show selected subCategory
         const result = this.props.subCategories.filter(subCategory => subCategory.id === subCategoryId);
         this.setState({
-            updateSubCategory: {
+            editSubCategory: {
                 ...result[0]
             }
         })
     }
 
     handleChange = event => {
-        console.log("in handleChange");
         this.setState({
-            updateSubCategory: {
-                ...this.state.updateSubCategory,
-                subCategoryUpdated: event.target.value,
+            editSubCategory: {
+                ...this.state.editSubCategory,
+                [event.target.name]: event.target.value,
             }
         });
     };
 
 
     handleClick = event => {
-        console.log('in handleClick', this.state.updateSubCategory);
-        this.props.dispatch({ type: "UPDATE_SUB_CATEGORY", payload: this.state.updateSubCategory });
-        swal({
-            title: `Updated Sub Category`,
-            text: "Sub Category successfully updated",
-            icon: "success",
-            buttons: "Ok",
-        })
+        this.props.dispatch({ type: "UPDATE_SUB_CATEGORY", payload: this.state.editSubCategory });
+        
         this.props.history.push('/adminManageSubCategories');
     }
 
@@ -73,22 +66,19 @@ class AdminEditSubCategories extends Component {
         console.log('after Click', this.state.updateSubCategory);
         return (
             <div className="div__container container__background--large">
-                <Title>Edit Sub Category</Title>
+                <Title>Edit Sub Category: <span style={{ color: '#98223e' }}>{this.state.editSubCategory.category_name}</span></Title>
                 <TextField
                     label="Outlet Sub Category"
-                    name="Outlet Sub Category"
+                    name="category_name"
                     type="text"
-                    value={this.state.updateSubCategory.subCategoryUpdated}
+                    value={this.state.editSubCategory.category_name}
                     onChange={this.handleChange}
-                    margin="normal"
-                    variant="outlined"
                     className={classes.textField}
                 />
                 <br />
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     style={btnStyle}
-                    color="secondary"
                     onClick={this.handleClick}>
                     Update Sub Category
                 </Button>
