@@ -16,6 +16,7 @@ const reportRouter = require('./routes/report.router');
 const locationRouter = require('./routes/location.router');
 const categoryRouter = require('./routes/category.router');
 const subCategoryRouter = require('./routes/subcategory.router');
+const templateRouter = require('./routes/template.router');
 const bulkDataRouter = require('./routes/bulkdata.router'); // stretch goal 
 
 // Body parser middleware
@@ -30,6 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 /* Routes */
+app.use('/api/template', templateRouter);
 app.use('/api/userList', userListRouter);
 app.use('/api/user', userRouter);
 app.use('/api/onsite', onSiteRouter);

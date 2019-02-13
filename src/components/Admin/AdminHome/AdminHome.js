@@ -27,17 +27,26 @@ class AdminHome extends Component {
     handleClickManageSubCategories = () => {
         this.props.history.push('/adminManageSubCategories');
     }
-    
+    getCounts = () => {
+       this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT' });
+    }
+    componentDidMount () {
+        this.getCounts();
+    }
+   
 
     render() {
         const { classes } = this.props;
         return (
-                
-            
             <div className="div__container container__background--large">
                 <Title>Admin</Title>
-                <Dashboard/>
-                <Dashboard/>
+                {this.props.reduxStore.dashboard.map((counts)=> {
+                    return (
+                        <Dashboard key={counts.id} count={counts.meal_count}/>
+
+                    )
+                })}
+                <Dashboard />
                 <Dashboard/>
                 <br/>
                 <div style={divStyle}>
