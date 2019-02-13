@@ -9,6 +9,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminEditUser extends Component {
   state = {
@@ -71,6 +72,7 @@ class AdminEditUser extends Component {
     const { classes } = this.props;
     return (
       <div className="div__container container__background--large">
+      <BackButton click={() => this.props.history.goBack()} />
         <Title>Edit User: <span style={{ color: '#98223e' }}>{this.state.editUser.name}</span></Title>
         {/* Edit Name */}
         <div>
