@@ -13,6 +13,7 @@ import swal from "sweetalert";
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
+import BackButton from '../../BackButton/BackButton';
 
 class OnSiteMeal extends Component {
 
@@ -129,19 +130,6 @@ class OnSiteMeal extends Component {
                 }));
             }
           });
-
-        // const confirmed = window.confirm('This will reset the Total Meal Count. Are you sure you want to reset the Total Meal Count?');
-        // if (confirmed) {
-        //     this.setState(prevState => ({
-        //         categorizebyage: !prevState.categorizebyage,
-        //         count: 0,
-        //         selectedGender: null,
-        //         selectedRace: null,
-        //         selectedAge: null,
-        //         genericAdult: 0,
-        //         genericChild: 0,
-        //     }))
-        // }
     }
 
     handleSubmit = () => {
@@ -206,6 +194,7 @@ class OnSiteMeal extends Component {
                 <Title>OnSite Meal</Title>
                 {/* Location display */}
                 <MyLocation />
+                <BackButton click={() => this.props.history.goBack()} />
                 {/* Categorize by age */}
                 <div style={{ textAlign: 'center' }}>
                     <ListItemText style={checkboxStyle} primary="Categorize by age group" />
