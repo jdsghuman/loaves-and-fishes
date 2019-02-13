@@ -9,6 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Title from '../../../Title/Title';
 import moment from 'moment';
 import swal from "sweetalert";
@@ -25,6 +26,10 @@ class AdminManageOutletCategories extends Component {
 
   handleAddCategories = () => {
     this.props.history.push('/adminAddOutletCategories');
+  }
+
+  editCategories = (id) => {
+    this.props.history.push(`adminEditOutletCategories/:id`);
   }
 
   removeCategories = (id) => {
@@ -67,6 +72,7 @@ class AdminManageOutletCategories extends Component {
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Updated By</CustomTableCell>
               <CustomTableCell>Date</CustomTableCell>
+              <CustomTableCell>Edit</CustomTableCell>
               <CustomTableCell>Delete</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -81,7 +87,8 @@ class AdminManageOutletCategories extends Component {
                   <TableCell >{String(category.active)}</TableCell>
                   <TableCell >{category.name}</TableCell>
                   <TableCell >{moment(category.date_updated).format('l')}</TableCell>
-                  <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
+                  <TableCell ><Button className={classes.editButton} onClick={() => this.editCategories(category.id)}><EditIcon /></Button></TableCell>
+                  <TableCell ><Button className={classes.deleteButton} onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );
             })}
@@ -127,6 +134,20 @@ const styles = theme => ({
       backgroundColor: '#6a172b',
     },
   },
+  editButton: {
+    background: '#b3b428',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#939324',
+    },
+  },
+  deleteButton: {
+    background: '#98223e',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#6a172b',
+    },
+  }
 });
 
 const mapReduxStateToProps = (reduxStore) => ({
