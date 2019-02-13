@@ -17,6 +17,14 @@ body {
     padding-right: 18px;
 }
 
+.div__container-table {
+    padding-left: 5px;
+    padding-right: 5px;
+    margin-bottom: 50px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
 .container__background {
     background: #EEE;
     width: 350px;

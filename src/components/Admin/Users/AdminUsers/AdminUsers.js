@@ -34,7 +34,7 @@ class AdminUsers extends Component {
     console.log('in remove user', id);
     console.log('get admin ', admin);
     // Prompt user with alert before deleting user
-    if(admin) {
+    if (admin) {
       swal({
         title: `Admin user`,
         text: "Admin Users cannot be deleted!",
@@ -61,40 +61,42 @@ class AdminUsers extends Component {
     const { classes } = this.props;
     return (
       <div>
-         <BackButton click={() => this.props.history.goBack()} />
+        <BackButton click={() => this.props.history.goBack()} />
         <Title>Manage Users</Title>
-        <div className={classes.root}>
-        <Table >
-          <TableHead>
-            <TableRow>
-              <CustomTableCell>New</CustomTableCell>
-              <CustomTableCell>Name</CustomTableCell>
-              <CustomTableCell>Username</CustomTableCell>
-              <CustomTableCell>Email</CustomTableCell>
-              <CustomTableCell>Status</CustomTableCell>
-              <CustomTableCell>Role</CustomTableCell>
-              <CustomTableCell>Edit</CustomTableCell>
-              <CustomTableCell>Delete</CustomTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.reduxStore.userListReducer.map((list) => {
-              console.log('checking ', list);
-              return (
-                <TableRow key={list.id}>
-                  <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
-                  <TableCell >{list.name}</TableCell>
-                  <TableCell >{list.username}</TableCell>
-                  <TableCell >{list.email}</TableCell>
-                  <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
-                  <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                  <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
-                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
+        <div className="div__container-table">
+          <div className={classes.root}>
+            <Table >
+              <TableHead>
+                <TableRow>
+                  <CustomTableCell>New</CustomTableCell>
+                  <CustomTableCell>Name</CustomTableCell>
+                  <CustomTableCell>Username</CustomTableCell>
+                  <CustomTableCell>Email</CustomTableCell>
+                  <CustomTableCell>Status</CustomTableCell>
+                  <CustomTableCell>Role</CustomTableCell>
+                  <CustomTableCell>Edit</CustomTableCell>
+                  <CustomTableCell>Delete</CustomTableCell>
                 </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+              </TableHead>
+              <TableBody>
+                {this.props.reduxStore.userListReducer.map((list) => {
+                  console.log('checking ', list);
+                  return (
+                    <TableRow key={list.id}>
+                      <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
+                      <TableCell >{list.name}</TableCell>
+                      <TableCell >{list.username}</TableCell>
+                      <TableCell >{list.email}</TableCell>
+                      <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
+                      <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
+                      <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
+                      <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </div>
     )
@@ -119,6 +121,7 @@ const styles = theme => ({
   },
   table: {
     minWidth: 700,
+    marginBottom: '50px'
   },
   row: {
     '&:nth-of-type(odd)': {
@@ -127,17 +130,17 @@ const styles = theme => ({
   },
   editButton: {
     background: '#b3b428',
-    color: '#ffffff', 
+    color: '#ffffff',
     '&:hover': {
       backgroundColor: '#939324',
-  },
+    },
   },
   deleteButton: {
     background: '#98223e',
     color: '#ffffff',
     '&:hover': {
       backgroundColor: '#6a172b',
-  },
+    },
   }
 });
 
