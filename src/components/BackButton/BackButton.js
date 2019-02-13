@@ -34,7 +34,7 @@ const styles = theme => ({
     position: 'absolute',
     left: '0',
     top: '0',
-    marginTop: '70px',
+    marginTop: '78px',
     marginLeft: '4px'
   }
 });
