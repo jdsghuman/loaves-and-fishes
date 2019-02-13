@@ -75,12 +75,11 @@ class AdminAddOutletCategories extends Component {
                 <br/>
                 <br/>
                 <FormControl >
-                    <FormLabel style={formLabelStyle}>Sub-Category</FormLabel>
+                    <FormLabel style={formLabelStyle}>Sub Category</FormLabel>
                     <Select
                         onChange={this.handleInputChangeFor('selectedSubCategory')}
                         value={this.state.selectedSubCategory}
-                        className={classNames(classes.textField, classes.dropDown)}
-
+                        className={classes.dropDown}
                     >
                     {subCategoryList}
                     </Select>
@@ -146,9 +145,7 @@ const styles = theme => ({
     dropDown: {
         height: '55px',
         width: '198px',
-        margin: '5px',
-        backgroundColor: '#ffffff',
-        color: '#cccccc'
+        margin: '5px'
     }
 });
 

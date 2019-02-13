@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const moment = require('moment')
 
 // Get all outlet categories
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let sql = `SELECT "meal_outlet_category".id, "meal_outlet_category".category_name, "meal_outlet_category".sub_category,
               "meal_outlet_category".notes, "meal_outlet_category".active, "meal_outlet_category".updated_by, "meal_outlet_category".date_updated, "outlet_sub_category".category_name AS "sub_category_name", "person"."name" FROM "meal_outlet_category"
               LEFT JOIN "outlet_sub_category" ON "meal_outlet_category".sub_category = "outlet_sub_category".id
