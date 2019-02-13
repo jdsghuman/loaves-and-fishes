@@ -36,6 +36,7 @@ class OnSiteHome extends Component {
 
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_LOCATIONS' });
+        this.props.dispatch({ type: 'FETCH_AGE' });
     }
 
     handleLocationChange = (event) => {
