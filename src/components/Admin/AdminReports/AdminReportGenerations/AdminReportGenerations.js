@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
+import BackButton from '../../../BackButton/BackButton';
+
 
 class AdminReportGenerations extends Component {
 
@@ -304,6 +306,7 @@ class AdminReportGenerations extends Component {
 
         return (
             <div className="div__container container__background--large">
+            <BackButton click={() => this.props.history.goBack()} />
                 <Title>Reports</Title>
                 <FormControl >
                     <InputLabel>Report Type</InputLabel>

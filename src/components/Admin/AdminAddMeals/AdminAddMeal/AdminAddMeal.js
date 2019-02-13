@@ -13,6 +13,7 @@ import swal from "sweetalert";
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Title from '../../../Title/Title';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminAddMeal extends Component {
 
@@ -133,6 +134,7 @@ class AdminAddMeal extends Component {
 
         return (
             <div className="div__container container__background">
+            <BackButton click={() => this.props.history.goBack()} />
                 <Title>Admin - Add Meal</Title>
                 <div style={divStyle}>
                     <FormControl >

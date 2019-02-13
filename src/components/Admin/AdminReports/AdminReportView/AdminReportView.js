@@ -13,6 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import moment from 'moment';
 
+
 class AdminReportView extends Component {
 
     state = {

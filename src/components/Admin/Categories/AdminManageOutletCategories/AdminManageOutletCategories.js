@@ -12,6 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import Title from '../../../Title/Title';
 import moment from 'moment';
 import swal from "sweetalert";
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminManageOutletCategories extends Component {
 
@@ -53,6 +54,7 @@ class AdminManageOutletCategories extends Component {
     return (
       <div>
         <Title>Manage Outlet Categories</Title>
+        <BackButton click={() => this.props.history.goBack()} />
         <Button
           className={classNames(classes.margin, classes.cssRoot)}
           onClick={this.handleAddCategories}>Add New Category Outlet
