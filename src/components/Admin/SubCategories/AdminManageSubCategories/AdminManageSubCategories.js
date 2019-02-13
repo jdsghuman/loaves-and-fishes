@@ -52,7 +52,7 @@ class AdminManageSubCategories extends Component {
         const { classes } = this.props;
         return (
             <div>
-                <Title>Manage Sub Category</Title>
+                <Title>Manage Sub Categories</Title>
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleAddNewSubCategory}>Add New Sub Category
