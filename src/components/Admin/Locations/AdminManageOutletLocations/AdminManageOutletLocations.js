@@ -30,7 +30,7 @@ class AdminManageOutletLocations extends Component {
   }
 
   editLocation = (id) => {
-    this.props.dispatch({type: 'SET_EDIT_LOCATION', payload: id})
+    this.props.dispatch({ type: 'SET_EDIT_LOCATION', payload: id })
     this.props.history.push(`/location/${id}`);
   }
 
@@ -65,52 +65,54 @@ class AdminManageOutletLocations extends Component {
           className={classNames(classes.margin, classes.cssRoot)}
           onClick={this.handleAddNewLocation}>Add New Location
         </Button>
-        <div className={classes.root}>
-          <Table >
-            <TableHead>
-              <TableRow>
-                <CustomTableCell>Meal Location</CustomTableCell>
-                <CustomTableCell>Category Outlet</CustomTableCell>
-                <CustomTableCell>Street</CustomTableCell>
-                <CustomTableCell>City</CustomTableCell>
-                <CustomTableCell>State</CustomTableCell>
-                <CustomTableCell>Zip</CustomTableCell>
-                <CustomTableCell>County</CustomTableCell>
-                <CustomTableCell>Status</CustomTableCell>
-                <CustomTableCell>Notes</CustomTableCell>
-                <CustomTableCell>Updated By</CustomTableCell>
-                <CustomTableCell>Date</CustomTableCell>
-                <CustomTableCell>Edit</CustomTableCell>
-                <CustomTableCell>Delete</CustomTableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {this.props.reduxStore.adminLocationReducer.map((location) => {
-                console.log('checking ', location);
-                return (
-                  <TableRow key={location.id} >
-                    <TableCell >{location.location_name}</TableCell>
-                    <TableCell >{location.category_name}</TableCell>
-                    <TableCell >{location.street_address}</TableCell>
-                    <TableCell >{location.city}</TableCell>
-                    <TableCell >{location.state}</TableCell>
-                    <TableCell >{location.zip}</TableCell>
-                    <TableCell >{location.county}</TableCell>
-                    <TableCell >{location.active ? 'Active' : 'Inactive'}</TableCell>
-                    <TableCell >{location.notes}</TableCell>
-                    <TableCell >{location.name}</TableCell>
-                    <TableCell >{moment(location.date_updated).format('l')}</TableCell>
-                    <TableCell >
-                      <Button className={classes.editButton} onClick={() => this.editLocation(location.id)}><EditIcon /></Button>
-                    </TableCell>
-                    <TableCell >
-                      <Button className={classes.deleteButton} onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
+        <div className="div__container-table">
+          <div className={classes.root}>
+            <Table >
+              <TableHead>
+                <TableRow>
+                  <CustomTableCell>Meal Location</CustomTableCell>
+                  <CustomTableCell>Category Outlet</CustomTableCell>
+                  <CustomTableCell>Street</CustomTableCell>
+                  <CustomTableCell>City</CustomTableCell>
+                  <CustomTableCell>State</CustomTableCell>
+                  <CustomTableCell>Zip</CustomTableCell>
+                  <CustomTableCell>County</CustomTableCell>
+                  <CustomTableCell>Status</CustomTableCell>
+                  <CustomTableCell>Notes</CustomTableCell>
+                  <CustomTableCell>Updated By</CustomTableCell>
+                  <CustomTableCell>Date</CustomTableCell>
+                  <CustomTableCell>Edit</CustomTableCell>
+                  <CustomTableCell>Delete</CustomTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.props.reduxStore.adminLocationReducer.map((location) => {
+                  console.log('checking ', location);
+                  return (
+                    <TableRow key={location.id} >
+                      <TableCell >{location.location_name}</TableCell>
+                      <TableCell >{location.category_name}</TableCell>
+                      <TableCell >{location.street_address}</TableCell>
+                      <TableCell >{location.city}</TableCell>
+                      <TableCell >{location.state}</TableCell>
+                      <TableCell >{location.zip}</TableCell>
+                      <TableCell >{location.county}</TableCell>
+                      <TableCell >{location.active ? 'Active' : 'Inactive'}</TableCell>
+                      <TableCell >{location.notes}</TableCell>
+                      <TableCell >{location.name}</TableCell>
+                      <TableCell >{moment(location.date_updated).format('l')}</TableCell>
+                      <TableCell >
+                        <Button className={classes.editButton} onClick={() => this.editLocation(location.id)}><EditIcon /></Button>
+                      </TableCell>
+                      <TableCell >
+                        <Button className={classes.deleteButton} onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </div>
         </div>
       </div>
     )
@@ -153,17 +155,17 @@ const styles = theme => ({
   },
   editButton: {
     background: '#b3b428',
-    color: '#ffffff', 
+    color: '#ffffff',
     '&:hover': {
       backgroundColor: '#939324',
-  },
+    },
   },
   deleteButton: {
     background: '#98223e',
     color: '#ffffff',
     '&:hover': {
       backgroundColor: '#6a172b',
-  },
+    },
   }
 });
 
