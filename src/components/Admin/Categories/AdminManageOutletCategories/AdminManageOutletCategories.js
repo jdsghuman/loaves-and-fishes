@@ -60,43 +60,47 @@ class AdminManageOutletCategories extends Component {
       <div>
         <Title>Manage Outlet Categories</Title>
         <BackButton click={() => this.props.history.goBack()} />
-        <Button
-          className={classNames(classes.margin, classes.cssRoot)}
-          onClick={this.handleAddCategories}>
-          <AddIcon/>Add New Category Outlet
+        <div className="div__container-table">
+          <div className={classes.root}>
+            <Button
+              className={classNames(classes.margin, classes.cssRoot)}
+              onClick={this.handleAddCategories}>
+              <AddIcon />Add New Category Outlet
         </Button>
-        <div className={classes.root}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <CustomTableCell>Category Name</CustomTableCell>
-              <CustomTableCell>Sub Category</CustomTableCell>
-              <CustomTableCell>Notes</CustomTableCell>
-              <CustomTableCell>Status</CustomTableCell>
-              <CustomTableCell>Updated By</CustomTableCell>
-              <CustomTableCell>Date</CustomTableCell>
-              <CustomTableCell>Edit</CustomTableCell>
-              <CustomTableCell>Delete</CustomTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.reduxStore.categoryReducer.map((category) => {
-              console.log('checking ', category);
-              return (
-                <TableRow key={category.id} >
-                  <TableCell >{category.category_name}</TableCell>
-                  <TableCell >{category.sub_category_name}</TableCell>
-                  <TableCell >{category.notes}</TableCell>
-                  <TableCell >{category.active ? 'Active' : 'Inactive'}</TableCell>
-                  <TableCell >{category.name}</TableCell>
-                  <TableCell >{moment(category.date_updated).format('l')}</TableCell>
-                  <TableCell ><Button className={classes.editButton} onClick={() => this.editCategories(category.id)}><EditIcon /></Button></TableCell>
-                  <TableCell ><Button className={classes.deleteButton} onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+            <div className={classes.root}>
+              <Table>
+                <TableHead>
+                  <TableRow>
+                    <CustomTableCell>Category Name</CustomTableCell>
+                    <CustomTableCell>Sub Category</CustomTableCell>
+                    <CustomTableCell>Notes</CustomTableCell>
+                    <CustomTableCell>Status</CustomTableCell>
+                    <CustomTableCell>Updated By</CustomTableCell>
+                    <CustomTableCell>Date</CustomTableCell>
+                    <CustomTableCell>Edit</CustomTableCell>
+                    <CustomTableCell>Delete</CustomTableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.props.reduxStore.categoryReducer.map((category) => {
+                    console.log('checking ', category);
+                    return (
+                      <TableRow key={category.id} >
+                        <TableCell >{category.category_name}</TableCell>
+                        <TableCell >{category.sub_category_name}</TableCell>
+                        <TableCell >{category.notes}</TableCell>
+                        <TableCell >{category.active ? 'Active' : 'Inactive'}</TableCell>
+                        <TableCell >{category.name}</TableCell>
+                        <TableCell >{moment(category.date_updated).format('l')}</TableCell>
+                        <TableCell ><Button className={classes.editButton} onClick={() => this.editCategories(category.id)}><EditIcon /></Button></TableCell>
+                        <TableCell ><Button className={classes.deleteButton} onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+          </div>
         </div>
       </div>
     )
