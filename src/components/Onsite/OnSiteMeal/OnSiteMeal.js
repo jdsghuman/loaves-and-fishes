@@ -57,7 +57,7 @@ class OnSiteMeal extends Component {
         // Add to Total count
         if (change === 'add') {
             this.setState(prevState => {
-                return { count: prevState.count + 1 }
+                return { count: parseInt(prevState.count) + 1 }
             })
             // Add to Adult count
             if (genericAge === 'adult') {
