@@ -54,7 +54,6 @@ class AdminManageOutletCategories extends Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div>
         <Title>Manage Outlet Categories</Title>
@@ -67,7 +66,7 @@ class AdminManageOutletCategories extends Component {
           <TableHead>
             <TableRow>
               <CustomTableCell>Category Name</CustomTableCell>
-              <CustomTableCell>Sub-Category</CustomTableCell>
+              <CustomTableCell>Sub Category</CustomTableCell>
               <CustomTableCell>Notes</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Updated By</CustomTableCell>
@@ -84,7 +83,7 @@ class AdminManageOutletCategories extends Component {
                   <TableCell >{category.category_name}</TableCell>
                   <TableCell >{category.sub_category_name}</TableCell>
                   <TableCell >{category.notes}</TableCell>
-                  <TableCell >{String(category.active)}</TableCell>
+                  <TableCell >{category.active ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{category.name}</TableCell>
                   <TableCell >{moment(category.date_updated).format('l')}</TableCell>
                   <TableCell ><Button className={classes.editButton} onClick={() => this.editCategories(category.id)}><EditIcon /></Button></TableCell>

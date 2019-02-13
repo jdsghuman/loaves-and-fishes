@@ -99,7 +99,7 @@ class AdminEditOutletCategories extends Component {
                     <TextField
                         id="outlined-name"
                         label="Category"
-                        name="category"
+                        name="category_name"
                         value={this.state.editCategory.category_name}
                         onChange={this.handleChange}
                         className={classes.textField}
@@ -118,11 +118,11 @@ class AdminEditOutletCategories extends Component {
                 <FormControl className={this.props.classes.formControl}>
                     <Select
                         value={this.state.editCategory.sub_category}
-                        name="sub category"
+                        name="sub_category"
                         style={{ height: '40px', width: '200px' }}
                         onChange={this.handleChange}
                         inputProps={{
-                            name: 'sub category',
+                            name: 'sub_category',
                         }}
                     >
                         {subCategoryList}
@@ -153,11 +153,11 @@ class AdminEditOutletCategories extends Component {
                 <FormControl className={this.props.classes.formControl}>
                     <Select
                         value={this.state.editCategory.active}
-                        name="status"
+                        name="active"
                         style={{ height: '40px', width: '200px' }}
                         onChange={this.handleChange}
                         inputProps={{
-                            name: 'status',
+                            name: 'active',
                         }}
                     >
                         <MenuItem value="true">
