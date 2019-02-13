@@ -41,8 +41,8 @@ function* updateSubCategory(action) {
         const response = yield axios.put(`/api/subcategory/${action.payload.id}`, action.payload);
         if(response) {
             swal({
-                title: `Updated Sub Category`,
-                text: "Sub Category successfully updated",
+                title: `Updated Sub Category!`,
+                text: "Sub Category successfully updated.",
                 icon: "success",
                 buttons: "Ok",
             })

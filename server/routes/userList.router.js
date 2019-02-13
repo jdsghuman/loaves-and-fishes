@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
     let sql = `SELECT "person".id, "person"."name", "person".username,
 "person".email, "person".last_location, "person".status,
 "person"."new", "person"."admin"
-FROM "person";`
+FROM "person" ORDER BY "person"."name" ASC;`
     pool.query(sql).then((response) => {
         res.send(response.rows)
     }).catch((error) => {
