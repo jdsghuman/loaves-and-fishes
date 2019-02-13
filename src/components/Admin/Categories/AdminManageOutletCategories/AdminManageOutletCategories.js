@@ -9,9 +9,11 @@ import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Title from '../../../Title/Title';
 import moment from 'moment';
 import swal from "sweetalert";
+import AddIcon from '@material-ui/icons/Add';
 import BackButton from '../../../BackButton/BackButton';
 
 class AdminManageOutletCategories extends Component {
@@ -26,6 +28,10 @@ class AdminManageOutletCategories extends Component {
 
   handleAddCategories = () => {
     this.props.history.push('/adminAddOutletCategories');
+  }
+
+  editCategories = (id) => {
+    this.props.history.push(`adminEditOutletCategories/${id}`);
   }
 
   removeCategories = (id) => {
@@ -50,25 +56,26 @@ class AdminManageOutletCategories extends Component {
 
   render() {
     const { classes } = this.props;
-
     return (
       <div>
         <Title>Manage Outlet Categories</Title>
         <BackButton click={() => this.props.history.goBack()} />
         <Button
           className={classNames(classes.margin, classes.cssRoot)}
-          onClick={this.handleAddCategories}>Add New Category Outlet
+          onClick={this.handleAddCategories}>
+          <AddIcon/>Add New Category Outlet
         </Button>
         <div className={classes.root}>
         <Table>
           <TableHead>
             <TableRow>
               <CustomTableCell>Category Name</CustomTableCell>
-              <CustomTableCell>Sub-Category</CustomTableCell>
+              <CustomTableCell>Sub Category</CustomTableCell>
               <CustomTableCell>Notes</CustomTableCell>
               <CustomTableCell>Status</CustomTableCell>
               <CustomTableCell>Updated By</CustomTableCell>
               <CustomTableCell>Date</CustomTableCell>
+              <CustomTableCell>Edit</CustomTableCell>
               <CustomTableCell>Delete</CustomTableCell>
             </TableRow>
           </TableHead>
@@ -80,10 +87,11 @@ class AdminManageOutletCategories extends Component {
                   <TableCell >{category.category_name}</TableCell>
                   <TableCell >{category.sub_category_name}</TableCell>
                   <TableCell >{category.notes}</TableCell>
-                  <TableCell >{String(category.active)}</TableCell>
+                  <TableCell >{category.active ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{category.name}</TableCell>
                   <TableCell >{moment(category.date_updated).format('l')}</TableCell>
-                  <TableCell ><Button size="small" variant="contained" color="secondary" onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
+                  <TableCell ><Button className={classes.editButton} onClick={() => this.editCategories(category.id)}><EditIcon /></Button></TableCell>
+                  <TableCell ><Button className={classes.deleteButton} onClick={() => this.removeCategories(category.id)}><DeleteIcon /></Button></TableCell>
                 </TableRow>
               );
             })}
@@ -129,6 +137,20 @@ const styles = theme => ({
       backgroundColor: '#6a172b',
     },
   },
+  editButton: {
+    background: '#b3b428',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#939324',
+    },
+  },
+  deleteButton: {
+    background: '#98223e',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#6a172b',
+    },
+  }
 });
 
 const mapReduxStateToProps = (reduxStore) => ({
