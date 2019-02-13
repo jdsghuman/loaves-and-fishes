@@ -45,7 +45,7 @@ class AdminHome extends Component {
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
-                        style={btnStyle} onClick={this.handleSubmitCategories}>Manage Outlet Categories
+                        style={btnStyle} onClick={this.handleSubmitAdminAddMeals}>Add Meal
                     </Button>
                 </div>
                 <div style={divStyle}>
@@ -63,7 +63,7 @@ class AdminHome extends Component {
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
-                        style={btnStyle} onClick={this.handleSubmitAdminAddMeals}>Add Meal
+                        style={btnStyle} onClick={this.handleSubmitCategories}>Manage Outlet Categories
                     </Button>
                 </div>
                 <div style={divStyle}>

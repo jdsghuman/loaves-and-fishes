@@ -61,18 +61,17 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 // Update outlet sub-category
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
-        const subCategoryId = req.params.id;
-        console.log('subcategory id ----', subCategoryId);
+        const subCatId = req.params.id;
+        console.log('subcategory id ----', subCatId);
         const subCategoryToUpdate = req.body;
+        const { category_name } = req.body;
+
         console.log('checking req.body', subCategoryToUpdate);
         const queryText = `UPDATE "outlet_sub_category" 
                            SET "category_name" = $1
                            WHERE "id" = $2;`;
-        const queryValues = [
-            subCategoryToUpdate.subCategoryUpdated, 
-            subCategoryId
-        ];
-        pool.query(queryText, queryValues)
+       
+        pool.query(queryText, [category_name, subCatId])
             .then((result) => {
                 console.log(result);
                 res.sendStatus(201);

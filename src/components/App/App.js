@@ -26,6 +26,7 @@ import AdminManageOutletCategories from '../Admin/Categories/AdminManageOutletCa
 import AdminAddOutletCategories from '../Admin/Categories/AdminAddOutletCategories/AdminAddOutletCategories';
 import AdminAddLocations from '../Admin/Locations/AdminAddLocations/AdminAddLocations';
 import AdminManageOutletLocations from '../Admin/Locations/AdminManageOutletLocations/AdminManageOutletLocations';
+import AdminEditLocation from '../Admin/Locations/AdminEditLocation/AdminEditLocation';
 import AdminAddMeal from '../Admin/AdminAddMeals/AdminAddMeal/AdminAddMeal';
 
 import AdminReportGenerations from '../Admin/AdminReports/AdminReportGenerations/AdminReportGenerations';
@@ -136,6 +137,11 @@ class App extends Component {
                 exact
                 path="/adminManageOutletLocations"
                 component={AdminManageOutletLocations}
+              />
+              <AdminRoute
+                exact
+                path="/location/:id"
+                component={AdminEditLocation}
               />
               <AdminRoute
                 exact

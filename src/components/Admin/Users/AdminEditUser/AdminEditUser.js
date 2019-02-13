@@ -6,11 +6,9 @@ import Title from '../../../Title/Title';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import swal from "sweetalert";
 
 class AdminEditUser extends Component {
   state = {
@@ -25,7 +23,7 @@ class AdminEditUser extends Component {
   }
 
   checkData = () => {
-    if(Object.keys(this.state.editUser).length == 0) {
+    if(Object.keys(this.state.editUser).length === 0) {
       this.props.history.push('/admin');
     }
   }
@@ -65,22 +63,7 @@ class AdminEditUser extends Component {
 
   handleUpdateUserClick = () => {
     this.props.dispatch({ type: 'EDIT_USER', payload: this.state.editUser });
-    swal({
-      title: `Updated user ${this.state.editUser.name}`,
-      text: "User successfully updated",
-      icon: "success",
-      buttons: "Ok",
-      // dangerMode: true,
-    })
-      // .then(willDelete => {
-      //   if (willDelete) {
-      //     this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-      //     swal("Deleted!", "User has been deleted!", "success");
-      //   }
-      //   else {
-      //     swal("Deletion has been canceled")
-      //   }
-      // });    
+    // Redirect user to the Admin home screen
     this.props.history.push('/admin');
   }
 

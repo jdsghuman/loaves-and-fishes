@@ -9,9 +9,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import swal from "sweetalert";
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
+import BackButton from '../../BackButton/BackButton';
 
 class OnSiteMeal extends Component {
 
@@ -57,7 +59,7 @@ class OnSiteMeal extends Component {
         // Add to Total count
         if (change === 'add') {
             this.setState(prevState => {
-                return { count: prevState.count + 1 }
+                return { count: parseInt(prevState.count) + 1 }
             })
             // Add to Adult count
             if (genericAge === 'adult') {
@@ -108,41 +110,57 @@ class OnSiteMeal extends Component {
 
     // Toggle state if Categorize Age checkbox is checked
     handleGenericAgeChange = () => {
-        const confirmed = window.confirm('This will reset the Total Meal Count. Are you sure you want to reset the Total Meal Count?');
-        if (confirmed) {
-            this.setState(prevState => ({
-                categorizebyage: !prevState.categorizebyage,
-                count: 0,
-                selectedGender: null,
-                selectedRace: null,
-                selectedAge: null,
-            }))
-        }
+
+        swal({
+            title: "Group by Age",
+            text: "This will reset the Total Meal Count. Are you sure you want to reset the Total Meal Count?",
+            icon: "info",
+            buttons: ['No', 'Yes'],
+        })
+        .then(groupByAge => {
+            if (groupByAge) {
+                this.setState(prevState => ({
+                    categorizebyage: !prevState.categorizebyage,
+                    count: 0,
+                    selectedGender: null,
+                    selectedRace: null,
+                    selectedAge: null,
+                    genericAdult: 0,
+                    genericChild: 0,
+                }));
+            }
+          });
     }
 
     handleSubmit = () => {
-        const confirmed = window.confirm('Are you sure you want to submit a meal count?');
-        if (confirmed) {
-            // If adults and/or child counts exist
-            if (this.state.genericAdult > 0 || this.state.genericChild > 0) {
-                // Check if generic_adult count exists
-                if (this.state.genericAdult > 0) {
-                    // Send adult count and Total count
-                    this.props.dispatch({ type: 'ADD_MEAL_COUNT_ADULT', payload: this.state });
-                }
-                // Check if generic_child count exists
-                if (this.state.genericChild > 0) {
-                    // Send child count and Total count
-                    this.props.dispatch({ type: 'ADD_MEAL_COUNT_CHILD', payload: this.state });
-                }
-                // No generic Adult/Child value
-            } else {
-                // Send Total count
-                this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
-            }
+        swal({
+            title: "Submit Meal Count",
+            text: "Are you sure you want to submit a meal count?",
+            icon: "info",
+            buttons: ['No', 'Yes'],
+        })
+            .then(addMealCount => {
+                if (addMealCount) {
+                    if (this.state.genericAdult > 0 || this.state.genericChild > 0) {
+                        // Check if generic_adult count exists
+                        if (this.state.genericAdult > 0) {
+                            // Send adult count and Total count
+                            this.props.dispatch({ type: 'ADD_MEAL_COUNT_ADULT', payload: this.state });
+                        }
+                        // Check if generic_child count exists
+                        if (this.state.genericChild > 0) {
+                            // Send child count and Total count
+                            this.props.dispatch({ type: 'ADD_MEAL_COUNT_CHILD', payload: this.state });
+                        }
+                        // No generic Adult/Child value
+                    } else {
+                        // Send Total count
+                        this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
+                    }
 
-            this.clearState();
-        }
+                    this.clearState();
+                }
+            });
 
     }
 
@@ -176,6 +194,7 @@ class OnSiteMeal extends Component {
                 <Title>OnSite Meal</Title>
                 {/* Location display */}
                 <MyLocation />
+                <BackButton click={() => this.props.history.goBack()} />
                 {/* Categorize by age */}
                 <div style={{ textAlign: 'center' }}>
                     <ListItemText style={checkboxStyle} primary="Categorize by age group" />
@@ -220,7 +239,7 @@ class OnSiteMeal extends Component {
                         <TextField
                             value={this.state.genericAdult}
                             type="number"
-                            readOnly="true"
+                            readOnly={true}
                             className={this.props.classes.textField}
                             margin="normal"
                             variant="outlined"
@@ -240,7 +259,7 @@ class OnSiteMeal extends Component {
                             type="number"
                             className={this.props.classes.textField}
                             margin="normal"
-                            readOnly="true"
+                            readOnly={true}
                             variant="outlined"
                             InputProps={{
                                 classes: {
