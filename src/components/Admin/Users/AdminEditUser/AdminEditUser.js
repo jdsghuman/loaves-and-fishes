@@ -81,6 +81,7 @@ class AdminEditUser extends Component {
       <div className="div__container container__background--large">
         <Title>Edit User: <span style={{ color: '#98223e' }}>{this.state.editUser.name}</span></Title>
         {/* Edit Name */}
+        {JSON.stringify(this.state)}
         <div>
           <FormLabel style={formLabelStyle}>Name</FormLabel>
           <TextField

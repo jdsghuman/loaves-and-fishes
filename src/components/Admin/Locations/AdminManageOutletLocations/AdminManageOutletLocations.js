@@ -67,7 +67,7 @@ class AdminManageOutletLocations extends Component {
           <Table >
             <TableHead>
               <TableRow>
-                <CustomTableCell>Meal Locations</CustomTableCell>
+                <CustomTableCell>Meal Location</CustomTableCell>
                 <CustomTableCell>Category Outlet</CustomTableCell>
                 <CustomTableCell>Street</CustomTableCell>
                 <CustomTableCell>City</CustomTableCell>
