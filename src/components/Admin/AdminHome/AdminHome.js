@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-
+import Dashboard from '../Dashboard/Dashboard';
 
 
 class AdminHome extends Component {
@@ -32,10 +32,14 @@ class AdminHome extends Component {
     render() {
         const { classes } = this.props;
         return (
-                // <Button variant="contained" color="primary" onClick={this.handleClickReportGeneration}>Report Generation </Button>
-
+                
+            
             <div className="div__container container__background--large">
                 <Title>Admin</Title>
+                <Dashboard/>
+                <Dashboard/>
+                <Dashboard/>
+                <br/>
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
