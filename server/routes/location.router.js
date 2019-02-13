@@ -3,12 +3,30 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-// Get all outlet locations for onSiteHome
+// Get all outlet locations
 router.get('/', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT * FROM "location"
                            ORDER BY "location"."location_name" ASC;`;
+        pool.query(queryText)
+            .then(result => {
+                res.send(result.rows);
+            }).catch(error => {
+                console.log('in outlet location GET ROUTER error', error);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// Get all outlet locations for onSiteHome
+router.get('/active', rejectUnauthenticated, (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('authenticated', req.isAuthenticated());
+        const queryText = `SELECT * FROM "location"
+        WHERE "location".active = true
+        ORDER BY "location"."location_name" ASC;`;
         pool.query(queryText)
             .then(result => {
                 res.send(result.rows);
