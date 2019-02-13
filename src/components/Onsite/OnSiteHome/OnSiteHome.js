@@ -35,7 +35,7 @@ class OnSiteHome extends Component {
 
 
     componentDidMount() {
-        this.props.dispatch({ type: 'FETCH_LOCATIONS' });
+        this.props.dispatch({ type: 'FETCH_ACTIVE_LOCATIONS' });
         this.props.dispatch({ type: 'FETCH_AGE' });
     }
 
