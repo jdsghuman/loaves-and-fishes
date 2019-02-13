@@ -12,6 +12,7 @@ import TextField from '@material-ui/core/TextField';
 import swal from "sweetalert";
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import Title from '../../../Title/Title';
 
 class AdminAddMeal extends Component {
 
@@ -132,7 +133,7 @@ class AdminAddMeal extends Component {
 
         return (
             <div className="div__container container__background">
-                <h1>Admin - Add Meal</h1>
+                <Title>Admin - Add Meal</Title>
                 <div style={divStyle}>
                     <FormControl >
                         <FormLabel style={formLabelStyle}>Location</FormLabel>
