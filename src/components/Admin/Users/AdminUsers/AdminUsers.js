@@ -39,7 +39,6 @@ class AdminUsers extends Component {
         text: "Admin Users cannot be deleted!",
         icon: "warning",
         buttons: "Ok",
-        // dangerMode: true,
       })
     } else {
       swal({
@@ -52,10 +51,7 @@ class AdminUsers extends Component {
         .then(willDelete => {
           if (willDelete) {
             this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-            swal("Deleted!", "User has been deleted!", "success");
-          }
-          else {
-            swal("Deletion has been canceled")
+            // swal("Deleted!", "User has been deleted!", "success");
           }
         });
     }

@@ -18,7 +18,10 @@ function* fetchUserList() {
 
 function* deleteUsers(action) {
     try {
-        yield axios.delete(`/api/userList/${action.payload}`);
+        const response = yield axios.delete(`/api/userList/${action.payload}`);
+        if(response) {
+            swal("Deleted!", "User has been deleted!", "success");
+        }
         yield put({ type: 'FETCH_USER_LIST' });
         yield put({ type: 'FETCH_USER', payload: action.payload });
 
