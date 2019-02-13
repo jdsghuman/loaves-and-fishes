@@ -85,7 +85,7 @@ class AdminUsers extends Component {
                   <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
                   <TableCell >{list.name}</TableCell>
                   <TableCell >{list.username}</TableCell>
-                  <TableCell >{list.email}</TableCell>
+                  <TableCell ><a href={"mailto:"+list.email}>{list.email}</a></TableCell>
                   <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
                   <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
                   <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
