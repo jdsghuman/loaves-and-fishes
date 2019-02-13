@@ -13,6 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Title from '../../../Title/Title';
 import moment from 'moment';
 import swal from "sweetalert";
+import AddIcon from '@material-ui/icons/Add';
 
 class AdminManageOutletCategories extends Component {
 
@@ -59,7 +60,8 @@ class AdminManageOutletCategories extends Component {
         <Title>Manage Outlet Categories</Title>
         <Button
           className={classNames(classes.margin, classes.cssRoot)}
-          onClick={this.handleAddCategories}>Add New Category Outlet
+          onClick={this.handleAddCategories}>
+          <AddIcon/>Add New Category Outlet
         </Button>
         <div className={classes.root}>
         <Table>

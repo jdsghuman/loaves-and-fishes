@@ -8,7 +8,8 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
  * GET route template
  */
 router.get('/', (req, res) => {
-    let sql = `SELECT * FROM "person";`
+    let sql = `SELECT * FROM "person"
+               ORDER BY "person"."name" ASC;`;
     pool.query(sql).then((response) => {
         res.send(response.rows)
     }).catch((error) => {

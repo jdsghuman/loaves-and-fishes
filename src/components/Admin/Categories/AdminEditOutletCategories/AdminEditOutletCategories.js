@@ -22,7 +22,7 @@ class AdminEditOutletCategories extends Component {
             notes: '',
             active: '',
             name: '',
-            date_updated: ''
+            date_updated: '',
         }
     }
 
@@ -33,8 +33,9 @@ class AdminEditOutletCategories extends Component {
     // }
 
     componentDidMount() {
-        this.getCategoryData();
         this.props.dispatch({ type: 'FETCH_SUB_CATEGORY' })
+        this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' })
+        this.getCategoryData();
     }
 
     componentWillMount() {
@@ -81,7 +82,7 @@ class AdminEditOutletCategories extends Component {
         const { classes } = this.props;
 
         let subCategoryList =
-            this.props.subCategories.map(subcategory => {
+            this.props.subCategoryReducer.map(subcategory => {
                 return (
                     <MenuItem key={subcategory.id} value={subcategory.id}>{subcategory.category_name}</MenuItem>
                 );
@@ -217,7 +218,7 @@ const formLabelStyle = {
 
 const mapStateToProps = store => ({
     categories: store.categoryReducer,
-    subCategories: store.subCategoryReducer
+    subCategoryReducer: store.subCategoryReducer
 })
 
 export default withStyles(styles)(connect(mapStateToProps)(AdminEditOutletCategories));
