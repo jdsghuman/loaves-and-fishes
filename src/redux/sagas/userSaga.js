@@ -24,7 +24,7 @@ function* fetchUser() {
     console.log('User get request failed', error);
     swal({
       title: "Error",
-      text: "You currently do not have access to login. Please contact the administrator at 612-379-2346 to confirm login access, thank you for your patience!",
+      text: "You currently do not have access to login. Please contact Loaves & fishes at grants@loavesandfishesmn.org to confirm login access, thank you for your patience!",
       icon: "warning",
       button: "Ok"
     });

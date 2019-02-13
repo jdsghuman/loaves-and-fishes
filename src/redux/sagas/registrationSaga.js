@@ -12,7 +12,7 @@ function* registerUser(action) {
     yield axios.post('api/user/register', action.payload);
     swal({
       title: "Thank you for registering",
-      text: "Upon approval you will receive an email and be able to log in, contact the administrator with any questions at 612-379-2346",
+      text: "Upon approval you will receive an email and will be able to log in, please contact Loaves & fishes with any questions at grants@loavesandfishesmn.org",
       dangerMode: true,
     })
       .then(willSubmit => {
