@@ -59,37 +59,40 @@ class AdminManageSubCategories extends Component {
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleAddNewSubCategory}>Add New Sub Category
         </Button>
-                <div className={classes.root}>
-                    <Table >
-                        <TableHead>
-                            <TableRow>
-                                <CustomTableCell>Sub Category</CustomTableCell>
-                                <CustomTableCell>Edit</CustomTableCell>
-                                <CustomTableCell>Delete</CustomTableCell>
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {this.props.subCategories.map((subCategory) => {
-                                console.log('checking ', subCategory);
-                                return (
-                                    <TableRow key={subCategory.id} >
-                                        <TableCell >{subCategory.category_name}</TableCell>
-                                        <TableCell >
-                                            <Button className={classes.editButton} onClick={() => this.editSubCategories(subCategory.id)}><EditIcon /></Button>
-                                        </TableCell>
-                                        <TableCell >
-                                            <Button 
-                                                className={classNames(classes.margin, classes.cssRoot)}
-                                                style={btnStyle}
-                                                onClick={() => this.removeSubCategories(subCategory.id)}>
-                                                <DeleteIcon/>
+                <div className="div__container-table">
+                    <div className={classes.root}>
+                        <Table >
+                            <TableHead>
+                                <TableRow>
+                                    <CustomTableCell>Sub Category</CustomTableCell>
+                                    <CustomTableCell>Edit</CustomTableCell>
+                                    <CustomTableCell>Delete</CustomTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {this.props.subCategories.map((subCategory) => {
+                                    console.log('checking ', subCategory);
+                                    return (
+
+                                        <TableRow key={subCategory.id} >
+                                            <TableCell >{subCategory.category_name}</TableCell>
+                                            <TableCell >
+                                                <Button className={classes.editButton} onClick={() => this.editSubCategories(subCategory.id)}><EditIcon /></Button>
+                                            </TableCell>
+                                            <TableCell >
+                                                <Button
+                                                    className={classNames(classes.margin, classes.cssRoot)}
+                                                    style={btnStyle}
+                                                    onClick={() => this.removeSubCategories(subCategory.id)}>
+                                                    <DeleteIcon />
                                                 </Button>
-                                        </TableCell>
-                                    </TableRow>
-                                );
-                            })}
-                        </TableBody>
-                    </Table>
+                                            </TableCell>
+                                        </TableRow>
+                                    );
+                                })}
+                            </TableBody>
+                        </Table>
+                    </div>
                 </div>
             </div>
         )
