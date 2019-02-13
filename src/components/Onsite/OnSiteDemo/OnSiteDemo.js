@@ -9,6 +9,7 @@ import MyLocation from '../../MyLocation/MyLocation';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import './OnSiteDemo.css';
+import BackButton from '../../BackButton/BackButton';
 
 class OnSiteDemo extends Component {
     state = {
@@ -111,6 +112,7 @@ class OnSiteDemo extends Component {
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
                 <MyLocation />
+                <BackButton click={() => this.props.history.goBack()} />
                 <br />
                 <div style={divStyle}>
                     <FormControl>

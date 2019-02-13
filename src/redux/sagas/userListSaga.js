@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
-
+import swal from "sweetalert";
 
 function* fetchUserList() {
     try {
@@ -17,23 +17,40 @@ function* fetchUserList() {
 }
 
 function* deleteUsers(action) {
-    try{
-        yield axios.delete(`/api/userList/${action.payload}`);
+    try {
+        const response = yield axios.delete(`/api/userList/${action.payload}`);
+        if(response) {
+            swal("Deleted!", "User has been deleted!", "success");
+        }
         yield put({ type: 'FETCH_USER_LIST' });
         yield put({ type: 'FETCH_USER', payload: action.payload });
 
-    }catch (error){
+    } catch (error) {
         console.log('delete saga failed for USERS', error);
     }
 }
 
 function* editUsers(action) {
     console.log('editUsers');
-    try{
-        yield axios.put(`/api/userList/${action.payload.id}`, action.payload );
+    try {
+        const response = yield axios.put(`/api/userList/${action.payload.id}`, action.payload);
+        if (response) {
+            swal({
+                title: `Updated user}`,
+                text: "User successfully updated",
+                icon: "success",
+                buttons: "Ok",
+            })
+        }
         yield put({ type: 'FETCH_USER_LIST' });
-    }catch (error) {
+    } catch (error) {
         console.log(`Error with edit user saga ${error}`);
+        swal({
+            title: "Error",
+            text: "User is not updated!",
+            icon: "warning",
+            button: "Ok"
+        });
     }
 }
 
