@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import Title from '../../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminAddSubCategories extends Component {
 
@@ -35,6 +36,7 @@ class AdminAddSubCategories extends Component {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
+            <BackButton click={() => this.props.history.goBack()} />
                 <Title>Add New Sub Category</Title>
                 <TextField
                     label="Outlet Sub Category"

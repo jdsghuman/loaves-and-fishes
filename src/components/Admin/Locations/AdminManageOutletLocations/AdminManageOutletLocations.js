@@ -13,6 +13,7 @@ import moment from 'moment';
 import Title from '../../../Title/Title';
 import swal from "sweetalert";
 import EditIcon from '@material-ui/icons/Edit';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminManageOutletLocations extends Component {
 
@@ -59,6 +60,7 @@ class AdminManageOutletLocations extends Component {
     return (
       <div>
         <Title>Manage Outlet Locations</Title>
+        <BackButton click={() => this.props.history.goBack()} />
         <Button
           className={classNames(classes.margin, classes.cssRoot)}
           onClick={this.handleAddNewLocation}>Add New Location

@@ -12,6 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import Title from '../../../Title/Title';
 import swal from "sweetalert";
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminManageSubCategories extends Component {
 
@@ -53,6 +54,7 @@ class AdminManageSubCategories extends Component {
         return (
             <div>
                 <Title>Manage Sub Category</Title>
+                <BackButton click={() => this.props.history.goBack()} />
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
                     onClick={this.handleAddNewSubCategory}>Add New Sub Category

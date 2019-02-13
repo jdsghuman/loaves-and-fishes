@@ -14,6 +14,7 @@ import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import Title from '../../../Title/Title';
 import swal from "sweetalert";
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminUsers extends Component {
 
@@ -60,6 +61,7 @@ class AdminUsers extends Component {
     const { classes } = this.props;
     return (
       <div>
+         <BackButton click={() => this.props.history.goBack()} />
         <Title>Manage Users</Title>
         <div className={classes.root}>
         <Table >
