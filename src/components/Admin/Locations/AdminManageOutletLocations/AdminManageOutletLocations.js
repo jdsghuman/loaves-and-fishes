@@ -30,7 +30,7 @@ class AdminManageOutletLocations extends Component {
 
   editLocation = (id) => {
     this.props.dispatch({type: 'SET_EDIT_LOCATION', payload: id})
-    this.props.history.push('/adminEditLocation')
+    this.props.history.push(`/location/${id}`);
   }
 
   removeAdminLocations = (id) => {
@@ -67,7 +67,7 @@ class AdminManageOutletLocations extends Component {
           <Table >
             <TableHead>
               <TableRow>
-                <CustomTableCell>Meal Locations</CustomTableCell>
+                <CustomTableCell>Meal Location</CustomTableCell>
                 <CustomTableCell>Category Outlet</CustomTableCell>
                 <CustomTableCell>Street</CustomTableCell>
                 <CustomTableCell>City</CustomTableCell>
@@ -99,10 +99,10 @@ class AdminManageOutletLocations extends Component {
                     <TableCell >{location.name}</TableCell>
                     <TableCell >{moment(location.date_updated).format('l')}</TableCell>
                     <TableCell >
-                      <Button className={classes.editButton} size="small" variant="contained" color="secondary" onClick={() => this.editLocation(location.id)}><EditIcon /></Button>
+                      <Button className={classes.editButton} onClick={() => this.editLocation(location.id)}><EditIcon /></Button>
                     </TableCell>
                     <TableCell >
-                      <Button className={classes.deleteButton} size="small" variant="contained" color="primary" onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
+                      <Button className={classes.deleteButton} onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
                     </TableCell>
                   </TableRow>
                 );
@@ -149,6 +149,20 @@ const styles = theme => ({
       backgroundColor: '#6a172b',
     },
   },
+  editButton: {
+    background: '#b3b428',
+    color: '#ffffff', 
+    '&:hover': {
+      backgroundColor: '#939324',
+  },
+  },
+  deleteButton: {
+    background: '#98223e',
+    color: '#ffffff',
+    '&:hover': {
+      backgroundColor: '#6a172b',
+  },
+  }
 });
 
 const mapReduxStateToProps = (reduxStore) => ({

@@ -37,12 +37,25 @@ function* deleteSubCategory(action) {
 }
 
 function* updateSubCategory(action) {
-    console.log('updateSubCategory');
     try {
-        yield axios.put(`/api/subcategory/${action.payload.id}`, action.payload);
+        const response = yield axios.put(`/api/subcategory/${action.payload.id}`, action.payload);
+        if(response) {
+            swal({
+                title: `Updated Sub Category`,
+                text: "Sub Category successfully updated",
+                icon: "success",
+                buttons: "Ok",
+            })
+        } 
         yield put({ type: 'FETCH_SUB_CATEGORY' });
     } catch (error) {
         console.log(`Error with edit sub category saga ${error}`);
+        swal({
+            title: "Error",
+            text: "Sub-Category not updated!",
+            icon: "warning",
+            button: "Ok"
+        });
     }
 }
 
