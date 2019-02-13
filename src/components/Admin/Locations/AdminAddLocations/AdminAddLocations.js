@@ -6,6 +6,7 @@ import Title from '../../../Title/Title';
 import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminAddLocations extends Component {
 
@@ -50,6 +51,7 @@ class AdminAddLocations extends Component {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
+            <BackButton click={() => this.props.history.goBack()} />
                 <Title>Add Location</Title>
                 <TextField
                     label="Location Name"

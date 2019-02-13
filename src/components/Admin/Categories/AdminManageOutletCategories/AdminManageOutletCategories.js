@@ -14,6 +14,7 @@ import Title from '../../../Title/Title';
 import moment from 'moment';
 import swal from "sweetalert";
 import AddIcon from '@material-ui/icons/Add';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminManageOutletCategories extends Component {
 
@@ -58,6 +59,7 @@ class AdminManageOutletCategories extends Component {
     return (
       <div>
         <Title>Manage Outlet Categories</Title>
+        <BackButton click={() => this.props.history.goBack()} />
         <Button
           className={classNames(classes.margin, classes.cssRoot)}
           onClick={this.handleAddCategories}>

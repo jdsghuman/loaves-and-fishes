@@ -10,6 +10,7 @@ import FormLabel from '@material-ui/core/FormLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminAddOutletCategories extends Component {
 
@@ -58,6 +59,7 @@ class AdminAddOutletCategories extends Component {
             
         return (
             <div className="div__container container__background--large">
+            <BackButton click={() => this.props.history.goBack()} />
                 <Title>Add New Category</Title>
                 <FormLabel style={formLabelStyle}>Outlet Category</FormLabel>
                 <TextField
