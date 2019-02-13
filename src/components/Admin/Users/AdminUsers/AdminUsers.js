@@ -51,7 +51,6 @@ class AdminUsers extends Component {
         .then(willDelete => {
           if (willDelete) {
             this.props.dispatch({ type: 'DELETE_USERS', payload: id });
-            // swal("Deleted!", "User has been deleted!", "success");
           }
         });
     }
@@ -139,6 +138,7 @@ const styles = theme => ({
   },
   }
 });
+
 const mapReduxStateToProps = (reduxStore) => ({
   reduxStore
 })
