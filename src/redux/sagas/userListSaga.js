@@ -36,7 +36,7 @@ function* editUsers(action) {
         const response = yield axios.put(`/api/userList/${action.payload.id}`, action.payload);
         if (response) {
             swal({
-                title: `Updated user}`,
+                title: `Updated user`,
                 text: "User successfully updated",
                 icon: "success",
                 buttons: "Ok",
