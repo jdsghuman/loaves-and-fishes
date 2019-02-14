@@ -5,7 +5,7 @@ import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Dashboard from '../Dashboard/Dashboard';
-import CounterUp from 'counterup'
+// import CountUp from 'react-countup';
 
 
 class AdminHome extends Component {
@@ -49,12 +49,21 @@ class AdminHome extends Component {
             <>
             <div style={{textAlign: 'center', margin: '5px', marginTop: '20px', marginBottom: '20px'}}>
              <Dashboard 
-                count={this.props.reduxStore.dashboardDaily.toLocaleString()}>
-                Meals Today
+                count={this.props.reduxStore.dashboardDaily.toLocaleString() || '0'}>
+                
+                        {/* <CountUp start={initialCount} end={this.props.reduxStore.dashboardDaily} delay={0} >
+                            {({ countUpRef }) => (
+                                <div>
+                                    <span ref={countUpRef} />
+                                </div>
+                            )}
+                        </CountUp> */}
+                        
+                Meals Served Today
                 </Dashboard>
                 <Dashboard
-                count={this.props.reduxStore.dashboardMonthly.toLocaleString()}>
-                Last 30 Days
+                count={this.props.reduxStore.dashboardMonthly.toLocaleString() || '0'}>
+                Meals Served Last 30 Days
                 </Dashboard>
             </div>
             <div className="div__container container__background--large">
