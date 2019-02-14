@@ -1,5 +1,6 @@
 import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
+import swal from 'sweetalert';
 
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
@@ -26,7 +27,13 @@ function* loginUser(action) {
       // The 401 is the error status sent from passport
       // if user isn't in the database or
       // if the username and password don't match in the database
-      yield put({ type: 'LOGIN_FAILED' });
+      swal({
+        title: "Error",
+        text: "Oops! The username and password didn't match. Try again!",
+        icon: "warning",
+        button: "Ok"
+      });
+      // yield put({ type: 'LOGIN_FAILED' });
     } else {
       // Got an error that wasn't a 401
       // Could be anything, but most common cause is the server is not started
