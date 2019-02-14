@@ -27,29 +27,29 @@ class AdminHome extends Component {
     handleClickManageSubCategories = () => {
         this.props.history.push('/adminManageSubCategories');
     }
-
     componentDidMount () {
-        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT' });
+        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' });
+        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' });
     }
    
 
     render() {
         const { classes } = this.props;
         return (
-            <div className="div__container container__background--large">
-                <Title>Admin</Title>
-                <Dashboard 
-                count={this.props.reduxStore.dashboard}>
+            <>
+            <div style={{textAlign: 'center', margin: '5px', marginTop: '20px', marginBottom: '20px'}}>
+             <Dashboard 
+                count={this.props.reduxStore.dashboardDaily}>
                 Meals Today
                 </Dashboard>
                 <Dashboard
-                count={this.props.reduxStore.dashboard}>
+                count={this.props.reduxStore.dashboardMonthly}>
                 30 Days
                 </Dashboard>
-                <Dashboard
-                count={this.props.reduxStore.dashboard}>
-               1 year
-                </Dashboard>
+            </div>
+            <div className="div__container container__background--large">
+                <Title>Admin</Title>
+               
                 <br/>
                 <div style={divStyle}>
                     <Button
@@ -88,6 +88,7 @@ class AdminHome extends Component {
                     </Button>
                 </div>
             </div>
+            </>
         )
     }
 }
