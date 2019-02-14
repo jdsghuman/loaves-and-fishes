@@ -90,9 +90,6 @@ class AdminEditOutletCategories extends Component {
             console.log('afterClick', this.state);
         return (
             <div className="div__container container__background--large">
-                {JSON.stringify(this.state)}
-                <p>--------</p>
-                {JSON.stringify(this.props.categories)}
                 <Title>Edit Outlet Category</Title>
                 {/* Edit Category */}
                 <div>

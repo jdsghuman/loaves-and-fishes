@@ -133,9 +133,9 @@ class AdminAddMeal extends Component {
         console.log(this.state);
 
         return (
-            <div className="div__container container__background">
+            <div className="div__container container__background--large">
             <BackButton click={() => this.props.history.goBack()} />
-                <Title>Admin - Add Meal</Title>
+                <Title>Add Meal</Title>
                 <div style={divStyle}>
                     <FormControl >
                         <FormLabel style={formLabelStyle}>Location</FormLabel>
@@ -150,7 +150,7 @@ class AdminAddMeal extends Component {
                 </div>
                 <div style={divStyle}>
                     <FormControl>
-                        <FormLabel style={formLabelStyle}>Meal Date</FormLabel>
+                        <FormLabel style={formLabelStyle}>Date</FormLabel>
                         <TextField
                             name="Time"
                             type="date"
@@ -158,6 +158,7 @@ class AdminAddMeal extends Component {
                             onChange={this.handleChangeDate('time')}
                             margin="normal"
                             variant="outlined"
+                            className={classes.textField}
                         />
                     </FormControl>
                 </div>
@@ -169,6 +170,7 @@ class AdminAddMeal extends Component {
                         margin="normal"
                         variant="outlined"
                         label="count"
+                        className={classes.textField}
                         onChange={this.handleChange()}
                     />
                 </div>
@@ -233,6 +235,10 @@ const styles = theme => ({
             backgroundColor: '#6a172b',
         },
     },
+        textField: {
+            backgroundColor: '#ffffff',
+            margin: '5px'
+        },
 });
 
 

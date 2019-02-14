@@ -18,7 +18,7 @@ function* postSubCategory(action) {
         yield put({ type: 'FETCH_SUB_CATEGORY' });
         swal({
             title: "Successfully submitted!",
-            text: "Sub-Category will display in drop down when adding a new location.",
+            text: "Sub Category will display in the drop down menu when adding a new location.",
             icon: "success",
             button: "Ok"
         });

@@ -13,6 +13,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import Title from '../../../Title/Title';
 import swal from "sweetalert";
 import BackButton from '../../../BackButton/BackButton';
+import AddIcon from '@material-ui/icons/Add';
 
 class AdminManageSubCategories extends Component {
 
@@ -44,7 +45,7 @@ class AdminManageSubCategories extends Component {
                     swal("Deleted!", "Sub Category has been deleted!", "success");
                 }
                 else {
-                    swal("Deletion has been canceled")
+                    swal("Deletion has been canceled!")
                 }
             });
     }
@@ -57,8 +58,9 @@ class AdminManageSubCategories extends Component {
                 <BackButton click={() => this.props.history.goBack()} />
                 <Button
                     className={classNames(classes.margin, classes.cssRoot)}
-                    onClick={this.handleAddNewSubCategory}>Add New Sub Category
-        </Button>
+                    onClick={this.handleAddNewSubCategory}>
+                    <AddIcon /> Add New Sub Category
+                </Button>
                 <div className="div__container-table">
                     <div className={classes.root}>
                         <Table >

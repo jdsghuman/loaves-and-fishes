@@ -65,7 +65,7 @@ class AdminEditUser extends Component {
   handleUpdateUserClick = () => {
     this.props.dispatch({ type: 'EDIT_USER', payload: this.state.editUser });
     // Redirect user to the Admin home screen
-    this.props.history.push('/admin');
+    this.props.history.push('/adminUser');
   }
 
   render() {

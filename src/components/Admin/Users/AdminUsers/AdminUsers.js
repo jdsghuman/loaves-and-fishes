@@ -63,34 +63,34 @@ class AdminUsers extends Component {
       <div>
         <BackButton click={() => this.props.history.goBack()} />
         <Title>Manage Users</Title>
-        <div className="div__container-table">
-          <div className={classes.root}>
-            <Table >
-              <TableHead>
-                <TableRow>
-                  <CustomTableCell>New</CustomTableCell>
-                  <CustomTableCell>Name</CustomTableCell>
-                  <CustomTableCell>Username</CustomTableCell>
-                  <CustomTableCell>Email</CustomTableCell>
-                  <CustomTableCell>Status</CustomTableCell>
-                  <CustomTableCell>Role</CustomTableCell>
-                  <CustomTableCell>Edit</CustomTableCell>
-                  <CustomTableCell>Delete</CustomTableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.props.reduxStore.userListReducer.map((list) => {
-                  console.log('checking ', list);
-                  return (
-                    <TableRow key={list.id}>
-                      <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
-                      <TableCell >{list.name}</TableCell>
-                      <TableCell >{list.username}</TableCell>
-                      <TableCell >{list.email}</TableCell>
-                      <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
-                      <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
-                      <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
-                      <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
+    <div className="div__container-table">
+      <div className={classes.root}>
+        <Table >
+          <TableHead>
+            <TableRow>
+              <CustomTableCell>New</CustomTableCell>
+              <CustomTableCell>Name</CustomTableCell>
+              <CustomTableCell>Username</CustomTableCell>
+              <CustomTableCell>Email</CustomTableCell>
+              <CustomTableCell>Status</CustomTableCell>
+              <CustomTableCell>Role</CustomTableCell>
+              <CustomTableCell>Edit</CustomTableCell>
+              <CustomTableCell>Delete</CustomTableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {this.props.reduxStore.userListReducer.map((list) => {
+              console.log('checking ', list);
+              return (
+                <TableRow key={list.id}>
+                  <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>
+                  <TableCell >{list.name}</TableCell>
+                  <TableCell >{list.username}</TableCell>
+                  <TableCell ><a href={"mailto:"+list.email}>{list.email}</a></TableCell>
+                  <TableCell >{list.status ? 'Active' : 'Inactive'}</TableCell>
+                  <TableCell >{list.admin ? 'Admin' : 'SC'}</TableCell>
+                  <TableCell><Button className={classes.editButton} onClick={() => this.handleEditUser(list.id)}><EditIcon /></Button></TableCell>
+                  <TableCell><Button className={classes.deleteButton} onClick={() => this.removeUser(list.id, list.admin)}><DeleteIcon /></Button></TableCell>
                     </TableRow>
                   );
                 })}
