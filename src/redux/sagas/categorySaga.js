@@ -49,6 +49,7 @@ function* editCategory(action) {
             })
         }
         yield put({ type: 'FETCH_SUB_CATEGORY' });
+        yield put({ type: 'FETCH_CATEGORY_OUTLET' });
     } catch (error) {
         console.log(`Error with edit sub category saga ${error}`);
         swal({

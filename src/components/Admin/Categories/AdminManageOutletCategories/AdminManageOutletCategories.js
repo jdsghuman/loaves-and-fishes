@@ -76,14 +76,14 @@ class AdminManageOutletCategories extends Component {
                     <CustomTableCell>Notes</CustomTableCell>
                     <CustomTableCell>Status</CustomTableCell>
                     <CustomTableCell>Updated By</CustomTableCell>
-                    <CustomTableCell>Date</CustomTableCell>
+                    <CustomTableCell>Date Updated</CustomTableCell>
                     <CustomTableCell>Edit</CustomTableCell>
                     <CustomTableCell>Delete</CustomTableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {this.props.reduxStore.categoryReducer.map((category) => {
-                    console.log('checking ', category);
+                    // console.log('checking ', category);
                     return (
                       <TableRow key={category.id} >
                         <TableCell >{category.category_name}</TableCell>
