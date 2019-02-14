@@ -40,12 +40,7 @@ class AdminHome extends Component {
         return (
             <div className="div__container container__background--large">
                 <Title>Admin</Title>
-                {this.props.reduxStore.dashboard.map((counts)=> {
-                    return (
-                        <Dashboard key={counts.id} count={counts.meal_count}/>
-
-                    )
-                })}
+                {this.props.reduxStore.dashboard}
                 <Dashboard />
                 <Dashboard/>
                 <br/>

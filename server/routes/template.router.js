@@ -7,11 +7,16 @@ const moment = require('moment');
  * GET route template
  */
 router.get('/', (req, res) => {
-    console.log('authenticated', req.isAuthenticated());
     const queryText = `SELECT SUM("count".meal_count) FROM "count"
     WHERE "count".timestamp BETWEEN $1 AND $2;`;
-    pool.query(queryText)
+      const queryValues = [
+        moment().subtract(1, 'days').calendar(),
+        moment().add(1, 'days').calendar()
+    ];
+    console.log('newCount ---- ', queryValues);
+    pool.query(queryText, queryValues)
         .then(result => {
+            console.log('checking', result.rows);
             res.send(result.rows);
         }).catch(error => {
             console.log('in reports GET error', error);
