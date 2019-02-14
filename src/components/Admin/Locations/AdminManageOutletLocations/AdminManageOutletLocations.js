@@ -26,6 +26,7 @@ class AdminManageOutletLocations extends Component {
 
   componentDidMount() {
     this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' })
+    this.props.dispatch({ type: 'FETCH_LOCATION_OUTLET' })
     this.getAdminLocations();
   }
 

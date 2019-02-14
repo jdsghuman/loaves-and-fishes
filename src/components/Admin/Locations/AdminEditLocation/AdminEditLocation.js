@@ -9,6 +9,11 @@ import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import moment from 'moment';
+import Checkbox from '@material-ui/core/Checkbox';
+import Input from '@material-ui/core/Input';
+import ListItemText from '@material-ui/core/ListItemText';
+import classNames from 'classnames';
+import Button from '@material-ui/core/Button';
 
 class AdminEditLocation extends Component {
     state = {
@@ -23,7 +28,8 @@ class AdminEditLocation extends Component {
             active: '',
             notes: '',
             name: '',
-            date_updated: ''
+            date_updated: '',
+            categories: []
         }
     }
 
@@ -50,12 +56,18 @@ class AdminEditLocation extends Component {
         // Get id of location
         let locationId = parseInt(this.props.match.params.id);
         // Filter to show selected location in fields
-        const result = this.props.adminLocationReducer.filter(location => location.id === locationId);
+        const resultLocation = this.props.adminLocationReducer.filter(location => location.id === locationId);
+
+        // Filter location_outlet for the selected Location that appears in state
+        const resultCategory = this.props.locationOutletReducer.filter(cat => cat.location_id === locationId);
+        // Loop through the location_outlet object and get the outlet_id
+        let categoryInLocation = resultCategory.map(resCat => resCat.outlet_id);
         this.setState({
             editLocation: {
-                ...result[0],
+                ...resultLocation[0],
+                categories: categoryInLocation
             }
-        })
+        });
     }
 
     handleChange = event => {
@@ -67,17 +79,25 @@ class AdminEditLocation extends Component {
         })
     }
 
+    handleClick = () => {
+        this.props.dispatch({ type: 'UPDATE_LOCATION', payload: this.state.editLocation });
+        this.props.dispatch({ type: 'UPDATE_OUTLET_LOCATION', payload: this.state.editLocation });
+        this.props.history.push('/adminManageOutletLocations')
+    }
+
     render() {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
-                <Title>Edit Location: </Title>
+                <Title>Edit Location: <span style={{color: '#98223e'}}>{this.state.editLocation.location_name}</span></Title>
                 <BackButton click={() => this.props.history.goBack()} />
-                {JSON.stringify(this.state)}
+                {/* {JSON.stringify(this.state)}
                 <p>--------</p>
                 {JSON.stringify(this.props.adminLocationReducer)}
                 <p>-----------</p>
                 {JSON.stringify(this.props.categories)}
+                <p>-----------</p>
+                {JSON.stringify(this.props.locationOutletReducer)} */}
                 {/* Edit Name */}
                 <div>
                     <FormLabel style={formLabelStyle}>Location Name</FormLabel>
@@ -212,6 +232,32 @@ class AdminEditLocation extends Component {
                         </MenuItem>
                     </Select>
                 </div>
+                {/* Outlet Categories */}
+                <div>
+                    {/* <InputLabel
+                        style={{ fontWeight: '300' }}
+                        htmlFor="ingredient">
+                        Ingredient
+                    </InputLabel> */}
+                    <FormLabel style={formLabelStyle}>Location Outlet Category</FormLabel>
+                    <Select
+                        multiple
+                        value={this.state.editLocation.categories}
+                        name="categories"
+                        style={{ height: '40px', width: '200px' }}
+                        onChange={this.handleChange}
+                        input={<Input id="select-multiple-checkbox" />}
+                        renderValue={selected => selected.join(', ')}
+                        MenuProps={this.props.MenuProps}
+                    >
+                        {this.props.categories.map(cat => (
+                            <MenuItem key={cat.id} value={cat.id} name={cat.category_name}>
+                                <Checkbox checked={this.state.editLocation.categories.indexOf(cat.id) > -1} />
+                                <ListItemText primary={cat.category_name} />
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </div>
                 {/* Notes */}
                 <div>
                     <FormLabel style={formLabelStyle}>Notes</FormLabel>
@@ -223,6 +269,7 @@ class AdminEditLocation extends Component {
                         className={classes.textField}
                         margin="normal"
                         variant="outlined"
+                        multiline
                         rows="4"
                         InputLabelProps={{
                             style: {
@@ -233,7 +280,7 @@ class AdminEditLocation extends Component {
                     />
                 </div>
                 {/* Updated By */}
-                <div>
+                {/* <div>
                     <FormLabel style={formLabelStyle}>Updated By</FormLabel>
                     <TextField
                         id="outlined-name"
@@ -251,9 +298,9 @@ class AdminEditLocation extends Component {
                             }
                         }}
                     />
-                </div>
+                </div> */}
                 {/* Date Updated */}
-                <div>
+                {/* <div>
                     <FormLabel style={formLabelStyle}>Date Updated</FormLabel>
                     <TextField
                         id="outlined-name"
@@ -271,9 +318,13 @@ class AdminEditLocation extends Component {
                             }
                         }}
                     />
-                </div>
-
                 
+                {/* Get Categories */}
+                <div style={divStyle}>
+                    <Button
+                        className={classNames(classes.margin, classes.cssRoot)}
+                        onClick={this.handleClick}>Update Location</Button>
+                </div>
             </div>
         )
     }
@@ -316,7 +367,8 @@ const formLabelStyle = {
 
 const mapReduxStateToProps = store => ({
     adminLocationReducer: store.adminLocationReducer,
-    categories: store.categoryReducer
+    categories: store.categoryReducer,
+    locationOutletReducer: store.locationOutletReducer
 })
 
 export default withStyles(styles)(connect(mapReduxStateToProps)(AdminEditLocation));

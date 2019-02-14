@@ -16,6 +16,15 @@ function* fetchLocations() {
     }
 }
 
+function* fetchLocationOutlet() {
+    try {
+        const response = yield axios.get('api/location/locationoutlet');
+        yield put({ type: 'SET_LOCATION_OUTLET', payload: response.data });
+    } catch(error) {
+        console.log(`Error on loation_outlet ${error}`);
+    }
+}
+
 function* fetchActiveLocations() {
     try {
         const config = {
@@ -38,10 +47,20 @@ function* addLastLocation(action) {
     }
 }
 
+function* updateLocation(action) {
+    try {
+        yield axios.put('api/location', action.payload);
+    } catch(error) {
+        console.log(`Error in update location ${error}`);
+    }
+}
+
 function* locationSaga() {
     yield takeEvery('FETCH_LOCATIONS', fetchLocations);
     yield takeEvery('SET_LAST_LOCATION', addLastLocation);
     yield takeEvery('FETCH_ACTIVE_LOCATIONS', fetchActiveLocations);
+    yield takeEvery('FETCH_LOCATION_OUTLET', fetchLocationOutlet);
+    yield takeEvery('UPDATE_LOCATION', updateLocation);
 }
 
 export default locationSaga;

@@ -109,7 +109,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 });
 
 // Delete outlet location
-router.delete('/:id', (req, res) => {
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
         console.log('testing delete route', req.params.id);
         let id = req.params.id
@@ -125,7 +125,31 @@ router.delete('/:id', (req, res) => {
     }
 });
 
-// Update outlet location
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+    if(req.user.admin) {
+        const reqId = req.params.id;
+        const updatedLocation = req.body;
+        console.log('updated location...', updatedLocation);
+        console.log('updated id...', reqId);
+        const queryString = `UPDATE "location" SET "location_name"=$1, "street_address"`
+
+    } else {
+        res.sendStatus(403);
+    }
+})
+
+router.get('/locationoutlet', rejectUnauthenticated, (req, res) => {
+    const queryString = `SELECT * FROM "location_outlet";`;
+    pool.query(queryString)
+        .then(result => {
+            console.log('location_outlet ----', result.rows);
+            res.send(result.rows);
+        })
+        .catch(error => {
+            console.log(`Error on GET location_outlet ${error}`);
+            res.sendStatus(500);
+        });
+});
 
 
 module.exports = router;
