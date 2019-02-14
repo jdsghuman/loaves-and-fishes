@@ -8,6 +8,7 @@ import Dashboard from '../Dashboard/Dashboard';
 
 
 class AdminHome extends Component {
+
     
     handleSubmitUsers = () => {
         this.props.history.push('/adminUser');
@@ -30,6 +31,14 @@ class AdminHome extends Component {
     componentDidMount () {
         this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' });
         this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' });
+        this.dailyInterval = setInterval(()=>{this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY'})}, 1000);
+        this.monthInterval = setInterval(() => { this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' }) }, 1000);
+    }
+    
+
+    componentWillUnmount() {
+        clearInterval(this.dailyInterval);
+        clearInterval(this.monthInterval);
     }
    
 
@@ -44,7 +53,7 @@ class AdminHome extends Component {
                 </Dashboard>
                 <Dashboard
                 count={this.props.reduxStore.dashboardMonthly}>
-                30 Days
+                Last 30 Days
                 </Dashboard>
             </div>
             <div className="div__container container__background--large">
