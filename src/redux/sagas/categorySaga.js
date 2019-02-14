@@ -32,8 +32,15 @@ function* deleteCategories(action) {
     try{
         yield axios.delete(`/api/category/${action.payload}`);
         yield put({ type: 'FETCH_CATEGORY_OUTLET' });
+        swal("Deleted!", "Outlet category has been deleted!", "success");
     }catch (error){
         console.log('delete saga failed for CATEGORIES', error);
+        swal({
+            title: "Error",
+            text: "Category not deleted!",
+            icon: "warning",
+            button: "Ok"
+        });
     }
 }
 

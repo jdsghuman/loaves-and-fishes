@@ -46,10 +46,9 @@ class AdminManageOutletCategories extends Component {
       .then(willDelete => {
         if (willDelete) {
           this.props.dispatch({ type: 'DELETE_CATEGORY_OUTLET', payload: id });
-          swal("Deleted!", "Outlet category has been deleted!", "success");
         }
         else {
-          swal("Deletion has been canceled")
+          swal("Deletion has been canceled!")
         }
       });
   }
