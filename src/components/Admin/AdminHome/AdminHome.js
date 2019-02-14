@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-
+import Dashboard from '../Dashboard/Dashboard';
 
 
 class AdminHome extends Component {
@@ -27,15 +27,30 @@ class AdminHome extends Component {
     handleClickManageSubCategories = () => {
         this.props.history.push('/adminManageSubCategories');
     }
-    
+    componentDidMount () {
+        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' });
+        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' });
+    }
+   
 
     render() {
         const { classes } = this.props;
         return (
-                // <Button variant="contained" color="primary" onClick={this.handleClickReportGeneration}>Report Generation </Button>
-
+            <>
+            <div style={{textAlign: 'center', margin: '5px', marginTop: '20px', marginBottom: '20px'}}>
+             <Dashboard 
+                count={this.props.reduxStore.dashboardDaily}>
+                Meals Today
+                </Dashboard>
+                <Dashboard
+                count={this.props.reduxStore.dashboardMonthly}>
+                30 Days
+                </Dashboard>
+            </div>
             <div className="div__container container__background--large">
                 <Title>Admin</Title>
+               
+                <br/>
                 <div style={divStyle}>
                     <Button
                         className={classNames(classes.margin, classes.cssRoot)}
@@ -73,6 +88,7 @@ class AdminHome extends Component {
                     </Button>
                 </div>
             </div>
+            </>
         )
     }
 }

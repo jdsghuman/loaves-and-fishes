@@ -14,7 +14,10 @@ import raceReducer from './raceReducer';
 import totalReducer from './totalReducer';
 import subCategoryReducer from './subCategoryReducer';
 import editLocationReducer from './editLocationReducer';
+import dashboardDaily from './dashboardDaily';
+import dashboardMonthly from './dashboardMonthly';
 import locationOutletReducer from './locationOutletReducer';
+
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -37,6 +40,8 @@ const rootReducer = combineReducers({
   totalReducer,
   subCategoryReducer,
   editLocationReducer,
+  dashboardDaily, 
+  dashboardMonthly,
   locationOutletReducer
 });
 
