@@ -5,11 +5,12 @@ import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Dashboard from '../Dashboard/Dashboard';
+import CounterUp from 'counterup'
 
 
 class AdminHome extends Component {
 
-    
+
     handleSubmitUsers = () => {
         this.props.history.push('/adminUser');
     }
@@ -41,18 +42,18 @@ class AdminHome extends Component {
         clearInterval(this.monthInterval);
     }
    
-
+   
     render() {
         const { classes } = this.props;
         return (
             <>
             <div style={{textAlign: 'center', margin: '5px', marginTop: '20px', marginBottom: '20px'}}>
              <Dashboard 
-                count={this.props.reduxStore.dashboardDaily}>
+                count={this.props.reduxStore.dashboardDaily.toLocaleString()}>
                 Meals Today
                 </Dashboard>
                 <Dashboard
-                count={this.props.reduxStore.dashboardMonthly}>
+                count={this.props.reduxStore.dashboardMonthly.toLocaleString()}>
                 Last 30 Days
                 </Dashboard>
             </div>
