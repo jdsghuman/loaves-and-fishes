@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeLatest } from 'redux-saga/effects';
+import swal from "sweetalert";
 
 // worker Saga: will be fired on "FETCH_USER" actions
 function* fetchUser() {
@@ -21,6 +22,12 @@ function* fetchUser() {
     yield put({ type: 'SET_USER', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
+    // swal({
+    //   title: "Error",
+    //   text: "You currently do not have access to login. Please contact Loaves & fishes at grants@loavesandfishesmn.org to confirm login access, thank you for your patience!",
+    //   icon: "warning",
+    //   button: "Ok"
+    // });
   }
 }
 

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import TextField from '@material-ui/core/TextField';
 import { withStyles } from '@material-ui/core/styles';
+import swal from 'sweetalert';
 
 const styles = theme => ({
   textField: {
@@ -37,7 +38,13 @@ class LoginPage extends Component {
         },
       });
     } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      // this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      swal({
+        title: "Error",
+        text: "Oops! Please enter your username and password!",
+        icon: "warning",
+        button: "Ok"
+      });
     }
   } // end login
 

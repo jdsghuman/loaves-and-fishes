@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Title from '../../../Title/Title';
 import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
 import BackButton from '../../../BackButton/BackButton';
+import FormLabel from '@material-ui/core/FormLabel';
 
 
 class AdminReportGenerations extends Component {
@@ -257,7 +257,8 @@ class AdminReportGenerations extends Component {
         if (this.state.reportType === 1 || this.state.reportType === 2 || this.state.reportType === 3) {
             optionDisplay =
                 <FormControl >
-                    <InputLabel>Outlet Category</InputLabel>
+                    <br/>
+                <FormLabel style={formLabelStyle}>Outlet Category</FormLabel>
                     <Select
                         onChange={this.handleInputChangeFor('selectedCategory')}
                         value={this.state.selectedCategory}
@@ -270,7 +271,8 @@ class AdminReportGenerations extends Component {
             optionDisplay =
                 <div>
                     <FormControl >
-                        <InputLabel>Gender</InputLabel>
+                        <br/>
+                    <FormLabel style={formLabelStyle}>Gender</FormLabel>
                         <Select
                             onChange={this.handleInputChangeFor('selectedGender')}
                             value={this.state.selectedGender}
@@ -279,9 +281,9 @@ class AdminReportGenerations extends Component {
                             {genders}
                         </Select>
                     </FormControl>
-                    {/* <br /> */}
                     <FormControl >
-                        <InputLabel>Race</InputLabel>
+                        <br/>
+                    <FormLabel style={formLabelStyle}>Race</FormLabel>
                         <Select
                             onChange={this.handleInputChangeFor('selectedRace')}
                             value={this.state.selectedRace}
@@ -290,9 +292,9 @@ class AdminReportGenerations extends Component {
                             {races}
                         </Select>
                     </FormControl>
-                    {/* <br /> */}
                     <FormControl >
-                        <InputLabel>Age</InputLabel>
+                        <br/>
+                    <FormLabel style={formLabelStyle}>Age</FormLabel>
                         <Select
                             onChange={this.handleInputChangeFor('selectedAge')}
                             value={this.state.selectedAge}
@@ -309,7 +311,7 @@ class AdminReportGenerations extends Component {
             <BackButton click={() => this.props.history.goBack()} />
                 <Title>Reports</Title>
                 <FormControl >
-                    <InputLabel>Report Type</InputLabel>
+                    <FormLabel style={formLabelStyle}>Report Type</FormLabel>
                     <Select
                         onChange={this.handleInputChangeFor('reportType')}
                         value={this.state.reportType}
@@ -322,8 +324,9 @@ class AdminReportGenerations extends Component {
                     </Select>
                 </FormControl>
                 <br />
+                <br/>
                 <FormControl >
-                    <InputLabel>Location</InputLabel>
+                    <FormLabel style={formLabelStyle}>Location</FormLabel>
                     <Select
                         onChange={this.handleInputChangeFor('selectedLocation')}
                         value={this.state.selectedLocation}
@@ -346,6 +349,7 @@ class AdminReportGenerations extends Component {
                     onChange={this.handleInputChangeFor('startDate')}
                     margin="normal"
                     variant="outlined"
+                    className={classes.textField}
                     style={{ width: '175px', margin: 20 }}
                     display="inlineBlock"
                 />
@@ -360,6 +364,7 @@ class AdminReportGenerations extends Component {
                     onChange={this.handleInputChangeFor('endDate')}
                     margin="normal"
                     variant="outlined"
+                    className={classes.textField}
                     style={{ width: '175px', margin: 20 }}
                 />
                 <br />
@@ -381,8 +386,19 @@ const styles = theme => ({
         '&:hover': {
             backgroundColor: '#6a172b',
         },
-    }
+    },
+        textField: {
+            backgroundColor: '#ffffff',
+            margin: '5px'
+        },
 });
+
+const formLabelStyle = {
+    display: 'block',
+    marginBottom: '0',
+    paddingBottom: '0',
+    color: '#98223e'
+}
 
 const mapStateToProps = (reduxStore) => {
     return {

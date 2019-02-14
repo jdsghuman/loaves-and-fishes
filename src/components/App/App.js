@@ -38,6 +38,7 @@ import './App.css';
 import AdminManageSubCategories from '../Admin/SubCategories/AdminManageSubCategories/AdminManageSubCategories';
 import AdminAddSubCategories from '../Admin/SubCategories/AdminAddSubCategories/AdminAddSubCategories';
 import AdminEditSubCategories from '../Admin/SubCategories/AdminEditSubCategories/AdminEditSubCategories';
+import AdminEditOutletCategories from '../Admin/Categories/AdminEditOutletCategories/AdminEditOutletCategories';
 
 const theme = createMuiTheme({
   palette: {
@@ -167,6 +168,11 @@ class App extends Component {
                 exact
                 path="/adminEditSubCategories/:id"
                 component={AdminEditSubCategories}
+              />
+              <AdminRoute
+                exact
+                path="/adminEditOutletCategories/:id"
+                component={AdminEditOutletCategories}
               />
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />

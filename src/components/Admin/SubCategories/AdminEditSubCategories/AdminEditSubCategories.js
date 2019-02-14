@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import Title from '../../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import swal from 'sweetalert';
+import FormLabel from '@material-ui/core/FormLabel';
 
 class AdminEditSubCategories extends Component {
 
@@ -67,10 +67,14 @@ class AdminEditSubCategories extends Component {
         return (
             <div className="div__container container__background--large">
                 <Title>Edit Sub Category: <span style={{ color: '#98223e' }}>{this.state.editSubCategory.category_name}</span></Title>
+                <FormLabel style={formLabelStyle}>Sub Category</FormLabel>
+                <br/>
                 <TextField
                     label="Outlet Sub Category"
                     name="category_name"
                     type="text"
+                    margin="normal"
+                    variant="outlined"
                     value={this.state.editSubCategory.category_name}
                     onChange={this.handleChange}
                     className={classes.textField}
@@ -111,6 +115,13 @@ const styles = theme => ({
 
 const btnStyle = {
     marginTop: '10px'
+}
+
+const formLabelStyle = {
+    display: 'block',
+    marginBottom: '0',
+    paddingBottom: '0',
+    color: '#98223e'
 }
 
 const mapStateToProps = (reduxStore) => ({

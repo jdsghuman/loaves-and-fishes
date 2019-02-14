@@ -5,7 +5,7 @@ const { rejectUnauthenticated } = require('../modules/authentication-middleware'
 const moment = require('moment')
 
 // Get all outlet categories
-router.get('/', (req, res) => {
+router.get('/', rejectUnauthenticated, (req, res) => {
     let sql = `SELECT "meal_outlet_category".id, "meal_outlet_category".category_name, "meal_outlet_category".sub_category,
               "meal_outlet_category".notes, "meal_outlet_category".active, "meal_outlet_category".updated_by, "meal_outlet_category".date_updated, "outlet_sub_category".category_name AS "sub_category_name", "person"."name" FROM "meal_outlet_category"
               LEFT JOIN "outlet_sub_category" ON "meal_outlet_category".sub_category = "outlet_sub_category".id
@@ -61,19 +61,18 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
     }
 });
 
-// Update outlet category
+// Update outlet sub-category
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
-        const reqId = req.params.id;
-        const categoryToUpdate = req.body; 
-        // const queryText = `UPDATE RYAN MUNDY PLEASE UPDATE;`;
-        const queryValues = [
-            categoryToUpdate.category_name, // update with database column name 
-            categoryToUpdate.sub_category, // update with database column name 
-            categoryToUpdate.notes, // update with database column name 
-            reqId
-        ];
-        pool.query(queryText, queryValues)
+        const catId = req.params.id;
+        console.log('category id ----', catId);
+        const user = req.user.id;
+        const date = moment().format();
+        const { category_name, sub_category, notes, active } = req.body;
+        const queryText = `UPDATE "meal_outlet_category" 
+                           SET "category_name" = $1, "sub_category" = $2, "notes" = $3, "active" = $4, "updated_by" = $5, "date_updated" = $6
+                           WHERE "id" = $7;`;
+        pool.query(queryText, [category_name, sub_category, notes, active, user, date, catId])
             .then((result) => {
                 console.log(result);
                 res.sendStatus(201);

@@ -14,11 +14,6 @@ function* fetchCategory() {
 
 function* postNewCategory(action) {
     try {
-        const config = {
-            headers: { 'Content-Type': 'application/json' },
-            withCredentials: true,
-        };
-
         yield axios.post('/api/category', action.payload);
         yield put({ type: 'FETCH_NEW_CATEGORY' });
         swal({
@@ -42,11 +37,35 @@ function* deleteCategories(action) {
     }
 }
 
+function* editCategory(action) {
+    try {
+        const response = yield axios.put(`/api/category/${action.payload.id}`, action.payload);
+        if (response) {
+            swal({
+                title: `Updated Category!`,
+                text: "Category successfully updated.",
+                icon: "success",
+                buttons: "Ok",
+            })
+        }
+        yield put({ type: 'FETCH_SUB_CATEGORY' });
+        yield put({ type: 'FETCH_CATEGORY_OUTLET' });
+    } catch (error) {
+        console.log(`Error with edit sub category saga ${error}`);
+        swal({
+            title: "Error",
+            text: "Category not updated!",
+            icon: "warning",
+            button: "Ok"
+        });
+    }
+}
 
 function* categorySaga() {
     yield takeEvery('FETCH_CATEGORY_OUTLET', fetchCategory);
     yield takeEvery('ADD_NEW_CATEGORY', postNewCategory);
     yield takeEvery('DELETE_CATEGORY_OUTLET', deleteCategories);
+    yield takeEvery('EDIT_CATEGORY', editCategory);
 }
 
 export default categorySaga;

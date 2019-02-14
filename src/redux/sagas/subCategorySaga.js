@@ -18,7 +18,7 @@ function* postSubCategory(action) {
         yield put({ type: 'FETCH_SUB_CATEGORY' });
         swal({
             title: "Successfully submitted!",
-            text: "Sub-Category will display in drop down when adding a new location.",
+            text: "Sub Category will display in the drop down menu when adding a new location.",
             icon: "success",
             button: "Ok"
         });
@@ -41,8 +41,8 @@ function* updateSubCategory(action) {
         const response = yield axios.put(`/api/subcategory/${action.payload.id}`, action.payload);
         if(response) {
             swal({
-                title: `Updated Sub Category`,
-                text: "Sub Category successfully updated",
+                title: `Updated Sub Category!`,
+                text: "Sub Category successfully updated.",
                 icon: "success",
                 buttons: "Ok",
             })

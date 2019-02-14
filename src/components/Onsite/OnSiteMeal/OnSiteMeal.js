@@ -194,7 +194,19 @@ class OnSiteMeal extends Component {
                 <Title>OnSite Meal</Title>
                 {/* Location display */}
                 <MyLocation />
-                <BackButton click={() => this.props.history.goBack()} />
+                <BackButton click={
+                    ()=>swal({
+                        title: "Are you sure?",
+                        text: "You will lose your current count!",
+                        icon: "info",
+                        buttons: ['No', 'Yes'],
+                    }).then(confirm => {
+                        if (confirm) {
+                            this.props.history.goBack()
+                        }
+                    })
+                } 
+                    />
                 {/* Categorize by age */}
                 <div style={{ textAlign: 'center' }}>
                     <ListItemText style={checkboxStyle} primary="Categorize by age group" />
