@@ -42,6 +42,25 @@ router.get('/active', rejectUnauthenticated, (req, res) => {
 router.get('/adminlocations', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
         console.log('authenticated', req.isAuthenticated());
+        const queryText = `SELECT "location".id, "location".location_name, "location".street_address, "location".city, "location".state,
+                          "location".zip, "location".county, "location".active, "location".notes, "person"."name", "location".date_updated FROM "location"
+                          LEFT JOIN "person" ON "location".updated_by = "person".id
+                          ORDER BY "location".location_name ASC;;`;
+        pool.query(queryText)
+            .then(result => {
+                res.send(result.rows);
+            }).catch(error => {
+                console.log('in Admin outlet location GET ROUTER error', error);
+            })
+    } else {
+        res.sendStatus(403);
+    }
+});
+
+// Get all outlet locations for Admin ---- COPY THIS FOR MANAGE LOCATIONS --------------- ******
+router.get('/manageadminlocations', rejectUnauthenticated, (req, res) => {
+    if (req.isAuthenticated()) {
+        console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT "location".id, "location".location_name, "meal_outlet_category".category_name, "location".street_address, "location".city, "location".state,
                           "location".zip, "location".county, "location".active, "location".notes, "person"."name", "location".date_updated FROM "location"
                           LEFT JOIN "location_outlet" ON "location".id = "location_outlet".location_id

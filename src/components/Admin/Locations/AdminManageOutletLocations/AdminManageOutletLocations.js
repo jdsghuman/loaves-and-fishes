@@ -14,6 +14,9 @@ import Title from '../../../Title/Title';
 import swal from "sweetalert";
 import EditIcon from '@material-ui/icons/Edit';
 import BackButton from '../../../BackButton/BackButton';
+import AddIcon from '@material-ui/icons/Add';
+import MenuItem from '@material-ui/core/MenuItem';
+
 
 class AdminManageOutletLocations extends Component {
 
@@ -22,6 +25,7 @@ class AdminManageOutletLocations extends Component {
   }
 
   componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' })
     this.getAdminLocations();
   }
 
@@ -63,7 +67,7 @@ class AdminManageOutletLocations extends Component {
         <BackButton click={() => this.props.history.goBack()} />
         <Button
           className={classNames(classes.margin, classes.cssRoot)}
-          onClick={this.handleAddNewLocation}>Add New Location
+          onClick={this.handleAddNewLocation}><AddIcon/> Add New Location
         </Button>
         <div className="div__container-table">
           <div className={classes.root}>
@@ -71,7 +75,6 @@ class AdminManageOutletLocations extends Component {
               <TableHead>
                 <TableRow>
                   <CustomTableCell>Meal Location</CustomTableCell>
-                  <CustomTableCell>Category Outlet</CustomTableCell>
                   <CustomTableCell>Street</CustomTableCell>
                   <CustomTableCell>City</CustomTableCell>
                   <CustomTableCell>State</CustomTableCell>
@@ -82,7 +85,6 @@ class AdminManageOutletLocations extends Component {
                   <CustomTableCell>Updated By</CustomTableCell>
                   <CustomTableCell>Date</CustomTableCell>
                   <CustomTableCell>Edit</CustomTableCell>
-                  <CustomTableCell>Delete</CustomTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -91,7 +93,6 @@ class AdminManageOutletLocations extends Component {
                   return (
                     <TableRow key={location.id} >
                       <TableCell >{location.location_name}</TableCell>
-                      <TableCell >{location.category_name}</TableCell>
                       <TableCell >{location.street_address}</TableCell>
                       <TableCell >{location.city}</TableCell>
                       <TableCell >{location.state}</TableCell>
@@ -103,9 +104,6 @@ class AdminManageOutletLocations extends Component {
                       <TableCell >{moment(location.date_updated).format('l')}</TableCell>
                       <TableCell >
                         <Button className={classes.editButton} onClick={() => this.editLocation(location.id)}><EditIcon /></Button>
-                      </TableCell>
-                      <TableCell >
-                        <Button className={classes.deleteButton} onClick={() => this.removeAdminLocations(location.id)}><DeleteIcon /></Button>
                       </TableCell>
                     </TableRow>
                   );
