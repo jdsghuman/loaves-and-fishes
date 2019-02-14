@@ -36,21 +36,21 @@ class AdminEditLocation extends Component {
     checkData = () => {
         // Redirect the user to the Admin home screen if state is null 
         if (Object.keys(this.state.editLocation).length === 0) {
-            this.props.history.push('/admin');
+            this.props.history.push('/adminManageOutletLocations');
         }
     }
 
     componentDidMount() {
         this.getLocationData();
-        // this.checkData();
+        this.checkData();
     }
 
-    // componentWillMount() {
-    //     // Redirect the user to the Admin home screen if page is refreshed 
-    //     if (this.props.adminLocationReducer.length === 0) {
-    //         this.props.history.push('/admin');
-    //     }
-    // }
+    componentWillMount() {
+        // Redirect the user to the Admin home screen if page is refreshed 
+        if (this.props.adminLocationReducer.length === 0) {
+            this.props.history.push('/adminManageOutletLocations');
+        }
+    }
 
     getLocationData = () => {
         // Get id of location
@@ -91,14 +91,6 @@ class AdminEditLocation extends Component {
             <div className="div__container container__background--large">
                 <Title>Edit Location: <span style={{color: '#98223e'}}>{this.state.editLocation.location_name}</span></Title>
                 <BackButton click={() => this.props.history.goBack()} />
-                {/* {JSON.stringify(this.state)}
-                <p>--------</p>
-                {JSON.stringify(this.props.adminLocationReducer)}
-                <p>-----------</p>
-                {JSON.stringify(this.props.categories)}
-                <p>-----------</p>
-                {JSON.stringify(this.props.locationOutletReducer)} */}
-                {/* Edit Name */}
                 <div>
                     <FormLabel style={formLabelStyle}>Location Name</FormLabel>
                     <TextField
@@ -217,11 +209,11 @@ class AdminEditLocation extends Component {
                     <FormLabel style={formLabelStyle}>Status</FormLabel>
                     <Select
                         value={this.state.editLocation.active}
-                        name="status"
+                        name="active"
                         style={{ height: '40px', width: '200px' }}
                         onChange={this.handleChange}
                         inputProps={{
-                            name: 'status',
+                            name: 'active',
                         }}
                     >
                         <MenuItem value="true">
@@ -234,11 +226,6 @@ class AdminEditLocation extends Component {
                 </div>
                 {/* Outlet Categories */}
                 <div>
-                    {/* <InputLabel
-                        style={{ fontWeight: '300' }}
-                        htmlFor="ingredient">
-                        Ingredient
-                    </InputLabel> */}
                     <FormLabel style={formLabelStyle}>Location Outlet Category</FormLabel>
                     <Select
                         multiple
@@ -279,46 +266,6 @@ class AdminEditLocation extends Component {
                         }}
                     />
                 </div>
-                {/* Updated By */}
-                {/* <div>
-                    <FormLabel style={formLabelStyle}>Updated By</FormLabel>
-                    <TextField
-                        id="outlined-name"
-                        name="name"
-                        value={this.state.editLocation.name}
-                        onChange={this.handleChange}
-                        className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                        rows="4"
-                        InputLabelProps={{
-                            style: {
-                                color: '#888888',
-                                fontWeight: '300',
-                            }
-                        }}
-                    />
-                </div> */}
-                {/* Date Updated */}
-                {/* <div>
-                    <FormLabel style={formLabelStyle}>Date Updated</FormLabel>
-                    <TextField
-                        id="outlined-name"
-                        name="name"
-                        value={moment(this.state.editLocation.date_updated).format('l')}
-                        onChange={this.handleChange}
-                        className={classes.textField}
-                        margin="normal"
-                        variant="outlined"
-                        rows="4"
-                        InputLabelProps={{
-                            style: {
-                                color: '#888888',
-                                fontWeight: '300',
-                            }
-                        }}
-                    />
-                
                 {/* Get Categories */}
                 <div style={divStyle}>
                     <Button

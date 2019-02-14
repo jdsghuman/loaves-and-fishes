@@ -2,6 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const moment = require('moment')
 
 // Get all outlet locations
 router.get('/', rejectUnauthenticated, (req, res) => {
@@ -45,7 +46,7 @@ router.get('/adminlocations', rejectUnauthenticated, (req, res) => {
         const queryText = `SELECT "location".id, "location".location_name, "location".street_address, "location".city, "location".state,
                           "location".zip, "location".county, "location".active, "location".notes, "person"."name", "location".date_updated FROM "location"
                           LEFT JOIN "person" ON "location".updated_by = "person".id
-                          ORDER BY "location".location_name ASC;;`;
+                          ORDER BY "location".location_name ASC;`;
         pool.query(queryText)
             .then(result => {
                 res.send(result.rows);
@@ -127,16 +128,26 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     if(req.user.admin) {
-        const reqId = req.params.id;
+        const reqId = req.body.id;
         const updatedLocation = req.body;
+        const user = req.user.id;
+        const dateUpdated = moment().format();
         console.log('updated location...', updatedLocation);
         console.log('updated id...', reqId);
-        const queryString = `UPDATE "location" SET "location_name"=$1, "street_address"`
-
+        const { location_name, street_address, city, state, zip, county, active, notes } = req.body;
+        const queryString = `UPDATE "location" SET "location_name"=$1, "street_address"=$2, "city"=$3, "state"=$4, "zip"=$5, "county"=$6, "active"=$7, "notes"=$8, "updated_by"=$9, "date_updated"=$10 WHERE id=$11;`;
+        pool.query(queryString, [location_name, street_address, city, state, zip, county, active, notes, user, dateUpdated, reqId])
+            .then(result => {
+                console.log(result);
+                res.sendStatus(204);
+            }).catch(error => {
+                console.log(`Error in updated location ${error}`);
+                res.sendStatus(500);
+            })
     } else {
         res.sendStatus(403);
     }
-})
+});
 
 router.get('/locationoutlet', rejectUnauthenticated, (req, res) => {
     const queryString = `SELECT * FROM "location_outlet";`;
@@ -151,5 +162,36 @@ router.get('/locationoutlet', rejectUnauthenticated, (req, res) => {
         });
 });
 
+router.put('/locationoutlet/:id', rejectUnauthenticated, (req, res) => {
+    if(req.user.admin) {
+        const location_id = req.body.id;
+        const categories = req.body.categories;
+        console.log('location_id...', location_id);
+        console.log('updatedLocationOutlet...', categories);
+        // DELETE WHERE ID = $1
+        const deleteQuery = `DELETE from "location_outlet" WHERE "location_outlet".location_id = $1;`;
+        pool.query(deleteQuery, [location_id])
+            .then(result => {
+                console.log(result);
+                res.sendStatus(201);
+            })
+            .catch(error => {
+                console.log(`Error making delete ${deleteQuery}, ${error}`);
+                res.sendStatus(500);
+            })
+
+        // INSERT ALL LOCATIONS
+        const updateQuery = `INSERT INTO "location_outlet" ("location_id", "outlet_id")
+        VALUES($1, $2)`;
+        categories.map(categoryId => {
+            const insertUpdatedValues = [location_id, categoryId];
+            pool.query(updateQuery, insertUpdatedValues);
+        });
+
+        res.sendStatus(201);
+    } else {
+        res.sendStatus(403);
+    }
+})
 
 module.exports = router;

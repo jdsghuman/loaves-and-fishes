@@ -8,7 +8,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
 import Title from '../../../Title/Title';
 import swal from "sweetalert";
@@ -16,7 +15,6 @@ import EditIcon from '@material-ui/icons/Edit';
 import BackButton from '../../../BackButton/BackButton';
 import AddIcon from '@material-ui/icons/Add';
 import MenuItem from '@material-ui/core/MenuItem';
-
 
 class AdminManageOutletLocations extends Component {
 
@@ -84,7 +82,7 @@ class AdminManageOutletLocations extends Component {
                   <CustomTableCell>Status</CustomTableCell>
                   <CustomTableCell>Notes</CustomTableCell>
                   <CustomTableCell>Updated By</CustomTableCell>
-                  <CustomTableCell>Date</CustomTableCell>
+                  <CustomTableCell>Date Updated</CustomTableCell>
                   <CustomTableCell>Edit</CustomTableCell>
                 </TableRow>
               </TableHead>
