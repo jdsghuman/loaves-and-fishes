@@ -73,6 +73,7 @@ class AdminManageSubCategories extends Component {
                             </TableHead>
                             <TableBody>
                                 {this.props.subCategories.map((subCategory) => {
+                                    if(subCategory.category_name !== 'None') {
                                     console.log('checking ', subCategory);
                                     return (
 
@@ -91,6 +92,7 @@ class AdminManageSubCategories extends Component {
                                             </TableCell>
                                         </TableRow>
                                     );
+                                    }
                                 })}
                             </TableBody>
                         </Table>

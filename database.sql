@@ -185,7 +185,8 @@ VALUES('Preschool (0-4)'),
 
 INSERT INTO outlet_sub_category
     ("category_name")
-VALUES('Open'),
+VALUES('None');
+    ('Open'),
     ('Closed');
 
 INSERT INTO meal_outlet_category
