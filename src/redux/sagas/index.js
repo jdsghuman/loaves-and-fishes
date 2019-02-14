@@ -31,6 +31,6 @@ export default function* rootSaga() {
     adminLocationSaga(),
     subCategorySaga(),
     reportSaga(),
-    dashboardSaga
+    dashboardSaga()
   ]);
 }

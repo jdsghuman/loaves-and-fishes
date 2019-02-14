@@ -3,8 +3,6 @@ import { put, takeEvery } from 'redux-saga/effects';
 
 function* fetchDashboardCount() {
     try {
-       
-
         const response = yield axios.get('/api/template');
         yield put({ type: 'SET_DASHBOARD_COUNT_DAILY', payload: response.data });
     } catch (error) {

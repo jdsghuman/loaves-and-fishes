@@ -1,4 +1,4 @@
-const dashboard = (state = '', action) => {
+const dashboard = (state = [], action) => {
     switch (action.type) {
         case 'SET_DASHBOARD_COUNT_DAILY':
             return action.payload;

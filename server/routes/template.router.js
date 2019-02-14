@@ -16,8 +16,8 @@ router.get('/', (req, res) => {
     console.log('newCount ---- ', queryValues);
     pool.query(queryText, queryValues)
         .then(result => {
-            console.log('checking', result.rows);
-            res.send(result.rows);
+            console.log('checking', result.rows[0].sum);
+            res.send(result.rows[0].sum);
         }).catch(error => {
             console.log('in reports GET error', error);
             res.sendStatus(500);
