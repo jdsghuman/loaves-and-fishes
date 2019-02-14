@@ -8,7 +8,7 @@ import Dashboard from '../Dashboard/Dashboard';
 
 
 class AdminHome extends Component {
-    
+
     handleSubmitUsers = () => {
         this.props.history.push('/adminUser');
     }
@@ -32,18 +32,18 @@ class AdminHome extends Component {
         this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' });
     }
    
-
+   
     render() {
         const { classes } = this.props;
         return (
             <>
             <div style={{textAlign: 'center', margin: '5px', marginTop: '20px', marginBottom: '20px'}}>
              <Dashboard 
-                count={this.props.reduxStore.dashboardDaily}>
+                count={this.props.reduxStore.dashboardDaily.toLocaleString()}>
                 Meals Today
                 </Dashboard>
                 <Dashboard
-                count={this.props.reduxStore.dashboardMonthly}>
+                count={this.props.reduxStore.dashboardMonthly.toLocaleString()}>
                 30 Days
                 </Dashboard>
             </div>
