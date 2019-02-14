@@ -22,12 +22,12 @@ function* fetchUser() {
     yield put({ type: 'SET_USER', payload: response.data });
   } catch (error) {
     console.log('User get request failed', error);
-    swal({
-      title: "Error",
-      text: "You currently do not have access to login. Please contact Loaves & fishes at grants@loavesandfishesmn.org to confirm login access, thank you for your patience!",
-      icon: "warning",
-      button: "Ok"
-    });
+    // swal({
+    //   title: "Error",
+    //   text: "You currently do not have access to login. Please contact Loaves & fishes at grants@loavesandfishesmn.org to confirm login access, thank you for your patience!",
+    //   icon: "warning",
+    //   button: "Ok"
+    // });
   }
 }
 
