@@ -3,7 +3,7 @@ CREATE TABLE "person"
 (
     "id" serial NOT NULL,
     "name" varchar(300) NOT NULL,
-    "username" varchar(300) NOT NULL,
+    "username" varchar(300) NOT NULL UNIQUE, 
     "password" varchar(300) NOT NULL,
     "email" varchar(1000) NOT NULL,
     "last_location" integer,

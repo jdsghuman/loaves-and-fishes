@@ -42,7 +42,6 @@ class AdminManageSubCategories extends Component {
             .then(willDelete => {
                 if (willDelete) {
                     this.props.dispatch({ type: 'DELETE_SUB_CATEGORY', payload: id });
-                    swal("Deleted!", "Sub Category has been deleted!", "success");
                 }
                 else {
                     swal("Deletion has been canceled!")
