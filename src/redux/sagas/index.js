@@ -10,7 +10,7 @@ import categorySaga from './categorySaga';
 import adminLocationSaga from './adminLocationSaga';
 import subCategorySaga from './subCategorySaga';
 import reportSaga from './reportSaga';
-
+import dashboardSaga from './dashboardSaga';
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -31,5 +31,6 @@ export default function* rootSaga() {
     adminLocationSaga(),
     subCategorySaga(),
     reportSaga(),
+    dashboardSaga()
   ]);
 }
