@@ -37,7 +37,7 @@ function* deleteCategories(action) {
         console.log('delete saga failed for CATEGORIES', error);
         swal({
             title: "Error",
-            text: "Category not deleted!",
+            text: "Outlet Category not deleted. Outlet Category is linked to an Outlet Location. Please make sure to unlink the Outlet Category from the Outlet Location in order to delete!",
             icon: "warning",
             button: "Ok"
         });
