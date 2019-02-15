@@ -18,7 +18,7 @@ function* postSubCategory(action) {
         yield put({ type: 'FETCH_SUB_CATEGORY' });
         swal({
             title: "Successfully submitted!",
-            text: "Sub Category will display in the drop down menu when adding a new location.",
+            text: "Sub Category will display in the drop down menu when adding a new Oulet Category.",
             icon: "success",
             button: "Ok"
         });
@@ -31,8 +31,15 @@ function* deleteSubCategory(action) {
     try {
         yield axios.delete(`/api/subcategory/${action.payload}`);
         yield put({ type: 'FETCH_SUB_CATEGORY' });
+        swal("Deleted!", "Sub Category has been deleted!", "success");
     } catch (error) {
         console.log('delete saga failed for SUB CATEGORY', error);
+        swal({
+            title: "Error",
+            text: "Sub Category not deleted. Sub Category is linked to an Outlet Category. Please make sure to unlink the Sub Category from the Outlet Category to None in order to delete!",
+            icon: "warning",
+            button: "Ok"
+        });
     }
 }
 
@@ -52,7 +59,7 @@ function* updateSubCategory(action) {
         console.log(`Error with edit sub category saga ${error}`);
         swal({
             title: "Error",
-            text: "Sub-Category not updated!",
+            text: "Sub Category not updated!",
             icon: "warning",
             button: "Ok"
         });

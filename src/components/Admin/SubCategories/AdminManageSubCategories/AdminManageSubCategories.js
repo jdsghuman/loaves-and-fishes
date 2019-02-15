@@ -42,7 +42,6 @@ class AdminManageSubCategories extends Component {
             .then(willDelete => {
                 if (willDelete) {
                     this.props.dispatch({ type: 'DELETE_SUB_CATEGORY', payload: id });
-                    swal("Deleted!", "Sub Category has been deleted!", "success");
                 }
                 else {
                     swal("Deletion has been canceled!")
@@ -73,6 +72,7 @@ class AdminManageSubCategories extends Component {
                             </TableHead>
                             <TableBody>
                                 {this.props.subCategories.map((subCategory) => {
+                                    if(subCategory.category_name !== 'None') {
                                     console.log('checking ', subCategory);
                                     return (
 
@@ -91,6 +91,7 @@ class AdminManageSubCategories extends Component {
                                             </TableCell>
                                         </TableRow>
                                     );
+                                    }
                                 })}
                             </TableBody>
                         </Table>

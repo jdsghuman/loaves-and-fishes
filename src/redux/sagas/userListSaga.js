@@ -37,7 +37,7 @@ function* editUsers(action) {
         if (response) {
             swal({
                 title: `Updated User!`,
-                text: "User successfully updated.",
+                text: "User successfully updated!",
                 icon: "success",
                 buttons: "Ok",
             })
