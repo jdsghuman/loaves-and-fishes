@@ -6,6 +6,7 @@ import Title from '../../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import FormLabel from '@material-ui/core/FormLabel';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminEditSubCategories extends Component {
 
@@ -67,6 +68,7 @@ class AdminEditSubCategories extends Component {
         return (
             <div className="div__container container__background--large">
                 <Title>Edit Sub Category: <span style={{ color: '#98223e' }}>{this.state.editSubCategory.category_name}</span></Title>
+                <BackButton click={() => this.props.history.goBack()} />
                 <FormLabel style={formLabelStyle}>Sub Category</FormLabel>
                 <br/>
                 <TextField

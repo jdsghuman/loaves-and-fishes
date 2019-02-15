@@ -73,7 +73,7 @@ class AdminEditUser extends Component {
     return (
       <div className="div__container container__background--large">
       <BackButton click={() => this.props.history.goBack()} />
-        <Title>Edit User: <span style={{ color: '#98223e' }}>{this.state.editUser.name}</span></Title>
+        <Title>Edit User: <span style={{ color: '#98223e', textTransform: 'uppercase' }}>{this.state.editUser.name}</span></Title>
         {/* Edit Name */}
         <div>
           <FormLabel style={formLabelStyle}>Name</FormLabel>
