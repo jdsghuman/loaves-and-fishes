@@ -5,10 +5,12 @@ import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Dashboard from '../Dashboard/Dashboard';
+// import CountUp from 'react-countup';
 
 
 class AdminHome extends Component {
-    
+
+
     handleSubmitUsers = () => {
         this.props.history.push('/adminUser');
     }
@@ -30,21 +32,38 @@ class AdminHome extends Component {
     componentDidMount () {
         this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' });
         this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' });
+        this.dailyInterval = setInterval(()=>{this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY'})}, 1000);
+        this.monthInterval = setInterval(() => { this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' }) }, 1000);
+    }
+    
+
+    componentWillUnmount() {
+        clearInterval(this.dailyInterval);
+        clearInterval(this.monthInterval);
     }
    
-
+   
     render() {
         const { classes } = this.props;
         return (
             <>
             <div style={{textAlign: 'center', margin: '5px', marginTop: '20px', marginBottom: '20px'}}>
              <Dashboard 
-                count={this.props.reduxStore.dashboardDaily}>
-                Meals Today
+                count={this.props.reduxStore.dashboardDaily.toLocaleString() || '0'}>
+                
+                        {/* <CountUp start={initialCount} end={this.props.reduxStore.dashboardDaily} delay={0} >
+                            {({ countUpRef }) => (
+                                <div>
+                                    <span ref={countUpRef} />
+                                </div>
+                            )}
+                        </CountUp> */}
+                        
+                Meals Served Today
                 </Dashboard>
                 <Dashboard
-                count={this.props.reduxStore.dashboardMonthly}>
-                30 Days
+                count={this.props.reduxStore.dashboardMonthly.toLocaleString() || '0'}>
+                Meals Served Last 30 Days
                 </Dashboard>
             </div>
             <div className="div__container container__background--large">

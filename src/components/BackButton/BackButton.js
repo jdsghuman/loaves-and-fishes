@@ -15,7 +15,7 @@ class BackButton extends Component {
     const { classes } = this.props;
     return (
       <div>
-        <Button className={classes.backButton} onClick={this.props.click}><ArrowBack className={classes.backIcon} /></Button>
+        <Button className="btn__back" onClick={this.props.click}><ArrowBack className={classes.backIcon} /></Button>
       </div>
     )
   }
@@ -30,13 +30,6 @@ const styles = theme => ({
       backgroundColor: 'transparent',
   },
   },
-  backButton: {
-    position: 'absolute',
-    left: '0',
-    top: '0',
-    marginTop: '78px',
-    marginLeft: '4px'
-  }
 });
 
 export default withStyles(styles)((BackButton));

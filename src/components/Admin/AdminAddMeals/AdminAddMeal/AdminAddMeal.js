@@ -111,6 +111,8 @@ class AdminAddMeal extends Component {
             .then(willSubmit => {
                 if (willSubmit) {
                     this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
+                    this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' })
+                    this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' })
                     this.clearState();
                     this.props.history.push('/admin');
                 }
@@ -118,6 +120,7 @@ class AdminAddMeal extends Component {
                     swal("Meal count not entered.")
                 }
             });
+       
 
     }
     render() {
