@@ -10,10 +10,12 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
+import { Offline, Online } from "react-detect-offline";
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
 import BackButton from '../../BackButton/BackButton';
+import OfflinePrompt from '../../OfflinePrompt/OfflinePrompt';
 
 class OnSiteMeal extends Component {
 
@@ -117,19 +119,19 @@ class OnSiteMeal extends Component {
             icon: "info",
             buttons: ['No', 'Yes'],
         })
-        .then(groupByAge => {
-            if (groupByAge) {
-                this.setState(prevState => ({
-                    categorizebyage: !prevState.categorizebyage,
-                    count: 0,
-                    selectedGender: null,
-                    selectedRace: null,
-                    selectedAge: null,
-                    genericAdult: 0,
-                    genericChild: 0,
-                }));
-            }
-          });
+            .then(groupByAge => {
+                if (groupByAge) {
+                    this.setState(prevState => ({
+                        categorizebyage: !prevState.categorizebyage,
+                        count: 0,
+                        selectedGender: null,
+                        selectedRace: null,
+                        selectedAge: null,
+                        genericAdult: 0,
+                        genericChild: 0,
+                    }));
+                }
+            });
     }
 
     handleSubmit = () => {
@@ -193,9 +195,10 @@ class OnSiteMeal extends Component {
             <div className="div__container container__background">
                 <Title>OnSite Meal</Title>
                 {/* Location display */}
-                <MyLocation />
+                <Online><MyLocation /></Online>
+                <Offline><OfflinePrompt /></Offline>
                 <BackButton click={
-                    ()=>swal({
+                    () => swal({
                         title: "Are you sure?",
                         text: "You will lose your current count!",
                         icon: "info",
@@ -205,8 +208,8 @@ class OnSiteMeal extends Component {
                             this.props.history.goBack()
                         }
                     })
-                } 
-                    />
+                }
+                />
                 {/* Categorize by age */}
                 <div style={{ textAlign: 'center' }}>
                     <ListItemText style={checkboxStyle} primary="Categorize by age group" />
@@ -282,10 +285,13 @@ class OnSiteMeal extends Component {
                         <AddCircle onClick={() => this.changeCount('add', 'child')} style={{ cursor: 'pointer', fontSize: '4rem', marginLeft: '15px', marginTop: '8px' }} />
                     </div>
                 }
-                <Button disabled={this.state.count === 0 ? true : false}
-                    className={classNames(classes.margin, classes.cssRoot)}
-                    onClick={this.handleSubmit}>Submit
+                <Online>
+                    <Button disabled={this.state.count === 0 ? true : false}
+                        className={classNames(classes.margin, classes.cssRoot)}
+                        onClick={this.handleSubmit}>Submit
                 </Button>
+                </Online>
+                <Offline><p style={{color: '#ff0000'}}>You're offline right now. Check your connection.</p></Offline>
             </div>
         )
     }

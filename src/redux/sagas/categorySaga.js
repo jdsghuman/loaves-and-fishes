@@ -32,8 +32,15 @@ function* deleteCategories(action) {
     try{
         yield axios.delete(`/api/category/${action.payload}`);
         yield put({ type: 'FETCH_CATEGORY_OUTLET' });
+        swal("Deleted!", "Outlet category has been deleted!", "success");
     }catch (error){
         console.log('delete saga failed for CATEGORIES', error);
+        swal({
+            title: "Error",
+            text: "Outlet Category not deleted. Outlet Category is linked to an Outlet Location. Please make sure to unlink the Outlet Category from the Outlet Location in order to delete!",
+            icon: "warning",
+            button: "Ok"
+        });
     }
 }
 
@@ -43,7 +50,7 @@ function* editCategory(action) {
         if (response) {
             swal({
                 title: `Updated Category!`,
-                text: "Category successfully updated.",
+                text: "Category successfully updated!",
                 icon: "success",
                 buttons: "Ok",
             })

@@ -23,7 +23,7 @@ function* postAdminLocation(action) {
         yield put({ type: 'FETCH_ADMIN_LOCATION' });
         swal({
             title: "Successfully submitted!",
-            text: "New location has been added.",
+            text: "New location has been added!",
             icon: "success",
             button: "Ok"
         });

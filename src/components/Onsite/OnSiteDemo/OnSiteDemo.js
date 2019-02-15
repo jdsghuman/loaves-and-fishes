@@ -10,6 +10,8 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import './OnSiteDemo.css';
 import BackButton from '../../BackButton/BackButton';
+import { Offline, Online } from "react-detect-offline";
+import OfflinePrompt from '../../OfflinePrompt/OfflinePrompt';
 
 class OnSiteDemo extends Component {
     state = {
@@ -111,7 +113,9 @@ class OnSiteDemo extends Component {
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
-                <MyLocation />
+                {/* Location display */}
+                <Online><MyLocation /></Online>
+                <Offline><OfflinePrompt /></Offline>
                 <BackButton click={() => this.props.history.goBack()} />
                 <br />
                 <div style={divStyle}>
@@ -178,10 +182,13 @@ class OnSiteDemo extends Component {
                     </Select>
                     </FormControl>
                 </div>
-                <Button disabled={(this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false) || (this.state.selectedAge.length === 0 && this.state.selectedGender.length === 0 && this.state.selectedRace.length === 0 ? true : false)}
-                    className={classNames(classes.margin, classes.cssRoot)}
-                    onClick={this.handleSubmit}>Submit
+                <Online>
+                    <Button disabled={(this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false) || (this.state.selectedAge.length === 0 && this.state.selectedGender.length === 0 && this.state.selectedRace.length === 0 ? true : false)}
+                        className={classNames(classes.margin, classes.cssRoot)}
+                        onClick={this.handleSubmit}>Submit
                 </Button>
+                </Online>
+                <Offline><p style={{ color: '#ff0000' }}>You're offline right now. Check your connection.</p></Offline>
             </div>
         )
     }
