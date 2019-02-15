@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import './OnSiteDemo.css';
 import BackButton from '../../BackButton/BackButton';
+import { Offline, Online } from "react-detect-offline";
 
 class OnSiteDemo extends Component {
     state = {
@@ -178,10 +179,13 @@ class OnSiteDemo extends Component {
                     </Select>
                     </FormControl>
                 </div>
-                <Button disabled={(this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false) || (this.state.selectedAge.length === 0 && this.state.selectedGender.length === 0 && this.state.selectedRace.length === 0 ? true : false)}
-                    className={classNames(classes.margin, classes.cssRoot)}
-                    onClick={this.handleSubmit}>Submit
+                <Online>
+                    <Button disabled={(this.state.selectedAge === '' && this.state.selectedGender === '' && this.state.selectedRace === '' ? true : false) || (this.state.selectedAge.length === 0 && this.state.selectedGender.length === 0 && this.state.selectedRace.length === 0 ? true : false)}
+                        className={classNames(classes.margin, classes.cssRoot)}
+                        onClick={this.handleSubmit}>Submit
                 </Button>
+                </Online>
+                <Offline><p style={{ color: '#ff0000' }}>You're offline right now. Check your connection.</p></Offline>
             </div>
         )
     }
