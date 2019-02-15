@@ -12,6 +12,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
 import moment from 'moment';
+import BackButton from '../../../BackButton/BackButton';
 
 class AdminEditOutletCategories extends Component {
 
@@ -91,6 +92,7 @@ class AdminEditOutletCategories extends Component {
         return (
             <div className="div__container container__background--large">
                 <Title>Edit Outlet Category</Title>
+                <BackButton click={() => this.props.history.goBack()} />
                 {/* Edit Category */}
                 <div>
                     <FormLabel style={formLabelStyle}>Category</FormLabel>
