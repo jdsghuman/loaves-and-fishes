@@ -15,6 +15,7 @@ import { Offline, Online } from "react-detect-offline";
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
 import BackButton from '../../BackButton/BackButton';
+import OfflinePrompt from '../../OfflinePrompt/OfflinePrompt';
 
 class OnSiteMeal extends Component {
 
@@ -194,7 +195,8 @@ class OnSiteMeal extends Component {
             <div className="div__container container__background">
                 <Title>OnSite Meal</Title>
                 {/* Location display */}
-                <MyLocation />
+                <Online><MyLocation /></Online>
+                <Offline><OfflinePrompt /></Offline>
                 <BackButton click={
                     () => swal({
                         title: "Are you sure?",
