@@ -50,7 +50,7 @@ function* editCategory(action) {
         if (response) {
             swal({
                 title: `Updated Category!`,
-                text: "Category successfully updated.",
+                text: "Category successfully updated!",
                 icon: "success",
                 buttons: "Ok",
             })

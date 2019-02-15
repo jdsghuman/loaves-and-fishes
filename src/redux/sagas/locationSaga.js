@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { put, takeEvery } from 'redux-saga/effects';
+import swal from 'sweetalert';
 
 
 function* fetchLocations() {
@@ -52,6 +53,12 @@ function* updateLocation(action) {
         yield axios.put('api/location/:id', action.payload);
         yield put({ type: 'FETCH_ADMIN_LOCATION' });
         yield put({ type: 'FETCH_LOCATION_OUTLET'});
+        swal({
+            title: `Updated Location!`,
+            text: "Location successfully updated!",
+            icon: "success",
+            buttons: "Ok",
+        })
     } catch(error) {
         console.log(`Error in update location ${error}`);
     }
