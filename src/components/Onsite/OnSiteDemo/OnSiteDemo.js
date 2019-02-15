@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import './OnSiteDemo.css';
 import BackButton from '../../BackButton/BackButton';
 import { Offline, Online } from "react-detect-offline";
+import OfflinePrompt from '../../OfflinePrompt/OfflinePrompt';
 
 class OnSiteDemo extends Component {
     state = {
@@ -112,7 +113,9 @@ class OnSiteDemo extends Component {
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
-                <MyLocation />
+                {/* Location display */}
+                <Online><MyLocation /></Online>
+                <Offline><OfflinePrompt /></Offline>
                 <BackButton click={() => this.props.history.goBack()} />
                 <br />
                 <div style={divStyle}>
