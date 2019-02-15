@@ -15,6 +15,7 @@ import moment from 'moment';
 import Title from '../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
+import swal from "sweetalert";
 
 class OnSiteHome extends Component {
 
@@ -82,7 +83,12 @@ class OnSiteHome extends Component {
         this.props.dispatch({ type: "SET_ONSITE", payload: this.state })
         this.props.dispatch({ type: 'SET_LAST_LOCATION', payload: this.state });
         if (this.state.selectedLocation === '') {
-            alert('Please select a location')
+            swal({
+                title: "Location is Required",
+                text: "Please select a location",
+                icon: "warning",
+                button: "Ok",
+            })
         }
         else if (this.state.value === 'yes') {
             this.props.history.push('/onSiteDemo')
