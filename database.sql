@@ -60,7 +60,7 @@ CREATE TABLE "count"
 (
     "id" serial NOT NULL,
     "meal_count" integer NOT NULL DEFAULT '1',
-    "timestamp" TIMESTAMP NOT NULL,
+    "timestamp" DATE NOT NULL,
     "summer" BOOLEAN NOT NULL DEFAULT 'false',
     "farm" BOOLEAN NOT NULL DEFAULT 'false',
     "location_id" integer NOT NULL,
