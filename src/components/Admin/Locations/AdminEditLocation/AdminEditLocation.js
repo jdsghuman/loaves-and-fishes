@@ -89,7 +89,7 @@ class AdminEditLocation extends Component {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
-                <Title>Edit Location: <span style={{color: '#98223e'}}>{this.state.editLocation.location_name}</span></Title>
+                <Title>Edit Location: <span style={{color: '#98223e', textTransform: 'uppercase'}}>{this.state.editLocation.location_name}</span></Title>
                 <BackButton click={() => this.props.history.goBack()} />
                 <div>
                     <FormLabel style={formLabelStyle}>Location Name</FormLabel>
