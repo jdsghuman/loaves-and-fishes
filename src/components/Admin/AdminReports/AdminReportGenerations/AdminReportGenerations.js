@@ -150,6 +150,13 @@ class AdminReportGenerations extends Component {
                     this.props.dispatch({ type: 'FETCH_DEMO_GENDER_AGE', payload: this.state })
                     this.props.history.push('/AdminReportView');
                 }
+                //Fix me
+                else if (this.state.reportType !== '' && this.state.selectedLocation === '' &&
+                    this.state.selectedGender === '' && this.state.selectedRace !== '' &&
+                    this.state.selectedAge !== '') {
+                    this.props.dispatch({ type: 'FETCH_DEMO_RACE_AGE', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
                 else if (this.state.reportType !== '' && this.state.selectedLocation === '' &&
                     this.state.selectedGender !== '' && this.state.selectedRace !== '' &&
                     this.state.selectedAge !== '') {
@@ -185,6 +192,13 @@ class AdminReportGenerations extends Component {
                     this.state.selectedGender !== '' && this.state.selectedRace === '' &&
                     this.state.selectedAge !== '') {
                     this.props.dispatch({ type: 'FETCH_DEMO_LOCATION_GENDER_AGE', payload: this.state })
+                    this.props.history.push('/AdminReportView');
+                }
+                //Fix me
+                else if (this.state.reportType !== '' && this.state.selectedLocation !== '' &&
+                    this.state.selectedGender === '' && this.state.selectedRace !== '' &&
+                    this.state.selectedAge !== '') {
+                    this.props.dispatch({ type: 'FETCH_DEMO_LOCATION_RACE_AGE', payload: this.state })
                     this.props.history.push('/AdminReportView');
                 }
                 else if (this.state.reportType !== '' && this.state.selectedLocation !== '' &&

@@ -1,8 +1,8 @@
-.location__banner {
-    background: rgba(179,180,40, 0.6);
+.location__banner--offline {
+    background: #98223e;
     padding: 5px;
     font-weight: 600;
-    color: #98223e;
+    color: #d1d11d;
     font-size: 1rem;
     position: absolute;
     top: 0;
@@ -29,13 +29,13 @@
 }
 
 @media only screen and (max-width: 700px) {
-  .location__banner {
+  .location__banner--offline {
     margin-top: 70px;
   }
 }
 
 @media only screen and (max-width: 750px) {
-  .location__banner {
+  .location__banner--offline {
     padding: 2px;
     height: auto;
   }

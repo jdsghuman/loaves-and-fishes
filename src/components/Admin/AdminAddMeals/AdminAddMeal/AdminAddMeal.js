@@ -162,6 +162,7 @@ class AdminAddMeal extends Component {
                             margin="normal"
                             variant="outlined"
                             className={classes.textField}
+                            style={{ width: '175px', margin: 20 }}
                         />
                     </FormControl>
                 </div>

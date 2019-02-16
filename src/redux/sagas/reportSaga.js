@@ -301,6 +301,30 @@ function* fetchDemoLocationGenderRaceAge(action) {
     }
 }
 
+function* fetchDemoRaceAge(action) {
+    try {
+        const config = {
+            params: action.payload
+        }
+        const response = yield axios.get(`/api/report/demoraceage`, config)
+        yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
+    } catch (error) {
+        console.log(`Error getting all location category meals ${error}`);
+    }
+}
+
+function* fetchDemoLocationRaceAge(action) {
+    try {
+        const config = {
+            params: action.payload
+        }
+        const response = yield axios.get(`/api/report/demolocationraceage`, config)
+        yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
+    } catch (error) {
+        console.log(`Error getting all location category meals ${error}`);
+    }
+}
+
 function* reportSaga() {
     yield takeEvery('FETCH_TOTAL', fetchTotal);
 
@@ -328,6 +352,7 @@ function* reportSaga() {
     yield takeEvery('FETCH_DEMO_AGE', fetchDemoAge);
     yield takeEvery('FETCH_DEMO_GENDER_RACE', fetchDemoGenderRace);
     yield takeEvery('FETCH_DEMO_GENDER_AGE', fetchDemoGenderAge);
+    yield takeEvery('FETCH_DEMO_RACE_AGE', fetchDemoRaceAge);
     yield takeEvery('FETCH_DEMO_GENDER_RACE_AGE', fetchDemoGenderRaceAge);
 
     //Demographic with location
@@ -336,6 +361,7 @@ function* reportSaga() {
     yield takeEvery('FETCH_DEMO_LOCATION_AGE', fetchDemoLocationAge);
     yield takeEvery('FETCH_DEMO_LOCATION_GENDER_RACE', fetchDemoLocationGenderRace);
     yield takeEvery('FETCH_DEMO_LOCATION_GENDER_AGE', fetchDemoLocationGenderAge);
+    yield takeEvery('FETCH_DEMO_LOCATION_RACE_AGE', fetchDemoLocationRaceAge);
     yield takeEvery('FETCH_DEMO_LOCATION_GENDER_RACE_AGE', fetchDemoLocationGenderRaceAge);
 }
 
