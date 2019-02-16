@@ -14,7 +14,6 @@ import swal from "sweetalert";
 import EditIcon from '@material-ui/icons/Edit';
 import BackButton from '../../../BackButton/BackButton';
 import AddIcon from '@material-ui/icons/Add';
-import MenuItem from '@material-ui/core/MenuItem';
 
 class AdminManageOutletLocations extends Component {
 

@@ -10,8 +10,6 @@ import StarIcon from '@material-ui/icons/Star';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
 import Title from '../../../Title/Title';
 import swal from "sweetalert";
 import BackButton from '../../../BackButton/BackButton';

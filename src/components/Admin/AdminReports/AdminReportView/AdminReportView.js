@@ -21,6 +21,11 @@ class AdminReportView extends Component {
         counter: 0
     }
 
+    componentWillUnmount() {
+        this.handleClear();
+        this.props.dispatch({ type: 'CLEAR_REPORT_MEALS'})
+    }
+
     handleReturnClick = () => {
         this.handleClear();
         this.props.dispatch({ type: 'CLEAR_REPORT_MEALS'})
