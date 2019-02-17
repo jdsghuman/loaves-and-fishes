@@ -51,6 +51,7 @@ class AdminManageOutletCategories extends Component {
           swal("Deletion has been canceled!")
         }
       });
+      this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' });
   }
 
   render() {

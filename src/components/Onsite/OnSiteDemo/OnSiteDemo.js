@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import './OnSiteDemo.css';
 import BackButton from '../../BackButton/BackButton';
 import { Offline, Online } from "react-detect-offline";
+import OfflinePrompt from '../../OfflinePrompt/OfflinePrompt';
 
 class OnSiteDemo extends Component {
     state = {
@@ -112,7 +113,9 @@ class OnSiteDemo extends Component {
                 <div className="count__container">
                     <h3 className="count__total-display">Total: <span style={{ fontWeight: '700', color: '#98223e' }}>{this.state.count}</span></h3>
                 </div>
-                <MyLocation />
+                {/* Location display */}
+                <Online><MyLocation /></Online>
+                <Offline><OfflinePrompt /></Offline>
                 <BackButton click={() => this.props.history.goBack()} />
                 <br />
                 <div style={divStyle}>
@@ -126,6 +129,7 @@ class OnSiteDemo extends Component {
                             multiple
                             native
                             value={this.state.selectedGender}
+                            className={classNames(classes.selectMenu)}
                             onChange={this.handleGenderChange}
                             underlinestyle={{ 'border-color': 'red !important' }}
                             inputProps={{
@@ -149,6 +153,7 @@ class OnSiteDemo extends Component {
                             native
                             value={this.state.selectedRace}
                             onChange={this.handleRaceChange}
+                            className={classNames(classes.selectMenu)}
                             inputProps={{
                                 id: 'select-multiple-native',
                             }}
@@ -170,6 +175,7 @@ class OnSiteDemo extends Component {
                             native
                             value={this.state.selectedAge}
                             onChange={this.handleAgeChange}
+                            className={classNames(classes.selectMenu)}
                             inputProps={{
                                 id: 'select-multiple-native',
                             }}
@@ -221,6 +227,10 @@ const styles = theme => ({
             backgroundColor: '#6a172b',
         },
     },
+    selectMenu: {
+        background: '#000000',
+        color: '#ffffff'
+    }
 });
 
 const mapStateToProps = (reduxStore) => ({

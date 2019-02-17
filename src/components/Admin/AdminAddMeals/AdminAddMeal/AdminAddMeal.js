@@ -11,7 +11,6 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import swal from "sweetalert";
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import Title from '../../../Title/Title';
 import BackButton from '../../../BackButton/BackButton';
 
@@ -102,26 +101,30 @@ class AdminAddMeal extends Component {
 
     handleSubmit = () => {
         
-        swal({
-            title: "Add Meal Count",
-            text: "Are you sure you want to submit this meal count?",
-            icon: "info",
-            buttons: ['No', 'Yes'],
-        })
-            .then(willSubmit => {
-                if (willSubmit) {
-                    this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
-                    this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' })
-                    this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' })
-                    this.clearState();
-                    this.props.history.push('/admin');
-                }
-                else {
-                    swal("Meal count not entered.")
-                }
-            });
-       
-
+        // Check 
+        if(this.state.count === '' || this.state.location === '') {
+            swal({
+                title: "Add Meal Count",
+                text: "Please ensure the following are not empty: (Count, Location)",
+                button: "Ok",
+            })
+        } else {
+            swal({
+                title: "Add Meal Count",
+                text: "Are you sure you want to submit this meal count?",
+                icon: "info",
+                buttons: ['No', 'Yes'],
+            })
+                .then(willSubmit => {
+                    if (willSubmit) {
+                        this.props.dispatch({ type: "ADD_MEAL_COUNT", payload: this.state })
+                        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_DAILY' })
+                        this.props.dispatch({ type: 'FETCH_DASHBOARD_COUNT_MONTHLY' })
+                        this.clearState();
+                        this.props.history.push('/admin');
+                    }
+                });
+        }       
     }
     render() {
         const { classes } = this.props;
@@ -162,6 +165,7 @@ class AdminAddMeal extends Component {
                             margin="normal"
                             variant="outlined"
                             className={classes.textField}
+                            style={{ width: '175px', margin: 20 }}
                         />
                     </FormControl>
                 </div>

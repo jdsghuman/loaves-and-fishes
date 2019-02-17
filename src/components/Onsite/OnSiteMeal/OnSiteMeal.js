@@ -11,10 +11,12 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
 import { Offline, Online } from "react-detect-offline";
+import PropTypes from 'prop-types';
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
 import BackButton from '../../BackButton/BackButton';
+import OfflinePrompt from '../../OfflinePrompt/OfflinePrompt';
 
 class OnSiteMeal extends Component {
 
@@ -194,7 +196,8 @@ class OnSiteMeal extends Component {
             <div className="div__container container__background">
                 <Title>OnSite Meal</Title>
                 {/* Location display */}
-                <MyLocation />
+                <Online><MyLocation /></Online>
+                <Offline><OfflinePrompt /></Offline>
                 <BackButton click={
                     () => swal({
                         title: "Are you sure?",
@@ -331,6 +334,10 @@ const styles = theme => ({
         },
     },
 });
+
+OnSiteMeal.propTypes = {
+    age: PropTypes.array.isRequired
+}
 
 const mapStateToProps = store => ({
     onSite: store.onSiteReducer,

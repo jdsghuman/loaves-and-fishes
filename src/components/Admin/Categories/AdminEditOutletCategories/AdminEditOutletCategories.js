@@ -6,12 +6,9 @@ import Title from '../../../Title/Title';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
-import swal from "sweetalert";
-import moment from 'moment';
 import BackButton from '../../../BackButton/BackButton';
 
 class AdminEditOutletCategories extends Component {
