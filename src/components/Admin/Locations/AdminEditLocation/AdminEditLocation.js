@@ -39,6 +39,7 @@ class AdminEditLocation extends Component {
     }
 
     componentDidMount() {
+        this.props.dispatch({ type: 'FETCH_ACTIVE_CATEGORIES' });
         this.getLocationData();
         this.checkData();
     }

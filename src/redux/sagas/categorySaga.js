@@ -68,11 +68,26 @@ function* editCategory(action) {
     }
 }
 
+function* fetchActiveCategories() {
+    try {
+        const config = {
+            headers: { 'Content-Type': 'application/json' },
+            withCredentials: true,
+        };
+
+        const response = yield axios.get('/api/category/active', config);
+        yield put({ type: 'SET_CATEGORY_OUTLET', payload: response.data });
+    } catch (error) {
+        console.log('User get request failed in fetchActiveCategories', error);
+    }
+}
+
 function* categorySaga() {
     yield takeEvery('FETCH_CATEGORY_OUTLET', fetchCategory);
     yield takeEvery('ADD_NEW_CATEGORY', postNewCategory);
     yield takeEvery('DELETE_CATEGORY_OUTLET', deleteCategories);
     yield takeEvery('EDIT_CATEGORY', editCategory);
+    yield takeEvery('FETCH_ACTIVE_CATEGORIES', fetchActiveCategories);
 }
 
 export default categorySaga;
