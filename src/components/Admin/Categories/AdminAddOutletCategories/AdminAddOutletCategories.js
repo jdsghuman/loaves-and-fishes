@@ -11,6 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import BackButton from '../../../BackButton/BackButton';
+import swal from "sweetalert";
 
 class AdminAddOutletCategories extends Component {
 
@@ -34,7 +35,9 @@ class AdminAddOutletCategories extends Component {
     };
 
     handleClick = event => {
-        event.preventDefault();
+        // If Category name is entered
+        if(this.state.categoryName !== '' && this.state.selectedSubCategory !== '') {
+            event.preventDefault();
         console.log('in handleClick', this.state);
         this.props.dispatch({ type: "ADD_NEW_CATEGORY", payload: this.state});
         this.setState({
@@ -45,6 +48,16 @@ class AdminAddOutletCategories extends Component {
             time: moment().format()
         })
         this.props.history.push('/adminManageOutletCategories');
+        } else {
+            // Category name is not entered
+            swal({
+                title: "Category",
+                text: "Please enter a valid Category name and select a Sub Category",
+                button: "Ok",
+            })
+        }
+        // Refresh Categories state in redux
+        this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' });
     }
 
     render() {

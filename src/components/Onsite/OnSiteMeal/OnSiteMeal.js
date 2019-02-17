@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
 import { Offline, Online } from "react-detect-offline";
+import PropTypes from 'prop-types';
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
@@ -333,6 +334,10 @@ const styles = theme => ({
         },
     },
 });
+
+OnSiteMeal.propTypes = {
+    age: PropTypes.array.isRequired
+}
 
 const mapStateToProps = store => ({
     onSite: store.onSiteReducer,
