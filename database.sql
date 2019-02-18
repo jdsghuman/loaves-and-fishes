@@ -185,7 +185,7 @@ VALUES('Preschool (0-4)'),
 
 INSERT INTO outlet_sub_category
     ("category_name")
-VALUES('None');
+VALUES('None'),
     ('Open'),
     ('Closed');
 
