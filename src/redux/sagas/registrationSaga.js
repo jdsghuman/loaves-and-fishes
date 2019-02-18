@@ -11,9 +11,9 @@ function* registerUser(action) {
     // passes the username and password from the payload to the server
     yield axios.post('api/user/register', action.payload);
     swal({
-      title: "Thank you for registering",
-      text: "Upon approval you will receive an email and will be able to log in, please contact Loaves & Fishes with any questions at grants@loavesandfishesmn.org",
-      dangerMode: true,
+      title: "Thank you for registering!",
+      text: "Upon approval you will receive an email and will be able to log in, please contact Loaves & Fishes at grants@loavesandfishesmn.org with any questions.",
+      button: "Ok",
     })
       .then(willSubmit => {
         if (willSubmit) {
@@ -31,6 +31,12 @@ function* registerUser(action) {
   } catch (error) {
       console.log('Error with user registration:', error);
       yield put({type: 'REGISTRATION_FAILED'});
+    swal({
+      title: "Error",
+      text: "Oops! That didn\'t work. The username might already be taken. Try again!",
+      icon: "warning",
+      button: "Ok"
+    });
   }
 }
 
