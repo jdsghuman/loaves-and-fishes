@@ -37,7 +37,7 @@ body {
     padding: 5px;
     padding-bottom: 15px;
     margin-bottom: 80px;
-    box-shadow: 0 5px 5px rgba(55, 55, 55, 0.5);
+    box-shadow: 0 4px 4px rgba(55, 55, 55, 0.5);
 }
 
 /* Applies a large background color to the div */
@@ -50,7 +50,7 @@ body {
     padding: 5px;
     padding-bottom: 15px;
     margin-bottom: 80px;
-    box-shadow: 0 5px 5px rgba(55, 55, 55, 0.5);
+    box-shadow: 0 4px 4px rgba(55, 55, 55, 0.5);
 }
 
 .alert {
