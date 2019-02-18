@@ -105,6 +105,13 @@ class OnSiteMeal extends Component {
 
     }
 
+    handleAgeGroupInput = () => {
+        swal({
+            text: "Cannot manually change counts when categorized by age group",
+            button: "Ok",
+        })
+    }
+    
     handleChange = name => event => {
         this.setState({
             count: event.target.value,
@@ -259,6 +266,7 @@ class OnSiteMeal extends Component {
                             className={this.props.classes.textField}
                             margin="normal"
                             variant="outlined"
+                            onClick={this.handleAgeGroupInput}
                             InputProps={{
                                 classes: {
                                     input: this.props.classes.resize,
@@ -277,6 +285,7 @@ class OnSiteMeal extends Component {
                             margin="normal"
                             readOnly={true}
                             variant="outlined"
+                            onClick={this.handleAgeGroupInput}
                             InputProps={{
                                 classes: {
                                     input: this.props.classes.resize,
