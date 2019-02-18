@@ -129,7 +129,6 @@ class OnSiteDemo extends Component {
                             multiple
                             native
                             value={this.state.selectedGender}
-                            className={classNames(classes.selectMenu)}
                             onChange={this.handleGenderChange}
                             underlinestyle={{ 'border-color': 'red !important' }}
                             inputProps={{
@@ -153,7 +152,6 @@ class OnSiteDemo extends Component {
                             native
                             value={this.state.selectedRace}
                             onChange={this.handleRaceChange}
-                            className={classNames(classes.selectMenu)}
                             inputProps={{
                                 id: 'select-multiple-native',
                             }}
@@ -175,7 +173,6 @@ class OnSiteDemo extends Component {
                             native
                             value={this.state.selectedAge}
                             onChange={this.handleAgeChange}
-                            className={classNames(classes.selectMenu)}
                             inputProps={{
                                 id: 'select-multiple-native',
                             }}
@@ -227,10 +224,6 @@ const styles = theme => ({
             backgroundColor: '#6a172b',
         },
     },
-    selectMenu: {
-        background: '#000000',
-        color: '#ffffff'
-    }
 });
 
 const mapStateToProps = (reduxStore) => ({
