@@ -37,7 +37,8 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
-    } else {
+    }
+    else {
       // this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
       swal({
         title: "Error",
@@ -117,6 +118,7 @@ class LoginPage extends Component {
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
+  users: state.userListReducer,
 });
 
 export default withStyles(styles)(connect(mapStateToProps)(LoginPage));
