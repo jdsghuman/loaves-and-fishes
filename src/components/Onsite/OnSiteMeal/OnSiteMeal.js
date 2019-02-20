@@ -111,7 +111,7 @@ class OnSiteMeal extends Component {
             button: "Ok",
         })
     }
-    
+
     handleChange = name => event => {
         this.setState({
             count: event.target.value,
@@ -296,12 +296,14 @@ class OnSiteMeal extends Component {
                     </div>
                 }
                 <Online>
-                    <Button disabled={this.state.count === 0 ? true : false}
-                        className={classNames(classes.margin, classes.cssRoot)}
-                        onClick={this.handleSubmit}>Submit
-                </Button>
+                    {this.state.count !== 0 &&
+                        <Button
+                            className={classNames(classes.margin, classes.cssRoot)}
+                            onClick={this.handleSubmit}>Submit
+                        </Button>
+                    }
                 </Online>
-                <Offline><p style={{color: '#ff0000'}}>You're offline right now. Check your connection.</p></Offline>
+                <Offline><p style={{ color: '#ff0000' }}>You're offline right now. Check your connection.</p></Offline>
             </div>
         )
     }
