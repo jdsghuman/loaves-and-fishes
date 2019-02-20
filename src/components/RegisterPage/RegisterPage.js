@@ -28,10 +28,14 @@ class RegisterPage extends Component {
       });
     } else {
       this.props.dispatch({ type: 'REGISTRATION_INPUT_ERROR' }); 
+      swal({
+        title: "Error",
+        text: "Oops! Please complete all fields to register!",
+        icon: "warning",
+        button: "Ok"
+      });
       this.props.history.push('/home');
-
     }
-    
   } // end registerUser
 
   handleInputChangeFor = propertyName => (event) => {
