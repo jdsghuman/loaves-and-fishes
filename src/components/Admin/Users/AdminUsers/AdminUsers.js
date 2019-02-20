@@ -29,8 +29,6 @@ class AdminUsers extends Component {
   }
 
   removeUser = (id, admin) => {
-    console.log('in remove user', id);
-    console.log('get admin ', admin);
     // Prompt user with alert before deleting user
     if (admin) {
       swal({
@@ -78,7 +76,6 @@ class AdminUsers extends Component {
           </TableHead>
           <TableBody>
             {this.props.reduxStore.userListReducer.map((list) => {
-              console.log('checking ', list);
               return (
                 <TableRow key={list.id}>
                   <TableCell >{list.new ? <StarIcon color="secondary" /> : null}</TableCell>

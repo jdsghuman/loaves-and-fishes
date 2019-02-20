@@ -35,7 +35,6 @@ class AdminManageOutletCategories extends Component {
   }
 
   removeCategories = (id) => {
-    console.log('in remove categories', id)
     swal({
       title: "Are you sure?",
       text: "This will permanently delete the outlet category. Are you sure you want to delete this category?",

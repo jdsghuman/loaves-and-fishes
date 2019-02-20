@@ -46,7 +46,6 @@ class OnSiteDemo extends Component {
 
 
     handleGenderChange = (event) => {
-        console.log('in handleGenderChange');
         this.setState({
             ...this.state,
             selectedGender: event.target.value
@@ -54,7 +53,6 @@ class OnSiteDemo extends Component {
     }
 
     handleRaceChange = (event) => {
-        console.log('in handleGenderChange');
         this.setState({
             ...this.state,
             selectedRace: event.target.value
@@ -62,7 +60,6 @@ class OnSiteDemo extends Component {
     }
 
     handleAgeChange = (event) => {
-        console.log('in handleAgeChange');
         this.setState({
             ...this.state,
             selectedAge: event.target.value
@@ -70,7 +67,6 @@ class OnSiteDemo extends Component {
     }
 
     handleSubmit = () => {
-        console.log('in handleSubmit');
         this.props.dispatch({ type: "ADD_DEMO", payload: this.state })
         this.setState({
             ...this.state,
@@ -106,7 +102,6 @@ class OnSiteDemo extends Component {
                     );
                 }
             })
-        console.log('handleChange AFTER click', this.state);
         return (
             <div className="div__container container__background">
                 <Title>OnSite Demographics</Title>

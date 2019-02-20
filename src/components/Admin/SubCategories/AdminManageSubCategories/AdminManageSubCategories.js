@@ -73,7 +73,6 @@ class AdminManageSubCategories extends Component {
                             <TableBody>
                                 {this.props.subCategories.map((subCategory) => {
                                     if(subCategory.category_name !== 'None') {
-                                    console.log('checking ', subCategory);
                                     return (
 
                                         <TableRow key={subCategory.id} >

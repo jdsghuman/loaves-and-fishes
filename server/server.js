@@ -17,7 +17,7 @@ const locationRouter = require('./routes/location.router');
 const categoryRouter = require('./routes/category.router');
 const subCategoryRouter = require('./routes/subcategory.router');
 const dashboardRouter = require('./routes/dashboard.router');
-const bulkDataRouter = require('./routes/bulkdata.router'); // stretch goal 
+
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -40,7 +40,7 @@ app.use('/api/report', reportRouter);
 app.use('/api/category', categoryRouter);
 app.use('/api/location', locationRouter);
 app.use('/api/subcategory', subCategoryRouter);
-app.use('/api/bulkdata', bulkDataRouter); // empty for now stretch goal
+
 
 // Serve static files
 app.use(express.static('build'));

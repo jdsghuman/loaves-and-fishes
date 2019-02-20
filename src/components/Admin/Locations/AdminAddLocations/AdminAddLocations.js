@@ -23,7 +23,6 @@ class AdminAddLocations extends Component {
     }
 
     handleInputChangeFor = propertyName => event => {
-        console.log("in handleInputChangeFor");
         this.setState({
             ...this.state,
             [propertyName]: event.target.value
@@ -38,7 +37,6 @@ class AdminAddLocations extends Component {
             this.state.state !== '' &&
             this.state.zip !== '') {
             event.preventDefault();
-            console.log('in handleClick', this.state);
             this.props.dispatch({ type: "ADD_LOCATION", payload: this.state });
             this.setState({
                 ...this.state,

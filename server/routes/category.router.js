@@ -14,14 +14,13 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(sql).then((response) => {
         res.send(response.rows)
     }).catch((error) => {
-        console.log(error);
+        console.log('error in get route for categories', error);
         res.sendStatus(500);
     })
 });
 
 // Add outlet category
 router.post('/', rejectUnauthenticated, (req, res) => {
-    console.log(req.user);
     if (req.user.admin) {
         const newOutletCategory = req.body;
         const queryText = `INSERT INTO "meal_outlet_category" ("category_name", "sub_category", "notes", "updated_by", "date_updated")
@@ -36,7 +35,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         pool.query(queryText, queryValues).then(result => {
             res.sendStatus(204);
         }).catch(error => {
-            console.log('in outlet category POST ROUTER error', error);
+            console.log('error in post route for categories', error);
             res.sendStatus(500)
         })
     } else {
@@ -47,13 +46,12 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 // Delete outlet category
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     if(req.user.admin) {
-        console.log('testing delete route', req.params.id);
         let id = req.params.id
         let queryText = `DELETE FROM "meal_outlet_category" WHERE id = $1;`;
         pool.query(queryText, [id]).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
-            console.log('error in delete route', error);
+            console.log('error in delete route for categories', error);
             res.sendStatus(500)
         })
     } else {
@@ -65,7 +63,6 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
 router.put('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
         const catId = req.params.id;
-        console.log('category id ----', catId);
         const user = req.user.id;
         const date = moment().format();
         const { category_name, sub_category, notes, active } = req.body;
@@ -74,10 +71,9 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
                            WHERE "id" = $7;`;
         pool.query(queryText, [category_name, sub_category, notes, active, user, date, catId])
             .then((result) => {
-                console.log(result);
                 res.sendStatus(201);
             }).catch((error) => {
-                console.log('in outlet category UPDATE ROUTER error', error);
+                console.log('error in put route at categories', error);
                 res.sendStatus(500)
             })
     } else {

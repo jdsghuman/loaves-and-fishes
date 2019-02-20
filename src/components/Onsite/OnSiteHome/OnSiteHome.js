@@ -41,8 +41,6 @@ class OnSiteHome extends Component {
     }
 
     handleLocationChange = (event) => {
-        console.log(event.target.value)
-        console.log('in handleLocationChange');
         this.setState({
             ...this.state,
             selectedLocation: event.target.value

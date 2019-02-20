@@ -7,7 +7,6 @@ const moment = require('moment')
 // Get all outlet locations
 router.get('/', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
-        console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT * FROM "location"
                            ORDER BY "location"."location_name" ASC;`;
         pool.query(queryText)
@@ -24,7 +23,6 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 // Get all outlet locations for onSiteHome
 router.get('/active', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
-        console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT * FROM "location"
         WHERE "location".active = true
         ORDER BY "location"."location_name" ASC;`;
@@ -42,7 +40,6 @@ router.get('/active', rejectUnauthenticated, (req, res) => {
 // Get all outlet locations for Admin
 router.get('/adminlocations', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
-        console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT "location".id, "location".location_name, "location".street_address, "location".city, "location".state,
                           "location".zip, "location".county, "location".active, "location".notes, "person"."name", "location".date_updated FROM "location"
                           LEFT JOIN "person" ON "location".updated_by = "person".id
@@ -61,7 +58,6 @@ router.get('/adminlocations', rejectUnauthenticated, (req, res) => {
 // Get all outlet locations for Admin ---- COPY THIS FOR MANAGE LOCATIONS --------------- ******
 router.get('/manageadminlocations', rejectUnauthenticated, (req, res) => {
     if (req.isAuthenticated()) {
-        console.log('authenticated', req.isAuthenticated());
         const queryText = `SELECT "location".id, "location".location_name, "meal_outlet_category".category_name, "location".street_address, "location".city, "location".state,
                           "location".zip, "location".county, "location".active, "location".notes, "person"."name", "location".date_updated FROM "location"
                           LEFT JOIN "location_outlet" ON "location".id = "location_outlet".location_id
@@ -83,7 +79,6 @@ router.get('/manageadminlocations', rejectUnauthenticated, (req, res) => {
 // Add outlet location
 router.post('/', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
-        console.log(req.user);
         const newOutletLocation = req.body;
         const queryText = `INSERT INTO "location" ("location_name", "street_address", "city", "state", "zip", "county", "notes", "updated_by", "date_updated")
                            VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9);`;
@@ -112,7 +107,6 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 // Delete outlet location
 router.delete('/:id', rejectUnauthenticated, (req, res) => {
     if (req.user.admin) {
-        console.log('testing delete route', req.params.id);
         let id = req.params.id
         let queryText = `DELETE FROM "location" WHERE id = $1;`;
         pool.query(queryText, [id]).then((result) => {
@@ -132,8 +126,6 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
         const updatedLocation = req.body;
         const user = req.user.id;
         const dateUpdated = moment().format();
-        console.log('updated location...', updatedLocation);
-        console.log('updated id...', reqId);
         const { location_name, street_address, city, state, zip, county, active, notes } = req.body;
         const queryString = `UPDATE "location" SET "location_name"=$1, "street_address"=$2, "city"=$3, "state"=$4, "zip"=$5, "county"=$6, "active"=$7, "notes"=$8, "updated_by"=$9, "date_updated"=$10 WHERE id=$11;`;
         pool.query(queryString, [location_name, street_address, city, state, zip, county, active, notes, user, dateUpdated, reqId])
@@ -153,7 +145,6 @@ router.get('/locationoutlet', rejectUnauthenticated, (req, res) => {
     const queryString = `SELECT * FROM "location_outlet";`;
     pool.query(queryString)
         .then(result => {
-            console.log('location_outlet ----', result.rows);
             res.send(result.rows);
         })
         .catch(error => {
@@ -166,8 +157,6 @@ router.put('/locationoutlet/:id', rejectUnauthenticated, (req, res) => {
     if(req.user.admin) {
         const location_id = req.body.id;
         const categories = req.body.categories;
-        console.log('location_id...', location_id);
-        console.log('updatedLocationOutlet...', categories);
         // DELETE WHERE ID = $1
         const deleteQuery = `DELETE from "location_outlet" WHERE "location_outlet".location_id = $1;`;
         pool.query(deleteQuery, [location_id])

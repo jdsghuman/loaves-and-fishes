@@ -24,7 +24,6 @@ class AdminEditSubCategories extends Component {
 
     componentDidMount() {
         this.getSubCategoryData();
-        // this.checkData();
     }
 
     componentWillMount() {
@@ -64,7 +63,6 @@ class AdminEditSubCategories extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log('after Click', this.state.updateSubCategory);
         return (
             <div className="div__container container__background--large">
                 <Title>Edit Sub Category: <span style={{ color: '#98223e' }}>{this.state.editSubCategory.category_name}</span></Title>
