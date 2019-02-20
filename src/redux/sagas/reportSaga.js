@@ -9,7 +9,6 @@ function* fetchTotal(action) {
         const response = yield axios.get(`/api/report/total`, config)
         yield put({ type: 'SET_TOTAL', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all meals ${error}`);
     }
 }
 
@@ -21,7 +20,6 @@ function* fetchReportMeals(action) {
         const response = yield axios.get(`/api/report/all`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all meals ${error}`);
     }
 }
 
@@ -33,7 +31,6 @@ function* fetchLocationMeals(action) {
         const response = yield axios.get(`/api/report/alllocation`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location meals ${error}`);
     }
 }
 
@@ -45,7 +42,6 @@ function* fetchCategoryMeals(action) {
         const response = yield axios.get(`/api/report/allcategory`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all category meals ${error}`);
     }
 }
 
@@ -57,7 +53,6 @@ function* fetchLocationCategoryMeals(action) {
         const response = yield axios.get(`/api/report/alllocationcategory`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -69,7 +64,6 @@ function* fetchFarmMeals(action) {
         const response = yield axios.get(`/api/report/allfarm`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -81,7 +75,6 @@ function* fetchLocationFarmMeals(action) {
         const response = yield axios.get(`/api/report/allfarmlocation`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -93,7 +86,6 @@ function* fetchCategoryFarmMeals(action) {
         const response = yield axios.get(`/api/report/allfarmcategory`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -105,7 +97,6 @@ function* fetchLocationCategoryFarmMeals(action) {
         const response = yield axios.get(`/api/report/allfarmlocationcategory`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -117,7 +108,6 @@ function* fetchSummerMeals(action) {
         const response = yield axios.get(`/api/report/allsummer`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -129,7 +119,6 @@ function* fetchLocationSummerMeals(action) {
         const response = yield axios.get(`/api/report/allsummerlocation`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -141,7 +130,6 @@ function* fetchCategorySummerMeals(action) {
         const response = yield axios.get(`/api/report/allsummercategory`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -153,7 +141,6 @@ function* fetchLocationCategorySummerMeals(action) {
         const response = yield axios.get(`/api/report/allsummerlocationcategory`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -165,7 +152,6 @@ function* fetchDemoGender(action) {
         const response = yield axios.get(`/api/report/demogender`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -177,7 +163,6 @@ function* fetchDemoRace(action) {
         const response = yield axios.get(`/api/report/demorace`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -189,7 +174,6 @@ function* fetchDemoAge(action) {
         const response = yield axios.get(`/api/report/demoage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -201,7 +185,6 @@ function* fetchDemoGenderRace(action) {
         const response = yield axios.get(`/api/report/demogenderrace`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -213,7 +196,6 @@ function* fetchDemoGenderAge(action) {
         const response = yield axios.get(`/api/report/demogenderage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -225,7 +207,6 @@ function* fetchDemoGenderRaceAge(action) {
         const response = yield axios.get(`/api/report/demogenderraceage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -237,7 +218,6 @@ function* fetchDemoLocationGender(action) {
         const response = yield axios.get(`/api/report/demolocationgender`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -249,7 +229,6 @@ function* fetchDemoLocationRace(action) {
         const response = yield axios.get(`/api/report/demolocationrace`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -261,7 +240,6 @@ function* fetchDemoLocationAge(action) {
         const response = yield axios.get(`/api/report/demolocationage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -273,7 +251,6 @@ function* fetchDemoLocationGenderRace(action) {
         const response = yield axios.get(`/api/report/demolocationgenderrace`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -285,7 +262,6 @@ function* fetchDemoLocationGenderAge(action) {
         const response = yield axios.get(`/api/report/demolocationgenderage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -297,7 +273,6 @@ function* fetchDemoLocationGenderRaceAge(action) {
         const response = yield axios.get(`/api/report/demolocationgenderraceage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -309,7 +284,6 @@ function* fetchDemoRaceAge(action) {
         const response = yield axios.get(`/api/report/demoraceage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 
@@ -321,7 +295,6 @@ function* fetchDemoLocationRaceAge(action) {
         const response = yield axios.get(`/api/report/demolocationraceage`, config)
         yield put({ type: 'SET_REPORT_MEALS', payload: response.data });
     } catch (error) {
-        console.log(`Error getting all location category meals ${error}`);
     }
 }
 

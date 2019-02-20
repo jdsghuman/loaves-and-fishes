@@ -44,8 +44,6 @@ class AdminAddMeal extends Component {
     }
 
     handleLocationChange = (event) => {
-        console.log(event.target.value)
-        console.log('in handleLocationChange');
         this.setState({
             ...this.state,
             location: event.target.value
@@ -136,7 +134,6 @@ class AdminAddMeal extends Component {
                 );
             })
 
-        console.log(this.state);
 
         return (
             <div className="div__container container__background--large">

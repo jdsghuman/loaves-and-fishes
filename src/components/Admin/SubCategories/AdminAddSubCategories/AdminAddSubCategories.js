@@ -15,7 +15,6 @@ class AdminAddSubCategories extends Component {
     }
 
     handleChange = (event) => {
-        console.log("in handleChange");
         this.setState({
             ...this.state,
             subCategory: event.target.value,
@@ -26,7 +25,6 @@ class AdminAddSubCategories extends Component {
         // Check if input is not empty 
         if(this.state.subCategory !== '') {
             event.preventDefault();
-        console.log('in handleClick');
         this.props.dispatch({ type: "ADD_SUB_CATEGORY", payload: this.state });
         this.setState({
             ...this.state,

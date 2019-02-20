@@ -37,7 +37,7 @@ class AdminReportView extends Component {
             dataToExport: [],
             counter: 0
         })
-        console.log('in handleClear', this.state);
+        
 
     }
 

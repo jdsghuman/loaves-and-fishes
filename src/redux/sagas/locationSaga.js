@@ -13,7 +13,6 @@ function* fetchLocations() {
         const response = yield axios.get('/api/location', config);
         yield put({ type: 'SET_LOCATIONS', payload: response.data });
     } catch (error) {
-        console.log('User get request failed', error);
     }
 }
 
@@ -22,7 +21,6 @@ function* fetchLocationOutlet() {
         const response = yield axios.get('api/location/locationoutlet');
         yield put({ type: 'SET_LOCATION_OUTLET', payload: response.data });
     } catch(error) {
-        console.log(`Error on loation_outlet ${error}`);
     }
 }
 
@@ -36,7 +34,6 @@ function* fetchActiveLocations() {
         const response = yield axios.get('/api/location/active', config);
         yield put({ type: 'SET_LOCATIONS', payload: response.data });
     } catch (error) {
-        console.log('User get request failed', error);
     }
 }
 
@@ -44,7 +41,6 @@ function* addLastLocation(action) {
     try {
         yield axios.put('/api/user/location', action.payload);
     } catch (error) {
-        console.log('User get request failed', error);
     }
 }
 
@@ -60,7 +56,6 @@ function* updateLocation(action) {
             buttons: "Ok",
         })
     } catch(error) {
-        console.log(`Error in update location ${error}`);
     }
 }
 
@@ -68,7 +63,6 @@ function* updateOutletLocation(action) {
     try {
         yield axios.put('api/location/locationoutlet/:id', action.payload);
     } catch(error) {
-        console.log(`Error update outlet location ${error}`);
     } 
 }
 

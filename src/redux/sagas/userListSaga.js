@@ -12,7 +12,6 @@ function* fetchUserList() {
         const response = yield axios.get('/api/userList', config);
         yield put({ type: 'SET_USER_LIST', payload: response.data });
     } catch (error) {
-        console.log('User get request failed', error);
     }
 }
 
@@ -26,12 +25,10 @@ function* deleteUsers(action) {
         yield put({ type: 'FETCH_USER', payload: action.payload });
 
     } catch (error) {
-        console.log('delete saga failed for USERS', error);
     }
 }
 
 function* editUsers(action) {
-    console.log('editUsers');
     try {
         const response = yield axios.put(`/api/userList/${action.payload.id}`, action.payload);
         if (response) {
@@ -44,7 +41,6 @@ function* editUsers(action) {
         }
         yield put({ type: 'FETCH_USER_LIST' });
     } catch (error) {
-        console.log(`Error with edit user saga ${error}`);
         swal({
             title: "Error",
             text: "User is not updated!",

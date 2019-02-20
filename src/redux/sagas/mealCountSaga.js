@@ -5,7 +5,6 @@ function* addMealCount(action) {
   try {
     yield axios.post('/api/count', action.payload);
   } catch (error) {
-    console.log(`Error adding meal count ${error}`);
   }
 }
 
@@ -13,7 +12,6 @@ function* addMealCountAdult(action) {
   try {
     yield axios.post('/api/count/adult', action.payload);
   } catch(error) {
-    console.log(`Error adding Adult meal ${error}`);
   }
 }
 
@@ -21,7 +19,6 @@ function* addMealCountChild(action) {
   try {
     yield axios.post('/api/count/child', action.payload);
   } catch(error) {
-    console.log(`Error adding Child meal ${error}`)
   }
 }
 

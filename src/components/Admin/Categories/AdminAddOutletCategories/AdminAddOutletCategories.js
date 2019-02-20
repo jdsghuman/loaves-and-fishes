@@ -27,7 +27,6 @@ class AdminAddOutletCategories extends Component {
     }
 
     handleInputChangeFor = propertyName => event => {
-        console.log("in handleInputChangeFor");
         this.setState({
             ...this.state,
             [propertyName]: event.target.value
@@ -38,7 +37,6 @@ class AdminAddOutletCategories extends Component {
         // If Category name is entered
         if(this.state.categoryName !== '' && this.state.selectedSubCategory !== '') {
             event.preventDefault();
-        console.log('in handleClick', this.state);
         this.props.dispatch({ type: "ADD_NEW_CATEGORY", payload: this.state});
         this.setState({
             ...this.state,
@@ -68,7 +66,7 @@ class AdminAddOutletCategories extends Component {
                     <MenuItem key={subCategories.id} value={subCategories.id} id={subCategories.id}>{subCategories.category_name}</MenuItem>
                 );
             })
-            console.log('after Click', this.state);
+            
             
         return (
             <div className="div__container container__background--large">

@@ -8,7 +8,6 @@ function* fetchCategory() {
         const response = yield axios.get('/api/category');
         yield put({ type: 'SET_CATEGORY_OUTLET', payload: response.data });
     } catch (error) {
-        console.log('category get request failed', error);
     }
 }
 
@@ -23,7 +22,6 @@ function* postNewCategory(action) {
             button: "Ok"
         });
     } catch (error) {
-        console.log(' POST request failed', error);
     }
 }
 
@@ -34,7 +32,6 @@ function* deleteCategories(action) {
         yield put({ type: 'FETCH_CATEGORY_OUTLET' });
         swal("Deleted!", "Outlet category has been deleted!", "success");
     }catch (error){
-        console.log('delete saga failed for CATEGORIES', error);
         swal({
             title: "Error",
             text: "Outlet Category not deleted. Outlet Category is linked to an Outlet Location. Please make sure to unlink the Outlet Category from the Outlet Location in order to delete!",
@@ -58,7 +55,6 @@ function* editCategory(action) {
         yield put({ type: 'FETCH_SUB_CATEGORY' });
         yield put({ type: 'FETCH_CATEGORY_OUTLET' });
     } catch (error) {
-        console.log(`Error with edit sub category saga ${error}`);
         swal({
             title: "Error",
             text: "Category not updated!",

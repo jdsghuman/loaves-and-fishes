@@ -43,7 +43,6 @@ class AdminReportGenerations extends Component {
     }
 
     handleInputChangeFor = propertyName => event => {
-        console.log("in handleInputChangeFor");
         this.setState({
             ...this.state,
             [propertyName]: event.target.value

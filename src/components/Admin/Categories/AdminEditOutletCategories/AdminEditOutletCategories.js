@@ -24,12 +24,6 @@ class AdminEditOutletCategories extends Component {
         }
     }
 
-    // checkData = () => {
-    //     if (Object.keys(this.state.editCategory).length == 0) {
-    //         this.props.history.push('/admin');
-    //     }
-    // }
-
     componentDidMount() {
         this.props.dispatch({ type: 'FETCH_SUB_CATEGORY' })
         this.props.dispatch({ type: 'FETCH_CATEGORY_OUTLET' })
@@ -56,7 +50,6 @@ class AdminEditOutletCategories extends Component {
     }
 
     handleChange = event => {
-        console.log('in handleChange');
         this.setState({
             editCategory: {
                 ...this.state.editCategory,
@@ -67,12 +60,6 @@ class AdminEditOutletCategories extends Component {
 
     handleClick = () => {
         this.props.dispatch({ type: 'EDIT_CATEGORY', payload: this.state.editCategory });
-        // swal({
-        //     title: `Updated Category`,
-        //     text: "Category successfully updated",
-        //     icon: "success",
-        //     buttons: "Ok",
-        // })   
         this.props.history.push('/adminManageOutletCategories');
     }
 
@@ -85,7 +72,6 @@ class AdminEditOutletCategories extends Component {
                     <MenuItem key={subcategory.id} value={subcategory.id}>{subcategory.category_name}</MenuItem>
                 );
             })
-            console.log('afterClick', this.state);
         return (
             <div className="div__container container__background--large">
                 <Title>Edit Outlet Category</Title>

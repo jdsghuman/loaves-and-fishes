@@ -29,7 +29,6 @@ function* registerUser(action) {
     // after registration or after they log out
     yield put({type: 'SET_TO_LOGIN_MODE'});
   } catch (error) {
-      console.log('Error with user registration:', error);
       yield put({type: 'REGISTRATION_FAILED'});
   }
 }

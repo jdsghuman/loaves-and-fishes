@@ -13,7 +13,6 @@ function* fetchAdminLocation() {
         const response = yield axios.get('/api/location/adminlocations', config);
         yield put({ type: 'SET_ADMIN_LOCATION', payload: response.data });
     } catch (error) {
-        console.log('fetchAdminLocation GET request failed', error);
     }
 }
 
@@ -28,7 +27,6 @@ function* postAdminLocation(action) {
             button: "Ok"
         });
     } catch (error) {
-        console.log('adminLocation POST request failed', error);
     }
 }
 
@@ -37,7 +35,6 @@ function* deleteAdminLocation(action) {
         yield axios.delete(`/api/location/${action.payload}`);
         yield put({ type: 'FETCH_ADMIN_LOCATION' });
     }catch (error){
-        console.log('delete saga failed for Location', error);
     }
 }
 
