@@ -28,7 +28,7 @@ function* loginUser(action) {
       // if the username and password don't match in the database
       swal({
         title: "Error",
-        text: "Oops! The username and password didn't match. Try again!",
+        text: "Oops! The username or password didn't match. Try again!",
         icon: "warning",
         button: "Ok"
       });
