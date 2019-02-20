@@ -85,22 +85,4 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
     }
 });
 
-// Get all outlet categories for AdminManageOutletLocations
-router.get('/active', rejectUnauthenticated, (req, res) => {
-    if (req.user.admin) {
-        console.log('authenticated', req.isAuthenticated());
-        const queryText = `SELECT * FROM "meal_outlet_category"
-        WHERE "meal_outlet_category".active = true
-        ORDER BY "meal_outlet_category"."category_name" ASC;`;
-        pool.query(queryText)
-            .then(result => {
-                res.send(result.rows);
-            }).catch(error => {
-                console.log('in active outlet category GET ROUTER error', error);
-            })
-    } else {
-        res.sendStatus(403);
-    }
-});
-
 module.exports = router;
