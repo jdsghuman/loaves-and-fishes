@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Dashboard = (props) => (
     <div style={{ display: 'inline-block', borderRadius: '5%', minWidth: '175px', height: '95px', backgroundColor: 'rgba(0,0,0, 0.7)', marginRight: '15px', marginBottom: '10px', padding: '10px' }}>

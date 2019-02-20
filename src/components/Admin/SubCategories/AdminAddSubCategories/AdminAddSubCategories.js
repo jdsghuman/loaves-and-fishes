@@ -6,6 +6,7 @@ import Title from '../../../Title/Title';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import BackButton from '../../../BackButton/BackButton';
+import swal from "sweetalert";
 
 class AdminAddSubCategories extends Component {
 
@@ -22,14 +23,25 @@ class AdminAddSubCategories extends Component {
     };
 
     handleClick = event => {
-        event.preventDefault();
+        // Check if input is not empty 
+        if(this.state.subCategory !== '') {
+            event.preventDefault();
         console.log('in handleClick');
         this.props.dispatch({ type: "ADD_SUB_CATEGORY", payload: this.state });
         this.setState({
             ...this.state,
-            subCategory: '',
+            subCategory: ''
         })
-        this.props.history.push('/adminManageSubCategories')
+        this.props.history.push('/adminManageSubCategories');
+        } else {
+            // If input field is empty
+            swal({
+                title: "Sub Category",
+                text: "Please enter a valid Sub Category name",
+                button: "Ok",
+            })
+        }
+        
     }
 
     render() {

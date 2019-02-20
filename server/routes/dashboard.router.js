@@ -8,10 +8,11 @@ const moment = require('moment');
  */
 router.get('/', (req, res) => {
     const queryText = `SELECT SUM("count".meal_count) FROM "count"
-    WHERE "count".timestamp BETWEEN $1 AND $2;`;
+    WHERE "count".timestamp = $1;`;
       const queryValues = [
-        moment().subtract(1, 'days').calendar(),
-        moment().add(1, 'days').calendar()
+        // moment().subtract(1, 'days').calendar(),
+        // moment().add(1, 'days').calendar()
+          moment().format()
     ];
     console.log('newCount ---- ', queryValues);
     pool.query(queryText, queryValues)

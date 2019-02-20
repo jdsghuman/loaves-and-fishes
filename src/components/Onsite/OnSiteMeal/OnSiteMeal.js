@@ -11,6 +11,7 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import swal from "sweetalert";
 import { Offline, Online } from "react-detect-offline";
+import PropTypes from 'prop-types';
 
 import Title from '../../Title/Title';
 import MyLocation from '../../MyLocation/MyLocation';
@@ -102,6 +103,13 @@ class OnSiteMeal extends Component {
             }
         }
 
+    }
+
+    handleAgeGroupInput = () => {
+        swal({
+            text: "Cannot manually change counts when categorized by age group",
+            button: "Ok",
+        })
     }
 
     handleChange = name => event => {
@@ -258,6 +266,7 @@ class OnSiteMeal extends Component {
                             className={this.props.classes.textField}
                             margin="normal"
                             variant="outlined"
+                            onClick={this.handleAgeGroupInput}
                             InputProps={{
                                 classes: {
                                     input: this.props.classes.resize,
@@ -276,6 +285,7 @@ class OnSiteMeal extends Component {
                             margin="normal"
                             readOnly={true}
                             variant="outlined"
+                            onClick={this.handleAgeGroupInput}
                             InputProps={{
                                 classes: {
                                     input: this.props.classes.resize,
@@ -286,12 +296,14 @@ class OnSiteMeal extends Component {
                     </div>
                 }
                 <Online>
-                    <Button disabled={this.state.count === 0 ? true : false}
-                        className={classNames(classes.margin, classes.cssRoot)}
-                        onClick={this.handleSubmit}>Submit
-                </Button>
+                    {this.state.count !== 0 &&
+                        <Button
+                            className={classNames(classes.margin, classes.cssRoot)}
+                            onClick={this.handleSubmit}>Submit
+                        </Button>
+                    }
                 </Online>
-                <Offline><p style={{color: '#ff0000'}}>You're offline right now. Check your connection.</p></Offline>
+                <Offline><p style={{ color: '#ff0000' }}>You're offline right now. Check your connection.</p></Offline>
             </div>
         )
     }
@@ -333,6 +345,10 @@ const styles = theme => ({
         },
     },
 });
+
+OnSiteMeal.propTypes = {
+    age: PropTypes.array.isRequired
+}
 
 const mapStateToProps = store => ({
     onSite: store.onSiteReducer,

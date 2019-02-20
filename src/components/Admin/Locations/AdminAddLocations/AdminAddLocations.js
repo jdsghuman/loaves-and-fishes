@@ -7,6 +7,7 @@ import moment from 'moment';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import BackButton from '../../../BackButton/BackButton';
+import swal from "sweetalert";
 
 class AdminAddLocations extends Component {
 
@@ -30,28 +31,41 @@ class AdminAddLocations extends Component {
     };
 
     handleClick = event => {
-        event.preventDefault();
-        console.log('in handleClick', this.state);
-        this.props.dispatch({ type: "ADD_LOCATION", payload: this.state });
-        this.setState({
-            ...this.state,
-            locationName: '',
-            street: '',
-            city: '',
-            state: '',
-            zip: '',
-            county: '',
-            notes: '',
-            time: moment().format(),
-        })
-        this.props.history.push('/adminManageOutletLocations')
+        // Validate form
+        if (this.state.locationName !== '' && 
+            this.state.street !== '' && 
+            this.state.city !== '' &&
+            this.state.state !== '' &&
+            this.state.zip !== '') {
+            event.preventDefault();
+            console.log('in handleClick', this.state);
+            this.props.dispatch({ type: "ADD_LOCATION", payload: this.state });
+            this.setState({
+                ...this.state,
+                locationName: '',
+                street: '',
+                city: '',
+                state: '',
+                zip: '',
+                county: '',
+                notes: '',
+                time: moment().format(),
+            })
+            this.props.history.push('/adminManageOutletLocations')
+        } else {
+            swal({
+                title: "Add New Location",
+                text: "Please ensure all required fields are filled out",
+                button: "Ok",
+            })
+        }
     }
 
     render() {
         const { classes } = this.props;
         return (
             <div className="div__container container__background--large">
-            <BackButton click={() => this.props.history.goBack()} />
+                <BackButton click={() => this.props.history.goBack()} />
                 <Title>Add Location</Title>
                 <TextField
                     label="Location Name"
@@ -62,6 +76,7 @@ class AdminAddLocations extends Component {
                     margin="normal"
                     variant="outlined"
                     color="secondary"
+                    required={true}
                     className={classes.textField}
                 />
                 <TextField
@@ -72,6 +87,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('street')}
                     margin="normal"
                     variant="outlined"
+                    required={true}
                     className={classes.textField}
                 />
                 <TextField
@@ -82,6 +98,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('city')}
                     margin="normal"
                     variant="outlined"
+                    required={true}
                     className={classes.textField}
                 />
                 <TextField
@@ -92,6 +109,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('state')}
                     margin="normal"
                     variant="outlined"
+                    required={true}
                     className={classes.textField}
                 />
                 <TextField
@@ -102,6 +120,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('zip')}
                     margin="normal"
                     variant="outlined"
+                    required={true}
                     className={classes.textField}
                 />
                 <TextField
@@ -112,6 +131,7 @@ class AdminAddLocations extends Component {
                     onChange={this.handleInputChangeFor('county')}
                     margin="normal"
                     variant="outlined"
+                    required={true}
                     className={classes.textField}
                 />
                 <TextField

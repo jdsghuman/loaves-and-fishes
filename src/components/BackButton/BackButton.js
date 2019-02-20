@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { withRouter } from 'react-router'
 import './BackButton.css';
 
 class BackButton extends Component {
