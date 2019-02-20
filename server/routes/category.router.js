@@ -14,7 +14,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
     pool.query(sql).then((response) => {
         res.send(response.rows)
     }).catch((error) => {
-        console.log(error);
+        console.log('error in get route for categories', error);
         res.sendStatus(500);
     })
 });
@@ -35,7 +35,7 @@ router.post('/', rejectUnauthenticated, (req, res) => {
         pool.query(queryText, queryValues).then(result => {
             res.sendStatus(204);
         }).catch(error => {
-            console.log(error);
+            console.log('error in post route for categories', error);
             res.sendStatus(500)
         })
     } else {
@@ -51,7 +51,7 @@ router.delete('/:id', rejectUnauthenticated, (req, res) => {
         pool.query(queryText, [id]).then((result) => {
             res.send(result.rows);
         }).catch((error) => {
-            console.log(error);
+            console.log('error in delete route for categories', error);
             res.sendStatus(500)
         })
     } else {
@@ -73,7 +73,7 @@ router.put('/:id', rejectUnauthenticated, (req, res) => {
             .then((result) => {
                 res.sendStatus(201);
             }).catch((error) => {
-                console.log(error);
+                console.log('error in put route at categories', error);
                 res.sendStatus(500)
             })
     } else {
