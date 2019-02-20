@@ -19,7 +19,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
             console.log('checking', result.rows[0].sum);
             res.send(result.rows[0].sum);
         }).catch(error => {
-            console.log('in reports GET error', error);
+            console.log('error in reports GET', error);
             res.sendStatus(500);
         })
 });
@@ -37,7 +37,7 @@ router.get('/monthly', rejectUnauthenticated, (req, res) => {
             console.log('checking', result.rows[0].sum);
             res.send(result.rows[0].sum);
         }).catch(error => {
-            console.log('in reports GET error', error);
+            console.log('in monthly reports GET error', error);
             res.sendStatus(500);
         })
 });
